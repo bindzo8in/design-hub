@@ -1,26 +1,246 @@
 @import "tailwindcss";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* 
+  Design Hub Brand Palette
+  Logo Red: #DF1B25
+  Logo Navy: #26336F
+  Ink Navy: #101735
+*/
+
+:root {
+  --radius: 0.8rem;
+
+  /* Base */
+  --background: #f8f9ff;
+  --foreground: #101735;
+
+  /* Surfaces */
+  --card: #ffffff;
+  --card-foreground: #101735;
+
+  --popover: #ffffff;
+  --popover-foreground: #101735;
+
+  /* Brand Primary - Navy */
+  --primary: #26336f;
+  --primary-foreground: #ffffff;
+
+  /* Secondary - Soft Navy Surface */
+  --secondary: #eef1ff;
+  --secondary-foreground: #18245a;
+
+  /* Muted */
+  --muted: #f1f3fb;
+  --muted-foreground: #64708f;
+
+  /* Accent - Logo Red */
+  --accent: #df1b25;
+  --accent-foreground: #ffffff;
+
+  /* Destructive */
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+
+  /* Borders / Inputs */
+  --border: #dfe4f3;
+  --input: #dfe4f3;
+  --ring: #df1b25;
+
+  /* Charts */
+  --chart-1: #df1b25;
+  --chart-2: #26336f;
+  --chart-3: #5366c9;
+  --chart-4: #f97316;
+  --chart-5: #14b8a6;
+
+  /* Sidebar */
+  --sidebar: #ffffff;
+  --sidebar-foreground: #101735;
+  --sidebar-primary: #26336f;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f1f3fb;
+  --sidebar-accent-foreground: #18245a;
+  --sidebar-border: #dfe4f3;
+  --sidebar-ring: #df1b25;
+}
+
+.dark {
+  /* Base */
+  --background: #050711;
+  --foreground: #f8f9ff;
+
+  /* Surfaces */
+  --card: #0b1024;
+  --card-foreground: #f8f9ff;
+
+  --popover: #0b1024;
+  --popover-foreground: #f8f9ff;
+
+  /* Brand Primary - White/Navy readable on dark */
+  --primary: #ffffff;
+  --primary-foreground: #101735;
+
+  /* Secondary - Deep Navy */
+  --secondary: #111939;
+  --secondary-foreground: #f8f9ff;
+
+  /* Muted */
+  --muted: #111939;
+  --muted-foreground: #9ea8cf;
+
+  /* Accent - Logo Red */
+  --accent: #df1b25;
+  --accent-foreground: #ffffff;
+
+  /* Destructive */
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  /* Borders / Inputs */
+  --border: #1f2a55;
+  --input: #1f2a55;
+  --ring: #df1b25;
+
+  /* Charts */
+  --chart-1: #df1b25;
+  --chart-2: #7f91ff;
+  --chart-3: #ffffff;
+  --chart-4: #fb923c;
+  --chart-5: #2dd4bf;
+
+  /* Sidebar */
+  --sidebar: #080b18;
+  --sidebar-foreground: #f8f9ff;
+  --sidebar-primary: #df1b25;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #111939;
+  --sidebar-accent-foreground: #f8f9ff;
+  --sidebar-border: #1f2a55;
+  --sidebar-ring: #df1b25;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--accent) 85%, transparent);
+    color: var(--accent-foreground);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .brand-gradient {
+    background: linear-gradient(
+      135deg,
+      #df1b25 0%,
+      #b91622 42%,
+      #26336f 100%
+    );
+  }
+
+  .brand-text-gradient {
+    background: linear-gradient(
+      135deg,
+      #df1b25 0%,
+      #26336f 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .dark .brand-text-gradient {
+    background: linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #df1b25 45%,
+      #7f91ff 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .brand-glow {
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--accent) 20%, transparent),
+      0 24px 80px color-mix(in srgb, var(--accent) 18%, transparent);
+  }
+
+  .nav-glass {
+    background: color-mix(in srgb, var(--background) 82%, transparent);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .dark .nav-glass {
+    background: color-mix(in srgb, #050711 78%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  }
 }
