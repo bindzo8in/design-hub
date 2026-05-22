@@ -7,6 +7,8 @@ export const env = createEnv({
    ADMIN_EMAIL: z.email(),
    ADMIN_PASSWORD: z.string(),
    ADMIN_USERNAME: z.string(),
+   AUTH_TRUST_HOST: z.coerce.boolean().default(true),
+    AUTH_SECRET: z.string(),
   },
   client: {
     
@@ -17,5 +19,7 @@ export const env = createEnv({
     ADMIN_EMAIL: process.env.ADMIN_EMAIL,
     ADMIN_PASSWORD: process.env.ADMIN_PASSWORD,
     ADMIN_USERNAME: process.env.ADMIN_USERNAME,
+    AUTH_TRUST_HOST: process.env.AUTH_TRUST_HOST,
+    AUTH_SECRET: process.env.AUTH_SECRET,
   },
 });

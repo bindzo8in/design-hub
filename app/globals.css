@@ -54,6 +54,10 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  --font-display: var(--font-bebas-neue);
+  --font-stick-no-bills: var(--font-stick-no-bills);
+  --font-orbitron: var(--font-orbitron);
+  --font-heebo: var(--font-heebo);
 }
 
 /* 
@@ -118,6 +122,8 @@
   --sidebar-accent-foreground: #18245a;
   --sidebar-border: #dfe4f3;
   --sidebar-ring: #df1b25;
+
+  
 }
 
 .dark {
@@ -243,4 +249,122 @@
     background: color-mix(in srgb, #050711 78%, transparent);
     border-bottom: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
   }
+
+   .text-glow-white {
+    color: transparent;
+    -webkit-text-stroke: 0.8px rgba(255, 255, 255, 0.95);
+    /* text-shadow: 0 0 18px rgba(255, 255, 255, 0.25); */
+  }
+
+  .text-glow-white-new {
+      color: transparent;
+  text-shadow: 
+    -1px -1px 0 #ffffff,  
+     1px -1px 0 #ffffff,
+    -1px  1px 0 #ffffff,
+     1px  1px 0 #ffffff;
+  }
+
+  @media (min-width: 640px) {
+    .text-glow-white {
+      -webkit-text-stroke: 1px rgba(255, 255, 255, 0.95);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .text-glow-white {
+      -webkit-text-stroke: 1.25px rgba(255, 255, 255, 0.95);
+    }
+  }
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(18px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.animate-float-reverse {
+  animation: float 4s cubic-bezier(0.45, 0, 0.55, 1) infinite reverse;
+}
+@keyframes blur {
+  0%, 100% {
+    filter: blur(0px);
+  }
+
+  50% {
+    filter: blur(20px);
+  }
+}
+
+.animate-blur {
+  animation: blur 5s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateY(0%);
+  }
+
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes marqueeReverse {
+  0% {
+    transform: translateY(-50%);
+  }
+
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 18s linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marqueeReverse 18s linear infinite;
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 10s linear infinite;
+}
+
+@keyframes printWipe {
+  0%,
+  100% {
+    transform: translateX(-110%);
+  }
+  55% {
+    transform: translateX(110%);
+  }
+}
+
+.animate-print-wipe {
+  animation: printWipe 3.4s ease-in-out infinite;
+}
+
 }

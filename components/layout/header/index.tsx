@@ -4,6 +4,7 @@ import { navRoutes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 import { Monitor, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -58,16 +59,23 @@ const BrandLogo = () => {
   return (
     <Link href="/" className="group flex items-center">
       {/* Light background logo (dark text) for light theme */}
-      <img
+      <Image
         src="/logo/light.png"
         alt="Design Hub"
-        className="h-11 lg:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02] block dark:hidden"
+        width={180}
+        height={64}
+        priority
+        className="h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02] lg:h-16 dark:hidden"
       />
+
       {/* Dark background logo (light text) for dark theme */}
-      <img
+      <Image
         src="/logo/dark.png"
         alt="Design Hub"
-        className="h-11 lg:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02] hidden dark:block"
+        width={180}
+        height={64}
+        priority
+        className="hidden h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02] lg:h-16 dark:block"
       />
     </Link>
   );
@@ -77,6 +85,7 @@ const PublicHeader = () => {
   const pathname = usePathname();
 
   const isActiveRoute = (href: string) => {
+    if (!pathname) return false;
     if (href === "/") return pathname === "/";
     return pathname.startsWith(href);
   };
@@ -104,7 +113,7 @@ const PublicHeader = () => {
                       "text-sm font-semibold text-muted-foreground transition-all duration-300",
                       "hover:bg-background hover:text-foreground",
                       active &&
-                        "bg-primary text-primary-foreground shadow-md hover:bg-primary hover:text-primary-foreground"
+                      "bg-primary text-primary-foreground shadow-md hover:bg-primary hover:text-primary-foreground"
                     )}
                   >
                     {active && (
@@ -205,9 +214,6 @@ const PublicHeader = () => {
           })}
         </div>
       </nav>
-
-      {/* Space for fixed mobile bottom navbar */}
-      <div className="h-24 lg:hidden" />
     </>
   );
 };
