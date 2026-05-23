@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Geist, Geist_Mono, Bebas_Neue, Stick_No_Bills, Orbitron, Heebo } from "next/font/google";
 import "./globals.css";
 import PublicHeader from "@/components/layout/header";
@@ -6,6 +5,10 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Providers } from "./providers";
 import Footer from "@/components/layout/footer";
 import WhatsAppButton from "@/components/ui/whatsapp-button";
+import { StructuredData } from "@/components/seo/structured-data";
+import { buildRootMetadata } from "@/lib/seo/metadata";
+import { buildOrganizationSchema, buildWebsiteSchema } from "@/lib/seo/schema";
+import { seoConfig } from "@/lib/seo/config";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,10 +44,10 @@ export const heebo = Heebo({
   variable: "--font-heebo",
 });
 
+export const metadata = buildRootMetadata();
 
-export const metadata: Metadata = {
-  title: "Design Hub",
-  description: "Welcome to Design Hub",
+export const viewport = {
+  themeColor: seoConfig.themeColor,
 };
 
 export default function RootLayout({
@@ -58,9 +61,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} ${stickNoBills.variable} ${orbitron.variable} ${heebo.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col"
-        suppressHydrationWarning
-      >
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        <StructuredData id="organization-schema" schema={buildOrganizationSchema()} />
+        <StructuredData id="website-schema" schema={buildWebsiteSchema()} />
         <ThemeProvider
           attribute="class"
           forcedTheme="dark"
@@ -70,7 +73,6 @@ export default function RootLayout({
           <Providers>
             <PublicHeader />
             {children}
-            {/* Floating quick WhatsApp widget */}
             <WhatsAppButton />
             <Footer />
           </Providers>

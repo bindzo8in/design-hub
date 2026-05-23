@@ -1,24 +1,29 @@
 import CareersHeroSection from "@/components/careers/hero-section";
 import CareersForm from "@/components/careers/careers-form";
-import WhatsAppButton from "@/components/ui/whatsapp-button";
+import { StructuredData } from "@/components/seo/structured-data";
+import { buildAbsoluteUrl } from "@/lib/seo/config";
+import { buildMetadata } from "@/lib/seo/metadata";
+import { buildBreadcrumbSchema } from "@/lib/seo/schema";
 
-export const metadata = {
-  title: "Careers | Design Hub - Build the Future of Digital Experiences",
+export const metadata = buildMetadata({
+  title: "Careers",
   description:
     "Explore open job openings at Design Hub. We are hiring UI/UX Designers, Web Developers, Mobile App Developers, Digital Marketers, and Graphic Designers in Coimbatore.",
-};
+  path: "/careers",
+  keywords: ["careers", "design hub careers", "UI designer jobs", "Coimbatore jobs"],
+});
+
+const breadcrumbSchema = buildBreadcrumbSchema([
+  { name: "Home", url: buildAbsoluteUrl("/") },
+  { name: "Careers", url: buildAbsoluteUrl("/careers") },
+]);
 
 const CareersPage = () => {
   return (
     <main className="flex flex-col w-full py-4">
-      {/* Careers page hero */}
+      <StructuredData id="careers-breadcrumb-schema" schema={breadcrumbSchema} />
       <CareersHeroSection />
-
-      {/* Dual column: form & positions */}
       <CareersForm />
-
-      {/* WhatsApp Button Widget */}
-      <WhatsAppButton />
     </main>
   );
 };

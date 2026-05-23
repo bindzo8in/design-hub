@@ -2,6 +2,7 @@ import './env'
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  trailingSlash: false,
   images: {
     remotePatterns: [
       {
@@ -14,7 +15,7 @@ const nextConfig: NextConfig = {
         hostname: "avatars.githubusercontent.com",
         pathname: "/**",
       },
-            {
+      {
         protocol: "https",
         hostname: "picsum.photos",
         pathname: "/**",

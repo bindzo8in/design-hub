@@ -11,7 +11,7 @@ export const env = createEnv({
     AUTH_SECRET: z.string(),
   },
   client: {
-    
+    NEXT_PUBLIC_BASE_URL: z.url(),
   },
   // If you're using Next.js < 13.4.4, you'll need to specify the runtimeEnv manually
   runtimeEnv: {
@@ -21,5 +21,6 @@ export const env = createEnv({
     ADMIN_USERNAME: process.env.ADMIN_USERNAME,
     AUTH_TRUST_HOST: process.env.AUTH_TRUST_HOST,
     AUTH_SECRET: process.env.AUTH_SECRET,
+    NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
   },
 });

@@ -1,23 +1,29 @@
 import ContactHeroSection from "@/components/contact/hero-section";
 import ContactForm from "@/components/contact/contact-form";
-import WhatsAppButton from "@/components/ui/whatsapp-button";
+import { StructuredData } from "@/components/seo/structured-data";
+import { buildAbsoluteUrl } from "@/lib/seo/config";
+import { buildMetadata } from "@/lib/seo/metadata";
+import { buildBreadcrumbSchema } from "@/lib/seo/schema";
 
-export const metadata = {
-  title: "Contact Us | Design Hub - Tech & Digital Marketing Agency",
+export const metadata = buildMetadata({
+  title: "Contact",
   description:
     "Get in touch with Design Hub in Coimbatore. Let's create responsive websites, e-commerce, custom software, graphics, and digital marketing strategies for your business success.",
-};
+  path: "/contact",
+  keywords: ["contact design hub", "web design Coimbatore", "digital marketing contact"],
+});
+
+const breadcrumbSchema = buildBreadcrumbSchema([
+  { name: "Home", url: buildAbsoluteUrl("/") },
+  { name: "Contact", url: buildAbsoluteUrl("/contact") },
+]);
 
 const ContactPage = () => {
   return (
     <main className="flex flex-col w-full py-4">
-      {/* Contact page hero section */}
+      <StructuredData id="contact-breadcrumb-schema" schema={breadcrumbSchema} />
       <ContactHeroSection />
-
-      {/* Dual column address info and service checkbox form */}
       <ContactForm />
-
-
     </main>
   );
 };
