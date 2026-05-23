@@ -4,17 +4,17 @@ const members = [
   {
     name: "Balaji",
     role: "Founder",
-    image: "/about/family/balaji.webp",
+    image: "/team/balaji.png",
   },
   {
     name: "Manikandan R",
     role: "Graphic Designer",
-    image: "/about/family/manikandan.webp",
+    image: "/team/mani.png",
   },
   {
     name: "Ranjani Rajkumar",
     role: "UI/UX Designer",
-    image: "/about/family/ranjani.webp",
+    image: "/team/ranjani.png",
   },
 ];
 

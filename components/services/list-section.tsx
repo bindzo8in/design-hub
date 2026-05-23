@@ -35,7 +35,7 @@ const ServicesListSection = () => {
                 alt={`${service.title} illustration`}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                className="object-contain p-6 transition-transform duration-500 group-hover:scale-105"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
             </figure>
           </div>
@@ -48,9 +48,9 @@ const ServicesListSection = () => {
               </h3>
 
               <Link
-                href="/contact"
+                href={service.href}
                 className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border bg-background text-muted-foreground transition-all group-hover:border-accent group-hover:bg-accent group-hover:text-accent-foreground"
-                aria-label={`Get quote for ${service.title}`}
+                aria-label={`Explore ${service.title}`}
               >
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
@@ -76,7 +76,7 @@ const ServicesListSection = () => {
         </div>
 
         {/* Bottom Card Effect */}
-        <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-300 group-hover:w-full" />
+        <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-accent transition-all duration-300 group-hover:w-full" />
       </article>
     ))}
   </div>

@@ -9,7 +9,7 @@ const Page = () => {
   return (
     <main>
       <HeroSection
-        title="PACKING DESIGN"
+        title="PACKAGING DESIGN"
         heading="Where Packaging Meets Purpose"
         description="We Design Packaging That Speaks Before The Product Does."
         bottomLabel="DESIGN HUB"

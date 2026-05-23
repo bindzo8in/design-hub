@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -42,25 +42,25 @@ const HomeHeroSection = () => {
       tl.fromTo(
         tagRef.current,
         { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 0.6, delay: 0.2 }
+        { opacity: 1, y: 0, duration: 0.6, delay: 0.2 },
       )
         .fromTo(
           ".headline-line-inner",
           { y: "110%", opacity: 0 },
           { y: 0, opacity: 1, duration: 0.8, stagger: 0.15 },
-          "-=0.3"
+          "-=0.3",
         )
         .fromTo(
           subRef.current,
           { opacity: 0, y: 20 },
           { opacity: 1, y: 0, duration: 0.7 },
-          "-=0.2"
+          "-=0.2",
         )
         .fromTo(
           typingContainerRef.current,
           { opacity: 0, y: 10 },
           { opacity: 1, y: 0, duration: 0.5 },
-          "-=0.1"
+          "-=0.1",
         );
 
       if (heroImageRef.current) {
@@ -68,7 +68,7 @@ const HomeHeroSection = () => {
           heroImageRef.current,
           { opacity: 0, scale: 0.95, y: 30 },
           { opacity: 1, scale: 1, y: 0, duration: 1.2, delay: 0.4 },
-          "-=0.8"
+          "-=0.8",
         );
 
         // Smooth floating motion
@@ -101,7 +101,13 @@ const HomeHeroSection = () => {
           gsap.fromTo(
             ".headline-line-inner",
             { y: "110%", opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.7, ease: "power4.out", stagger: 0.08 }
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.7,
+              ease: "power4.out",
+              stagger: 0.08,
+            },
           );
         },
       });
@@ -142,24 +148,34 @@ const HomeHeroSection = () => {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[92vh] sm:min-h-[95vh] flex flex-col justify-end px-4 sm:px-8 pb-12 sm:pb-20 pt-24 overflow-hidden bg-background"
+      className="
+    relative
+    min-h-auto lg:min-h-[92vh]
+    flex flex-col justify-center lg:justify-end
+    px-4 sm:px-6 lg:px-8
+    sm:py-20 lg:pb-20 lg:pt-24
+    overflow-hidden
+    bg-background
+  "
     >
       {/* Background glow and grids */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_60%_40%,rgba(223,27,37,0.08)_0%,transparent_65%)] dark:bg-[radial-gradient(ellipse_80%_60%_at_60%_40%,rgba(223,27,37,0.12)_0%,transparent_65%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_70%_at_10%_80%,rgba(38,51,111,0.06)_0%,transparent_60%)] dark:bg-[radial-gradient(ellipse_50%_70%_at_10%_80%,rgba(38,51,111,0.1)_0%,transparent_60%)]" />
-        
+
         {/* Tech Grid Pattern */}
-        <div 
-          className="absolute inset-0 opacity-[0.04] dark:opacity-[0.03]" 
+        <div
+          className="absolute inset-0 opacity-[0.04] dark:opacity-[0.03]"
           style={{
             backgroundImage: `
               linear-gradient(var(--foreground) 1px, transparent 1px),
               linear-gradient(90deg, var(--foreground) 1px, transparent 1px)
             `,
             backgroundSize: "80px 80px",
-            maskImage: "radial-gradient(ellipse 70% 70% at 50% 50%, black 0%, transparent 100%)",
-            WebkitMaskImage: "radial-gradient(ellipse 70% 70% at 50% 50%, black 0%, transparent 100%)"
+            maskImage:
+              "radial-gradient(ellipse 70% 70% at 50% 50%, black 0%, transparent 100%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse 70% 70% at 50% 50%, black 0%, transparent 100%)",
           }}
         />
       </div>
@@ -175,17 +191,35 @@ const HomeHeroSection = () => {
           <div
             key={idx}
             className={`w-2.5 h-2.5 rounded-full border border-border/80 transition-all duration-300 ${
-              idx === headlineIdx ? "bg-accent scale-125 border-accent" : "bg-muted-foreground/30"
+              idx === headlineIdx
+                ? "bg-accent scale-125 border-accent"
+                : "bg-muted-foreground/30"
             }`}
           />
         ))}
       </div>
 
       <div className="container mx-auto max-w-7xl relative z-10 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          
+        <div
+          className="
+    grid
+    grid-cols-1
+    md:grid-cols-2
+    lg:grid-cols-12
+    gap-8
+    lg:gap-8
+    items-center
+  "
+        >
           {/* Left Column: Text Content */}
-          <div className="lg:col-span-7 space-y-6 sm:space-y-8">
+          <div
+            className="
+    order-2
+    md:order-1
+    lg:col-span-7
+    space-y-6 sm:space-y-8
+  "
+          >
             {/* Top Tagline */}
             <div
               ref={tagRef}
@@ -198,7 +232,22 @@ const HomeHeroSection = () => {
             {/* Bebas Neue Headline */}
             <h1
               ref={headlineRef}
-              className="font-[family-name:var(--font-bebas-neue)] text-[12vw] sm:text-[10vw] md:text-[9vw] lg:text-[8vw] uppercase tracking-tight leading-[0.9] text-foreground select-none"
+              className="
+  font-(family-name:--font-bebas-neue)
+  uppercase
+  tracking-tight
+  leading-[0.9]
+  text-foreground
+  select-none
+
+  text-[clamp(3rem,11vw,5.5rem)]
+
+  landscape:text-[clamp(2rem,5vw,3.5rem)]
+  landscape:leading-[0.85]
+
+  md:text-[clamp(4rem,8vw,6rem)]
+  lg:text-[clamp(5rem,8vw,8rem)]
+"
             >
               <span className="block overflow-hidden h-[1.3em] py-1 relative">
                 <span className="headline-line-inner block">
@@ -216,11 +265,37 @@ const HomeHeroSection = () => {
             </h1>
 
             {/* Subtext and CTAs */}
-            <div ref={subRef} className="grid grid-cols-1 md:grid-cols-12 gap-6 pt-4 items-center">
-              <p className="md:col-span-7 text-sm sm:text-base text-muted-foreground leading-relaxed max-w-lg">
-                We design and engineer bespoke web platforms and digital systems. We blend creative boldness with technical precision to build products that make an impact.
+            <div
+              ref={subRef}
+              className="
+    flex
+    flex-col
+    sm:flex-row
+    sm:items-start
+    landscape:flex-col
+    gap-6
+    pt-4
+  "
+            >
+              <p className="md:col-span-7 text-sm sm:text-base text-muted-foreground leading-relaxed max-w-[320px] md:max-w-[420px]">
+                We design and engineer bespoke web platforms and digital
+                systems. We blend creative boldness with technical precision to
+                build products that make an impact.
               </p>
-              <div className="md:col-span-5 flex flex-wrap items-center gap-4">
+              <div
+                className="
+    flex
+    sm:flex-col
+    gap-3
+    flex-row
+    landscape:flex-row
+    landscape:items-center
+    landscape:gap-4
+      items-center
+      justify-center
+    shrink-0
+  "
+              >
                 <Link
                   href="/about"
                   className="inline-flex items-center gap-2 rounded-2xl bg-accent px-6 py-3.5 text-sm font-bold text-accent-foreground shadow-sm transition-all hover:bg-accent/90 hover:scale-[1.02]"
@@ -252,10 +327,24 @@ const HomeHeroSection = () => {
           </div>
 
           {/* Right Column: Floating Visual */}
-          <div className="lg:col-span-5 relative hidden lg:block">
+          <div
+            className="
+    order-1
+    md:order-2
+    lg:col-span-5
+    relative
+    flex
+    justify-center
+  "
+          >
             <div
               ref={heroImageRef}
-              className="relative w-full h-[480px] rounded-3xl border border-[#26336F]/20 bg-card/10 backdrop-blur-md shadow-2xl p-4 overflow-hidden flex items-center justify-center"
+              className="  relative
+  w-full
+  h-[260px]
+  sm:h-[340px]
+  md:h-[420px]
+  lg:h-[480px] rounded-3xl border border-[#26336F]/20 bg-card/10 backdrop-blur-md shadow-2xl p-4 overflow-hidden flex items-center justify-center"
             >
               <div className="absolute inset-0 bg-gradient-to-tr from-[#26336F]/10 via-[#050711]/60 to-[#DF1B25]/5 z-0" />
               <div className="relative w-full h-full rounded-2xl overflow-hidden flex items-center justify-center">
@@ -268,7 +357,6 @@ const HomeHeroSection = () => {
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>

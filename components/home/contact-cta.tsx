@@ -41,7 +41,32 @@ const HomeCTASection = () => {
   return (
     <section
       ref={containerRef}
-      className="relative overflow-hidden py-20 sm:py-24 lg:py-32"
+      // className="relative overflow-hidden py-20 sm:py-24 lg:py-32"
+      className="
+  relative
+
+  min-h-auto
+  lg:min-h-[92vh]
+
+  flex flex-col
+  justify-start lg:justify-end
+
+  px-4 sm:px-6 lg:px-8
+
+  pt-4
+  pb-8
+
+  sm:pt-6
+  sm:pb-10
+
+  landscape:py-4
+
+  lg:pt-24
+  lg:pb-20
+
+  overflow-hidden
+  bg-background
+"
     >
       {/* Background Glow */}
       <div className="absolute inset-0 -z-10 overflow-hidden">

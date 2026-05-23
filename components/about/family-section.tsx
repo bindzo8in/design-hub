@@ -117,14 +117,17 @@ const FamilySection = ({
         {/* team grid */}
         <div className="team-grid-trigger mt-14 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
           {members.map((member) => (
-            <article key={member.name} className="team-card-reveal group relative rounded-3xl border border-border/60 bg-card p-4 overflow-hidden shadow-sm hover:border-accent/40 transition-colors duration-300">
+            <article key={member.name} className="team-card-reveal group relative rounded-3xl border border-border/60 bg-card p-4 overflow-hidden shadow-sm hover:border-accent/40 transition-colors duration-300
+            ">
               <figure className="relative aspect-[1/1] overflow-hidden rounded-2xl bg-secondary/35">
                 <Image
                   src={member.image}
                   alt={member.alt ?? member.name}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover grayscale transition duration-500 group-hover:scale-103 group-hover:grayscale-0"
+                  className="object-cover grayscale transition duration-500 group-hover:scale-103 group-hover:grayscale-0
+                  group-hover:bg-white bg-black group-hover:shadow-lg group-hover:shadow-accent/20
+                  "
                 />
               </figure>
 
