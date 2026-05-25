@@ -31,6 +31,7 @@ const ContactForm = () => {
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -84,15 +85,47 @@ const ContactForm = () => {
     );
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setSubmitError(null);
 
-    // Simulate database send or email triggers
-    setTimeout(() => {
-      setIsLoading(false);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          services: selectedServices,
+        }),
+      });
+
+      const payload = await response.json();
+
+      if (!response.ok) {
+        throw new Error(payload.message || "Unable to send your request.");
+      }
+
       setIsSubmitted(true);
-    }, 1500);
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        subject: "",
+        description: "",
+      });
+      setSelectedServices([]);
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error
+          ? error.message
+          : "Unable to send your request right now."
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -340,6 +373,12 @@ const ContactForm = () => {
                     {isLoading ? "Sending Request..." : "Send Your Request"}
                     {!isLoading && <Send className="ml-2 h-4 w-4" />}
                   </button>
+
+                  {submitError ? (
+                    <p className="rounded-xl border border-rose-500/30 bg-rose-500/10 px-4 py-3 text-sm text-rose-200">
+                      {submitError}
+                    </p>
+                  ) : null}
 
                 </form>
               )}
