@@ -12,7 +12,7 @@ export const footer_items = {
         { title: "Why Choose Us", href: "/why-choose-us"},
         { title: "Who we Work", href: "/wh         o-we-work"},
         { title: "What we do", href: "/what-we-do"},
-        { title: "Our Achievements", href: "/our-achievements"},
+        // { title: "Our Achievements", href: "/our-achievements"},
         { title: "Terms Of Services", href: "/terms-of-services"},
         { title: "Privacy Policy", href: "/privacy-policy"},
     ],

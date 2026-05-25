@@ -63,12 +63,13 @@ export function ReusableFormField<
                 placeholder={placeholder}
                 disabled={disabled}
                 {...field}
-                className="bg-[#101735]/40 border-[#26336F]/30 text-white placeholder-slate-500 rounded-xl focus:border-[#DF1B25]/50 focus:ring-[#DF1B25]/20 focus-visible:border-[#DF1B25]/50 min-h-[100px]"
+                value={field.value ?? ""}
+                className="bg-[#101735]/40 border-[#26336F]/30 text-white placeholder-slate-500 rounded-xl focus:border-[#DF1B25]/50 focus:ring-[#DF1B25]/20 focus-visible:border-[#DF1B25]/50 min-h-25"
               />
             ) : type === "switch" ? (
               <div className="flex items-center h-9">
                 <Switch
-                  checked={field.value}
+                  checked={Boolean(field.value)}
                   onCheckedChange={field.onChange}
                   disabled={disabled}
                 />
@@ -77,7 +78,7 @@ export function ReusableFormField<
               <Select
                 disabled={disabled}
                 onValueChange={field.onChange}
-                value={field.value}
+                value={field.value ?? ""}
               >
                 <SelectTrigger className="w-full bg-[#101735]/40 border-[#26336F]/30 text-white rounded-xl focus:border-[#DF1B25]/50 focus:ring-[#DF1B25]/20">
                   <SelectValue placeholder={placeholder || "Select option"} />
@@ -100,6 +101,7 @@ export function ReusableFormField<
                 placeholder={placeholder}
                 disabled={disabled}
                 {...field}
+                value={field.value ?? ""}
                 className="bg-[#101735]/40 border-[#26336F]/30 text-white placeholder-slate-500 rounded-xl focus:border-[#DF1B25]/50 focus:ring-[#DF1B25]/20 focus-visible:border-[#DF1B25]/50"
               />
             )}

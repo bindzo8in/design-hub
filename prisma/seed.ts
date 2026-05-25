@@ -26,6 +26,7 @@ const userData: Prisma.UserCreateInput[] = [
 
 export async function main() {
   // Clear existing records
+  await prisma.testimonial.deleteMany({});
   await prisma.project.deleteMany({});
   await prisma.client.deleteMany({});
   await prisma.category.deleteMany({});
@@ -110,6 +111,24 @@ export async function main() {
       clientId: hyperionClient.id,
     },
   });
+
+  // Seed Testimonials
+  await prisma.testimonial.create({
+    data: {
+      author: "Anand Kumar",
+      role: "CEO, Tech Startup",
+      text: "They really nailed it. The only way of finding the limits of the possible is by going beyond them into the impossible. Design Hub made our vision a reality.",
+    },
+  });
+
+  await prisma.testimonial.create({
+    data: {
+      author: "Priya Sharma",
+      role: "Marketing Director, Organic Foods Corp",
+      text: "They really nailed it. The only way of finding the limits of the possible is by going beyond them into the impossible. Our brand has never looked better.",
+    },
+  });
+  console.log("Testimonials seeded successfully.");
 
   console.log("Database seeded successfully with encrypted credentials and mock portfolio assets.");
 }

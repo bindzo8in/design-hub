@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { teamMemberFormSchema, TeamMemberFormValues } from "../schemas/team.schema";
 import { Form } from "@/components/ui/form";
 import { ReusableFormField } from "@/components/forms/reusable-form-field";
+import { ImageUploadField } from "@/components/forms/image-upload-field";
 import { SubmitButton } from "@/components/forms/submit-button";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -28,7 +29,7 @@ export function TeamForm({
     defaultValues: defaultValues || {
       name: "",
       role: "",
-      imageUrl: "",
+      imageUrl: null,
       bio: "",
       githubUrl: "",
       linkedinUrl: "",
@@ -53,13 +54,17 @@ export function TeamForm({
             placeholder="Senior Product Designer"
             disabled={loading}
           />
-          <ReusableFormField
-            control={form.control}
-            name="imageUrl"
-            label="Avatar Image URL"
-            placeholder="https://images.unsplash.com/photo-..."
-            disabled={loading}
-          />
+          <div className="md:col-span-2">
+            <ImageUploadField
+              control={form.control}
+              name="imageUrl"
+              label="Team Member Photo"
+              description="Upload a confident headshot that will be used in the public team section."
+              disabled={loading}
+              folder="design-hub/team"
+              previewAlt="Team member photo preview"
+            />
+          </div>
           <ReusableFormField
             control={form.control}
             name="githubUrl"

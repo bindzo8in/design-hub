@@ -9,6 +9,9 @@ export const env = createEnv({
    ADMIN_USERNAME: z.string(),
    AUTH_TRUST_HOST: z.coerce.boolean().default(true),
     AUTH_SECRET: z.string(),
+    CLOUDINARY_CLOUD_NAME: z.string(),
+    CLOUDINARY_API_KEY: z.string(),
+    CLOUDINARY_API_SECRET: z.string(),
   },
   client: {
     NEXT_PUBLIC_BASE_URL: z.url(),
@@ -21,6 +24,9 @@ export const env = createEnv({
     ADMIN_USERNAME: process.env.ADMIN_USERNAME,
     AUTH_TRUST_HOST: process.env.AUTH_TRUST_HOST,
     AUTH_SECRET: process.env.AUTH_SECRET,
+    CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME,
+    CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
+    CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET,
     NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
   },
 });

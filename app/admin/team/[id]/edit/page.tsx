@@ -69,7 +69,12 @@ export default function EditTeamMemberPage() {
             defaultValues={{
               name: member.name,
               role: member.role,
-              imageUrl: member.imageUrl || "",
+              imageUrl: member.imageUrl
+                ? {
+                    url: member.imageUrl,
+                    publicId: member.imagePublicId ?? "",
+                  }
+                : null,
               bio: member.bio || "",
               githubUrl: member.githubUrl || "",
               linkedinUrl: member.linkedinUrl || "",

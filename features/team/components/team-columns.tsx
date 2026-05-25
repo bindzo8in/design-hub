@@ -23,6 +23,7 @@ export interface TeamMemberRow {
   name: string;
   role: string;
   imageUrl: string | null;
+  imagePublicId?: string | null;
   bio: string | null;
   githubUrl: string | null;
   linkedinUrl: string | null;

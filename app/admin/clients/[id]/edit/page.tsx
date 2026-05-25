@@ -68,7 +68,12 @@ export default function EditClientPage() {
             isEdit
             defaultValues={{
               name: client.name,
-              logoUrl: client.logoUrl || "",
+              logoUrl: client.logoUrl
+                ? {
+                    url: client.logoUrl,
+                    publicId: "",
+                  }
+                : null,
               website: client.website || "",
             }}
             onSubmit={(values) => updateMutation.mutate(values)}

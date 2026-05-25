@@ -43,12 +43,14 @@ export async function POST(req: NextRequest) {
     }
 
     const { name, role, imageUrl, bio, githubUrl, linkedinUrl } = result.data;
+    const image = imageUrl && typeof imageUrl === "object" ? imageUrl : null;
 
     const teamMember = await prisma.teamMember.create({
       data: {
         name,
         role,
-        imageUrl: imageUrl && imageUrl.trim() !== "" ? imageUrl : null,
+        imageUrl: image?.url?.trim() ? image.url : null,
+        imagePublicId: image?.publicId?.trim() ? image.publicId : null,
         bio: bio && bio.trim() !== "" ? bio : null,
         githubUrl: githubUrl && githubUrl.trim() !== "" ? githubUrl : null,
         linkedinUrl: linkedinUrl && linkedinUrl.trim() !== "" ? linkedinUrl : null,

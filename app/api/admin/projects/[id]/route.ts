@@ -69,7 +69,7 @@ export async function PUT(
       );
     }
 
-    const { title, description, clientName, budget, status, startDate, endDate, categoryId, clientId } = result.data;
+    const { title, description, clientName, budget, status, startDate, endDate, categoryId, clientId, thumbnail, bannerImage } = result.data;
 
     // Check if project exists
     const projectExists = await prisma.project.findUnique({ where: { id } });
@@ -89,6 +89,10 @@ export async function PUT(
         endDate: endDate ? new Date(endDate) : null,
         categoryId: categoryId && categoryId !== "none" ? categoryId : null,
         clientId: clientId && clientId !== "none" ? clientId : null,
+        thumbnail: thumbnail?.url || null,
+        thumbnailPublicId: thumbnail?.publicId || null,
+        bannerImage: bannerImage?.url || null,
+        bannerPublicId: bannerImage?.publicId || null,
       },
     });
 

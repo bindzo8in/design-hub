@@ -1,9 +1,13 @@
-import { Geist, Geist_Mono, Bebas_Neue, Stick_No_Bills, Orbitron, Heebo } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Bebas_Neue,
+  Stick_No_Bills,
+  Orbitron,
+  Heebo,
+} from "next/font/google";
 import "./globals.css";
-import PublicHeader from "@/components/layout/header";
-import { ThemeProvider } from "@/components/theme-provider";
 import { Providers } from "./providers";
-import Footer from "@/components/layout/footer";
 import WhatsAppButton from "@/components/ui/whatsapp-button";
 import { StructuredData } from "@/components/seo/structured-data";
 import { buildRootMetadata } from "@/lib/seo/metadata";
@@ -62,21 +66,15 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
-        <StructuredData id="organization-schema" schema={buildOrganizationSchema()} />
+        <StructuredData
+          id="organization-schema"
+          schema={buildOrganizationSchema()}
+        />
         <StructuredData id="website-schema" schema={buildWebsiteSchema()} />
-        <ThemeProvider
-          attribute="class"
-          forcedTheme="dark"
-          enableSystem={false}
-          disableTransitionOnChange
-        >
-          <Providers>
-            <PublicHeader />
-            {children}
-            <WhatsAppButton />
-            <Footer />
-          </Providers>
-        </ThemeProvider>
+        <Providers>
+          {children}
+          <WhatsAppButton />
+        </Providers>
       </body>
     </html>
   );

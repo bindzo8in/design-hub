@@ -66,6 +66,7 @@ export async function PUT(
     }
 
     const { name, role, imageUrl, bio, githubUrl, linkedinUrl } = result.data;
+    const image = imageUrl && typeof imageUrl === "object" ? imageUrl : null;
 
     // Check if member exists
     const memberExists = await prisma.teamMember.findUnique({ where: { id } });
@@ -78,7 +79,8 @@ export async function PUT(
       data: {
         name,
         role,
-        imageUrl: imageUrl && imageUrl.trim() !== "" ? imageUrl : null,
+        imageUrl: image?.url?.trim() ? image.url : null,
+        imagePublicId: image?.publicId?.trim() ? image.publicId : null,
         bio: bio && bio.trim() !== "" ? bio : null,
         githubUrl: githubUrl && githubUrl.trim() !== "" ? githubUrl : null,
         linkedinUrl: linkedinUrl && linkedinUrl.trim() !== "" ? linkedinUrl : null,

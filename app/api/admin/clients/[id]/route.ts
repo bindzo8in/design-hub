@@ -71,6 +71,7 @@ export async function PUT(
     }
 
     const { name, logoUrl, website } = result.data;
+    const logo = logoUrl && typeof logoUrl === "object" ? logoUrl : null;
 
     // Check if client exists
     const client = await prisma.client.findUnique({ where: { id } });
@@ -97,7 +98,7 @@ export async function PUT(
       where: { id },
       data: {
         name,
-        logoUrl: logoUrl && logoUrl.trim() !== "" ? logoUrl : null,
+        logoUrl: logo?.url?.trim() ? logo.url : null,
         website: website && website.trim() !== "" ? website : null,
       },
     });

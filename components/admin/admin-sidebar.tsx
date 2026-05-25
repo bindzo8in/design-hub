@@ -18,7 +18,7 @@ import {
   Menu,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 
 export interface SidebarItem {
   title: string;
@@ -105,6 +105,7 @@ export function MobileSidebar() {
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="p-0 w-72 bg-[#050711] border-r border-[#26336F]/20 text-white">
+        <SheetTitle className="sr-only">Admin navigation</SheetTitle>
         <SidebarContent />
       </SheetContent>
     </Sheet>

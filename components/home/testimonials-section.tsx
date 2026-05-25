@@ -4,23 +4,55 @@ import { useEffect, useRef } from "react";
 import { Quote } from "lucide-react";
 import gsap from "gsap";
 
-const testimonials = [
+const defaultTestimonials = [
   {
     avatar: "A",
+    isImage: false,
     text: "They really nailed it. The only way of finding the limits of the possible is by going beyond them into the impossible. Design Hub made our vision a reality.",
     author: "Anand Kumar",
     role: "CEO, Tech Startup",
   },
   {
     avatar: "P",
+    isImage: false,
     text: "They really nailed it. The only way of finding the limits of the possible is by going beyond them into the impossible. Our brand has never looked better.",
     author: "Priya Sharma",
     role: "Marketing Director, Organic Foods Corp",
   },
 ];
 
-const HomeTestimonialsSection = () => {
+interface Testimonial {
+  id: string;
+  author: string;
+  role: string;
+  text: string;
+  avatarUrl?: string | null;
+}
+
+interface HomeTestimonialsSectionProps {
+  testimonials?: Testimonial[];
+}
+
+const HomeTestimonialsSection = ({ testimonials: dbTestimonials }: HomeTestimonialsSectionProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const displayTestimonials = dbTestimonials && dbTestimonials.length > 0
+    ? dbTestimonials.map((t) => {
+        const initials = t.author
+          .split(" ")
+          .map((n) => n[0])
+          .slice(0, 2)
+          .join("")
+          .toUpperCase();
+        return {
+          avatar: t.avatarUrl || initials || "C",
+          isImage: !!t.avatarUrl,
+          text: t.text,
+          author: t.author,
+          role: t.role,
+        };
+      })
+    : defaultTestimonials;
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -90,7 +122,7 @@ const HomeTestimonialsSection = () => {
 
         {/* Testimonials Grid */}
         <div className="testi-trigger-grid grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {testimonials.map((item, idx) => (
+          {displayTestimonials.map((item, idx) => (
             <article
               key={idx}
               className="testi-card group relative rounded-3xl border border-border/60 bg-background p-6 sm:p-8 flex flex-col justify-between min-h-[220px] transition-all duration-300 hover:border-accent/40"
@@ -107,8 +139,12 @@ const HomeTestimonialsSection = () => {
 
               {/* Author Info */}
               <div className="flex items-center gap-4 mt-8 pt-6 border-t border-border/40">
-                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-secondary text-primary dark:text-[#7f91ff] font-[family-name:var(--font-bebas-neue)] text-lg border border-border/60">
-                  {item.avatar}
+                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-secondary text-primary dark:text-[#7f91ff] font-[family-name:var(--font-bebas-neue)] text-lg border border-border/60 overflow-hidden shrink-0">
+                  {item.isImage ? (
+                    <img src={item.avatar} alt={item.author} className="w-full h-full object-cover" />
+                  ) : (
+                    item.avatar
+                  )}
                 </div>
                 <div>
                   <h4 className="text-sm font-bold text-foreground">

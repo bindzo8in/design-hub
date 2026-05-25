@@ -3,7 +3,11 @@
 import React from "react";
 import { useParams } from "next/navigation";
 import { ProjectForm } from "@/features/projects/components/project-form";
-import { useProjectQuery, useUpdateProjectMutation } from "@/features/projects/hooks/use-projects-query";
+import {
+  useProjectQuery,
+  useUpdateProjectMutation,
+} from "@/features/projects/hooks/use-projects-query";
+import { mapProjectToFormValues } from "@/features/projects/components/utils";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -15,16 +19,6 @@ export default function EditProjectPage() {
 
   const { data: project, isLoading, error } = useProjectQuery(id);
   const updateMutation = useUpdateProjectMutation(id);
-
-  // Helper to format ISO Date string into YYYY-MM-DD for HTML5 date inputs
-  const formatDateForInput = (dStr: string | null | undefined) => {
-    if (!dStr) return "";
-    try {
-      return new Date(dStr).toISOString().split("T")[0];
-    } catch {
-      return "";
-    }
-  };
 
   return (
     <div className="space-y-6 max-w-3xl mx-auto">
@@ -76,17 +70,7 @@ export default function EditProjectPage() {
         ) : project ? (
           <ProjectForm
             isEdit
-            defaultValues={{
-              title: project.title,
-              description: project.description || "",
-              clientName: project.clientName || "",
-              budget: project.budget || 0,
-              status: project.status as any,
-              startDate: formatDateForInput(project.startDate),
-              endDate: formatDateForInput(project.endDate),
-              categoryId: (project as any).categoryId || "none",
-              clientId: (project as any).clientId || "none",
-            }}
+            defaultValues={mapProjectToFormValues(project)}
             onSubmit={(values) => updateMutation.mutate(values)}
             loading={updateMutation.isPending}
           />

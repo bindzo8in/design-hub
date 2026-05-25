@@ -48,6 +48,7 @@ export async function POST(req: NextRequest) {
     }
 
     const { name, logoUrl, website } = result.data;
+    const logo = logoUrl && typeof logoUrl === "object" ? logoUrl : null;
 
     // Check if client name already exists
     const existing = await prisma.client.findUnique({
@@ -64,7 +65,7 @@ export async function POST(req: NextRequest) {
     const client = await prisma.client.create({
       data: {
         name,
-        logoUrl: logoUrl && logoUrl.trim() !== "" ? logoUrl : null,
+        logoUrl: logo?.url?.trim() ? logo.url : null,
         website: website && website.trim() !== "" ? website : null,
       },
     });

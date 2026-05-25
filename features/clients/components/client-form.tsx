@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { clientFormSchema, ClientFormValues } from "../schemas/client.schema";
 import { Form } from "@/components/ui/form";
 import { ReusableFormField } from "@/components/forms/reusable-form-field";
+import { ImageUploadField } from "@/components/forms/image-upload-field";
 import { SubmitButton } from "@/components/forms/submit-button";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -27,10 +28,12 @@ export function ClientForm({
     resolver: zodResolver(clientFormSchema),
     defaultValues: defaultValues || {
       name: "",
-      logoUrl: "",
+      logoUrl: null,
       website: "",
     },
   });
+
+  console.log("Form errors:", form.formState.errors);
 
   return (
     <Form {...form}>
@@ -43,13 +46,17 @@ export function ClientForm({
             placeholder="Acme Corp"
             disabled={loading}
           />
-          <ReusableFormField
-            control={form.control}
-            name="logoUrl"
-            label="Logo Image URL"
-            placeholder="https://logo.clearbit.com/acme.com"
-            disabled={loading}
-          />
+          <div className="md:col-span-2">
+            <ImageUploadField
+              control={form.control}
+              name="logoUrl"
+              label="Client Logo"
+              description="Upload a high-resolution logo for this client profile."
+              disabled={loading}
+              folder="design-hub/clients"
+              previewAlt="Client logo preview"
+            />
+          </div>
           <ReusableFormField
             control={form.control}
             name="website"
