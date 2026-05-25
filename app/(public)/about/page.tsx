@@ -6,6 +6,9 @@ import { buildAbsoluteUrl } from "@/lib/seo/config";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { buildBreadcrumbSchema, buildFAQSchema } from "@/lib/seo/schema";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export const metadata = buildMetadata({
   title: "About",
   description:
