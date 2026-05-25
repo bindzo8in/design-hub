@@ -322,13 +322,13 @@
   }
 }
 
-@keyframes marqueeReverse {
+@keyframes marqueeX {
   0% {
-    transform: translateY(-50%);
+    transform: translateX(-50%);
   }
 
   100% {
-    transform: translateY(0%);
+    transform: translateX(0%);
   }
 }
 
@@ -337,7 +337,15 @@
 }
 
 .animate-marquee-reverse {
-  animation: marqueeReverse 18s linear infinite;
+  animation: marquee 18s linear infinite reverse;
+}
+
+.animate-marquee-x {
+  animation: marqueeX 12s linear infinite;
+}
+
+.animate-marquee-x-reverse {
+  animation: marqueeX 12s linear infinite reverse;
 }
 
 @keyframes spinSlow {

@@ -2,59 +2,58 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
-import { 
-  Globe, 
-  ShoppingBag, 
-  Smartphone, 
-  Cpu, 
-  Search, 
-  TrendingUp, 
-  Share2, 
-  Palette, 
-  ArrowUpRight 
+import {
+  Globe,
+  TrendingUp,
+  Palette,
+  ShoppingBag,
+  Package,
+  Camera,
+  ArrowUpRight,
 } from "lucide-react";
 import gsap from "gsap";
 
 const services = [
   {
     icon: Globe,
-    title: "Website Development",
-    description: "Custom, high-performance websites built on UX principles that meet your business goals.",
+    title: "Web Design",
+    description:
+      "Creating digital experiences that convert visitors into customers through thoughtful design and strong user journeys.",
   },
-  {
-    icon: ShoppingBag,
-    title: "E-Commerce Development",
-    description: "Feature-rich online stores with seamless shopping experiences and secure checkout systems.",
-  },
-  {
-    icon: Smartphone,
-    title: "Mobile App Development",
-    description: "Native and cross-platform mobile applications engineered to engage and retain users.",
-  },
-  {
-    icon: Cpu,
-    title: "Software Development",
-    description: "Custom ERP, CRM, and bespoke business software platforms tailored to your workflow.",
-  },
-  {
-    icon: Search,
-    title: "Search Engine Optimization",
-    description: "Data-driven SEO strategies that improve keyword rankings and drive organic traffic.",
-  },
+
   {
     icon: TrendingUp,
-    title: "Lead Generation (Paid Ads)",
-    description: "Targeted Google and Meta ad campaigns optimized for maximum conversion and quality leads.",
+    title: "Digital Marketing",
+    description:
+      "Smart strategies and data-led campaigns designed to help businesses grow with measurable results.",
   },
-  {
-    icon: Share2,
-    title: "Social Media Management",
-    description: "Strategic social media presence that builds community and drives brand engagement.",
-  },
+
   {
     icon: Palette,
-    title: "Graphic Designing",
-    description: "Compelling brand identities, print layouts, and digital materials that stand out.",
+    title: "Design Solution",
+    description:
+      "Brand-focused visual systems that unify storytelling, audience engagement, and performance across every touchpoint.",
+  },
+
+  {
+    icon: ShoppingBag,
+    title: "Printing",
+    description:
+      "High-quality print materials that turn ideas into memorable, tangible brand experiences.",
+  },
+
+  {
+    icon: Package,
+    title: "Packaging Design",
+    description:
+      "Packaging that communicates purpose, strengthens shelf appeal, and leaves a lasting impression.",
+  },
+
+  {
+    icon: Camera,
+    title: "Photography",
+    description:
+      "Professional visuals that bring your brand story to life with authenticity, detail, and emotion.",
   },
 ];
 
@@ -148,7 +147,8 @@ const HomeServicesSection = () => {
         </div>
 
         {/* Services Grid */}
-        <div className="services-trigger-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="services-trigger-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2
+xl:grid-cols-3 gap-6">
           {services.map((service, idx) => (
             <div
               key={idx}

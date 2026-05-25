@@ -37,7 +37,7 @@ const StatisticsSection = () => {
       ...item,
       wire: 0,
       mobile: 0,
-    }))
+    })),
   );
 
   useEffect(() => {
@@ -69,7 +69,12 @@ const StatisticsSection = () => {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden bg-[#050711] px-4 py-20 sm:px-6 lg:px-8"
+      className="
+  relative overflow-hidden bg-[#050711]
+  px-4 py-12
+  sm:px-6 sm:py-16
+  lg:px-8 lg:py-20
+"
     >
       {/* Background */}
       <div
@@ -82,27 +87,61 @@ const StatisticsSection = () => {
 
       <div className="relative mx-auto max-w-7xl">
         {/* Header */}
-        <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div
+          className="
+    mb-8
+    flex flex-col gap-6
+    lg:mb-10
+    sm:flex-row sm:items-end sm:justify-between
+  "
+        >
           <div>
             <p className="text-sm uppercase tracking-[0.35em] text-[#DF1B25]">
               Statistics
             </p>
 
-            <h2 className="mt-3 text-4xl font-semibold text-white sm:text-5xl">
+            <h2
+              className="
+    mt-3
+    text-3xl
+    font-semibold
+    leading-tight
+    text-white
+    sm:text-4xl
+    lg:text-5xl
+  "
+            >
               Payment Received
             </h2>
           </div>
 
-          <div className="flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-300 backdrop-blur-xl">
-            <button className="rounded-full bg-[#DF1B25] px-4 py-2 text-white">
+          <div
+            className="
+    flex w-full items-center justify-between
+    gap-2 overflow-x-auto
+    rounded-2xl
+    border border-white/10
+    bg-white/5
+    p-2
+    text-xs text-slate-300
+    backdrop-blur-xl
+
+    sm:w-fit
+    sm:rounded-full
+    sm:px-4
+    sm:py-3
+    sm:text-sm
+  "
+          >
+            <button className="whitespace-nowrap rounded-full bg-[#DF1B25] px-4 py-2 text-white">
               Month
             </button>
 
-            <button className="rounded-full px-4 py-2 text-slate-300/80 hover:text-white">
+            <button className="whitespace-nowrap rounded-full px-4 py-2 text-slate-300/80 hover:text-white">
               Week
             </button>
 
-            <button className="rounded-full px-4 py-2 text-slate-300/80 hover:text-white">
+            <button className="whitespace-nowrap rounded-full px-4 py-2 text-slate-300/80 hover:text-white">
               Year
             </button>
           </div>
@@ -118,7 +157,7 @@ const StatisticsSection = () => {
             overflow-hidden rounded-[2rem]
             border border-white/10
             bg-slate-950/90
-            p-6
+            p-4 sm:p-6
             shadow-2xl shadow-black/40
             backdrop-blur-xl
           "
@@ -137,27 +176,13 @@ const StatisticsSection = () => {
           </div>
 
           {/* Chart */}
-          <div className="h-[380px] w-full">
+          <div className="h-[260px] w-full sm:h-[320px] lg:h-[380px]">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={animatedData}>
                 <defs>
-                  <linearGradient
-                    id="wireGradient"
-                    x1="0"
-                    y1="0"
-                    x2="0"
-                    y2="1"
-                  >
-                    <stop
-                      offset="0%"
-                      stopColor="#DF1B25"
-                      stopOpacity={0.5}
-                    />
-                    <stop
-                      offset="100%"
-                      stopColor="#DF1B25"
-                      stopOpacity={0}
-                    />
+                  <linearGradient id="wireGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#DF1B25" stopOpacity={0.5} />
+                    <stop offset="100%" stopColor="#DF1B25" stopOpacity={0} />
                   </linearGradient>
 
                   <linearGradient
@@ -167,16 +192,8 @@ const StatisticsSection = () => {
                     x2="0"
                     y2="1"
                   >
-                    <stop
-                      offset="0%"
-                      stopColor="#4EA7FF"
-                      stopOpacity={0.5}
-                    />
-                    <stop
-                      offset="100%"
-                      stopColor="#4EA7FF"
-                      stopOpacity={0}
-                    />
+                    <stop offset="0%" stopColor="#4EA7FF" stopOpacity={0.5} />
+                    <stop offset="100%" stopColor="#4EA7FF" stopOpacity={0} />
                   </linearGradient>
                 </defs>
 
@@ -190,12 +207,16 @@ const StatisticsSection = () => {
                   stroke="#94A3B8"
                   tickLine={false}
                   axisLine={false}
+                  tick={{ fontSize: 10 }}
+                  interval="preserveStartEnd"
                 />
 
                 <YAxis
                   stroke="#94A3B8"
                   tickLine={false}
                   axisLine={false}
+                  tick={{ fontSize: 10 }}
+                  width={30}
                 />
 
                 <Tooltip
@@ -219,7 +240,7 @@ const StatisticsSection = () => {
                   type="monotone"
                   dataKey="mobile"
                   stroke="#4EA7FF"
-                  strokeWidth={3}
+                  strokeWidth={2.5}
                   fill="url(#mobileGradient)"
                 />
               </AreaChart>

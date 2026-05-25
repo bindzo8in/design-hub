@@ -29,9 +29,12 @@ const PhotographyServices = () => {
     <section
       className="
         relative overflow-hidden
-        min-h-screen
         bg-black
-        py-20
+
+        py-16
+        sm:py-20
+        lg:min-h-screen
+        lg:py-24
       "
     >
       {/* Background */}
@@ -40,95 +43,312 @@ const PhotographyServices = () => {
           src="/service/wavy.gif"
           alt="Background"
           fill
-          className="object-cover opacity-40"
+          className="object-cover opacity-30"
         />
       </div>
 
-      {/* Red Glow */}
+      {/* Cinematic Glow */}
       <div
         className="
           absolute
-          left-[-15%]
-          top-0
-          h-[500px]
-          w-[500px]
+          left-[-20%]
+          top-[10%]
+
+          h-[260px]
+          w-[260px]
+
+          sm:h-[380px]
+          sm:w-[380px]
+
+          lg:h-[520px]
+          lg:w-[520px]
+
           rounded-full
-          bg-red-600/30
+          bg-red-600/20
           blur-[140px]
         "
       />
 
-      {/* Blue Glow */}
       <div
         className="
           absolute
-          right-[-15%]
-          top-0
-          h-[500px]
-          w-[500px]
+          bottom-[5%]
+          right-[-20%]
+
+          h-[260px]
+          w-[260px]
+
+          sm:h-[380px]
+          sm:w-[380px]
+
+          lg:h-[520px]
+          lg:w-[520px]
+
           rounded-full
-          bg-blue-600/30
+          bg-blue-600/20
           blur-[140px]
         "
       />
 
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/10" />
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/40" />
 
+      {/* Content */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
-        <h2 className="mb-16 text-4xl font-light uppercase tracking-wide text-white sm:text-5xl">
-          SERVICES
-        </h2>
+        <div className="mb-14 lg:mb-20">
+          <p className="mb-4 text-xs uppercase tracking-[0.35em] text-white/50">
+            Creative Studio
+          </p>
 
-        <div className="grid items-center gap-16 lg:grid-cols-2">
-          {/* Left Images */}
-          <div className="relative flex min-h-[420px] items-center justify-center">
-            {/* Image 1 */}
-            <div className="absolute left-0 top-0 overflow-hidden rounded-[2rem] border border-white/10">
+          <h2
+            className="
+              text-4xl
+              font-light
+              uppercase
+              tracking-wide
+              text-white
+
+              sm:text-5xl
+
+              lg:text-6xl
+            "
+          >
+            Photography
+            <span className="text-white/40"> Services</span>
+          </h2>
+        </div>
+
+        {/* Main Grid */}
+        <div
+          className="
+            grid
+            items-center
+            gap-14
+
+            lg:grid-cols-[1.1fr_0.9fr]
+            lg:gap-20
+          "
+        >
+          {/* ====================================== */}
+          {/* LEFT VISUAL COMPOSITION */}
+          {/* ====================================== */}
+
+          <div
+            className="
+              relative
+              mx-auto
+              flex
+              w-full
+              max-w-[760px]
+              items-center
+              justify-center
+
+              min-h-[420px]
+
+              sm:min-h-[560px]
+
+              lg:min-h-[680px]
+            "
+          >
+            {/* center image */}
+            <div
+              className="
+                relative z-20
+                overflow-hidden
+                rounded-[2rem]
+                border border-white/10
+                shadow-2xl shadow-black/40
+
+                w-[72%]
+
+                sm:w-[56%]
+
+                lg:w-[52%]
+              "
+            >
               <Image
                 src="/tmp/card_placeholder.webp"
                 alt="Photography"
-                width={320}
-                height={220}
-                className="h-[180px] w-[280px] object-cover"
+                width={1000}
+                height={1400}
+                className="
+                  aspect-[4/5]
+                  w-full
+                  object-cover
+                "
+              />
+
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+            </div>
+
+            {/* top left */}
+            <div
+              className="
+                absolute
+                left-0
+                top-0
+                z-10
+                overflow-hidden
+                rounded-[1.75rem]
+                border border-white/10
+                shadow-xl shadow-black/30
+
+                w-[38%]
+
+                sm:w-[30%]
+
+                lg:w-[28%]
+              "
+            >
+              <Image
+                src="/tmp/card_placeholder.webp"
+                alt="Lifestyle"
+                width={600}
+                height={800}
+                className="
+                  aspect-[4/5]
+                  w-full
+                  object-cover
+                "
               />
             </div>
 
-            {/* Image 2 */}
-            <div className="absolute bottom-0 left-40 overflow-hidden rounded-[2rem] border border-white/10">
+            {/* bottom right */}
+            <div
+              className="
+                absolute
+                bottom-0
+                right-0
+                z-10
+                overflow-hidden
+                rounded-[1.75rem]
+                border border-white/10
+                shadow-xl shadow-black/30
+
+                w-[40%]
+
+                sm:w-[32%]
+
+                lg:w-[30%]
+              "
+            >
               <Image
                 src="/tmp/card_placeholder.webp"
-                alt="Fashion"
-                width={320}
-                height={220}
-                className="h-[180px] w-[280px] object-cover"
+                alt="Creative"
+                width={600}
+                height={800}
+                className="
+                  aspect-[4/5]
+                  w-full
+                  object-cover
+                "
               />
             </div>
 
-            {/* Image 3 */}
-            <div className="absolute right-0 top-10 overflow-hidden rounded-[2rem] border border-white/10">
-              <Image
-                src="/tmp/card_placeholder.webp"
-                alt="Wedding"
-                width={320}
-                height={220}
-                className="h-[180px] w-[280px] object-cover"
-              />
-            </div>
+            {/* glow */}
+            <div
+              className="
+                absolute
+                left-1/2
+                top-1/2
+                z-0
+
+                h-[220px]
+                w-[220px]
+
+                sm:h-[340px]
+                sm:w-[340px]
+
+                lg:h-[460px]
+                lg:w-[460px]
+
+                -translate-x-1/2
+                -translate-y-1/2
+
+                rounded-full
+                bg-white/10
+                blur-[140px]
+              "
+            />
           </div>
 
-          {/* Right Content */}
-          <div className="space-y-8">
-            {services.map((item, index) => (
-              <div key={index}>
-                <h3 className="text-2xl font-semibold text-white">
-                  {item.title}
-                </h3>
+          {/* ====================================== */}
+          {/* RIGHT CONTENT */}
+          {/* ====================================== */}
 
-                <p className="mt-2 max-w-xl text-lg leading-8 text-white/70">
-                  {item.desc}
-                </p>
+          <div className="space-y-5 sm:space-y-6">
+            {services.map((item, index) => (
+              <div
+                key={index}
+                className="
+                  group
+                  rounded-[1.75rem]
+                  border border-white/10
+                  bg-white/[0.03]
+                  p-5
+                  backdrop-blur-xl
+                  transition-all
+                  duration-300
+
+                  hover:border-white/20
+                  hover:bg-white/[0.05]
+
+                  sm:p-6
+                "
+              >
+                <div className="flex items-start gap-4">
+                  {/* number */}
+                  <div
+                    className="
+                      flex
+                      h-10
+                      w-10
+                      shrink-0
+                      items-center
+                      justify-center
+                      rounded-full
+                      border border-white/10
+                      bg-white/5
+                      text-sm
+                      font-medium
+                      text-white/70
+                    "
+                  >
+                    0{index + 1}
+                  </div>
+
+                  {/* content */}
+                  <div>
+                    <h3
+                      className="
+                        text-lg
+                        font-semibold
+                        text-white
+
+                        sm:text-xl
+
+                        lg:text-2xl
+                      "
+                    >
+                      {item.title}
+                    </h3>
+
+                    <p
+                      className="
+                        mt-2
+                        text-sm
+                        leading-7
+                        text-white/65
+
+                        sm:text-base
+                        sm:leading-8
+                      "
+                    >
+                      {item.desc}
+                    </p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>

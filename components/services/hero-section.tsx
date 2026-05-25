@@ -18,7 +18,7 @@ const ServicesHeroSection = () => {
         }}
       />
 
-      <div className="container relative z-10 mx-auto flex min-h-[calc(100svh-80px)] max-w-7xl flex-col items-center justify-center px-4 py-10 text-center sm:px-6 sm:py-14 lg:px-8 lg:py-16">
+      <div className="container relative z-10 mx-auto flex max-w-7xl flex-col items-center justify-center px-4 py-8 text-center sm:px-6 sm:py-12 lg:min-h-[calc(100svh-80px)] lg:px-8 lg:py-16">
         <header className="relative z-20 space-y-1 sm:space-y-2">
           <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-accent sm:text-xs lg:text-sm">
             Enter a world of
@@ -36,8 +36,8 @@ const ServicesHeroSection = () => {
         </header>
 
         {/* Hero Visual */}
-        <div className="relative z-10 -mt-2 flex w-full justify-center sm:-mt-5 lg:-mt-8">
-          <div className="relative aspect-[16/9] w-full max-w-[620px] sm:max-w-[760px] lg:max-w-[900px] xl:max-w-[980px]">
+        <div className="relative z-10 -mt-2 flex w-full justify-center sm:-mt-4 lg:-mt-8">
+          <div className="relative aspect-[16/9] w-full max-w-[480px] sm:max-w-[680px] lg:max-w-[900px] xl:max-w-[980px]">
             {/* GIF / particle overlay */}
             <Image
               src="/services/hero.gif"
@@ -55,7 +55,7 @@ const ServicesHeroSection = () => {
                 alt="Enter a world of creativity and innovation"
                 fill
                 priority
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 760px, 980px"
+                sizes="(max-width: 640px) 480px, (max-width: 1024px) 680px, 980px"
                 className="object-contain"
               />
             </div>

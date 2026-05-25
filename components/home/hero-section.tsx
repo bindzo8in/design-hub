@@ -1,7 +1,7 @@
 "use client";
+
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import gsap from "gsap";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
@@ -14,10 +14,11 @@ const headlines = [
 
 const typingPhrases = [
   "WEB DESIGN",
-  "ECOMMERCE DEVELOPMENT",
-  "MOBILE APPS",
-  "SEO & GROWTH",
-  "BRAND STRATEGY",
+  "DIGITAL MARKETING",
+  "DESIGN SOLUTIONS",
+  "PRINTING",
+  "PACKAGING DESIGN",
+  "PHOTOGRAPHY",
 ];
 
 const HomeHeroSection = () => {
@@ -29,49 +30,86 @@ const HomeHeroSection = () => {
 
   const containerRef = useRef<HTMLDivElement>(null);
   const tagRef = useRef<HTMLDivElement>(null);
-  const headlineRef = useRef<HTMLHeadingElement>(null);
   const subRef = useRef<HTMLDivElement>(null);
   const typingContainerRef = useRef<HTMLDivElement>(null);
   const heroImageRef = useRef<HTMLDivElement>(null);
 
-  // Entrance animations
+  // animations
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+      const tl = gsap.timeline({
+        defaults: { ease: "power4.out" },
+      });
 
       tl.fromTo(
         tagRef.current,
         { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 0.6, delay: 0.2 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          delay: 0.2,
+        }
       )
         .fromTo(
           ".headline-line-inner",
-          { y: "110%", opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8, stagger: 0.15 },
-          "-=0.3",
+          {
+            y: "110%",
+            opacity: 0,
+          },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.15,
+          },
+          "-=0.3"
         )
         .fromTo(
           subRef.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.7 },
-          "-=0.2",
+          {
+            opacity: 0,
+            y: 20,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+          },
+          "-=0.2"
         )
         .fromTo(
           typingContainerRef.current,
-          { opacity: 0, y: 10 },
-          { opacity: 1, y: 0, duration: 0.5 },
-          "-=0.1",
+          {
+            opacity: 0,
+            y: 10,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+          },
+          "-=0.1"
         );
 
       if (heroImageRef.current) {
         tl.fromTo(
           heroImageRef.current,
-          { opacity: 0, scale: 0.95, y: 30 },
-          { opacity: 1, scale: 1, y: 0, duration: 1.2, delay: 0.4 },
-          "-=0.8",
+          {
+            opacity: 0,
+            scale: 0.95,
+            y: 30,
+          },
+          {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 1.2,
+            delay: 0.4,
+          },
+          "-=0.8"
         );
 
-        // Smooth floating motion
         gsap.to(heroImageRef.current, {
           y: -12,
           duration: 3.5,
@@ -85,29 +123,34 @@ const HomeHeroSection = () => {
     return () => ctx.revert();
   }, []);
 
-  // Headline Cycler
+  // headline cycler
   useEffect(() => {
     const interval = setInterval(() => {
-      // Fade out
       gsap.to(".headline-line-inner", {
         y: -30,
         opacity: 0,
         duration: 0.4,
         ease: "power2.in",
         stagger: 0.05,
+
         onComplete: () => {
-          setHeadlineIdx((prev) => (prev + 1) % headlines.length);
-          // Set back position and fade in
+          setHeadlineIdx(
+            (prev) => (prev + 1) % headlines.length
+          );
+
           gsap.fromTo(
             ".headline-line-inner",
-            { y: "110%", opacity: 0 },
+            {
+              y: "110%",
+              opacity: 0,
+            },
             {
               y: 0,
               opacity: 1,
               duration: 0.7,
               ease: "power4.out",
               stagger: 0.08,
-            },
+            }
           );
         },
       });
@@ -116,28 +159,38 @@ const HomeHeroSection = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Typewriter loop
+  // typewriter
   useEffect(() => {
     const phrase = typingPhrases[phraseIdx];
     let timer: NodeJS.Timeout;
 
     if (!isDeleting) {
       timer = setTimeout(() => {
-        setTypingText(phrase.slice(0, charIdx + 1));
+        setTypingText(
+          phrase.slice(0, charIdx + 1)
+        );
+
         setCharIdx((prev) => prev + 1);
+
         if (charIdx === phrase.length) {
           setIsDeleting(true);
-          // Pause at completion
-          timer = setTimeout(() => {}, 2000);
         }
       }, 90);
     } else {
       timer = setTimeout(() => {
-        setTypingText(phrase.slice(0, charIdx - 1));
+        setTypingText(
+          phrase.slice(0, charIdx - 1)
+        );
+
         setCharIdx((prev) => prev - 1);
+
         if (charIdx === 0) {
           setIsDeleting(false);
-          setPhraseIdx((prev) => (prev + 1) % typingPhrases.length);
+
+          setPhraseIdx(
+            (prev) =>
+              (prev + 1) % typingPhrases.length
+          );
         }
       }, 50);
     }
@@ -149,21 +202,34 @@ const HomeHeroSection = () => {
     <section
       ref={containerRef}
       className="
-    relative
-    min-h-auto lg:min-h-[92vh]
-    flex flex-col justify-center lg:justify-end
-    px-4 sm:px-6 lg:px-8
-    sm:py-20 lg:pb-20 lg:pt-24
-    overflow-hidden
-    bg-background
-  "
+        relative
+        overflow-hidden
+        bg-background
+
+        min-h-auto
+        lg:min-h-[78vh]
+
+        flex
+        items-center
+        justify-center
+
+        px-4
+        py-20
+
+        sm:px-6
+        sm:py-24
+
+        lg:px-6
+        lg:py-10
+      "
     >
-      {/* Background glow and grids */}
+      {/* background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_60%_40%,rgba(223,27,37,0.08)_0%,transparent_65%)] dark:bg-[radial-gradient(ellipse_80%_60%_at_60%_40%,rgba(223,27,37,0.12)_0%,transparent_65%)]" />
+
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_70%_at_10%_80%,rgba(38,51,111,0.06)_0%,transparent_60%)] dark:bg-[radial-gradient(ellipse_50%_70%_at_10%_80%,rgba(38,51,111,0.1)_0%,transparent_60%)]" />
 
-        {/* Tech Grid Pattern */}
+        {/* grid */}
         <div
           className="absolute inset-0 opacity-[0.04] dark:opacity-[0.03]"
           style={{
@@ -180,13 +246,8 @@ const HomeHeroSection = () => {
         />
       </div>
 
-      {/* Side scroll indicators */}
-      <div className="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2 rotate-90 text-[10px] tracking-[0.25em] text-muted-foreground/60 select-none z-10 font-medium">
-        SCROLL TO EXPLORE &darr;
-      </div>
-
-      {/* Side counter indicators */}
-      <div className="hidden lg:flex absolute left-8 top-1/2 -translate-y-1/2 flex-col gap-4 z-10">
+      {/* desktop dots */}
+      <div className="hidden xl:flex absolute left-6 top-1/2 -translate-y-1/2 flex-col gap-4 z-10">
         {headlines.map((_, idx) => (
           <div
             key={idx}
@@ -199,160 +260,333 @@ const HomeHeroSection = () => {
         ))}
       </div>
 
-      <div className="container mx-auto max-w-7xl relative z-10 w-full">
+      <div className="relative z-10 mx-auto w-full max-w-[1380px]">
         <div
           className="
-    grid
-    grid-cols-1
-    md:grid-cols-2
-    lg:grid-cols-12
-    gap-8
-    lg:gap-8
-    items-center
-  "
+            grid
+            items-center
+
+            gap-8
+
+            md:gap-10
+
+            lg:grid-cols-12
+            lg:gap-4
+          "
         >
-          {/* Left Column: Text Content */}
+          {/* ====================================== */}
+          {/* LEFT */}
+          {/* ====================================== */}
+
           <div
             className="
-    order-2
-    md:order-1
-    lg:col-span-7
-    space-y-6 sm:space-y-8
-  "
+              order-2
+
+              space-y-5
+
+              md:space-y-6
+
+              lg:col-span-7
+              lg:order-1
+            "
           >
-            {/* Top Tagline */}
+            {/* tagline */}
             <div
               ref={tagRef}
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-card/40 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+              className="
+                inline-flex
+                items-center
+                gap-2
+
+                rounded-full
+                border border-border
+                bg-card/40
+
+                px-4 py-1.5
+
+                text-[10px]
+                font-semibold
+                uppercase
+                tracking-[0.2em]
+                text-muted-foreground
+
+                sm:text-xs
+              "
             >
               <span className="flex h-2 w-2 rounded-full bg-accent animate-pulse" />
-              Digital Excellence &bull; Custom Solutions
+
+              Digital Excellence
             </div>
 
-            {/* Bebas Neue Headline */}
+            {/* headline */}
             <h1
-              ref={headlineRef}
               className="
-  font-(family-name:--font-bebas-neue)
-  uppercase
-  tracking-tight
-  leading-[0.9]
-  text-foreground
-  select-none
+                font-(family-name:--font-bebas-neue)
+                uppercase
+                leading-[0.88]
+                tracking-tight
+                text-foreground
 
-  text-[clamp(3rem,11vw,5.5rem)]
+                text-[clamp(3.2rem,12vw,5rem)]
 
-  landscape:text-[clamp(2rem,5vw,3.5rem)]
-  landscape:leading-[0.85]
+                md:text-[clamp(4rem,9vw,6rem)]
 
-  md:text-[clamp(4rem,8vw,6rem)]
-  lg:text-[clamp(5rem,8vw,8rem)]
-"
+                lg:text-[clamp(4.5rem,7vw,7rem)]
+              "
             >
-              <span className="block overflow-hidden h-[1.3em] py-1 relative">
+              <span className="block overflow-hidden py-1">
                 <span className="headline-line-inner block">
                   {headlines[headlineIdx].line1}
                 </span>
               </span>
-              <span className="block overflow-hidden h-[1.3em] py-1 relative">
+
+              <span className="block overflow-hidden py-1">
                 <span className="headline-line-inner block">
                   {headlines[headlineIdx].line2}
-                  <em className="not-italic text-accent font-extrabold">
+
+                  <em className="not-italic text-accent">
                     {headlines[headlineIdx].highlight}
                   </em>
                 </span>
               </span>
             </h1>
 
-            {/* Subtext and CTAs */}
+            {/* ====================================== */}
+            {/* TABLET HERO VISUAL */}
+            {/* ====================================== */}
+
+            <div className="hidden md:block lg:hidden">
+              <div
+                className="
+                  relative
+                  h-[360px]
+                  overflow-hidden
+                  rounded-[2rem]
+                  border border-[#26336F]/20
+                  bg-card/10
+                  p-5
+                  shadow-2xl
+                  backdrop-blur-md
+                "
+              >
+                <div className="absolute inset-0 bg-gradient-to-tr from-[#26336F]/10 via-[#050711]/60 to-[#DF1B25]/5" />
+
+                <div className="relative flex h-full items-center justify-center overflow-hidden rounded-[1.5rem]">
+                  <DotLottieReact
+                    src="/lottie/Live chatbot.lottie"
+                    loop
+                    autoplay
+                    className="h-full w-full object-contain"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* mobile visual */}
+            <div className="md:hidden">
+              <div
+                className="
+                  relative
+                  h-[260px]
+                  overflow-hidden
+                  rounded-[1.75rem]
+                  border border-[#26336F]/20
+                  bg-card/10
+                  p-4
+                  shadow-2xl
+                  backdrop-blur-md
+                "
+              >
+                <div className="absolute inset-0 bg-gradient-to-tr from-[#26336F]/10 via-[#050711]/60 to-[#DF1B25]/5" />
+
+                <div className="relative flex h-full items-center justify-center overflow-hidden rounded-[1.25rem]">
+                  <DotLottieReact
+                    src="/lottie/Live chatbot.lottie"
+                    loop
+                    autoplay
+                    className="h-full w-full object-contain"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* sub */}
             <div
               ref={subRef}
               className="
-    flex
-    flex-col
-    sm:flex-row
-    sm:items-start
-    landscape:flex-col
-    gap-6
-    pt-4
-  "
+                flex flex-col
+                gap-5
+                pt-2
+
+                sm:flex-row
+                sm:items-start
+                sm:justify-between
+              "
             >
-              <p className="md:col-span-7 text-sm sm:text-base text-muted-foreground leading-relaxed max-w-[320px] md:max-w-[420px]">
-                We design and engineer bespoke web platforms and digital
-                systems. We blend creative boldness with technical precision to
-                build products that make an impact.
+              <p
+                className="
+                  max-w-[520px]
+                  text-sm
+                  leading-relaxed
+                  text-muted-foreground
+
+                  sm:text-base
+                "
+              >
+                We design and build modern digital
+                experiences that combine creativity,
+                branding, and technology to help
+                businesses grow with impact.
               </p>
+
+              {/* buttons */}
               <div
                 className="
-    flex
-    sm:flex-col
-    gap-3
-    flex-row
-    landscape:flex-row
-    landscape:items-center
-    landscape:gap-4
-      items-center
-      justify-center
-    shrink-0
-  "
+                  flex
+                  flex-wrap
+                  items-center
+                  gap-3
+                  shrink-0
+                "
               >
                 <Link
                   href="/about"
-                  className="inline-flex items-center gap-2 rounded-2xl bg-accent px-6 py-3.5 text-sm font-bold text-accent-foreground shadow-sm transition-all hover:bg-accent/90 hover:scale-[1.02]"
+                  className="
+                    inline-flex
+                    items-center
+                    gap-2
+
+                    rounded-2xl
+                    bg-accent
+
+                    px-6 py-3.5
+
+                    text-sm
+                    font-bold
+                    text-accent-foreground
+
+                    transition-all
+                    duration-300
+
+                    hover:scale-[1.02]
+                    hover:bg-accent/90
+                  "
                 >
                   Discover Us
+
                   <ArrowRight className="h-4 w-4" />
                 </Link>
+
                 <Link
                   href="/services"
-                  className="inline-flex items-center gap-2 text-sm font-bold text-muted-foreground transition-all hover:text-foreground"
+                  className="
+                    inline-flex
+                    items-center
+                    gap-2
+
+                    text-sm
+                    font-bold
+                    text-muted-foreground
+
+                    transition-colors
+                    duration-300
+
+                    hover:text-foreground
+                  "
                 >
                   Our Services
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+
+                  <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
             </div>
 
-            {/* Typing Line */}
+            {/* typing */}
             <div
               ref={typingContainerRef}
-              className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 pt-6 border-t border-border/50 text-xs sm:text-sm font-semibold tracking-wider text-muted-foreground/60 select-none uppercase"
+              className="
+                flex flex-col
+                gap-3
+
+                border-t border-border/50
+                pt-4
+
+                text-xs
+                font-semibold
+                uppercase
+                tracking-wider
+                text-muted-foreground/60
+
+                sm:flex-row
+                sm:items-center
+                sm:gap-4
+              "
             >
               <span>We are experts in:</span>
-              <div className="flex items-center text-foreground font-[family-name:var(--font-bebas-neue)] text-2xl sm:text-3xl tracking-wide">
+
+              <div
+                className="
+                  flex items-center
+
+                  font-(family-name:--font-bebas-neue)
+
+                  text-2xl
+                  tracking-wide
+                  text-foreground
+
+                  sm:text-3xl
+                "
+              >
                 <span>{typingText}</span>
-                <span className="inline-block w-[3px] h-[1.1em] bg-accent ml-1 animate-[pulse_0.9s_steps(2,start)_infinite]" />
+
+                <span className="ml-1 inline-block h-[1.1em] w-[3px] bg-accent animate-[pulse_0.9s_steps(2,start)_infinite]" />
               </div>
             </div>
           </div>
 
-          {/* Right Column: Floating Visual */}
+          {/* ====================================== */}
+          {/* DESKTOP RIGHT VISUAL */}
+          {/* ====================================== */}
+
           <div
             className="
-    order-1
-    md:order-2
-    lg:col-span-5
-    relative
-    flex
-    justify-center
-  "
+              hidden
+              lg:flex
+
+              lg:col-span-5
+
+              relative
+              justify-center
+            "
           >
             <div
               ref={heroImageRef}
-              className="  relative
-  w-full
-  h-[260px]
-  sm:h-[340px]
-  md:h-[420px]
-  lg:h-[480px] rounded-3xl border border-[#26336F]/20 bg-card/10 backdrop-blur-md shadow-2xl p-4 overflow-hidden flex items-center justify-center"
+              className="
+                relative
+
+                w-[92%]
+                overflow-hidden
+
+                rounded-[2rem]
+                border border-[#26336F]/20
+                bg-card/10
+
+                p-4
+
+                shadow-2xl
+                backdrop-blur-md
+
+                h-[420px]
+              "
             >
               <div className="absolute inset-0 bg-gradient-to-tr from-[#26336F]/10 via-[#050711]/60 to-[#DF1B25]/5 z-0" />
-              <div className="relative w-full h-full rounded-2xl overflow-hidden flex items-center justify-center">
+
+              <div className="relative flex h-full items-center justify-center overflow-hidden rounded-[1.5rem]">
                 <DotLottieReact
                   src="/lottie/Live chatbot.lottie"
                   loop
                   autoplay
-                  className="w-full h-full object-contain"
+                  className="h-full w-full object-contain"
                 />
               </div>
             </div>

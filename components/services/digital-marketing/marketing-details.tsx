@@ -121,12 +121,77 @@ const DigitalMarketingDetails = () => {
             ))}
           </div>
 
-<div className="grid h-[600px] gap-6 overflow-hidden lg:grid-cols-2">
-  
+{/* ========================= */}
+{/* MOBILE & TABLET */}
+{/* ========================= */}
+<div className="grid gap-4 lg:hidden">
+  {Array.from({ length: 4 }).map((_, index) => (
+    <div
+      key={index}
+      className="
+        group relative overflow-hidden
+        rounded-[1.75rem]
+        border border-white/10
+        bg-slate-950/85
+        p-4
+        shadow-2xl shadow-black/40
+      "
+    >
+      <div
+        className={`
+          absolute top-6 h-24 w-24 rounded-full blur-3xl opacity-70
+          ${index % 2 === 0 ? "bg-[#DF1B25]/20 -left-8" : "bg-blue-500/20 -right-8"}
+        `}
+      />
+
+      <div className="flex items-center gap-4">
+        {/* Image */}
+        <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-2xl bg-slate-900">
+          <Image
+            src={
+              index % 2 === 0
+                ? "/services/hero.png"
+                : "/service/robot.png"
+            }
+            alt="Marketing preview"
+            fill
+            className="
+              object-cover
+              transition-transform
+              duration-500
+              group-hover:scale-110
+            "
+          />
+        </div>
+
+        {/* Content */}
+        <div className="min-w-0 flex-1">
+          <p className="text-[10px] uppercase tracking-[0.2em] text-slate-400">
+            Campaign imagery
+          </p>
+
+          <h3 className="mt-2 text-base font-semibold text-white">
+            Campaign mockup set {index + 1}
+          </h3>
+
+          <p className="mt-2 text-sm leading-6 text-slate-300">
+            Creative marketing visuals designed for engagement and performance.
+          </p>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+{/* ========================= */}
+{/* DESKTOP */}
+{/* ========================= */}
+<div className="hidden h-[600px] gap-6 overflow-hidden lg:grid lg:grid-cols-2">
+
   {/* LEFT COLUMN */}
   <div className="relative overflow-hidden">
     <div className="animate-marquee flex flex-col gap-6">
-      
+
       {[...Array(2)].map((_, duplicateIndex) => (
         <React.Fragment key={duplicateIndex}>
           {Array.from({ length: 6 }).map((_, index) => (
@@ -175,7 +240,7 @@ const DigitalMarketingDetails = () => {
   {/* RIGHT COLUMN */}
   <div className="relative overflow-hidden">
     <div className="animate-marquee-reverse flex flex-col gap-6">
-      
+
       {[...Array(2)].map((_, duplicateIndex) => (
         <React.Fragment key={duplicateIndex}>
           {Array.from({ length: 6 }).map((_, index) => (
@@ -260,7 +325,7 @@ const DigitalMarketingDetails = () => {
         </div>
       </section>
 
-            {/* <section className="relative overflow-hidden bg-[#050711] px-4 py-20 sm:px-6 lg:px-8">
+      {/* <section className="relative overflow-hidden bg-[#050711] px-4 py-20 sm:px-6 lg:px-8">
         <div
           className="pointer-events-none absolute inset-0"
           style={{
