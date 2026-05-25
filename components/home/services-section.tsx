@@ -3,13 +3,17 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import {
+  ArrowUpRight,
+  Building2,
+  BusFront,
+  Camera,
+  CarFront,
   Globe,
-  TrendingUp,
+  Megaphone,
+  Package,
   Palette,
   ShoppingBag,
-  Package,
-  Camera,
-  ArrowUpRight,
+  TrendingUp,
 } from "lucide-react";
 import gsap from "gsap";
 
@@ -17,43 +21,72 @@ const services = [
   {
     icon: Globe,
     title: "Web Design",
+    href: "/services/web-design",
     description:
       "Creating digital experiences that convert visitors into customers through thoughtful design and strong user journeys.",
   },
-
   {
     icon: TrendingUp,
     title: "Digital Marketing",
+    href: "/services/digital-marketing",
     description:
       "Smart strategies and data-led campaigns designed to help businesses grow with measurable results.",
   },
-
   {
     icon: Palette,
     title: "Design Solution",
+    href: "/services/design-solution",
     description:
       "Brand-focused visual systems that unify storytelling, audience engagement, and performance across every touchpoint.",
   },
-
   {
     icon: ShoppingBag,
     title: "Printing",
+    href: "/services/printing",
     description:
       "High-quality print materials that turn ideas into memorable, tangible brand experiences.",
   },
-
   {
     icon: Package,
     title: "Packaging Design",
+    href: "/services/packaging-design",
     description:
       "Packaging that communicates purpose, strengthens shelf appeal, and leaves a lasting impression.",
   },
-
   {
     icon: Camera,
     title: "Photography",
+    href: "/services/photography",
     description:
       "Professional visuals that bring your brand story to life with authenticity, detail, and emotion.",
+  },
+  {
+    icon: Megaphone,
+    title: "Outdoor Advertisement",
+    href: "/services/outdoor-advertisement",
+    description:
+      "Large-format campaigns across high-footfall locations to increase visibility and reinforce brand recall.",
+  },
+  {
+    icon: BusFront,
+    title: "Bus Advertisement",
+    href: "/services/bus-advertisement",
+    description:
+      "Transit-first campaigns designed to keep your brand moving across routes, neighborhoods, and busy corridors.",
+  },
+  {
+    icon: CarFront,
+    title: "Mobile Van Advertisement",
+    href: "/services/mobile-van-adverticement",
+    description:
+      "Mobile campaign activations that bring your message directly to the audience with high visibility and flexibility.",
+  },
+  {
+    icon: Building2,
+    title: "Barricade Advertisement",
+    href: "/services/barricade-adverticement",
+    description:
+      "Premium viewing spaces on barricades and hoardings that support brand presence at events, construction zones, and public activations.",
   },
 ];
 
@@ -107,7 +140,7 @@ const HomeServicesSection = () => {
   }, []);
 
   // Handle card mouse shine effect
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -149,14 +182,15 @@ const HomeServicesSection = () => {
         {/* Services Grid */}
         <div className="services-trigger-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2
 xl:grid-cols-3 gap-6">
-          {services.map((service, idx) => (
-            <div
-              key={idx}
+          {services.map((service) => (
+            <Link
+              key={service.href}
+              href={service.href}
               onMouseMove={handleMouseMove}
               className="service-grid-card group relative overflow-hidden rounded-3xl border border-border/60 bg-card/40 p-6 sm:p-8 flex flex-col justify-between min-h-[250px] transition-all duration-300 hover:border-accent/40 hover:-translate-y-1 hover:shadow-md"
             >
               {/* Vercel-like hover radial glow effect */}
-              <div 
+              <div
                 className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 style={{
                   background: `radial-gradient(350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(223, 27, 37, 0.05), transparent 60%)`
@@ -186,7 +220,7 @@ xl:grid-cols-3 gap-6">
                   <ArrowUpRight className="h-4 w-4" />
                 </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 

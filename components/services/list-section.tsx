@@ -1,4 +1,3 @@
-import React from 'react'
 import { servicesList } from './utils'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -43,9 +42,16 @@ const ServicesListSection = () => {
           {/* Content */}
           <div className="p-6 pt-5 lg:p-8 lg:pt-6">
             <div className="flex items-start justify-between gap-4">
-              <h3 className="text-xl font-bold tracking-tight text-foreground">
-                {service.title}
-              </h3>
+              <div>
+                <h3 className="text-xl font-bold tracking-tight text-foreground">
+                  {service.title}
+                </h3>
+                {service.status && (
+                  <span className="mt-3 inline-flex items-center rounded-full border border-accent/30 bg-accent/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-accent">
+                    {service.status}
+                  </span>
+                )}
+              </div>
 
               <Link
                 href={service.href}

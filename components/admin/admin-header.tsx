@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import { Bell, Search, Sun, Moon, LogOut, User, Settings, ShieldAlert } from "lucide-react";
@@ -121,7 +120,7 @@ export function AdminHeader() {
             </DropdownMenuItem>
             <DropdownMenuSeparator className="bg-[#26336F]/20" />
             <DropdownMenuItem
-              onClick={() => signOut({ callbackUrl: "/auth-demo" })}
+              onClick={() => signOut({ callbackUrl: "/" })}
               className="focus:bg-[#DF1B25]/20 focus:text-[#DF1B25] text-[#DF1B25] cursor-pointer rounded-lg py-2"
             >
               <LogOut className="mr-2 h-4 w-4" />

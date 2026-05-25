@@ -32,7 +32,7 @@ export default {
         "/portfolio",
         "/careers",
         "/login",
-        "/auth-demo",
+        // "/auth-demo",
       ];
 
       const isPublicRoute =
