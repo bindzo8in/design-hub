@@ -13,14 +13,13 @@ import { IoIosPhonePortrait, IoMdMailOpen } from "react-icons/io";
 import { FaXTwitter } from "react-icons/fa6";
 import { footer_items } from "./utils";
 import Link from "next/link";
+import { env } from "@/env";
 
 const socials = [
-  FaInstagram,
-  FaLinkedin,
-  FaFacebook,
-  FaXTwitter,
-  FaGoogle,
-  FaPinterest,
+  { Icon: FaInstagram, href: env.NEXT_PUBLIC_SOCIAL_INSTAGRAM },
+  { Icon: FaLinkedin, href: env.NEXT_PUBLIC_SOCIAL_LINKEDIN },
+  { Icon: FaFacebook, href: env.NEXT_PUBLIC_SOCIAL_FACEBOOK },
+  { Icon: FaGoogle, href: env.NEXT_PUBLIC_SOCIAL_GOOGLE },
 ];
 
 const Footer = () => {
@@ -147,8 +146,11 @@ const Footer = () => {
 
             {/* socials */}
             <div className="mt-8 flex flex-wrap gap-3">
-              {socials.map((Icon, index) => (
-                <button
+              {socials.map((item, index) => (
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   key={index}
                   className="
                     flex
@@ -171,8 +173,8 @@ const Footer = () => {
                     hover:text-secondary-foreground
                   "
                 >
-                  <Icon className="h-4 w-4" />
-                </button>
+                  <item.Icon className="h-4 w-4" />
+                </a>
               ))}
             </div>
           </div>
@@ -191,9 +193,7 @@ const Footer = () => {
           >
             {/* quick links */}
             <div>
-              <h2 className="mb-5 text-lg font-semibold">
-                Quick Links
-              </h2>
+              <h2 className="mb-5 text-lg font-semibold">Quick Links</h2>
 
               <nav className="flex flex-col gap-3">
                 {footer_items.quick_links.map((link, index) => (
@@ -218,17 +218,14 @@ const Footer = () => {
 
             {/* features */}
             <div>
-              <h2 className="mb-5 text-lg font-semibold">
-                Our Features
-              </h2>
+              <h2 className="mb-5 text-lg font-semibold">Our Features</h2>
 
               <nav className="flex flex-col gap-3">
-                {footer_items.our_features.map(
-                  (feature, index) => (
-                    <Link
-                      key={index}
-                      href={feature.href}
-                      className="
+                {footer_items.our_features.map((feature, index) => (
+                  <Link
+                    key={index}
+                    href={feature.href}
+                    className="
                         text-sm
                         text-muted-foreground
 
@@ -237,19 +234,16 @@ const Footer = () => {
 
                         hover:text-secondary-foreground
                       "
-                    >
-                      {feature.title}
-                    </Link>
-                  )
-                )}
+                  >
+                    {feature.title}
+                  </Link>
+                ))}
               </nav>
             </div>
 
             {/* contact */}
             <div className="sm:col-span-2 lg:col-span-1">
-              <h2 className="mb-5 text-lg font-semibold">
-                Contact Us
-              </h2>
+              <h2 className="mb-5 text-lg font-semibold">Contact Us</h2>
 
               <div className="space-y-5 text-sm text-muted-foreground">
                 <a
@@ -265,12 +259,12 @@ const Footer = () => {
                   <FaMapMarker className="mt-1 h-4 w-4 shrink-0" />
 
                   <address className="not-italic leading-relaxed">
-                    Coimbatore, Tamil Nadu
+                    {env.NEXT_PUBLIC_ADDRESS}
                   </address>
                 </a>
 
                 <a
-                  href="tel:+919876543210"
+                  href={`tel:${env.NEXT_PUBLIC_PHONE_NUMBER}`}
                   className="
                     flex items-center gap-3
                     transition-colors duration-300
@@ -279,11 +273,11 @@ const Footer = () => {
                 >
                   <IoIosPhonePortrait className="h-4 w-4 shrink-0" />
 
-                  <span>+91 98765 43210</span>
+                  <span>{env.NEXT_PUBLIC_PHONE_LABEL}</span>
                 </a>
 
                 <a
-                  href="mailto:testmail@gmail.com"
+                  href={`mailto:${env.NEXT_PUBLIC_EMAIL}}`}
                   className="
                     flex items-center gap-3
                     break-all
@@ -293,7 +287,7 @@ const Footer = () => {
                 >
                   <IoMdMailOpen className="h-4 w-4 shrink-0" />
 
-                  <span>testmail@gmail.com</span>
+                  <span>{env.NEXT_PUBLIC_EMAIL}</span>
                 </a>
               </div>
             </div>
@@ -318,8 +312,8 @@ const Footer = () => {
           "
         >
           <p className="text-xs text-muted-foreground sm:text-sm">
-            Copyright © {new Date().getFullYear()},
-            Bindzo 8 IT Solutions. All Rights Reserved.
+            Copyright © {new Date().getFullYear()}, Bindzo 8 IT Solutions. All
+            Rights Reserved.
           </p>
 
           <p className="text-xs text-muted-foreground sm:text-sm">

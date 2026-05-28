@@ -58,6 +58,8 @@
   --font-stick-no-bills: var(--font-stick-no-bills);
   --font-orbitron: var(--font-orbitron);
   --font-heebo: var(--font-heebo);
+  --font-cormorant: var(--font-cormorant);
+  --font-cormorant: var(--font-cormorant);
 }
 
 /* 
@@ -347,6 +349,24 @@
 .animate-marquee-x-reverse {
   animation: marqueeX 12s linear infinite reverse;
 }
+/* service hero */
+.hero-marquee { animation: marqueeX 26s linear infinite reverse; }
+ @keyframes ring-cw  { to { transform: rotate(360deg);  } }
+        @keyframes ring-ccw { to { transform: rotate(-360deg); } }
+        .ring-cw  { animation: ring-cw  32s linear infinite; }
+        .ring-ccw { animation: ring-ccw 48s linear infinite; }
+
+        @keyframes grain-shift {
+          0%,100% { transform: translate(0,0); }
+          20%      { transform: translate(-2%,-2%); }
+          40%      { transform: translate(2%,-1%); }
+          60%      { transform: translate(-1%, 2%); }
+          80%      { transform: translate(1%,1%); }
+        }
+        .grain { animation: grain-shift 0.4s steps(1) infinite; }
+
+        .hero-btn-primary:hover  { filter: brightness(1.1); }
+        .hero-btn-outline:hover  { background: rgba(255,255,255,0.07); }
 
 @keyframes spinSlow {
   from {

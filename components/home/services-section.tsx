@@ -19,18 +19,18 @@ import gsap from "gsap";
 
 const services = [
   {
-    icon: Globe,
-    title: "Web Design",
-    href: "/services/web-design",
-    description:
-      "Creating digital experiences that convert visitors into customers through thoughtful design and strong user journeys.",
-  },
-  {
     icon: TrendingUp,
     title: "Digital Marketing",
     href: "/services/digital-marketing",
     description:
       "Smart strategies and data-led campaigns designed to help businesses grow with measurable results.",
+  },
+  {
+    icon: Globe,
+    title: "Web Development",
+    href: "/services/web-design",
+    description:
+      "Creating digital experiences that convert visitors into customers through thoughtful design and strong user journeys.",
   },
   {
     icon: Palette,
@@ -60,34 +60,34 @@ const services = [
     description:
       "Professional visuals that bring your brand story to life with authenticity, detail, and emotion.",
   },
-  {
-    icon: Megaphone,
-    title: "Outdoor Advertisement",
-    href: "/services/outdoor-advertisement",
-    description:
-      "Large-format campaigns across high-footfall locations to increase visibility and reinforce brand recall.",
-  },
-  {
-    icon: BusFront,
-    title: "Bus Advertisement",
-    href: "/services/bus-advertisement",
-    description:
-      "Transit-first campaigns designed to keep your brand moving across routes, neighborhoods, and busy corridors.",
-  },
-  {
-    icon: CarFront,
-    title: "Mobile Van Advertisement",
-    href: "/services/mobile-van-adverticement",
-    description:
-      "Mobile campaign activations that bring your message directly to the audience with high visibility and flexibility.",
-  },
-  {
-    icon: Building2,
-    title: "Barricade Advertisement",
-    href: "/services/barricade-adverticement",
-    description:
-      "Premium viewing spaces on barricades and hoardings that support brand presence at events, construction zones, and public activations.",
-  },
+  // {
+  //   icon: Megaphone,
+  //   title: "Outdoor Advertisement",
+  //   href: "/services/outdoor-advertisement",
+  //   description:
+  //     "Large-format campaigns across high-footfall locations to increase visibility and reinforce brand recall.",
+  // },
+  // {
+  //   icon: BusFront,
+  //   title: "Bus Advertisement",
+  //   href: "/services/bus-advertisement",
+  //   description:
+  //     "Transit-first campaigns designed to keep your brand moving across routes, neighborhoods, and busy corridors.",
+  // },
+  // {
+  //   icon: CarFront,
+  //   title: "Mobile Van Advertisement",
+  //   href: "/services/mobile-van-adverticement",
+  //   description:
+  //     "Mobile campaign activations that bring your message directly to the audience with high visibility and flexibility.",
+  // },
+  // {
+  //   icon: Building2,
+  //   title: "Barricade Advertisement",
+  //   href: "/services/barricade-adverticement",
+  //   description:
+  //     "Premium viewing spaces on barricades and hoardings that support brand presence at events, construction zones, and public activations.",
+  // },
 ];
 
 const HomeServicesSection = () => {
@@ -113,7 +113,7 @@ const HomeServicesSection = () => {
               start: "top 85%",
               once: true,
             },
-          }
+          },
         );
 
         // Grid cards stagger entrance
@@ -131,7 +131,7 @@ const HomeServicesSection = () => {
               start: "top 80%",
               once: true,
             },
-          }
+          },
         );
       });
     }, containerRef);
@@ -152,10 +152,9 @@ const HomeServicesSection = () => {
     <section
       ref={containerRef}
       id="services"
-      className="relative overflow-hidden bg-background py-16 sm:py-24 px-4 sm:px-8 border-b border-border/40 select-none"
+      className="relative overflow-hidden bg-gray-800 py-16 sm:py-24 px-4 sm:px-8 border-b border-border/40 select-none"
     >
       <div className="container mx-auto max-w-7xl">
-        
         {/* Section Header */}
         <div className="services-trigger-header flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 lg:mb-16">
           <div className="space-y-4">
@@ -167,7 +166,7 @@ const HomeServicesSection = () => {
               Our <em className="not-italic text-accent">Services</em>
             </h2>
           </div>
-          
+
           <div className="services-reveal">
             <Link
               href="/services"
@@ -180,8 +179,10 @@ const HomeServicesSection = () => {
         </div>
 
         {/* Services Grid */}
-        <div className="services-trigger-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2
-xl:grid-cols-3 gap-6">
+        <div
+          className="services-trigger-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2
+xl:grid-cols-3 gap-6"
+        >
           {services.map((service) => (
             <Link
               key={service.href}
@@ -193,37 +194,40 @@ xl:grid-cols-3 gap-6">
               <div
                 className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 style={{
-                  background: `radial-gradient(350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(223, 27, 37, 0.05), transparent 60%)`
+                  background: `radial-gradient(
+      350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+      rgba(255, 80, 80, 0.12),
+      transparent 60%
+    )`,
                 }}
               />
 
               <div>
                 {/* Icon wrapper */}
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary text-primary dark:text-[#7f91ff] group-hover:bg-accent group-hover:text-accent-foreground transition-all duration-300 shadow-sm">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-red-50 text-red-600 group-hover:bg-red-500 group-hover:text-white transition-all duration-300 shadow-sm">
                   <service.icon className="h-5 w-5" />
                 </div>
 
                 {/* Title */}
-                <h3 className="mt-6 text-base sm:text-lg font-bold text-foreground tracking-wide uppercase">
+                <h3 className="mt-6 text-base sm:text-lg font-bold text-gray-100 tracking-wide uppercase">
                   {service.title}
                 </h3>
 
                 {/* Description */}
-                <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                <p className="mt-2 text-xs sm:text-sm text-gray-300 leading-relaxed">
                   {service.description}
                 </p>
               </div>
 
               {/* Bottom arrow visual */}
-              <div className="flex justify-end pt-4 border-t border-border/40 mt-6">
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-background border border-border group-hover:bg-accent group-hover:text-accent-foreground transition-all duration-300">
+              <div className="flex justify-end pt-4 border-t border-gray-200 mt-6">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white border border-gray-200 text-gray-700 group-hover:bg-red-500 group-hover:text-white transition-all duration-300">
                   <ArrowUpRight className="h-4 w-4" />
                 </span>
               </div>
             </Link>
           ))}
         </div>
-
       </div>
     </section>
   );

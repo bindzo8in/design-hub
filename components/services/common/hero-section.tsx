@@ -28,7 +28,7 @@ const HeroSection = ({
       className="
         relative overflow-hidden
         min-h-fit
-        lg:min-h-screen
+        lg:min-h-fit
 
         flex flex-col justify-center
 
@@ -71,21 +71,35 @@ const HeroSection = ({
         "
       >
         {/* Top Title */}
-        <h1
-          className="
-            text-glow-white
-            text-center
-            text-2xl
-            font-bold
-            tracking-wide
+        <div className="relative flex items-center justify-center">
+          {/* decorative blur */}
+          <div className="absolute h-24 w-24 rounded-full bg-accent/20 blur-3xl" />
 
-            sm:text-3xl
-            md:text-4xl
-            lg:text-5xl
-          "
-        >
-          {title}
-        </h1>
+          <h1
+            className="
+      relative
+      text-center
+      font-(family-name:--font-bodoni)
+      font-medium
+      text-foreground
+
+      tracking-[-0.04em]
+      leading-none
+
+      text-[clamp(2.5rem,7vw,5.5rem)]
+
+      drop-shadow-[0_2px_20px_rgba(255,255,255,0.08)]
+    "
+          >
+            <span className="block opacity-70 text-sm uppercase tracking-[0.4em] mb-3 font-sans">
+              Premium Digital Studio
+            </span>
+
+            {title}
+
+            <span className="mx-auto mt-5 block h-px w-24 bg-gradient-to-r from-transparent via-accent to-transparent" />
+          </h1>
+        </div>
 
         {/* Hero Content */}
         <div
@@ -202,7 +216,7 @@ const HeroSection = ({
         </div>
 
         {/* Bottom Label */}
-        <div className="mt-4 lg:-mt-4">
+        {/* <div className="mt-4 lg:-mt-4">
           <h5
             className="
               animate-blur
@@ -222,7 +236,7 @@ const HeroSection = ({
           >
             {bottomLabel}
           </h5>
-        </div>
+        </div> */}
       </div>
     </section>
   );

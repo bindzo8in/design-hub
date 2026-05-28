@@ -1,7 +1,6 @@
 import HeroSection from "@/components/services/common/hero-section";
 import DigitalMarketingDetails from "@/components/services/digital-marketing/marketing-details";
 import StatisticsSection from "@/components/services/digital-marketing/statistics-section";
-import React from "react";
 
 const Page = () => {
   return (

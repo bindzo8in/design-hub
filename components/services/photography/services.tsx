@@ -168,7 +168,7 @@ const PhotographyServices = () => {
               "
             >
               <Image
-                src="/tmp/card_placeholder.webp"
+                src="/service/photo-shoot/Photography.webp"
                 alt="Photography"
                 width={1000}
                 height={1400}
@@ -202,7 +202,7 @@ const PhotographyServices = () => {
               "
             >
               <Image
-                src="/tmp/card_placeholder.webp"
+                src="/service/photo-shoot/studios.jpg"
                 alt="Lifestyle"
                 width={600}
                 height={800}
@@ -234,7 +234,7 @@ const PhotographyServices = () => {
               "
             >
               <Image
-                src="/tmp/card_placeholder.webp"
+                src="/service/photo-shoot/Winter.webp"
                 alt="Creative"
                 width={600}
                 height={800}

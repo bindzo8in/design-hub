@@ -4,15 +4,15 @@ import Image from "next/image";
 const cards = [
   {
     title: "Product Photography",
-    image: "/tmp/card_placeholder.webp",
+    image: "/service/photo-shoot/product-photography.avif",
   },
   {
     title: "Fashion Shoots",
-    image: "/tmp/card_placeholder.webp",
+    image: "/service/photo-shoot/fashion-shooting.avif",
   },
   {
     title: "Wedding Moments",
-    image: "/tmp/card_placeholder.webp",
+    image: "/service/photo-shoot/wedding-moments.jpg",
   },
 ];
 

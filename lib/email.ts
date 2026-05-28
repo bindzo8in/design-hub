@@ -22,6 +22,12 @@ export type CareerSubmission = {
   resumeContentType?: string;
 };
 
+export type PopupContactSubmission = {
+  name: string;
+  phone: string;
+  subject: string;
+};
+
 const defaultFromName = env.RESEND_FROM_NAME || "Design Hub";
 const defaultFromEmail = env.RESEND_FROM_EMAIL || env.ADMIN_EMAIL;
 
@@ -41,7 +47,8 @@ const escapeHtml = (value: string) =>
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 
-const formatHtml = (value: string) => escapeHtml(value).replace(/\n/g, "<br />");
+const formatHtml = (value: string) =>
+  escapeHtml(value).replace(/\n/g, "<br />");
 
 const buildField = (label: string, value: string) => `
   <div style="margin-bottom: 16px;">
@@ -100,7 +107,10 @@ export const sendContactEmails = async (data: ContactSubmission) => {
     buildField("Email", data.email),
     buildField("Phone", data.phone),
     buildField("Subject", data.subject),
-    buildField("Services", data.services.length ? data.services.join(", ") : "Not selected"),
+    buildField(
+      "Services",
+      data.services.length ? data.services.join(", ") : "Not selected",
+    ),
     buildField("Description", data.description),
   ].join("");
 
@@ -112,7 +122,7 @@ export const sendContactEmails = async (data: ContactSubmission) => {
       <p style="font-size: 15px; line-height: 1.8;">Thank you for reaching out to Design Hub. Our team has received your request and will review it within 24 business hours.</p>
       ${buildField("Subject", data.subject)}
       ${buildField("Services", data.services.length ? data.services.join(", ") : "Not selected")}`,
-    "If you need immediate support, call us at +91 98843 44503 or email info@designhub.in."
+    "If you need immediate support, call us at +91 98843 44503 or email info@designhub.in.",
   );
 
   await Promise.all([
@@ -152,18 +162,19 @@ export const sendCareerEmails = async (data: CareerSubmission) => {
       <p style="font-size: 15px; line-height: 1.8;">Thank you for applying to Design Hub. We have received your application for <strong>${escapeHtml(data.position)}</strong>. Our HR team will review your profile and get back to you shortly.</p>
       ${buildField("Location", data.location)}
       ${buildField("Position", data.position)}`,
-    "We will contact you if your profile is a strong match for the role."
+    "We will contact you if your profile is a strong match for the role.",
   );
 
-  const attachments = data.resumeContent && data.resumeFileName
-    ? [
-        {
-          filename: data.resumeFileName,
-          content: data.resumeContent,
-          contentType: data.resumeContentType,
-        },
-      ]
-    : undefined;
+  const attachments =
+    data.resumeContent && data.resumeFileName
+      ? [
+          {
+            filename: data.resumeFileName,
+            content: data.resumeContent,
+            contentType: data.resumeContentType,
+          },
+        ]
+      : undefined;
 
   await Promise.all([
     sendEmail({
@@ -182,4 +193,32 @@ export const sendCareerEmails = async (data: CareerSubmission) => {
       attachments,
     }),
   ]);
+};
+
+export const sendPopupContactEmails = async (data: PopupContactSubmission) => {
+  const adminFields = [
+    buildField("Name", data.name),
+
+    buildField("Phone", data.phone),
+
+    buildField("Project Details", data.subject),
+  ].join("");
+
+  await sendEmail({
+    to: env.ADMIN_EMAIL,
+
+    subject: `New popup inquiry from ${data.name}`,
+
+    html: buildAdminEmail("Popup Inquiry", adminFields),
+
+    text: `
+New popup inquiry
+
+Name: ${data.name}
+
+Phone: ${data.phone}
+
+Project Details: ${data.subject}
+`,
+  });
 };

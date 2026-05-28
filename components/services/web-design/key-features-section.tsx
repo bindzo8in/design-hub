@@ -14,7 +14,7 @@ const KeyFeaturesSection = () => {
       <div className="relative w-full max-w-lg relative">
         <Image
           src="/service/1915.gif"
-          alt="Web Design"
+          alt="Web Development"
           width={1003}
           height={388}
           className="w-full h-auto object-contain opacity-20"

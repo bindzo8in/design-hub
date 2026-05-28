@@ -12,9 +12,9 @@ const features = [
 ];
 
 const images = [
-  "/tmp/card_placeholder.webp",
-  "/tmp/project_placeholder.webp",
-  "/tmp/card_placeholder.webp",
+  "/service/printing/printing-press.webp",
+  "/service/printing/textured-paper.webp",
+  "/service/printing/print-proof.webp",
 ];
 
 const PrintingWhySection = () => {
@@ -58,7 +58,6 @@ const PrintingWhySection = () => {
   return (
     <section className="min-h-screen bg-black text-white px-6 md:px-12 lg:px-20 py-20">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        {/* LEFT SIDE */}
         {/* LEFT SIDE */}
         <div
           className="
@@ -119,7 +118,7 @@ const PrintingWhySection = () => {
     "
           >
             <Image
-              src="/tmp/project_placeholder.webp"
+              src="/service/printing/textured-paper.webp"
               alt=""
               width={300}
               height={400}
@@ -250,7 +249,7 @@ const PrintingWhySection = () => {
     "
           >
             <Image
-              src="/tmp/card_placeholder.webp"
+              src="/service/printing/print-proof.webp"
               alt=""
               width={300}
               height={300}
@@ -267,9 +266,9 @@ const PrintingWhySection = () => {
         {/* RIGHT SIDE */}
         <div className="space-y-8">
           <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-white/50 mb-4">
+            {/* <p className="text-sm uppercase tracking-[0.3em] text-white/50 mb-4">
               Why Choose Us
-            </p>
+            </p> */}
 
             <h2 className="text-4xl md:text-5xl font-semibold leading-tight">
               Exceptional Print Quality & Service

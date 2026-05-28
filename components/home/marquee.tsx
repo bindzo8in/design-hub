@@ -1,5 +1,5 @@
 const marqueeItems = [
-  "Web Design",
+  "Web Development",
   "E-Commerce Development",
   "Mobile Apps",
   "SEO Optimization",

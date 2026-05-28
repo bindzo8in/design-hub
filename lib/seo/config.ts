@@ -5,7 +5,7 @@ export const seoConfig = {
   defaultDescription:
     "Design Hub builds modern websites, digital marketing campaigns, brand systems, packaging, photography, and print solutions for businesses in Coimbatore and beyond.",
   defaultKeywords: [
-    "web design",
+    "web development",
     "digital marketing",
     "branding",
     "packaging design",

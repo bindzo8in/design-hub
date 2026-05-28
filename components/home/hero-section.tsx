@@ -13,7 +13,7 @@ const headlines = [
 ];
 
 const typingPhrases = [
-  "WEB DESIGN",
+  "WEB DEVELOPMENT",
   "DIGITAL MARKETING",
   "DESIGN SOLUTIONS",
   "PRINTING",
@@ -321,7 +321,7 @@ const HomeHeroSection = () => {
             {/* headline */}
             <h1
               className="
-                font-(family-name:--font-bebas-neue)
+                font-cormorant
                 uppercase
                 leading-[0.88]
                 tracking-tight

@@ -5,8 +5,9 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
 
 import authConfig from "./auth.config";
+import { env } from "./env";
 
-const allowedAdminEmail = process.env.ADMIN_EMAIL?.toLowerCase();
+const allowedAdminEmail = env.ADMIN_EMAIL || [];
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   debug: process.env.NODE_ENV === "development",
@@ -25,8 +26,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }) {
       if (
         account?.provider === "google" &&
-        user.id &&
-        user.email?.toLowerCase() === allowedAdminEmail
+        user.id && user.email &&
+        allowedAdminEmail.includes(user.email?.toLowerCase())
       ) {
         await prisma.user.update({
           where: {
@@ -46,7 +47,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     ...authConfig.callbacks,
 
     async signIn({ user }) {
-      if (user.email?.toLowerCase() !== allowedAdminEmail) {
+      if (user.email && !allowedAdminEmail.includes(user.email?.toLowerCase())) {
         return false;
       }
 

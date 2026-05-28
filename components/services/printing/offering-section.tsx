@@ -188,7 +188,7 @@ export default function PrintingSection() {
         "
       >
         <Image
-          src="/tmp/project_placeholder.webp"
+          src="/service/printing/Billboard_Mockup.jpg"
           alt=""
           width={700}
           height={500}
@@ -270,7 +270,7 @@ export default function PrintingSection() {
     <div className="grid grid-cols-2 gap-4">
       <div className="relative overflow-hidden rounded-[1.5rem] border border-white/10">
         <Image
-          src="/tmp/project_placeholder.webp"
+           src="/service/printing/fashion-magazine.webp"
           alt=""
           width={400}
           height={300}
@@ -284,7 +284,7 @@ export default function PrintingSection() {
 
       <div className="relative overflow-hidden rounded-[1.5rem] border border-cyan-400/40">
         <Image
-          src="/tmp/project_placeholder.webp"
+          src="/service/printing/Box-Packaging.jpg"
           alt=""
           width={400}
           height={300}
@@ -314,7 +314,7 @@ export default function PrintingSection() {
 
         <div className="relative overflow-hidden rounded-md border border-white/20 bg-zinc-900 p-2">
           <Image
-            src="/tmp/project_placeholder.webp"
+            src="/service/printing/Billboard_Mockup.jpg"
             alt=""
             width={260}
             height={160}
@@ -368,10 +368,10 @@ export default function PrintingSection() {
 
         <div className="relative overflow-hidden rounded-lg border border-white/10 bg-white/5 p-4 backdrop-blur-xl">
           <Image
-            src="/tmp/project_placeholder.webp"
+            src="/service/printing/fashion-magazine.webp"
             alt=""
-            width={320}
-            height={220}
+            width={640}
+            height={440}
             className="object-cover"
           />
         </div>
@@ -423,7 +423,7 @@ export default function PrintingSection() {
 
         <div className="overflow-hidden rounded-md border border-cyan-400/50 bg-zinc-900 p-2 shadow-[0_0_40px_rgba(59,130,246,0.35)]">
           <Image
-            src="/tmp/project_placeholder.webp"
+            src="/service/printing/Box-Packaging.jpg"
             alt=""
             width={260}
             height={160}

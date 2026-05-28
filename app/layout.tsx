@@ -5,10 +5,11 @@ import {
   Stick_No_Bills,
   Orbitron,
   Heebo,
+  Cormorant_Garamond,
+  Syne,
 } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
-import WhatsAppButton from "@/components/ui/whatsapp-button";
 import { StructuredData } from "@/components/seo/structured-data";
 import { buildRootMetadata } from "@/lib/seo/metadata";
 import { buildOrganizationSchema, buildWebsiteSchema } from "@/lib/seo/schema";
@@ -48,6 +49,19 @@ export const heebo = Heebo({
   variable: "--font-heebo",
 });
 
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  variable: "--font-cormorant",
+  weight: ["300", "400", "500", "600", "700"],
+});
+
+const syne = Syne({
+  subsets: ["latin"],
+  variable: "--font-syne",
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+})
+
 export const metadata = buildRootMetadata();
 
 export const viewport = {
@@ -62,7 +76,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} ${stickNoBills.variable} ${orbitron.variable} ${heebo.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} ${stickNoBills.variable} ${orbitron.variable} ${heebo.variable} ${cormorant.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
@@ -71,10 +85,7 @@ export default function RootLayout({
           schema={buildOrganizationSchema()}
         />
         <StructuredData id="website-schema" schema={buildWebsiteSchema()} />
-        <Providers>
-          {children}
-          <WhatsAppButton />
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

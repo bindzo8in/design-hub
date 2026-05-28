@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 const CreativeSection = () => {
   return (
     <section className="relative overflow-hidden bg-black py-20 min-h-fit">
@@ -74,10 +72,10 @@ const CreativeSection = () => {
             {/* Row 1 — scrolls left */}
             <div className="overflow-hidden">
               <div className="flex gap-3 animate-marquee-x w-max">
-                {[...Array(8)].map((_, idx) => (
+                {[...Array(9)].map((_, idx) => (
                   <img
                     key={idx}
-                    src="/tmp/project_placeholder.webp"
+                    src={`/design-images/${idx+1}.png`}
                     alt=""
                     className="w-[140px] sm:w-[180px] aspect-[265/288] rounded-sm object-cover flex-shrink-0"
                   />
@@ -90,7 +88,7 @@ const CreativeSection = () => {
                 {[...Array(8)].map((_, idx) => (
                   <img
                     key={idx}
-                    src="/tmp/project_placeholder.webp"
+                    src={`/design-images/${idx+1}.png`}
                     alt=""
                     className="w-[180px] aspect-[265/288] rounded-sm object-cover flex-shrink-0"
                   />
@@ -125,10 +123,10 @@ const CreativeSection = () => {
             {/* column 1 */}
             <div className="h-[620px] overflow-hidden">
               <div className="animate-marquee flex flex-col gap-3">
-                {[...Array(6)].map((_, idx) => (
+                {[...Array(10)].map((_, idx) => (
                   <img
                     key={idx}
-                    src="/tmp/project_placeholder.webp"
+                    src={`/design-images/${idx+1}.png`}
                     alt=""
                     className="block w-[220px] aspect-[265/288] rounded-sm object-cover"
                   />
@@ -145,10 +143,10 @@ const CreativeSection = () => {
               </div>
               <div className="flex-1 overflow-hidden">
                 <div className="animate-marquee-reverse flex flex-col gap-3">
-                  {[...Array(6)].map((_, idx) => (
+                  {[...Array(10)].map((_, idx) => (
                     <img
                       key={idx}
-                      src="/tmp/project_placeholder.webp"
+                      src={`/design-images/${idx+1}.png`}
                       alt=""
                       className="block w-[220px] aspect-[265/288] rounded-sm object-cover"
                     />
@@ -160,10 +158,10 @@ const CreativeSection = () => {
             {/* column 3 */}
             <div className="h-[620px] overflow-hidden pt-8">
               <div className="animate-marquee flex flex-col gap-3">
-                {[...Array(6)].map((_, idx) => (
+                {[...Array(10)].map((_, idx) => (
                   <img
                     key={idx}
-                    src="/tmp/project_placeholder.webp"
+                    src={`/design-images/${idx+1}.png`}
                     alt=""
                     className="block w-[220px] aspect-[265/288] rounded-sm object-cover"
                   />

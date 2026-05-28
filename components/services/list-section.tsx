@@ -6,7 +6,8 @@ import { ArrowUpRight } from 'lucide-react'
 const ServicesListSection = () => {
   return (
     /* Services List Section */
-<section className="container mx-auto max-w-7xl bg-background px-4 pb-16 sm:px-6 lg:px-8">
+<section className="bg-gray-800">
+  <div className="container mx-auto max-w-7xl px-4 pb-16 pt-4 sm:px-6 lg:px-8">
   <header className="mb-12 max-w-3xl lg:mb-16">
     <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
       Our Core Services
@@ -46,11 +47,6 @@ const ServicesListSection = () => {
                 <h3 className="text-xl font-bold tracking-tight text-foreground">
                   {service.title}
                 </h3>
-                {service.status && (
-                  <span className="mt-3 inline-flex items-center rounded-full border border-accent/30 bg-accent/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-accent">
-                    {service.status}
-                  </span>
-                )}
               </div>
 
               <Link
@@ -85,6 +81,7 @@ const ServicesListSection = () => {
         <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-accent transition-all duration-300 group-hover:w-full" />
       </article>
     ))}
+  </div>
   </div>
 </section>
   )

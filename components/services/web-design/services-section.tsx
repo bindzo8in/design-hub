@@ -51,7 +51,7 @@ const ServicesSection = () => {
       <div className="w-full max-w-lg">
         <Image
           src="/service/web-design.webp"
-          alt="Web Design"
+          alt="Web Development"
           width={1003}
           height={388}
           className="w-full h-auto object-contain"

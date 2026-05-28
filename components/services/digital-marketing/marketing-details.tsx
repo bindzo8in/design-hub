@@ -121,171 +121,121 @@ const DigitalMarketingDetails = () => {
             ))}
           </div>
 
-{/* ========================= */}
-{/* MOBILE & TABLET */}
-{/* ========================= */}
-<div className="grid gap-4 lg:hidden">
-  {Array.from({ length: 4 }).map((_, index) => (
-    <div
-      key={index}
-      className="
-        group relative overflow-hidden
-        rounded-[1.75rem]
-        border border-white/10
-        bg-slate-950/85
-        p-4
-        shadow-2xl shadow-black/40
-      "
-    >
-      <div
-        className={`
-          absolute top-6 h-24 w-24 rounded-full blur-3xl opacity-70
-          ${index % 2 === 0 ? "bg-[#DF1B25]/20 -left-8" : "bg-blue-500/20 -right-8"}
-        `}
-      />
-
-      <div className="flex items-center gap-4">
-        {/* Image */}
-        <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-2xl bg-slate-900">
-          <Image
-            src={
-              index % 2 === 0
-                ? "/services/hero.png"
-                : "/service/robot.png"
-            }
-            alt="Marketing preview"
-            fill
-            className="
-              object-cover
-              transition-transform
-              duration-500
-              group-hover:scale-110
-            "
-          />
-        </div>
-
-        {/* Content */}
-        <div className="min-w-0 flex-1">
-          <p className="text-[10px] uppercase tracking-[0.2em] text-slate-400">
-            Campaign imagery
-          </p>
-
-          <h3 className="mt-2 text-base font-semibold text-white">
-            Campaign mockup set {index + 1}
-          </h3>
-
-          <p className="mt-2 text-sm leading-6 text-slate-300">
-            Creative marketing visuals designed for engagement and performance.
-          </p>
-        </div>
-      </div>
-    </div>
-  ))}
-</div>
-
-{/* ========================= */}
-{/* DESKTOP */}
-{/* ========================= */}
-<div className="hidden h-[600px] gap-6 overflow-hidden lg:grid lg:grid-cols-2">
-
-  {/* LEFT COLUMN */}
-  <div className="relative overflow-hidden">
-    <div className="animate-marquee flex flex-col gap-6">
-
-      {[...Array(2)].map((_, duplicateIndex) => (
-        <React.Fragment key={duplicateIndex}>
-          {Array.from({ length: 6 }).map((_, index) => (
-            <div
-              key={`${duplicateIndex}-${index}`}
-              className="
-                group relative overflow-hidden
-                rounded-[2rem]
-                border border-white/10
-                bg-slate-950/85
-                p-5
-                shadow-2xl shadow-black/40
-              "
-            >
-              <div className="absolute -left-10 top-8 h-28 w-28 rounded-full bg-[#DF1B25]/10 blur-3xl opacity-80" />
-
-              <div className="relative h-64 overflow-hidden rounded-[1.75rem] bg-slate-900">
-                <Image
-                  src={
-                    index % 2 === 0
-                      ? "/services/hero.png"
-                      : "/service/robot.png"
-                  }
-                  alt="Marketing preview"
-                  fill
-                  className="object-cover"
+          {/* ========================= */}
+          {/* MOBILE & TABLET */}
+          {/* ========================= */}
+          <div className="grid gap-4 lg:hidden">
+            {Array.from({ length: 9 }).map((_, index) => (
+              <div
+                key={index}
+                className="
+                  group relative overflow-hidden
+                  rounded-[1.75rem]
+                  border border-white/10
+                  bg-slate-950/85
+                  p-4
+                  shadow-2xl shadow-black/40
+                "
+              >
+                <div
+                  className={`
+                    absolute top-6 h-24 w-24 rounded-full blur-3xl opacity-70
+                    ${index % 2 === 0 ? "bg-[#DF1B25]/20 -left-8" : "bg-blue-500/20 -right-8"}
+                  `}
                 />
+
+                <div className="flex items-center gap-4">
+                  {/* Image */}
+                  <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-2xl bg-slate-900">
+                    <Image
+                      src={`/design-images/${(index % 10) + 1}.png`}
+                      alt="Marketing preview"
+                      fill
+                      className="
+                        object-cover
+                        transition-transform
+                        duration-500
+                        group-hover:scale-110
+                      "
+                    />
+                  </div>
+                </div>
               </div>
+            ))}
+          </div>
 
-              <div className="relative mt-4 space-y-3">
-                <p className="text-sm uppercase tracking-[0.2em] text-slate-400">
-                  Campaign imagery
-                </p>
+          {/* ========================= */}
+          {/* DESKTOP */}
+          {/* ========================= */}
+          <div className="hidden h-[600px] gap-6 overflow-hidden lg:grid lg:grid-cols-2">
+            {/* LEFT COLUMN */}
+            <div className="relative overflow-hidden">
+              <div className="animate-marquee flex flex-col gap-6">
+                {[...Array(2)].map((_, duplicateIndex) => (
+                  <React.Fragment key={duplicateIndex}>
+                    {Array.from({ length: 6 }).map((_, index) => (
+                      <div
+                        key={`${duplicateIndex}-${index}`}
+                        className="
+                          group relative overflow-hidden
+                          rounded-[2rem]
+                          border border-white/10
+                          bg-slate-950/85
+                          p-5
+                          shadow-2xl shadow-black/40
+                        "
+                      >
+                        <div className="absolute -left-10 top-8 h-28 w-28 rounded-full bg-[#DF1B25]/10 blur-3xl opacity-80" />
 
-                <p className="text-base font-semibold text-white">
-                  Campaign mockup set {index + 1}
-                </p>
+                        <div className="relative h-64 overflow-hidden rounded-[1.75rem] bg-slate-900">
+                          <Image
+                            src={`/design-images/${(index % 10) + 1}.png`}
+                            alt="Marketing preview"
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </React.Fragment>
+                ))}
               </div>
             </div>
-          ))}
-        </React.Fragment>
-      ))}
-    </div>
-  </div>
 
-  {/* RIGHT COLUMN */}
-  <div className="relative overflow-hidden">
-    <div className="animate-marquee-reverse flex flex-col gap-6">
+            {/* RIGHT COLUMN */}
+            <div className="relative overflow-hidden">
+              <div className="animate-marquee-reverse flex flex-col gap-6">
+                {[...Array(2)].map((_, duplicateIndex) => (
+                  <React.Fragment key={duplicateIndex}>
+                    {Array.from({ length: 9 }).map((_, index) => (
+                      <div
+                        key={`${duplicateIndex}-${index}`}
+                        className="
+                          group relative overflow-hidden
+                          rounded-[2rem]
+                          border border-white/10
+                          bg-slate-950/85
+                          p-5
+                          shadow-2xl shadow-black/40
+                        "
+                      >
+                        <div className="absolute -right-10 top-8 h-28 w-28 rounded-full bg-blue-500/10 blur-3xl opacity-80" />
 
-      {[...Array(2)].map((_, duplicateIndex) => (
-        <React.Fragment key={duplicateIndex}>
-          {Array.from({ length: 6 }).map((_, index) => (
-            <div
-              key={`${duplicateIndex}-${index}`}
-              className="
-                group relative overflow-hidden
-                rounded-[2rem]
-                border border-white/10
-                bg-slate-950/85
-                p-5
-                shadow-2xl shadow-black/40
-              "
-            >
-              <div className="absolute -right-10 top-8 h-28 w-28 rounded-full bg-blue-500/10 blur-3xl opacity-80" />
-
-              <div className="relative h-64 overflow-hidden rounded-[1.75rem] bg-slate-900">
-                <Image
-                  src={
-                    index % 2 === 0
-                      ? "/service/robot.png"
-                      : "/services/hero.png"
-                  }
-                  alt="Creative preview"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-
-              <div className="relative mt-4 space-y-3">
-                <p className="text-sm uppercase tracking-[0.2em] text-slate-400">
-                  Creative visuals
-                </p>
-
-                <p className="text-base font-semibold text-white">
-                  Creative showcase {index + 1}
-                </p>
+                        <div className="relative h-64 overflow-hidden rounded-[1.75rem] bg-slate-900">
+                          <Image
+                            src={`/design-images/${index + 1}.png`}
+                            alt="Creative preview"
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </React.Fragment>
+                ))}
               </div>
             </div>
-          ))}
-        </React.Fragment>
-      ))}
-    </div>
-  </div>
-</div>
+          </div>
         </div>
       </section>
 
@@ -324,158 +274,6 @@ const DigitalMarketingDetails = () => {
           </div>
         </div>
       </section>
-
-      {/* <section className="relative overflow-hidden bg-[#050711] px-4 py-20 sm:px-6 lg:px-8">
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at bottom, rgba(223,27,37,0.12), transparent 25%), radial-gradient(circle at top, rgba(44,132,221,0.1), transparent 30%)",
-          }}
-        />
-        <div className="relative mx-auto max-w-7xl">
-          <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="text-sm uppercase tracking-[0.35em] text-[#DF1B25]">
-                Statistics
-              </p>
-              <h2 className="mt-3 text-4xl font-semibold text-white sm:text-5xl">
-                Payment Received
-              </h2>
-            </div>
-            <div className="flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-300">
-              <button className="rounded-full bg-[#DF1B25] px-4 py-2 text-white">
-                Month
-              </button>
-              <button className="rounded-full px-4 py-2 text-slate-300/80 hover:text-white">
-                Week
-              </button>
-              <button className="rounded-full px-4 py-2 text-slate-300/80 hover:text-white">
-                Year
-              </button>
-            </div>
-          </div>
-
-          <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/90 p-6 shadow-2xl shadow-black/40 backdrop-blur-xl">
-            <div className="mb-8 flex flex-wrap gap-4">
-              <div className="flex items-center gap-2 text-sm text-white">
-                <span className="inline-block h-2.5 w-2.5 rounded-full bg-[#DF1B25]" />
-                Wire transfer
-              </div>
-              <div className="flex items-center gap-2 text-sm text-slate-300">
-                <span className="inline-block h-2.5 w-2.5 rounded-full bg-[#26336F]" />
-                Mobile payment
-              </div>
-            </div>
-
-            <div className="overflow-x-auto pb-2">
-              <svg
-                width="100%"
-                height="320"
-                viewBox="0 0 780 320"
-                style={{ minWidth: "780px" }}
-              >
-                <defs>
-                  <linearGradient
-                    id="lineGradientDesktop"
-                    x1="0"
-                    y1="0"
-                    x2="1"
-                    y2="0"
-                  >
-                    <stop offset="0%" stopColor="#DF1B25" />
-                    <stop offset="100%" stopColor="#DF1B25" stopOpacity="0.3" />
-                  </linearGradient>
-                  <linearGradient
-                    id="lineGradientMobile"
-                    x1="0"
-                    y1="0"
-                    x2="1"
-                    y2="0"
-                  >
-                    <stop offset="0%" stopColor="#4EA7FF" />
-                    <stop
-                      offset="100%"
-                      stopColor="#4EA7FF"
-                      stopOpacity="0.25"
-                    />
-                  </linearGradient>
-                </defs>
-                <rect x="0" y="0" width="780" height="320" fill="transparent" />
-                {Array.from({ length: 5 }).map((_, index) => (
-                  <line
-                    key={index}
-                    x1="40"
-                    x2="740"
-                    y1={40 + index * 56}
-                    y2={40 + index * 56}
-                    stroke="rgba(255,255,255,0.08)"
-                    strokeWidth="1"
-                  />
-                ))}
-                {chartData.map((item, index) => {
-                  const x = 40 + (index * 700) / (chartData.length - 1);
-                  return (
-                    <g key={item.label}>
-                      <line
-                        x1={x}
-                        x2={x}
-                        y1="40"
-                        y2="280"
-                        stroke="rgba(255,255,255,0.05)"
-                        strokeWidth="1"
-                      />
-                      <text
-                        x={x}
-                        y="303"
-                        textAnchor="middle"
-                        fill="#94A3B8"
-                        fontSize="12"
-                      >
-                        {item.label}
-                      </text>
-                    </g>
-                  );
-                })}
-                <path
-                  d={buildPath(chartData.map((item) => item.desktop))}
-                  fill="none"
-                  stroke="#DF1B25"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                />
-                <path
-                  d={buildPath(chartData.map((item) => item.mobile))}
-                  fill="none"
-                  stroke="#4EA7FF"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  opacity="0.9"
-                />
-                {chartData.map((item, index) => {
-                  const x = 40 + (index * 700) / (chartData.length - 1);
-                  const yDesktop =
-                    CHART_HEIGHT -
-                    VERTICAL_PADDING -
-                    (item.desktop / MAX_VALUE) *
-                      (CHART_HEIGHT - VERTICAL_PADDING * 2);
-                  const yMobile =
-                    CHART_HEIGHT -
-                    VERTICAL_PADDING -
-                    (item.mobile / MAX_VALUE) *
-                      (CHART_HEIGHT - VERTICAL_PADDING * 2);
-                  return (
-                    <g key={`dot-${item.label}`}>
-                      <circle cx={x} cy={yDesktop} r="5" fill="#DF1B25" />
-                      <circle cx={x} cy={yMobile} r="5" fill="#4EA7FF" />
-                    </g>
-                  );
-                })}
-              </svg>
-            </div>
-          </div>
-        </div>
-      </section> */}
     </div>
   );
 };

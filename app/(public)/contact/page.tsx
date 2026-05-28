@@ -4,13 +4,14 @@ import { StructuredData } from "@/components/seo/structured-data";
 import { buildAbsoluteUrl } from "@/lib/seo/config";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { buildBreadcrumbSchema } from "@/lib/seo/schema";
+import ContactMap from "@/components/contact/contact-map";
 
 export const metadata = buildMetadata({
   title: "Contact",
   description:
     "Get in touch with Design Hub in Coimbatore. Let's create responsive websites, e-commerce, custom software, graphics, and digital marketing strategies for your business success.",
   path: "/contact",
-  keywords: ["contact design hub", "web design Coimbatore", "digital marketing contact"],
+  keywords: ["contact design hub", "web development Coimbatore", "digital marketing contact"],
 });
 
 const breadcrumbSchema = buildBreadcrumbSchema([
@@ -24,6 +25,7 @@ const ContactPage = () => {
       <StructuredData id="contact-breadcrumb-schema" schema={breadcrumbSchema} />
       <ContactHeroSection />
       <ContactForm />
+      <ContactMap />
     </main>
   );
 };

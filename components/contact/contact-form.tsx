@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { MapPin, Phone, Mail, Send, CheckCircle2 } from "lucide-react";
 import gsap from "gsap";
+import { env } from "@/env";
 
 const SERVICES_OPTIONS = [
   "Android App Development",
@@ -52,7 +53,7 @@ const ContactForm = () => {
               start: "top 85%",
               once: true,
             },
-          }
+          },
         );
 
         // Form pane reveal
@@ -69,7 +70,7 @@ const ContactForm = () => {
               start: "top 85%",
               once: true,
             },
-          }
+          },
         );
       });
     }, containerRef);
@@ -81,7 +82,7 @@ const ContactForm = () => {
     setSelectedServices((prev) =>
       prev.includes(service)
         ? prev.filter((s) => s !== service)
-        : [...prev, service]
+        : [...prev, service],
     );
   };
 
@@ -121,7 +122,7 @@ const ContactForm = () => {
       setSubmitError(
         error instanceof Error
           ? error.message
-          : "Unable to send your request right now."
+          : "Unable to send your request right now.",
       );
     } finally {
       setIsLoading(false);
@@ -135,12 +136,11 @@ const ContactForm = () => {
     >
       <div className="contact-grid-trigger container mx-auto max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          
           {/* Left Column: Get In Touch Info Card */}
           <div className="contact-info-reveal lg:col-span-4 space-y-8 lg:sticky lg:top-28">
             <div className="relative rounded-3xl border border-border/60 bg-card/45 p-6 sm:p-8 overflow-hidden backdrop-blur-md">
               <div className="absolute top-0 left-0 w-[3px] h-full bg-gradient-to-b from-accent to-transparent" />
-              
+
               <h2 className="font-[family-name:var(--font-bebas-neue)] text-3xl sm:text-4xl tracking-wider text-foreground mb-8">
                 Get In Touch
               </h2>
@@ -155,8 +155,7 @@ const ContactForm = () => {
                       Our Location
                     </h4>
                     <p className="text-sm leading-relaxed text-foreground/90 font-medium">
-                      #197 & 198, 2nd Street, <br />
-                      Gandhipuram, Coimbatore - 641 012
+                      {env.NEXT_PUBLIC_ADDRESS}
                     </p>
                   </div>
                 </li>
@@ -171,12 +170,39 @@ const ContactForm = () => {
                     </h4>
                     <div className="text-sm space-y-1 text-foreground/90 font-medium">
                       <p>
-                        <span className="text-accent/80 font-bold mr-1">Sales:</span>{" "}
-                        <a href="tel:9884344503" className="hover:underline">+91 98843 44503</a>
+                        <span className="text-accent/80 font-bold mr-1">
+                          Phone 1:
+                        </span>
+                        <a
+                          href={`tel:${env.NEXT_PUBLIC_PHONE_NUMBER}`}
+                          className="hover:underline"
+                        >
+                          {env.NEXT_PUBLIC_PHONE_LABEL}
+                        </a>
                       </p>
+
                       <p>
-                        <span className="text-accent/80 font-bold mr-1">Marketing:</span>{" "}
-                        <a href="tel:9884344503" className="hover:underline">+91 98843 44503</a>
+                        <span className="text-accent/80 font-bold mr-1">
+                          Phone 2:
+                        </span>
+                        <a
+                          href={`tel:${env.NEXT_PUBLIC_PHONE_NUMBER_2}`}
+                          className="hover:underline"
+                        >
+                          {env.NEXT_PUBLIC_PHONE_LABEL_2}
+                        </a>
+                      </p>
+
+                      <p>
+                        <span className="text-accent/80 font-bold mr-1">
+                          Tel:
+                        </span>
+                        <a
+                          href={`tel:${env.NEXT_PUBLIC_PHONE_NUMBER_3}`}
+                          className="hover:underline"
+                        >
+                          {env.NEXT_PUBLIC_PHONE_LABEL_3}
+                        </a>
                       </p>
                     </div>
                   </div>
@@ -192,20 +218,29 @@ const ContactForm = () => {
                     </h4>
                     <div className="text-sm space-y-1 text-foreground/90 font-medium">
                       <p>
-                        <a href="mailto:info@designhub.in" className="hover:text-accent transition-colors">
-                          info@designhub.in
+                        <a
+                          href={`mailto:${env.NEXT_PUBLIC_EMAIL}}`}
+                          className="hover:text-accent transition-colors"
+                        >
+                          {env.NEXT_PUBLIC_EMAIL}
                         </a>
                       </p>
-                      <p>
-                        <a href="mailto:contact@designhub.in" className="hover:text-accent transition-colors">
+                      {/* <p>
+                        <a
+                          href="mailto:contact@designhub.in"
+                          className="hover:text-accent transition-colors"
+                        >
                           contact@designhub.in
                         </a>
                       </p>
                       <p>
-                        <a href="mailto:designhubcbe@gmail.com" className="hover:text-accent transition-colors">
+                        <a
+                          href="mailto:designhubcbe@gmail.com"
+                          className="hover:text-accent transition-colors"
+                        >
                           designhubcbe@gmail.com
                         </a>
-                      </p>
+                      </p> */}
                     </div>
                   </div>
                 </li>
@@ -225,12 +260,20 @@ const ContactForm = () => {
                     Request Received Successfully!
                   </h3>
                   <p className="text-sm sm:text-base text-muted-foreground max-w-md mx-auto leading-relaxed">
-                    Thank you for reaching out to Design Hub. An account executive will review your selected services and contact you within 24 business hours.
+                    Thank you for reaching out to Design Hub. An account
+                    executive will review your selected services and contact you
+                    within 24 business hours.
                   </p>
                   <button
                     onClick={() => {
                       setIsSubmitted(false);
-                      setFormData({ name: "", email: "", phone: "", subject: "", description: "" });
+                      setFormData({
+                        name: "",
+                        email: "",
+                        phone: "",
+                        subject: "",
+                        description: "",
+                      });
                       setSelectedServices([]);
                     }}
                     className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-accent px-6 py-3 text-sm font-bold text-accent-foreground shadow-md transition-all hover:bg-accent/90"
@@ -240,11 +283,13 @@ const ContactForm = () => {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-8">
-                  
                   {/* Inputs Grid */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label htmlFor="name" className="text-xs font-semibold text-foreground/80 uppercase tracking-wider">
+                      <label
+                        htmlFor="name"
+                        className="text-xs font-semibold text-foreground/80 uppercase tracking-wider"
+                      >
                         Full Name *
                       </label>
                       <input
@@ -252,14 +297,19 @@ const ContactForm = () => {
                         id="name"
                         required
                         value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, name: e.target.value })
+                        }
                         className="w-full rounded-xl border border-border bg-background/50 px-4 py-3 text-sm text-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-all duration-200"
                         placeholder="Name"
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <label htmlFor="email" className="text-xs font-semibold text-foreground/80 uppercase tracking-wider">
+                      <label
+                        htmlFor="email"
+                        className="text-xs font-semibold text-foreground/80 uppercase tracking-wider"
+                      >
                         Email Address *
                       </label>
                       <input
@@ -267,7 +317,9 @@ const ContactForm = () => {
                         id="email"
                         required
                         value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, email: e.target.value })
+                        }
                         className="w-full rounded-xl border border-border bg-background/50 px-4 py-3 text-sm text-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-all duration-200"
                         placeholder="Email"
                       />
@@ -276,7 +328,10 @@ const ContactForm = () => {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label htmlFor="phone" className="text-xs font-semibold text-foreground/80 uppercase tracking-wider">
+                      <label
+                        htmlFor="phone"
+                        className="text-xs font-semibold text-foreground/80 uppercase tracking-wider"
+                      >
                         Mobile Number *
                       </label>
                       <input
@@ -284,14 +339,19 @@ const ContactForm = () => {
                         id="phone"
                         required
                         value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, phone: e.target.value })
+                        }
                         className="w-full rounded-xl border border-border bg-background/50 px-4 py-3 text-sm text-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-all duration-200"
                         placeholder="Mobile Number"
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <label htmlFor="subject" className="text-xs font-semibold text-foreground/80 uppercase tracking-wider">
+                      <label
+                        htmlFor="subject"
+                        className="text-xs font-semibold text-foreground/80 uppercase tracking-wider"
+                      >
                         How can we help you? *
                       </label>
                       <input
@@ -299,7 +359,9 @@ const ContactForm = () => {
                         id="subject"
                         required
                         value={formData.subject}
-                        onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, subject: e.target.value })
+                        }
                         className="w-full rounded-xl border border-border bg-background/50 px-4 py-3 text-sm text-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-all duration-200"
                         placeholder="How can we help you?"
                       />
@@ -311,7 +373,7 @@ const ContactForm = () => {
                     <h4 className="text-xs font-semibold text-foreground/80 uppercase tracking-wider">
                       Services You Are Interested In
                     </h4>
-                    
+
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {SERVICES_OPTIONS.map((service) => {
                         const isChecked = selectedServices.includes(service);
@@ -341,7 +403,9 @@ const ContactForm = () => {
                                 </svg>
                               )}
                             </div>
-                            <span className="text-xs sm:text-sm font-semibold">{service}</span>
+                            <span className="text-xs sm:text-sm font-semibold">
+                              {service}
+                            </span>
                           </div>
                         );
                       })}
@@ -350,7 +414,10 @@ const ContactForm = () => {
 
                   {/* Description Box */}
                   <div className="space-y-2">
-                    <label htmlFor="description" className="text-xs font-semibold text-foreground/80 uppercase tracking-wider">
+                    <label
+                      htmlFor="description"
+                      className="text-xs font-semibold text-foreground/80 uppercase tracking-wider"
+                    >
                       Description *
                     </label>
                     <textarea
@@ -358,7 +425,12 @@ const ContactForm = () => {
                       required
                       rows={5}
                       value={formData.description}
-                      onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          description: e.target.value,
+                        })
+                      }
                       className="w-full rounded-xl border border-border bg-background/50 px-4 py-3 text-sm text-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-all duration-200 resize-none"
                       placeholder="Description:"
                     />
@@ -379,12 +451,10 @@ const ContactForm = () => {
                       {submitError}
                     </p>
                   ) : null}
-
                 </form>
               )}
             </div>
           </div>
-
         </div>
       </div>
     </section>

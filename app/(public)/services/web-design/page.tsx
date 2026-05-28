@@ -8,7 +8,7 @@ const Page = () => {
   return (
     <main>
       <HeroSection
-        title="WEB DESIGN"
+        title="WEB DEVELOPMENT"
         heading="Websites Built To Perform"
         description="Creating Digital Experiences That Convert Visitors Into Customers."
         bottomLabel="DESIGN HUB"

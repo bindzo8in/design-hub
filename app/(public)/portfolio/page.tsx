@@ -14,7 +14,7 @@ export const metadata = buildMetadata({
   description:
     "Explore our selected works, bespoke software solutions, high-performance web systems, and creative designs.",
   path: "/portfolio",
-  keywords: ["portfolio", "web design portfolio", "branding portfolio", "design projects"],
+  keywords: ["portfolio", "web development portfolio", "branding portfolio", "design projects"],
 });
 
 const breadcrumbSchema = buildBreadcrumbSchema([

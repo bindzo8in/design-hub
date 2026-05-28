@@ -41,6 +41,12 @@ const POSITIONS = [
     type: "Full-time",
     salary: "Not Disclosed",
   },
+  {
+    title: "Telemarketing Executive",
+    desc: "Handle outbound and inbound customer calls, explain services, follow up with leads, and maintain customer relationships.",
+    type: "Full-time",
+    salary: "Not Disclosed",
+  },
 ];
 
 const CareersForm = () => {
@@ -77,7 +83,7 @@ const CareersForm = () => {
               start: "top 85%",
               once: true,
             },
-          }
+          },
         );
 
         // Positions reveal
@@ -94,7 +100,7 @@ const CareersForm = () => {
               start: "top 85%",
               once: true,
             },
-          }
+          },
         );
       });
     }, containerRef);
@@ -134,7 +140,9 @@ const CareersForm = () => {
       const payload = await response.json();
 
       if (!response.ok) {
-        throw new Error(payload.message || "Unable to submit your application.");
+        throw new Error(
+          payload.message || "Unable to submit your application.",
+        );
       }
 
       setIsSubmitted(true);
@@ -151,7 +159,7 @@ const CareersForm = () => {
       setSubmitError(
         error instanceof Error
           ? error.message
-          : "Unable to submit your application right now."
+          : "Unable to submit your application right now.",
       );
     } finally {
       setIsLoading(false);
@@ -165,7 +173,6 @@ const CareersForm = () => {
     >
       <div className="careers-grid-trigger container mx-auto max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          
           {/* Left Column: Application Form */}
           <div className="careers-form-reveal lg:col-span-7">
             <div className="rounded-[2rem] border border-border/60 bg-card/30 p-6 sm:p-10 backdrop-blur-md">
@@ -178,7 +185,9 @@ const CareersForm = () => {
                     Application Submitted!
                   </h3>
                   <p className="text-sm sm:text-base text-muted-foreground max-w-md mx-auto leading-relaxed">
-                    Thank you for applying to Design Hub. Our HR department will review your details and resume. If your profile matches our requirements, we will reach out to schedule an interview.
+                    Thank you for applying to Design Hub. Our HR department will
+                    review your details and resume. If your profile matches our
+                    requirements, we will reach out to schedule an interview.
                   </p>
                   <button
                     onClick={() => {
@@ -200,11 +209,13 @@ const CareersForm = () => {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  
                   {/* Grid Input */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label htmlFor="name" className="text-xs font-semibold text-foreground/80 uppercase tracking-wider">
+                      <label
+                        htmlFor="name"
+                        className="text-xs font-semibold text-foreground/80 uppercase tracking-wider"
+                      >
                         Full Name *
                       </label>
                       <input
@@ -212,14 +223,19 @@ const CareersForm = () => {
                         id="name"
                         required
                         value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, name: e.target.value })
+                        }
                         className="w-full rounded-xl border border-border bg-background/50 px-4 py-3 text-sm text-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-all duration-200"
                         placeholder="Name"
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <label htmlFor="email" className="text-xs font-semibold text-foreground/80 uppercase tracking-wider">
+                      <label
+                        htmlFor="email"
+                        className="text-xs font-semibold text-foreground/80 uppercase tracking-wider"
+                      >
                         Email Address *
                       </label>
                       <input
@@ -227,7 +243,9 @@ const CareersForm = () => {
                         id="email"
                         required
                         value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, email: e.target.value })
+                        }
                         className="w-full rounded-xl border border-border bg-background/50 px-4 py-3 text-sm text-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-all duration-200"
                         placeholder="Email"
                       />
@@ -236,7 +254,10 @@ const CareersForm = () => {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label htmlFor="phone" className="text-xs font-semibold text-foreground/80 uppercase tracking-wider">
+                      <label
+                        htmlFor="phone"
+                        className="text-xs font-semibold text-foreground/80 uppercase tracking-wider"
+                      >
                         Mobile Number *
                       </label>
                       <input
@@ -244,14 +265,19 @@ const CareersForm = () => {
                         id="phone"
                         required
                         value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, phone: e.target.value })
+                        }
                         className="w-full rounded-xl border border-border bg-background/50 px-4 py-3 text-sm text-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-all duration-200"
                         placeholder="Mobile Number"
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <label htmlFor="location" className="text-xs font-semibold text-foreground/80 uppercase tracking-wider">
+                      <label
+                        htmlFor="location"
+                        className="text-xs font-semibold text-foreground/80 uppercase tracking-wider"
+                      >
                         Location *
                       </label>
                       <input
@@ -259,7 +285,9 @@ const CareersForm = () => {
                         id="location"
                         required
                         value={formData.location}
-                        onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, location: e.target.value })
+                        }
                         className="w-full rounded-xl border border-border bg-background/50 px-4 py-3 text-sm text-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-all duration-200"
                         placeholder="Location"
                       />
@@ -269,14 +297,19 @@ const CareersForm = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {/* Position apply for */}
                     <div className="space-y-2">
-                      <label htmlFor="position" className="text-xs font-semibold text-foreground/80 uppercase tracking-wider">
+                      <label
+                        htmlFor="position"
+                        className="text-xs font-semibold text-foreground/80 uppercase tracking-wider"
+                      >
                         Position Apply For *
                       </label>
                       <select
                         id="position"
                         required
                         value={formData.position}
-                        onChange={(e) => setFormData({ ...formData, position: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, position: e.target.value })
+                        }
                         className="w-full rounded-xl border border-border bg-background/50 px-4 py-3 text-sm text-foreground focus:border-accent focus:outline-none transition-all duration-200"
                       >
                         {POSITIONS.map((pos) => (
@@ -313,7 +346,10 @@ const CareersForm = () => {
 
                   {/* Description Box */}
                   <div className="space-y-2">
-                    <label htmlFor="description" className="text-xs font-semibold text-foreground/80 uppercase tracking-wider">
+                    <label
+                      htmlFor="description"
+                      className="text-xs font-semibold text-foreground/80 uppercase tracking-wider"
+                    >
                       Description *
                     </label>
                     <textarea
@@ -321,7 +357,12 @@ const CareersForm = () => {
                       required
                       rows={5}
                       value={formData.description}
-                      onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          description: e.target.value,
+                        })
+                      }
                       className="w-full rounded-xl border border-border bg-background/50 px-4 py-3 text-sm text-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-all duration-200 resize-none"
                       placeholder="Description:"
                     />
@@ -342,7 +383,6 @@ const CareersForm = () => {
                       {submitError}
                     </p>
                   ) : null}
-
                 </form>
               )}
             </div>
@@ -358,7 +398,9 @@ const CareersForm = () => {
               {POSITIONS.map((pos) => (
                 <article
                   key={pos.title}
-                  onClick={() => setFormData((prev) => ({ ...prev, position: pos.title }))}
+                  onClick={() =>
+                    setFormData((prev) => ({ ...prev, position: pos.title }))
+                  }
                   className={`group relative rounded-2xl border p-5 cursor-pointer transition-all duration-300 backdrop-blur-md ${
                     formData.position === pos.title
                       ? "border-accent bg-accent/5"
@@ -373,7 +415,7 @@ const CareersForm = () => {
                       <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
                         {pos.desc}
                       </p>
-                      
+
                       {/* Badges */}
                       <div className="flex flex-wrap gap-2 mt-4">
                         <span className="inline-flex items-center rounded-md bg-secondary px-2.5 py-0.5 text-2xs font-semibold uppercase tracking-wider text-primary dark:text-[#7f91ff] border border-border/40">
@@ -384,7 +426,7 @@ const CareersForm = () => {
                         </span>
                       </div>
                     </div>
-                    
+
                     <div className="flex-shrink-0 h-8 w-8 rounded-lg bg-accent/10 flex items-center justify-center text-accent">
                       <Briefcase className="h-4 w-4" />
                     </div>
@@ -393,7 +435,6 @@ const CareersForm = () => {
               ))}
             </div>
           </div>
-
         </div>
       </div>
     </section>

@@ -7,19 +7,19 @@ const CardsSection = () => {
       title: "Business-Oriented Design Approach",
       description:
         "We design with your business goals in mind, ensuring every visual supports growth, clarity, and measurable results.",
-      image: "/tmp/card_placeholder.webp",
+      image: "/service/card/1.webp",
     },
     {
       title: "Strong Focus On Brand Identity",
       description:
         "We build designs that reflect your brand's personality, values, and voice, creating a strong and recognizable identity.",
-      image: "/tmp/card_placeholder.webp",
+      image: "/service/card/2.jpg",
     },
     {
       title: "Consistency Across All Platforms",
       description:
         "We maintain visual consistency across print, digital, and outdoor media to strengthen brand recognition everywhere.",
-      image: "/tmp/card_placeholder.webp",
+      image: "/service/card/1.jpg",
     },
   ];
 
