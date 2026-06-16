@@ -321,7 +321,8 @@ const HomeHeroSection = () => {
             {/* headline */}
             <h1
               className="
-                font-cormorant
+                relative
+                font-audiowide
                 uppercase
                 leading-[0.88]
                 tracking-tight
@@ -334,21 +335,36 @@ const HomeHeroSection = () => {
                 lg:text-[clamp(4.5rem,7vw,7rem)]
               "
             >
-              <span className="block overflow-hidden py-1">
-                <span className="headline-line-inner block">
-                  {headlines[headlineIdx].line1}
+              {/* Invisible spacer with longest text to maintain consistent height */}
+              <div className="invisible pointer-events-none select-none" aria-hidden="true">
+                <span className="block overflow-hidden py-1">
+                  <span className="block">We Believe In</span>
                 </span>
-              </span>
-
-              <span className="block overflow-hidden py-1">
-                <span className="headline-line-inner block">
-                  {headlines[headlineIdx].line2}
-
-                  <em className="not-italic text-accent">
-                    {headlines[headlineIdx].highlight}
-                  </em>
+                <span className="block overflow-hidden py-1">
+                  <span className="block">
+                    Thinking <em className="not-italic text-accent">Different</em>
+                  </span>
                 </span>
-              </span>
+              </div>
+
+              {/* Animated text layer */}
+              <div className="absolute inset-0 flex flex-col justify-start">
+                <span className="block overflow-hidden py-1">
+                  <span className="headline-line-inner block">
+                    {headlines[headlineIdx].line1}
+                  </span>
+                </span>
+
+                <span className="block overflow-hidden py-1">
+                  <span className="headline-line-inner block">
+                    {headlines[headlineIdx].line2}
+
+                    <em className="not-italic text-accent">
+                      {headlines[headlineIdx].highlight}
+                    </em>
+                  </span>
+                </span>
+              </div>
             </h1>
 
             {/* ====================================== */}
@@ -527,6 +543,8 @@ const HomeHeroSection = () => {
               <div
                 className="
                   flex items-center
+                  min-h-8 sm:min-h-9
+                  min-w-[200px] sm:min-w-[280px]
 
                   font-(family-name:--font-bebas-neue)
 
@@ -537,7 +555,7 @@ const HomeHeroSection = () => {
                   sm:text-3xl
                 "
               >
-                <span>{typingText}</span>
+                <span>{typingText || '\u200B'}</span>
 
                 <span className="ml-1 inline-block h-[1.1em] w-[3px] bg-accent animate-[pulse_0.9s_steps(2,start)_infinite]" />
               </div>

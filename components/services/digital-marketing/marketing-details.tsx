@@ -124,44 +124,42 @@ const DigitalMarketingDetails = () => {
           {/* ========================= */}
           {/* MOBILE & TABLET */}
           {/* ========================= */}
-          <div className="grid gap-4 lg:hidden">
-            {Array.from({ length: 9 }).map((_, index) => (
-              <div
-                key={index}
-                className="
-                  group relative overflow-hidden
-                  rounded-[1.75rem]
-                  border border-white/10
-                  bg-slate-950/85
-                  p-4
-                  shadow-2xl shadow-black/40
-                "
-              >
-                <div
-                  className={`
-                    absolute top-6 h-24 w-24 rounded-full blur-3xl opacity-70
-                    ${index % 2 === 0 ? "bg-[#DF1B25]/20 -left-8" : "bg-blue-500/20 -right-8"}
-                  `}
-                />
-
-                <div className="flex items-center gap-4">
-                  {/* Image */}
-                  <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-2xl bg-slate-900">
-                    <Image
-                      src={`/design-images/${(index % 10) + 1}.png`}
-                      alt="Marketing preview"
-                      fill
+          <div className="relative w-full overflow-hidden lg:hidden h-[240px] mt-8">
+            {/* Fade edges */}
+            <div className="absolute left-0 top-0 z-10 h-full w-12 bg-gradient-to-r from-[#050711] to-transparent pointer-events-none" />
+            <div className="absolute right-0 top-0 z-10 h-full w-12 bg-gradient-to-l from-[#050711] to-transparent pointer-events-none" />
+            
+            <div className="flex w-max animate-marquee-x gap-4">
+              {[...Array(2)].map((_, duplicateIndex) => (
+                <React.Fragment key={duplicateIndex}>
+                  {Array.from({ length: 9 }).map((_, index) => (
+                    <div
+                      key={`${duplicateIndex}-${index}`}
                       className="
-                        object-cover
-                        transition-transform
-                        duration-500
-                        group-hover:scale-110
+                        group relative overflow-hidden shrink-0
+                        rounded-[1.5rem]
+                        border border-white/10
+                        bg-slate-950/85
+                        p-3
+                        shadow-2xl shadow-black/40
                       "
-                    />
-                  </div>
-                </div>
-              </div>
-            ))}
+                    >
+                      <div className="absolute top-4 h-20 w-20 rounded-full bg-[#DF1B25]/20 blur-2xl opacity-70 -left-6" />
+
+                      <div className="relative h-44 w-44 shrink-0 overflow-hidden rounded-[1rem] bg-slate-900">
+                        <Image
+                          src={`/design-images/${(index % 10) + 1}.png`}
+                          alt="Marketing preview"
+                          fill
+                          className="object-cover"
+                        
+  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
+                      </div>
+                    </div>
+                  ))}
+                </React.Fragment>
+              ))}
+            </div>
           </div>
 
           {/* ========================= */}
@@ -193,7 +191,8 @@ const DigitalMarketingDetails = () => {
                             alt="Marketing preview"
                             fill
                             className="object-cover"
-                          />
+                          
+  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
                         </div>
                       </div>
                     ))}
@@ -227,7 +226,8 @@ const DigitalMarketingDetails = () => {
                             alt="Creative preview"
                             fill
                             className="object-cover"
-                          />
+                          
+  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
                         </div>
                       </div>
                     ))}

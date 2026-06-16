@@ -6,7 +6,7 @@ import { ArrowUpRight } from 'lucide-react'
 const ServicesListSection = () => {
   return (
     /* Services List Section */
-<section className="bg-gray-800">
+<section className="bg-background">
   <div className="container mx-auto max-w-7xl px-4 pb-16 pt-4 sm:px-6 lg:px-8">
   <header className="mb-12 max-w-3xl lg:mb-16">
     <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">

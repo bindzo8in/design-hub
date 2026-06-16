@@ -401,34 +401,30 @@ const CareersForm = () => {
                   onClick={() =>
                     setFormData((prev) => ({ ...prev, position: pos.title }))
                   }
-                  className={`group relative rounded-2xl border p-5 cursor-pointer transition-all duration-300 backdrop-blur-md ${
+                  className={`group relative rounded-xl border p-3 sm:p-4 cursor-pointer transition-all duration-300 backdrop-blur-md ${
                     formData.position === pos.title
                       ? "border-accent bg-accent/5"
                       : "border-border/60 bg-card/45 hover:border-border hover:bg-card/65"
                   }`}
                 >
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <h3 className="text-base sm:text-lg font-bold text-foreground group-hover:text-accent transition-colors duration-200">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="flex-shrink-0 h-8 w-8 rounded-lg bg-accent/10 flex items-center justify-center text-accent">
+                        <Briefcase className="h-4 w-4" />
+                      </div>
+                      <h3 className="text-sm sm:text-base font-bold text-foreground group-hover:text-accent transition-colors duration-200 truncate">
                         {pos.title}
                       </h3>
-                      <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                        {pos.desc}
-                      </p>
-
-                      {/* Badges */}
-                      <div className="flex flex-wrap gap-2 mt-4">
-                        <span className="inline-flex items-center rounded-md bg-secondary px-2.5 py-0.5 text-2xs font-semibold uppercase tracking-wider text-primary dark:text-[#7f91ff] border border-border/40">
-                          {pos.type}
-                        </span>
-                        <span className="inline-flex items-center rounded-md bg-accent/10 px-2.5 py-0.5 text-2xs font-semibold uppercase tracking-wider text-accent border border-accent/25">
-                          {pos.salary}
-                        </span>
-                      </div>
                     </div>
 
-                    <div className="flex-shrink-0 h-8 w-8 rounded-lg bg-accent/10 flex items-center justify-center text-accent">
-                      <Briefcase className="h-4 w-4" />
+                    {/* Badges */}
+                    <div className="flex items-center gap-2 flex-shrink-0">
+                      <span className="inline-flex items-center rounded-md bg-secondary px-2 py-0.5 text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-primary dark:text-[#7f91ff] border border-border/40 whitespace-nowrap">
+                        {pos.type}
+                      </span>
+                      <span className="hidden sm:inline-flex items-center rounded-md bg-accent/10 px-2 py-0.5 text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-accent border border-accent/25 whitespace-nowrap">
+                        {pos.salary}
+                      </span>
                     </div>
                   </div>
                 </article>

@@ -197,7 +197,8 @@ export default function ProductShowcaseSection() {
                       alt={product.title}
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
+                    
+  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                     <CardOverlay title={product.title} desc={product.desc} />
                   </div>
@@ -251,7 +252,8 @@ export default function ProductShowcaseSection() {
                     alt={product.title}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
+                  
+  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                 </div>
                 <CardOverlay title={product.title} desc={product.desc} />
@@ -305,7 +307,8 @@ export default function ProductShowcaseSection() {
                     alt={product.title}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
+                  
+  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                 </div>
                 {/* reuse overlay — padding adjusted slightly for smaller cards */}

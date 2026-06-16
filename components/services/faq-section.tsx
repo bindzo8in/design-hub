@@ -1,8 +1,8 @@
 const faqs = [
     {
-        question: "What services does Bindzo 8 Techno Solutions offer?",
+        question: "What services does Design Hub offer?",
         answer:
-            "Bindzo 8 Techno Solutions delivers complete digital solutions including Website Development, Mobile App Development, Custom Software & ERP Solutions, UI/UX Design, Graphic Design, SEO, Digital Marketing, and Video Editing Services.",
+            "Design Hub delivers complete digital solutions including Website Development, Mobile App Development, Custom Software & ERP Solutions, UI/UX Design, Graphic Design, SEO, Digital Marketing, and Video Editing Services.",
     },
     {
         question: "Which industries do you support with custom software and CRM solutions?",
@@ -27,7 +27,7 @@ const faqs = [
     {
         question: "What graphic and branding design services do you offer?",
         answer:
-            "Bindzo 8 designs logos, brand identity systems, marketing creatives, brochures, packaging, labels, social media designs, advertisements, UI elements, and promotional materials.",
+            "Design Hub designs logos, brand identity systems, marketing creatives, brochures, packaging, labels, social media designs, advertisements, UI elements, and promotional materials.",
     },
     {
         question: "What digital marketing and SEO services are provided?",
@@ -40,14 +40,14 @@ const faqs = [
             "Yes, we create professional promo videos, reels, ads, explainer videos, motion graphics, product videos, and corporate videos with high-quality editing and color grading.",
     },
     {
-        question: "What makes Bindzo 8 Techno Solutions unique?",
+        question: "What makes Design Hub unique?",
         answer:
             "We combine creativity, modern technology, and business-focused strategies. With an experienced team, transparent process, fast delivery, customized solutions, and strong client support, we ensure high-quality results for every project.",
     },
     {
-        question: "Where is Bindzo 8 Techno Solutions located?",
+        question: "Where is Design Hub located?",
         answer:
-            "Bindzo 8 Techno Solutions is based in Coimbatore, Tamil Nadu, and provides services to clients across India and internationally through remote and hybrid project collaboration.",
+            "Design Hub is based in Coimbatore, Tamil Nadu, and provides services to clients across India and internationally through remote and hybrid project collaboration.",
     },
 ];
 

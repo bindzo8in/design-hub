@@ -25,8 +25,8 @@ export const env = createEnv({
     GOOGLE_CLIENT_ID: z.string(),
     GOOGLE_CLIENT_SECRET: z.string(),
     RESEND_API_KEY: z.string(),
-    RESEND_FROM_EMAIL: z.email().optional(),
-    RESEND_FROM_NAME: z.string().optional(),
+    RESEND_FROM_EMAIL: z.email(),
+    RESEND_FROM_NAME: z.string(),
   },
   client: {
     NEXT_PUBLIC_BASE_URL: z.url(),

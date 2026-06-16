@@ -152,7 +152,7 @@ const HomeServicesSection = () => {
     <section
       ref={containerRef}
       id="services"
-      className="relative overflow-hidden bg-gray-800 py-16 sm:py-24 px-4 sm:px-8 border-b border-border/40 select-none"
+      className="relative overflow-hidden bg-background py-16 sm:py-24 px-4 sm:px-8 border-b border-border/40 select-none"
     >
       <div className="container mx-auto max-w-7xl">
         {/* Section Header */}
@@ -188,7 +188,7 @@ xl:grid-cols-3 gap-6"
               key={service.href}
               href={service.href}
               onMouseMove={handleMouseMove}
-              className="service-grid-card group relative overflow-hidden rounded-3xl border border-border/60 bg-card/40 p-6 sm:p-8 flex flex-col justify-between min-h-[250px] transition-all duration-300 hover:border-accent/40 hover:-translate-y-1 hover:shadow-md"
+              className="service-grid-card group relative overflow-hidden rounded-3xl border border-border/60 bg-card/40 p-6 sm:p-8 flex flex-col justify-between min-h-[250px] transition-all duration-300 hover:border-accent/40 hover:-translate-y-1 hover:shadow-md group"
             >
               {/* Vercel-like hover radial glow effect */}
               <div
@@ -196,7 +196,7 @@ xl:grid-cols-3 gap-6"
                 style={{
                   background: `radial-gradient(
       350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
-      rgba(255, 80, 80, 0.12),
+      rgba(223, 27, 37, 0.12),
       transparent 60%
     )`,
                 }}
@@ -204,25 +204,25 @@ xl:grid-cols-3 gap-6"
 
               <div>
                 {/* Icon wrapper */}
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-red-50 text-red-600 group-hover:bg-red-500 group-hover:text-white transition-all duration-300 shadow-sm">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/10 text-accent group-hover:bg-accent group-hover:text-accent-foreground transition-all duration-300 shadow-sm border border-accent/20">
                   <service.icon className="h-5 w-5" />
                 </div>
 
                 {/* Title */}
-                <h3 className="mt-6 text-base sm:text-lg font-bold text-gray-100 tracking-wide uppercase">
+                <h3 className="mt-6 text-base sm:text-lg font-bold text-foreground tracking-wide uppercase">
                   {service.title}
                 </h3>
 
                 {/* Description */}
-                <p className="mt-2 text-xs sm:text-sm text-gray-300 leading-relaxed">
+                <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
                   {service.description}
                 </p>
               </div>
 
               {/* Bottom arrow visual */}
-              <div className="flex justify-end pt-4 border-t border-gray-200 mt-6">
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white border border-gray-200 text-gray-700 group-hover:bg-red-500 group-hover:text-white transition-all duration-300">
-                  <ArrowUpRight className="h-4 w-4" />
+              <div className="flex justify-end pt-4 border-t border-border/50 mt-6">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-card/60 border border-border/60 text-muted-foreground group-hover:bg-accent group-hover:border-accent group-hover:text-accent-foreground transition-all duration-300">
+                  <ArrowUpRight className="h-4 w-4 group-hover:rotate-45 transition-transform duration-300 delay-75" />
                 </span>
               </div>
             </Link>

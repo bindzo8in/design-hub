@@ -168,12 +168,12 @@ export const sendCareerEmails = async (data: CareerSubmission) => {
   const attachments =
     data.resumeContent && data.resumeFileName
       ? [
-          {
-            filename: data.resumeFileName,
-            content: data.resumeContent,
-            contentType: data.resumeContentType,
-          },
-        ]
+        {
+          filename: data.resumeFileName,
+          content: data.resumeContent,
+          contentType: data.resumeContentType,
+        },
+      ]
       : undefined;
 
   await Promise.all([
@@ -220,5 +220,11 @@ Phone: ${data.phone}
 
 Project Details: ${data.subject}
 `,
-  });
+  }).then(
+    (res) => {
+      if (process.env.NODE_ENV === "development") {
+        console.log(" Popup inquiry email sent successfully", res);
+      }
+    }
+  );
 };

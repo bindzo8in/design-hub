@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { ArrowRight, Sparkles, Phone } from "lucide-react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import gsap from "gsap";
+import Link from "next/link";
 
 const HomeCTASection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -101,22 +102,20 @@ const HomeCTASection = () => {
 
               {/* Buttons */}
               <div className="cta-item mt-6 sm:mt-8 flex flex-col xs:flex-row gap-3 sm:gap-4">
-                <a
-                  href="https://wa.me/919994713122"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href={"/contact"}
                   className="inline-flex items-center justify-center rounded-xl sm:rounded-2xl bg-accent px-5 py-3.5 sm:px-6 sm:py-4 text-sm font-bold text-accent-foreground transition-all hover:scale-[1.02] active:scale-[0.98]"
                 >
                   Start Your Project
-                  <ArrowRight className="ml-2 h-4 w-4 flex-shrink-0" />
-                </a>
+                  <ArrowRight className="ml-2 h-4 w-4 shrink-0" />
+                </Link>
 
                 <a
                   href="tel:+919994713122"
                   className="inline-flex items-center justify-center rounded-xl sm:rounded-2xl border border-border bg-background/40 px-5 py-3.5 sm:px-6 sm:py-4 text-sm font-semibold hover:bg-accent/5 transition-colors"
                 >
-                  <Phone className="mr-2 h-4 w-4 flex-shrink-0" />
-                  Schedule a Call
+                  <Phone className="mr-2 h-4 w-4 shrink-0" />
+                  Call Now
                 </a>
               </div>
 

@@ -1,8 +1,16 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { Search, Calendar, Landmark, Briefcase, Tag } from "lucide-react";
 import gsap from "gsap";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
 interface Category {
   id: string;
@@ -22,6 +30,8 @@ interface Project {
   title: string;
   description: string | null;
   clientName: string | null;
+  thumbnail?: string | null;
+  bannerImage?: string | null;
   budget: number | null;
   status: string;
   startDate: string | null;
@@ -71,6 +81,7 @@ const statusLabelMap: Record<string, string> = {
 export default function PortfolioClient({ initialProjects, categories }: PortfolioClientProps) {
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
 
@@ -123,9 +134,9 @@ export default function PortfolioClient({ initialProjects, categories }: Portfol
   // Format budget currency helper
   const formatCurrency = (value: number | null) => {
     if (value === null || value === undefined) return "Undisclosed";
-    return new Intl.NumberFormat("en-US", {
+    return new Intl.NumberFormat("en-IN", {
       style: "currency",
-      currency: "USD",
+      currency: "INR",
       maximumFractionDigits: 0,
     }).format(value);
   };
@@ -245,9 +256,22 @@ export default function PortfolioClient({ initialProjects, categories }: Portfol
               return (
                 <div
                   key={project.id}
-                  className="portfolio-card group relative bg-[#101735]/40 border border-[#26336F]/20 rounded-3xl p-6 backdrop-blur-md hover:border-[#DF1B25]/45 hover:shadow-[0_0_30px_rgba(223,27,37,0.05)] transition-all duration-500 flex flex-col justify-between"
+                  onClick={() => setSelectedProject(project)}
+                  className="portfolio-card cursor-pointer group relative bg-[#101735]/40 border border-[#26336F]/20 rounded-3xl backdrop-blur-md hover:border-[#DF1B25]/45 hover:shadow-[0_0_30px_rgba(223,27,37,0.05)] transition-all duration-500 flex flex-col overflow-hidden"
                 >
-                  <div className="space-y-4">
+                  {project.thumbnail && (
+                    <div className="relative w-full h-48 sm:h-56 bg-[#0b1024] shrink-0 border-b border-[#26336F]/20 overflow-hidden">
+                      <Image
+                        src={project.thumbnail}
+                        alt={project.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-700"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                    </div>
+                  )}
+                  <div className="p-6 flex flex-col justify-between flex-1">
+                    <div className="space-y-4">
                     {/* Top Row: Category and Status */}
                     <div className="flex items-center justify-between">
                       <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-[#DF1B25]">
@@ -304,9 +328,10 @@ export default function PortfolioClient({ initialProjects, categories }: Portfol
                       </span>
                     </div>
                   </div>
+                  </div>
 
                   {/* Left accent lines hover effect */}
-                  <div className="absolute top-0 bottom-0 left-0 w-[3px] bg-[#DF1B25] rounded-l-3xl transform scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-center" />
+                  <div className="absolute top-0 bottom-0 left-0 w-[3px] bg-[#DF1B25] rounded-l-3xl transform scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-center z-20" />
                 </div>
               );
             })}
@@ -320,6 +345,93 @@ export default function PortfolioClient({ initialProjects, categories }: Portfol
           </div>
         )}
       </div>
+
+      {/* Project Preview Modal */}
+      <Dialog open={!!selectedProject} onOpenChange={(open) => !open && setSelectedProject(null)}>
+        {selectedProject && (
+          <DialogContent className="sm:max-w-2xl bg-[#0b1024] border border-[#26336F]/40 text-white p-0 overflow-y-auto max-h-[90vh] rounded-3xl shadow-2xl">
+            {/* Project Image Banner */}
+            {(selectedProject.bannerImage || selectedProject.thumbnail) ? (
+              <div className="relative w-full h-48 sm:h-72 bg-[#101735] shrink-0 border-b border-[#26336F]/30">
+                <Image
+                  src={selectedProject.bannerImage || selectedProject.thumbnail || ""}
+                  alt={selectedProject.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 42rem"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0b1024] via-transparent to-transparent" />
+              </div>
+            ) : (
+              <div className="h-2 w-full shrink-0 bg-gradient-to-r from-[#DF1B25] to-[#26336F]" />
+            )}
+            
+            <div className="p-6 sm:p-8 pt-4">
+              <DialogHeader className="text-left space-y-4">
+                <div className="flex flex-wrap items-center gap-3">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#26336F]/20 text-[#7f91ff] border border-[#26336F]/40">
+                    <Tag className="h-3.5 w-3.5" />
+                    {selectedProject.category?.name || "Direct Work"}
+                  </span>
+                  
+                  {/* Status Badge */}
+                  <span
+                    className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border ${statusColorMap[selectedProject.status]?.bg || statusColorMap.PLANNING.bg} ${statusColorMap[selectedProject.status]?.text || statusColorMap.PLANNING.text}`}
+                  >
+                    <span className={`h-2 w-2 rounded-full ${statusColorMap[selectedProject.status]?.dot || statusColorMap.PLANNING.dot}`} />
+                    {statusLabelMap[selectedProject.status] || selectedProject.status}
+                  </span>
+                </div>
+                
+                <DialogTitle className="font-[family-name:var(--font-bebas-neue)] text-4xl sm:text-5xl uppercase tracking-wider text-white mt-4">
+                  {selectedProject.title}
+                </DialogTitle>
+              </DialogHeader>
+
+              <div className="mt-8 space-y-6">
+                {/* Description */}
+                <div>
+                  <h4 className="text-sm font-semibold text-slate-300 uppercase tracking-widest mb-3">Project Overview</h4>
+                  <DialogDescription className="text-sm text-slate-400 leading-relaxed font-sans">
+                    {selectedProject.description || "Detailed project description is currently unavailable. This project was developed as a bespoke solution tailored strictly to client requirements."}
+                  </DialogDescription>
+                </div>
+
+                {/* Details Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6 border-t border-[#26336F]/30">
+                  <div className="bg-[#101735]/50 rounded-2xl p-4 border border-[#26336F]/20">
+                    <p className="flex items-center gap-2 text-xs text-slate-400 mb-1 font-semibold uppercase tracking-wider">
+                      <Briefcase className="h-4 w-4 text-slate-500" /> Client
+                    </p>
+                    <p className="text-base text-white font-medium">
+                      {selectedProject.client?.name || selectedProject.clientName || "Direct Partner"}
+                    </p>
+                  </div>
+                  
+                  <div className="bg-[#101735]/50 rounded-2xl p-4 border border-[#26336F]/20">
+                    <p className="flex items-center gap-2 text-xs text-slate-400 mb-1 font-semibold uppercase tracking-wider">
+                      <Landmark className="h-4 w-4 text-slate-500" /> Valuation
+                    </p>
+                    <p className="text-base text-white font-bold tracking-wide">
+                      {formatCurrency(selectedProject.budget)}
+                    </p>
+                  </div>
+
+                  <div className="bg-[#101735]/50 rounded-2xl p-4 border border-[#26336F]/20 sm:col-span-2">
+                    <p className="flex items-center gap-2 text-xs text-slate-400 mb-1 font-semibold uppercase tracking-wider">
+                      <Calendar className="h-4 w-4 text-slate-500" /> Timeline
+                    </p>
+                    <p className="text-base text-slate-300 font-medium">
+                      {formatDate(selectedProject.startDate)} &mdash; {formatDate(selectedProject.endDate)}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </DialogContent>
+        )}
+      </Dialog>
     </div>
   );
 }

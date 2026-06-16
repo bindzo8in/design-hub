@@ -51,7 +51,8 @@ const InfoCard = ({
           duration-1000
           ease-in-out
         "
-      />
+      
+  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
 
       {/* Content */}
       <div className="relative z-10 flex h-full flex-col justify-start">

@@ -114,37 +114,6 @@ const StatisticsSection = () => {
               Traffic & Growth Analytics
             </h2>
           </div>
-
-          <div
-            className="
-              flex w-full items-center justify-between
-              gap-2 overflow-x-auto
-              rounded-2xl
-              border border-white/10
-              bg-white/5
-              p-2
-              text-xs text-slate-300
-              backdrop-blur-xl
-
-              sm:w-fit
-              sm:rounded-full
-              sm:px-4
-              sm:py-3
-              sm:text-sm
-            "
-          >
-            <button className="whitespace-nowrap rounded-full bg-[#DF1B25] px-4 py-2 text-white">
-              Month
-            </button>
-
-            <button className="whitespace-nowrap rounded-full px-4 py-2 text-slate-300/80 hover:text-white">
-              Week
-            </button>
-
-            <button className="whitespace-nowrap rounded-full px-4 py-2 text-slate-300/80 hover:text-white">
-              Year
-            </button>
-          </div>
         </div>
 
         {/* Chart Card */}

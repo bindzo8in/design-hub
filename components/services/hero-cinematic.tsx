@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import Link from "next/link";
 
 const cyclingWords = [
   "premium.",
@@ -83,7 +84,7 @@ export default function HeroCinematic() {
         style={{
           position: "relative",
           overflow: "hidden",
-          background: "#060606",
+          background: "var(--background)",
           // minHeight: "100svh",
           display: "flex",
           flexDirection: "column",
@@ -149,7 +150,7 @@ export default function HeroCinematic() {
                 width: 460,
                 height: 460,
                 borderRadius: "50%",
-                border: "1px solid rgba(232,184,75,0.09)",
+                border: "1px solid rgba(223,27,37,0.09)",
               }}
             />
             <div
@@ -161,12 +162,12 @@ export default function HeroCinematic() {
                 width: 320,
                 height: 320,
                 borderRadius: "50%",
-                border: "1px solid rgba(232,184,75,0.05)",
+                border: "1px solid rgba(223,27,37,0.05)",
               }}
             />
           </div>
 
-          {/* Amber glow */}
+          {/* Crimson glow */}
           <div
             className="hero-bg-glow"
             style={{
@@ -178,7 +179,7 @@ export default function HeroCinematic() {
               height: 560,
               borderRadius: "50%",
               background:
-                "radial-gradient(circle, rgba(232,184,75,0.12) 0%, transparent 70%)",
+                "radial-gradient(circle, rgba(223,27,37,0.12) 0%, transparent 70%)",
             }}
           />
 
@@ -220,7 +221,7 @@ export default function HeroCinematic() {
             }}
           >
             <DotLottieReact
-              src="/lottie/hero-service.lottie"
+              src="/lottie/software_testing.lottie"
               autoplay
               loop
               style={{
@@ -262,7 +263,7 @@ export default function HeroCinematic() {
                 width: 6,
                 height: 6,
                 borderRadius: "50%",
-                background: "#E8B84B",
+                background: "var(--accent)",
                 flexShrink: 0,
               }}
             />
@@ -325,7 +326,7 @@ export default function HeroCinematic() {
                     fontWeight: 400,
                     fontSize: "clamp(40px, 8.5vw, 118px)",
                     lineHeight: 0.93,
-                    color: "#E8B84B",
+                    color: "var(--accent)",
                   }}
                 >
                   {cyclingWords[wordIndex]}
@@ -367,14 +368,15 @@ export default function HeroCinematic() {
               className="hero-cta-group"
               style={{ display: "flex", gap: 12, flexWrap: "wrap" }}
             >
-              <button
+              <Link
+                href="/contact"
                 className="hero-btn-primary"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
                   gap: 8,
-                  background: "#E8B84B",
-                  color: "#060606",
+                  background: "var(--accent)",
+                  color: "var(--accent-foreground)",
                   fontFamily: "'Syne', sans-serif",
                   fontWeight: 700,
                   fontSize: "clamp(11px, 1vw, 13px)",
@@ -390,9 +392,10 @@ export default function HeroCinematic() {
               >
                 Start a Project
                 <ArrowUpRight size={15} />
-              </button>
+              </Link>
 
-              <button
+              <Link
+                href="/portfolio"
                 className="hero-btn-outline"
                 style={{
                   display: "inline-flex",
@@ -414,7 +417,7 @@ export default function HeroCinematic() {
                 }}
               >
                 View Our Work
-              </button>
+              </Link>
             </div>
           </motion.div>
 
@@ -506,7 +509,7 @@ export default function HeroCinematic() {
                     width: 4,
                     height: 4,
                     borderRadius: "50%",
-                    background: "#E8B84B",
+                    background: "var(--accent)",
                     opacity: 0.5,
                     flexShrink: 0,
                   }}

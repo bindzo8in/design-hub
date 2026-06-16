@@ -312,7 +312,7 @@ const Footer = () => {
           "
         >
           <p className="text-xs text-muted-foreground sm:text-sm">
-            Copyright © {new Date().getFullYear()}, Bindzo 8 IT Solutions. All
+            Copyright © {new Date().getFullYear()}, Design Hub. All
             Rights Reserved.
           </p>
 

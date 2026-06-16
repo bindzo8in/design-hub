@@ -7,6 +7,7 @@ import {
   Heebo,
   Cormorant_Garamond,
   Syne,
+  Audiowide
 } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
@@ -62,6 +63,13 @@ const syne = Syne({
   display: "swap",
 })
 
+const audiowide = Audiowide({
+  subsets: ["latin"],
+  variable: "--font-audiowide",
+  weight: ["400"],
+  display: "swap",
+})
+
 export const metadata = buildRootMetadata();
 
 export const viewport = {
@@ -76,7 +84,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} ${stickNoBills.variable} ${orbitron.variable} ${heebo.variable} ${cormorant.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} ${stickNoBills.variable} ${orbitron.variable} ${heebo.variable} ${cormorant.variable} ${audiowide.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
