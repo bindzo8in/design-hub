@@ -86,24 +86,24 @@ const HomeProcessSection = () => {
     <section
       ref={containerRef}
       id="process"
-      className="relative overflow-hidden bg-card/60 py-16 sm:py-24 px-4 sm:px-8 border-t border-b border-border/40 select-none"
+      className="relative overflow-hidden bg-[#101735] text-white py-20 sm:py-28 px-4 sm:px-8 border-t border-b border-[#26336F]/50 select-none"
     >
       <div className="container mx-auto max-w-7xl">
         
         {/* Section Header */}
-        <div className="process-trigger-header flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+        <div className="process-header-pin process-trigger-header flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div className="space-y-4">
             <div className="process-reveal flex items-center gap-3 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-accent">
               <span className="w-8 h-[1px] bg-accent" />
               Our Process
             </div>
-            <h2 className="process-reveal font-[family-name:var(--font-bebas-neue)] text-5xl sm:text-7xl lg:text-8xl leading-[0.9] tracking-wider uppercase text-foreground max-w-2xl">
+            <h2 className="process-reveal font-[family-name:var(--font-bebas-neue)] text-5xl sm:text-7xl lg:text-8xl leading-[0.9] tracking-wider uppercase text-white max-w-2xl">
               We're All In. <br />
               <em className="not-italic text-accent">Every Step</em> Of The Way.
             </h2>
           </div>
           <div className="process-reveal flex flex-col items-start md:items-end gap-4 max-w-sm">
-            <div className="w-56 h-56 sm:w-72 sm:h-72 border border-[#26336F]/10 rounded-3xl overflow-hidden bg-[#050711]/25 flex items-center justify-center">
+            <div className="w-56 h-56 sm:w-72 sm:h-72">
               <DotLottieReact
                 src="/lottie/Process in cub.lottie"
                 loop
@@ -111,18 +111,18 @@ const HomeProcessSection = () => {
                 className="w-full h-full object-contain"
               />
             </div>
-            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed md:text-right">
+            <p className="text-sm sm:text-base text-slate-300 leading-relaxed md:text-right">
               The first step is to discover more about you, your company's vision, and to build a strong relationship.
             </p>
           </div>
         </div>
 
         {/* Steps Grid */}
-        <div className="process-steps-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 border border-border/60 rounded-3xl overflow-hidden bg-background">
+        <div className="process-steps-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 border border-[#26336F] rounded-3xl overflow-hidden bg-[#18224b] shadow-xl">
           {steps.map((step, idx) => (
             <div
               key={idx}
-              className="process-step-card group relative p-6 sm:p-8 flex flex-col justify-between border-b sm:border-b-0 sm:border-r border-border/60 last:border-r-0 last:border-b-0 hover:bg-card/40 transition-colors duration-300 min-h-[220px]"
+              className="process-step-anim process-step-card group relative p-6 sm:p-8 flex flex-col justify-between border-b sm:border-b-0 sm:border-r border-border/60 last:border-r-0 last:border-b-0 hover:bg-card/40 transition-colors duration-300 min-h-[220px]"
             >
               <div>
                 {/* Number */}
@@ -162,9 +162,9 @@ const HomeProcessSection = () => {
                 Our creative workflows ensure that we don't just design pretty interfaces—we construct robust, secure, and blazing-fast digital assets. Every line of code is structured for scale and clean performance, helping your brand stand out with dynamic impact.
               </p>
             </div>
-            <div className="lg:col-span-7 relative w-full h-[250px] sm:h-[350px] rounded-2xl overflow-hidden border border-[#26336F]/20 bg-[#050711]/60 flex items-center justify-center">
+            <div className="lg:col-span-7 relative w-full h-[250px] sm:h-[350px] flex items-center justify-center">
               <DotLottieReact
-                src="/lottie/Dashboard.lottie"
+                src="/lottie/team.lottie"
                 loop
                 autoplay
                 className="w-full h-full object-contain"

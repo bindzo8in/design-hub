@@ -130,27 +130,27 @@
 }
 
 .dark {
-  /* Base */
-  --background: #050711;
+  /* Base - Brand Ink Navy instead of pitch black */
+  --background: #101735;
   --foreground: #f8f9ff;
 
-  /* Surfaces */
-  --card: #0b1024;
+  /* Surfaces - Layered Navy */
+  --card: #18224b;
   --card-foreground: #f8f9ff;
 
-  --popover: #0b1024;
+  --popover: #18224b;
   --popover-foreground: #f8f9ff;
 
-  /* Brand Primary - White/Navy readable on dark */
+  /* Brand Primary */
   --primary: #ffffff;
   --primary-foreground: #101735;
 
   /* Secondary - Deep Navy */
-  --secondary: #111939;
+  --secondary: #1e295d;
   --secondary-foreground: #f8f9ff;
 
   /* Muted */
-  --muted: #111939;
+  --muted: #1e295d;
   --muted-foreground: #9ea8cf;
 
   /* Accent - Logo Red */
@@ -162,8 +162,8 @@
   --destructive-foreground: #ffffff;
 
   /* Borders / Inputs */
-  --border: #1f2a55;
-  --input: #1f2a55;
+  --border: #26336f;
+  --input: #26336f;
   --ring: #df1b25;
 
   /* Charts */
@@ -174,13 +174,13 @@
   --chart-5: #2dd4bf;
 
   /* Sidebar */
-  --sidebar: #080b18;
+  --sidebar: #101735;
   --sidebar-foreground: #f8f9ff;
   --sidebar-primary: #df1b25;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #111939;
+  --sidebar-accent: #1e295d;
   --sidebar-accent-foreground: #f8f9ff;
-  --sidebar-border: #1f2a55;
+  --sidebar-border: #26336f;
   --sidebar-ring: #df1b25;
 }
 
@@ -249,8 +249,8 @@
   }
 
   .dark .nav-glass {
-    background: color-mix(in srgb, #050711 78%, transparent);
-    border-bottom: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+    background: color-mix(in srgb, #101735 85%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, #26336F 60%, transparent);
   }
 
    .text-glow-white {

@@ -4,90 +4,78 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import {
   ArrowUpRight,
-  Building2,
-  BusFront,
   Camera,
-  CarFront,
   Globe,
-  Megaphone,
   Package,
   Palette,
   ShoppingBag,
   TrendingUp,
+  Sparkles,
+  CheckCircle2,
 } from "lucide-react";
 import gsap from "gsap";
 
 const services = [
   {
+    num: "01",
     icon: TrendingUp,
     title: "Digital Marketing",
     href: "/services/digital-marketing",
     description:
-      "Smart strategies and data-led campaigns designed to help businesses grow with measurable results.",
+      "Data-driven marketing strategies, high-ROAS ad campaigns, and search optimization designed to scale revenue.",
+    capabilities: ["SEO & Content Strategy", "PPC & Paid Campaigns", "Conversion Optimization"],
+    accentGradient: "from-red-500 via-accent to-red-600",
   },
   {
+    num: "02",
     icon: Globe,
     title: "Web Development",
     href: "/services/web-design",
     description:
-      "Creating digital experiences that convert visitors into customers through thoughtful design and strong user journeys.",
+      "Sub-second Next.js web applications, headless e-commerce stores, and conversion-engineered digital platforms.",
+    capabilities: ["Next.js & React Apps", "E-Commerce Systems", "Custom UI Architecture"],
+    accentGradient: "from-blue-500 via-indigo-600 to-blue-700",
   },
   {
+    num: "03",
     icon: Palette,
     title: "Design Solution",
     href: "/services/design-solution",
     description:
-      "Brand-focused visual systems that unify storytelling, audience engagement, and performance across every touchpoint.",
+      "Cohesive visual identities, design systems, and logo architecture that elevate brand positioning.",
+    capabilities: ["Brand Identity Systems", "Logo Design Architecture", "Visual Guidelines"],
+    accentGradient: "from-purple-500 via-accent to-indigo-600",
   },
   {
-    icon: ShoppingBag,
-    title: "Printing",
-    href: "/services/printing",
-    description:
-      "High-quality print materials that turn ideas into memorable, tangible brand experiences.",
-  },
-  {
+    num: "04",
     icon: Package,
     title: "Packaging Design",
     href: "/services/packaging-design",
     description:
-      "Packaging that communicates purpose, strengthens shelf appeal, and leaves a lasting impression.",
+      "Tactile packaging, unboxing experiences, and structural box designs engineered for maximum retail shelf presence.",
+    capabilities: ["3D Box Mockups", "Structural Packaging", "Foil & Die-Cut Finishes"],
+    accentGradient: "from-emerald-500 via-teal-600 to-emerald-700",
   },
   {
+    num: "05",
+    icon: ShoppingBag,
+    title: "Print Production",
+    href: "/services/printing",
+    description:
+      "Ultra-high resolution print collateral, corporate stationery, brochures, and promotional merchandise crafted to impress.",
+    capabilities: ["Corporate Stationery", "Large Format Printing", "Luxury Paper Stocks"],
+    accentGradient: "from-amber-500 via-orange-600 to-amber-700",
+  },
+  {
+    num: "06",
     icon: Camera,
-    title: "Photography",
+    title: "Commercial Photography",
     href: "/services/photography",
     description:
-      "Professional visuals that bring your brand story to life with authenticity, detail, and emotion.",
+      "Professional product photography, editorial shoots, and commercial visual production that brings brand stories to life.",
+    capabilities: ["Studio Product Shoots", "Editorial & Lifestyle", "High-End Retouching"],
+    accentGradient: "from-pink-500 via-rose-600 to-accent",
   },
-  // {
-  //   icon: Megaphone,
-  //   title: "Outdoor Advertisement",
-  //   href: "/services/outdoor-advertisement",
-  //   description:
-  //     "Large-format campaigns across high-footfall locations to increase visibility and reinforce brand recall.",
-  // },
-  // {
-  //   icon: BusFront,
-  //   title: "Bus Advertisement",
-  //   href: "/services/bus-advertisement",
-  //   description:
-  //     "Transit-first campaigns designed to keep your brand moving across routes, neighborhoods, and busy corridors.",
-  // },
-  // {
-  //   icon: CarFront,
-  //   title: "Mobile Van Advertisement",
-  //   href: "/services/mobile-van-adverticement",
-  //   description:
-  //     "Mobile campaign activations that bring your message directly to the audience with high visibility and flexibility.",
-  // },
-  // {
-  //   icon: Building2,
-  //   title: "Barricade Advertisement",
-  //   href: "/services/barricade-adverticement",
-  //   description:
-  //     "Premium viewing spaces on barricades and hoardings that support brand presence at events, construction zones, and public activations.",
-  // },
 ];
 
 const HomeServicesSection = () => {
@@ -113,7 +101,7 @@ const HomeServicesSection = () => {
               start: "top 85%",
               once: true,
             },
-          },
+          }
         );
 
         // Grid cards stagger entrance
@@ -124,14 +112,14 @@ const HomeServicesSection = () => {
             opacity: 1,
             y: 0,
             duration: 0.7,
-            stagger: 0.08,
+            stagger: 0.1,
             ease: "power3.out",
             scrollTrigger: {
               trigger: ".services-trigger-grid",
               start: "top 80%",
               once: true,
             },
-          },
+          }
         );
       });
     }, containerRef);
@@ -152,77 +140,105 @@ const HomeServicesSection = () => {
     <section
       ref={containerRef}
       id="services"
-      className="relative overflow-hidden bg-background py-16 sm:py-24 px-4 sm:px-8 border-b border-border/40 select-none"
+      className="relative overflow-hidden bg-[#101735] text-white py-20 lg:py-32 px-4 sm:px-6 lg:px-8 border-t border-b border-[#26336F]/50 select-none"
     >
-      <div className="container mx-auto max-w-7xl">
+      {/* Soft Background Ambient Spotlights */}
+      <div className="services-bg-glow pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute left-1/2 top-0 h-[450px] w-[600px] -translate-x-1/2 rounded-full bg-accent/10 blur-[140px]" />
+      </div>
+
+      <div className="container relative z-10 mx-auto max-w-7xl">
         {/* Section Header */}
-        <div className="services-trigger-header flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 lg:mb-16">
-          <div className="space-y-4">
-            <div className="services-reveal flex items-center gap-3 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-accent">
-              <span className="w-8 h-[1px] bg-accent" />
-              What We Do
+        <div className="services-trigger-header flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 lg:mb-20">
+          <div className="max-w-2xl space-y-4">
+            <div className="services-reveal inline-flex items-center gap-2.5 rounded-full border border-accent/30 bg-accent/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-accent">
+              <Sparkles className="h-3.5 w-3.5" />
+              Core Capabilities
             </div>
-            <h2 className="services-reveal font-[family-name:var(--font-bebas-neue)] text-5xl sm:text-7xl lg:text-8xl leading-[0.9] tracking-wider uppercase text-foreground">
-              Our <em className="not-italic text-accent">Services</em>
+            <h2 className="services-reveal font-[family-name:var(--font-bebas-neue)] text-5xl sm:text-7xl lg:text-8xl leading-[0.88] tracking-wider uppercase text-white">
+              Engineered For <br />
+              <em className="not-italic text-accent">Maximum Impact</em>
             </h2>
+            <p className="services-reveal text-sm sm:text-base text-slate-300 leading-relaxed max-w-xl">
+              We combine strategy, design systems, and web technology to build complete digital ecosystems that scale your business.
+            </p>
           </div>
 
           <div className="services-reveal">
             <Link
               href="/services"
-              className="inline-flex items-center gap-2 text-sm font-bold text-accent transition-colors hover:text-accent/80 hover:underline underline-offset-4"
+              className="group inline-flex items-center gap-3 rounded-full border border-[#26336F] bg-[#18224b] px-6 py-3.5 text-sm font-bold uppercase tracking-wider text-white shadow-sm transition-all duration-300 hover:border-accent hover:bg-accent hover:shadow-md"
             >
-              All Services
-              <ArrowUpRight className="h-4 w-4" />
+              Explore All Services
+              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
           </div>
         </div>
 
         {/* Services Grid */}
-        <div
-          className="services-trigger-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2
-xl:grid-cols-3 gap-6"
-        >
+        <div className="services-trigger-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service) => (
             <Link
               key={service.href}
               href={service.href}
               onMouseMove={handleMouseMove}
-              className="service-grid-card group relative overflow-hidden rounded-3xl border border-border/60 bg-card/40 p-6 sm:p-8 flex flex-col justify-between min-h-[250px] transition-all duration-300 hover:border-accent/40 hover:-translate-y-1 hover:shadow-md group"
+              className="service-card-anim service-grid-card group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-[#26336F]/80 bg-[#141b3d] p-8 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:border-accent/60 hover:shadow-[0_20px_50px_rgba(223,27,37,0.18)]"
             >
-              {/* Vercel-like hover radial glow effect */}
+              {/* Top Accent Gradient Border on Hover */}
+              <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${service.accentGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+
+              {/* Cursor Shine Radial Overlay */}
               <div
                 className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 style={{
                   background: `radial-gradient(
-      350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
-      rgba(223, 27, 37, 0.12),
-      transparent 60%
-    )`,
+                    380px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+                    rgba(223, 27, 37, 0.12),
+                    transparent 70%
+                  )`,
                 }}
               />
 
               <div>
-                {/* Icon wrapper */}
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/10 text-accent group-hover:bg-accent group-hover:text-accent-foreground transition-all duration-300 shadow-sm border border-accent/20">
-                  <service.icon className="h-5 w-5" />
+                {/* Header Row: Icon & Watermark Number */}
+                <div className="flex items-center justify-between mb-8">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-accent/30 bg-accent/15 text-accent group-hover:bg-accent group-hover:text-white transition-all duration-300 shadow-sm group-hover:scale-110">
+                    <service.icon className="h-6 w-6" />
+                  </div>
+
+                  <span className="font-[family-name:var(--font-bebas-neue)] text-4xl sm:text-5xl text-[#26336F]/70 group-hover:text-accent/30 transition-colors duration-300 leading-none">
+                    {service.num}
+                  </span>
                 </div>
 
-                {/* Title */}
-                <h3 className="mt-6 text-base sm:text-lg font-bold text-foreground tracking-wide uppercase">
+                {/* Service Title */}
+                <h3 className="font-[family-name:var(--font-bebas-neue)] text-3xl sm:text-4xl text-white tracking-wide uppercase transition-colors group-hover:text-accent">
                   {service.title}
                 </h3>
 
                 {/* Description */}
-                <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                <p className="mt-3 text-xs sm:text-sm text-slate-300 leading-relaxed">
                   {service.description}
                 </p>
+
+                {/* Capabilities Feature Tags */}
+                <div className="mt-6 space-y-2 border-t border-[#26336F]/60 pt-5">
+                  {service.capabilities.map((cap, i) => (
+                    <div key={i} className="flex items-center gap-2 text-xs font-semibold text-slate-200">
+                      <CheckCircle2 className="h-3.5 w-3.5 text-accent shrink-0" />
+                      <span>{cap}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
 
-              {/* Bottom arrow visual */}
-              <div className="flex justify-end pt-4 border-t border-border/50 mt-6">
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-card/60 border border-border/60 text-muted-foreground group-hover:bg-accent group-hover:border-accent group-hover:text-accent-foreground transition-all duration-300">
-                  <ArrowUpRight className="h-4 w-4 group-hover:rotate-45 transition-transform duration-300 delay-75" />
+              {/* Bottom CTA Row */}
+              <div className="mt-8 flex items-center justify-between border-t border-[#26336F]/60 pt-4">
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-300 group-hover:text-accent transition-colors">
+                  Learn More
+                </span>
+                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#26336F] bg-[#18224b] text-slate-200 group-hover:bg-accent group-hover:border-accent group-hover:text-white transition-all duration-300">
+                  <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </span>
               </div>
             </Link>

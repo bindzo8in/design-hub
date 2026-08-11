@@ -174,27 +174,27 @@ export default function PortfolioClient({ initialProjects, categories }: Portfol
 
       {/* Metrics Row */}
       <div className="grid grid-cols-3 gap-4 max-w-4xl mx-auto px-4 select-none">
-        <div className="bg-[#101735]/30 border border-[#26336F]/10 rounded-2xl p-4 text-center backdrop-blur-sm">
-          <div className="font-[family-name:var(--font-bebas-neue)] text-3xl sm:text-5xl text-white">
+        <div className="bg-white border border-slate-200 dark:bg-[#18224b] dark:border-[#26336F] rounded-2xl p-4 text-center shadow-sm">
+          <div className="font-[family-name:var(--font-bebas-neue)] text-3xl sm:text-5xl text-slate-900 dark:text-white">
             {totalProjects}
           </div>
-          <div className="text-[9px] sm:text-xs font-semibold tracking-wider text-slate-400 uppercase mt-1">
+          <div className="text-[9px] sm:text-xs font-semibold tracking-wider text-slate-500 dark:text-slate-300 uppercase mt-1">
             Total Projects
           </div>
         </div>
-        <div className="bg-[#101735]/30 border border-[#26336F]/10 rounded-2xl p-4 text-center backdrop-blur-sm">
-          <div className="font-[family-name:var(--font-bebas-neue)] text-3xl sm:text-5xl text-[#DF1B25]">
+        <div className="bg-white border border-slate-200 dark:bg-[#18224b] dark:border-[#26336F] rounded-2xl p-4 text-center shadow-sm">
+          <div className="font-[family-name:var(--font-bebas-neue)] text-3xl sm:text-5xl text-accent">
             {activeProjects}
           </div>
-          <div className="text-[9px] sm:text-xs font-semibold tracking-wider text-slate-400 uppercase mt-1">
+          <div className="text-[9px] sm:text-xs font-semibold tracking-wider text-slate-500 dark:text-slate-300 uppercase mt-1">
             Active Now
           </div>
         </div>
-        <div className="bg-[#101735]/30 border border-[#26336F]/10 rounded-2xl p-4 text-center backdrop-blur-sm">
-          <div className="font-[family-name:var(--font-bebas-neue)] text-3xl sm:text-5xl text-emerald-400">
+        <div className="bg-white border border-slate-200 dark:bg-[#18224b] dark:border-[#26336F] rounded-2xl p-4 text-center shadow-sm">
+          <div className="font-[family-name:var(--font-bebas-neue)] text-3xl sm:text-5xl text-emerald-600 dark:text-emerald-400">
             {completedProjects}
           </div>
-          <div className="text-[9px] sm:text-xs font-semibold tracking-wider text-slate-400 uppercase mt-1">
+          <div className="text-[9px] sm:text-xs font-semibold tracking-wider text-slate-500 dark:text-slate-300 uppercase mt-1">
             Success Rate
           </div>
         </div>

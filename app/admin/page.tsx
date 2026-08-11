@@ -52,9 +52,9 @@ export default function AdminOverviewPage() {
       {/* Grid of Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* Stat 1: Revenue */}
-        <Card className="bg-[#101735]/40 border-[#26336F]/20 rounded-2xl hover:border-[#DF1B25]/40 transition-all duration-300 group shadow-lg">
+        <Card className="bg-white dark:bg-[#18224b] border-slate-200 dark:border-[#26336F] rounded-2xl hover:border-accent/40 transition-all duration-300 group shadow-md">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-semibold text-slate-400 font-mono uppercase tracking-wider">
+            <CardTitle className="text-sm font-semibold text-slate-500 dark:text-slate-300 font-mono uppercase tracking-wider">
               Total Revenue
             </CardTitle>
             <div className="bg-[#DF1B25]/10 p-2 rounded-xl text-[#DF1B25] group-hover:scale-105 transition-transform duration-300">
@@ -62,8 +62,8 @@ export default function AdminOverviewPage() {
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-extrabold text-white">$50,300</div>
-            <p className="text-xs text-emerald-400 flex items-center gap-1 mt-1 font-mono">
+            <div className="text-3xl font-extrabold text-slate-900 dark:text-white">$50,300</div>
+            <p className="text-xs text-emerald-600 dark:text-emerald-400 flex items-center gap-1 mt-1 font-mono">
               <TrendingUp className="w-3 h-3" />
               +12.5% from last week
             </p>
@@ -71,18 +71,18 @@ export default function AdminOverviewPage() {
         </Card>
 
         {/* Stat 2: Active Users */}
-        <Card className="bg-[#101735]/40 border-[#26336F]/20 rounded-2xl hover:border-[#DF1B25]/40 transition-all duration-300 group shadow-lg">
+        <Card className="bg-white dark:bg-[#18224b] border-slate-200 dark:border-[#26336F] rounded-2xl hover:border-accent/40 transition-all duration-300 group shadow-md">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-semibold text-slate-400 font-mono uppercase tracking-wider">
+            <CardTitle className="text-sm font-semibold text-slate-500 dark:text-slate-300 font-mono uppercase tracking-wider">
               Active Members
             </CardTitle>
-            <div className="bg-[#26336F]/20 p-2 rounded-xl text-slate-300 group-hover:scale-105 transition-transform duration-300">
+            <div className="bg-[#26336F]/20 p-2 rounded-xl text-slate-700 dark:text-slate-200 group-hover:scale-105 transition-transform duration-300">
               <Users className="w-4 h-4" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-extrabold text-white">1,248</div>
-            <p className="text-xs text-emerald-400 flex items-center gap-1 mt-1 font-mono">
+            <div className="text-3xl font-extrabold text-slate-900 dark:text-white">1,248</div>
+            <p className="text-xs text-emerald-600 dark:text-emerald-400 flex items-center gap-1 mt-1 font-mono">
               <TrendingUp className="w-3 h-3" />
               +4.8% new registers
             </p>
@@ -90,36 +90,36 @@ export default function AdminOverviewPage() {
         </Card>
 
         {/* Stat 3: Active Projects */}
-        <Card className="bg-[#101735]/40 border-[#26336F]/20 rounded-2xl hover:border-[#DF1B25]/40 transition-all duration-300 group shadow-lg">
+        <Card className="bg-white dark:bg-[#18224b] border-slate-200 dark:border-[#26336F] rounded-2xl hover:border-accent/40 transition-all duration-300 group shadow-md">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-semibold text-slate-400 font-mono uppercase tracking-wider">
+            <CardTitle className="text-sm font-semibold text-slate-500 dark:text-slate-300 font-mono uppercase tracking-wider">
               Active Projects
             </CardTitle>
-            <div className="bg-[#26336F]/20 p-2 rounded-xl text-slate-300 group-hover:scale-105 transition-transform duration-300">
+            <div className="bg-[#26336F]/20 p-2 rounded-xl text-slate-700 dark:text-slate-200 group-hover:scale-105 transition-transform duration-300">
               <FolderGit2 className="w-4 h-4" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-extrabold text-white">18</div>
-            <p className="text-xs text-slate-400 mt-1 font-mono">
+            <div className="text-3xl font-extrabold text-slate-900 dark:text-white">18</div>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-mono">
               4 nearing completion
             </p>
           </CardContent>
         </Card>
 
         {/* Stat 4: Average Contract Value */}
-        <Card className="bg-[#101735]/40 border-[#26336F]/20 rounded-2xl hover:border-[#DF1B25]/40 transition-all duration-300 group shadow-lg">
+        <Card className="bg-white dark:bg-[#18224b] border-slate-200 dark:border-[#26336F] rounded-2xl hover:border-accent/40 transition-all duration-300 group shadow-md">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-semibold text-slate-400 font-mono uppercase tracking-wider">
+            <CardTitle className="text-sm font-semibold text-slate-500 dark:text-slate-300 font-mono uppercase tracking-wider">
               Avg Contract Value
             </CardTitle>
-            <div className="bg-[#26336F]/20 p-2 rounded-xl text-slate-300 group-hover:scale-105 transition-transform duration-300">
+            <div className="bg-[#26336F]/20 p-2 rounded-xl text-slate-700 dark:text-slate-200 group-hover:scale-105 transition-transform duration-300">
               <DollarSign className="w-4 h-4" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-extrabold text-white">$14,800</div>
-            <p className="text-xs text-emerald-400 flex items-center gap-1 mt-1 font-mono">
+            <div className="text-3xl font-extrabold text-slate-900 dark:text-white">$14,800</div>
+            <p className="text-xs text-emerald-600 dark:text-emerald-400 flex items-center gap-1 mt-1 font-mono">
               <TrendingUp className="w-3 h-3" />
               +8.2% from last quarter
             </p>
@@ -130,19 +130,19 @@ export default function AdminOverviewPage() {
       {/* Main Charts & Activity Content Row */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Sales Chart Card */}
-        <Card className="bg-[#101735]/30 border-[#26336F]/20 rounded-3xl lg:col-span-2 shadow-2xl backdrop-blur-md overflow-hidden">
-          <CardHeader className="border-b border-[#26336F]/10 pb-4">
+        <Card className="bg-white dark:bg-[#18224b] border-slate-200 dark:border-[#26336F] rounded-3xl lg:col-span-2 shadow-md overflow-hidden">
+          <CardHeader className="border-b border-slate-100 dark:border-[#26336F]/40 pb-4">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-base font-bold text-white flex items-center gap-2">
+              <CardTitle className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
                 <Activity className="w-4 h-4 text-[#DF1B25]" />
                 Weekly Performance Analytics
               </CardTitle>
               <div className="flex items-center gap-4 text-xs font-mono">
-                <span className="flex items-center gap-1.5 text-white">
+                <span className="flex items-center gap-1.5 text-slate-900 dark:text-white">
                   <span className="w-2.5 h-2.5 rounded-full bg-[#DF1B25]" />
                   Sales
                 </span>
-                <span className="flex items-center gap-1.5 text-slate-400">
+                <span className="flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
                   <span className="w-2.5 h-2.5 rounded-full bg-[#26336F]" />
                   Traffic
                 </span>
@@ -168,13 +168,13 @@ export default function AdminOverviewPage() {
                   </defs>
                   <XAxis
                     dataKey="day"
-                    stroke="#475569"
+                    stroke="#64748b"
                     fontSize={11}
                     tickLine={false}
                     axisLine={false}
                   />
                   <YAxis
-                    stroke="#475569"
+                    stroke="#64748b"
                     fontSize={11}
                     tickLine={false}
                     axisLine={false}
@@ -211,9 +211,9 @@ export default function AdminOverviewPage() {
         </Card>
 
         {/* Recent Events Card */}
-        <Card className="bg-[#101735]/30 border-[#26336F]/20 rounded-3xl shadow-2xl backdrop-blur-md overflow-hidden">
-          <CardHeader className="border-b border-[#26336F]/10 pb-4">
-            <CardTitle className="text-base font-bold text-white flex items-center justify-between">
+        <Card className="bg-white dark:bg-[#18224b] border-slate-200 dark:border-[#26336F] rounded-3xl shadow-md overflow-hidden">
+          <CardHeader className="border-b border-slate-100 dark:border-[#26336F]/40 pb-4">
+            <CardTitle className="text-base font-bold text-slate-900 dark:text-white flex items-center justify-between">
               <span>Recent Admin Activity</span>
               <span className="text-[10px] bg-[#DF1B25]/10 border border-[#DF1B25]/20 text-[#DF1B25] font-mono px-2 py-0.5 rounded-full uppercase tracking-wider">
                 Live Feed
@@ -228,7 +228,7 @@ export default function AdminOverviewPage() {
                   details: "Standard Account 'Jane Doe' registered.",
                   time: "10 mins ago",
                   icon: UserPlus,
-                  iconColor: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
+                  iconColor: "text-emerald-500 bg-emerald-500/10 border-emerald-500/20",
                 },
                 {
                   action: "New Project Initiated",
@@ -242,7 +242,7 @@ export default function AdminOverviewPage() {
                   details: "Automated incremental backup verified.",
                   time: "4 hours ago",
                   icon: Wrench,
-                  iconColor: "text-blue-400 bg-blue-500/10 border-blue-500/20",
+                  iconColor: "text-blue-500 bg-blue-500/10 border-blue-500/20",
                 },
               ].map((act, index) => (
                 <div key={index} className="flex gap-4">
@@ -251,10 +251,10 @@ export default function AdminOverviewPage() {
                   </div>
                   <div className="flex-1 space-y-1">
                     <div className="flex justify-between items-start">
-                      <h4 className="text-sm font-semibold text-white">{act.action}</h4>
+                      <h4 className="text-sm font-semibold text-slate-900 dark:text-white">{act.action}</h4>
                       <span className="text-[10px] text-slate-500 font-mono">{act.time}</span>
                     </div>
-                    <p className="text-xs text-slate-400 leading-normal">{act.details}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-300 leading-normal">{act.details}</p>
                   </div>
                 </div>
               ))}
@@ -264,21 +264,21 @@ export default function AdminOverviewPage() {
       </div>
 
       {/* Quick Action Panel */}
-      <Card className="bg-[#101735]/40 border-[#26336F]/20 p-6 rounded-3xl backdrop-blur-xl">
+      <Card className="bg-white dark:bg-[#18224b] border-slate-200 dark:border-[#26336F] p-6 rounded-3xl shadow-md">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
-            <h3 className="text-lg font-bold text-white font-sans">
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white font-sans">
               Quick Administrative Actions
             </h3>
-            <p className="text-slate-400 text-xs mt-0.5">
+            <p className="text-slate-500 dark:text-slate-300 text-xs mt-0.5">
               Rapid navigation panels to skip menu clicks and manage users, projects, or core configurations immediately.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <Button asChild variant="outline" className="bg-[#101735]/60 border-[#26336F]/30 text-white rounded-xl hover:bg-white/5 cursor-pointer">
+            <Button asChild variant="outline" className="bg-slate-50 dark:bg-[#101735] border-slate-300 dark:border-[#26336F] text-slate-900 dark:text-white rounded-xl hover:bg-slate-100 dark:hover:bg-[#26336F] cursor-pointer">
               <Link href="/admin/users/new">New Account</Link>
             </Button>
-            <Button asChild variant="outline" className="bg-[#101735]/60 border-[#26336F]/30 text-white rounded-xl hover:bg-white/5 cursor-pointer">
+            <Button asChild variant="outline" className="bg-slate-50 dark:bg-[#101735] border-slate-300 dark:border-[#26336F] text-slate-900 dark:text-white rounded-xl hover:bg-slate-100 dark:hover:bg-[#26336F] cursor-pointer">
               <Link href="/admin/projects/new">New Project</Link>
             </Button>
             <Button asChild className="bg-[#DF1B25] hover:bg-[#DF1B25]/90 text-white rounded-xl cursor-pointer">

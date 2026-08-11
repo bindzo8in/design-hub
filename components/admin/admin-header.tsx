@@ -31,7 +31,7 @@ export function AdminHeader() {
   };
 
   return (
-    <header className="sticky top-0 z-20 flex h-16 w-full items-center justify-between border-b border-[#26336F]/20 bg-[#050711]/80 px-6 backdrop-blur-md text-white">
+    <header className="sticky top-0 z-20 flex h-16 w-full items-center justify-between border-b border-[#26336F]/40 bg-[#101735]/95 px-6 backdrop-blur-md text-white">
       {/* Mobile Toggle & Title */}
       <div className="flex items-center gap-4">
         <MobileSidebar />

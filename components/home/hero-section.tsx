@@ -200,6 +200,7 @@ const HomeHeroSection = () => {
 
   return (
     <section
+      id="hero"
       ref={containerRef}
       className="
         relative
@@ -224,14 +225,14 @@ const HomeHeroSection = () => {
       "
     >
       {/* background */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
+      <div className="hero-bg-radial absolute inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_60%_40%,rgba(223,27,37,0.08)_0%,transparent_65%)] dark:bg-[radial-gradient(ellipse_80%_60%_at_60%_40%,rgba(223,27,37,0.12)_0%,transparent_65%)]" />
 
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_70%_at_10%_80%,rgba(38,51,111,0.06)_0%,transparent_60%)] dark:bg-[radial-gradient(ellipse_50%_70%_at_10%_80%,rgba(38,51,111,0.1)_0%,transparent_60%)]" />
 
         {/* grid */}
         <div
-          className="absolute inset-0 opacity-[0.04] dark:opacity-[0.03]"
+          className="hero-grid-layer absolute inset-0 opacity-[0.04] dark:opacity-[0.03]"
           style={{
             backgroundImage: `
               linear-gradient(var(--foreground) 1px, transparent 1px),
@@ -260,7 +261,7 @@ const HomeHeroSection = () => {
         ))}
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-[1380px]">
+      <div className="hero-content-parallax relative z-10 mx-auto w-full max-w-[1380px]">
         <div
           className="
             grid
@@ -280,14 +281,12 @@ const HomeHeroSection = () => {
 
           <div
             className="
-              order-2
-
               space-y-5
 
               md:space-y-6
 
               lg:col-span-7
-              lg:order-1
+              lg:order-2
             "
           >
             {/* tagline */}
@@ -389,7 +388,7 @@ const HomeHeroSection = () => {
 
                 <div className="relative flex h-full items-center justify-center overflow-hidden rounded-[1.5rem]">
                   <DotLottieReact
-                    src="/lottie/Live chatbot.lottie"
+                    src="/lottie/digital_marketing.lottie"
                     loop
                     autoplay
                     className="h-full w-full object-contain"
@@ -417,7 +416,7 @@ const HomeHeroSection = () => {
 
                 <div className="relative flex h-full items-center justify-center overflow-hidden rounded-[1.25rem]">
                   <DotLottieReact
-                    src="/lottie/Live chatbot.lottie"
+                    src="/lottie/digital_marketing.lottie"
                     loop
                     autoplay
                     className="h-full w-full object-contain"
@@ -439,21 +438,31 @@ const HomeHeroSection = () => {
                 sm:justify-between
               "
             >
-              <p
-                className="
-                  max-w-[520px]
-                  text-sm
-                  leading-relaxed
-                  text-muted-foreground
+              <div className="space-y-4">
+                <p
+                  className="
+                    max-w-[540px]
+                    text-sm
+                    leading-relaxed
+                    text-muted-foreground
 
-                  sm:text-base
-                "
-              >
-                We design and build modern digital
-                experiences that combine creativity,
-                branding, and technology to help
-                businesses grow with impact.
-              </p>
+                    sm:text-base
+                  "
+                >
+                  We craft high-converting digital products, brand identities, packaging design, and performance marketing campaigns that help ambitious businesses scale faster.
+                </p>
+
+                {/* Trust Badges */}
+                <div className="flex flex-wrap items-center gap-3 text-xs font-semibold text-muted-foreground">
+                  <span className="flex items-center gap-1 text-amber-500 font-bold">
+                    ★★★★★ <span className="text-foreground ml-1">4.9/5 Rating</span>
+                  </span>
+                  <span className="h-3 w-[1px] bg-border" />
+                  <span>200+ Projects Delivered</span>
+                  <span className="h-3 w-[1px] bg-border" />
+                  <span className="text-accent font-medium">100% Custom Solutions</span>
+                </div>
+              </div>
 
               {/* buttons */}
               <div
@@ -466,7 +475,7 @@ const HomeHeroSection = () => {
                 "
               >
                 <Link
-                  href="/about"
+                  href="/contact"
                   className="
                     inline-flex
                     items-center
@@ -475,44 +484,51 @@ const HomeHeroSection = () => {
                     rounded-2xl
                     bg-accent
 
-                    px-6 py-3.5
+                    px-7 py-4
 
                     text-sm
                     font-bold
                     text-accent-foreground
+                    shadow-lg
+                    shadow-accent/25
 
                     transition-all
                     duration-300
 
-                    hover:scale-[1.02]
+                    hover:scale-[1.03]
                     hover:bg-accent/90
                   "
                 >
-                  Discover Us
+                  Start Your Project
 
                   <ArrowRight className="h-4 w-4" />
                 </Link>
 
                 <Link
-                  href="/services"
+                  href="/portfolio"
                   className="
                     inline-flex
                     items-center
                     gap-2
 
+                    rounded-2xl
+                    border border-border
+                    bg-secondary/60
+
+                    px-6 py-4
+
                     text-sm
                     font-bold
-                    text-muted-foreground
+                    text-foreground
 
-                    transition-colors
+                    transition-all
                     duration-300
 
-                    hover:text-foreground
+                    hover:border-accent/40
+                    hover:bg-secondary
                   "
                 >
-                  Our Services
-
-                  <ArrowRight className="h-4 w-4" />
+                  View Work
                 </Link>
               </div>
             </div>
@@ -572,41 +588,23 @@ const HomeHeroSection = () => {
               lg:flex
 
               lg:col-span-5
+              lg:order-1
 
               relative
+              items-center
               justify-center
             "
           >
             <div
               ref={heroImageRef}
-              className="
-                relative
-
-                w-[92%]
-                overflow-hidden
-
-                rounded-[2rem]
-                border border-[#26336F]/20
-                bg-card/10
-
-                p-4
-
-                shadow-2xl
-                backdrop-blur-md
-
-                h-[420px]
-              "
+              className="w-full h-[520px]"
             >
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#26336F]/10 via-[#050711]/60 to-[#DF1B25]/5 z-0" />
-
-              <div className="relative flex h-full items-center justify-center overflow-hidden rounded-[1.5rem]">
-                <DotLottieReact
-                  src="/lottie/Live chatbot.lottie"
-                  loop
-                  autoplay
-                  className="h-full w-full object-contain"
-                />
-              </div>
+              <DotLottieReact
+                src="/lottie/digital_marketing.lottie"
+                loop
+                autoplay
+                className="h-full w-full object-contain"
+              />
             </div>
           </div>
         </div>

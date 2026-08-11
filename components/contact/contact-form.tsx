@@ -132,7 +132,7 @@ const ContactForm = () => {
   return (
     <section
       ref={containerRef}
-      className="relative overflow-hidden bg-background pb-20 px-4 sm:px-6 lg:px-8 select-none"
+      className="relative overflow-hidden bg-white dark:bg-[#101735] pb-20 pt-8 px-4 sm:px-6 lg:px-8 select-none"
     >
       <div className="contact-grid-trigger container mx-auto max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">

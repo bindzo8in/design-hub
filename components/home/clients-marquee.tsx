@@ -21,7 +21,7 @@ export default function HomeClientsMarquee({ clients }: HomeClientsMarqueeProps)
   }
 
   return (
-    <section className="relative border-t border-b border-border/50 bg-card/60 py-4 sm:py-6 overflow-hidden select-none">
+    <section className="clients-section relative border-t border-b border-slate-200/80 dark:border-slate-800/80 bg-slate-100/80 dark:bg-slate-900/60 py-6 sm:py-8 overflow-hidden select-none">
       <style
         dangerouslySetInnerHTML={{
           __html: `

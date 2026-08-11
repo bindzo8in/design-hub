@@ -31,7 +31,7 @@ const ContactHeroSection = () => {
   return (
     <section
       ref={containerRef}
-      className="relative overflow-hidden bg-background text-foreground py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 select-none"
+      className="relative overflow-hidden bg-slate-50 dark:bg-[#101735] text-slate-900 dark:text-white py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 select-none border-b border-slate-200 dark:border-[#26336F]/40"
     >
       {/* Background visual grids */}
       <div className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center opacity-30">

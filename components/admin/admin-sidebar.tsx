@@ -41,15 +41,15 @@ export function SidebarContent() {
   const pathname = usePathname();
 
   return (
-    <div className="flex h-full flex-col bg-[#050711] border-r border-[#26336F]/20 text-white">
+    <div className="flex h-full flex-col bg-[#101735] border-r border-[#26336F]/40 text-white">
       {/* Brand Header */}
-      <div className="flex h-16 items-center px-6 border-b border-[#26336F]/20">
+      <div className="flex h-16 items-center px-6 border-b border-[#26336F]/40">
         <Link href="/admin" className="flex items-center gap-2.5 group">
           <div className="bg-[#DF1B25]/10 border border-[#DF1B25]/30 p-1.5 rounded-lg text-[#DF1B25] group-hover:scale-105 transition-transform duration-300">
             <Shield className="w-5 h-5" />
           </div>
           <span className="font-sans font-bold tracking-tight text-lg">
-            DESIGN<span className="text-[#DF1B25]">HUB</span> <span className="text-xs uppercase px-1.5 py-0.5 rounded bg-[#26336F]/30 text-[#26336F]/90 font-mono tracking-widest ml-1 border border-[#26336F]/30">Admin</span>
+            DESIGN<span className="text-[#DF1B25]">HUB</span> <span className="text-xs uppercase px-1.5 py-0.5 rounded bg-[#26336F] text-white font-mono tracking-widest ml-1 border border-[#26336F]">Admin</span>
           </span>
         </Link>
       </div>
@@ -66,8 +66,8 @@ export function SidebarContent() {
               className={cn(
                 "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 group relative overflow-hidden",
                 isActive
-                  ? "bg-[#101735]/60 text-white border border-[#26336F]/30 shadow-[0_0_15px_rgba(38,51,111,0.15)]"
-                  : "text-slate-400 hover:text-white hover:bg-white/5 border border-transparent"
+                  ? "bg-[#18224b] text-white border border-[#26336F] shadow-md"
+                  : "text-slate-300 hover:text-white hover:bg-[#18224b]/60 border border-transparent"
               )}
             >
               {isActive && (
@@ -86,8 +86,8 @@ export function SidebarContent() {
       </div>
 
       {/* Footer Info */}
-      <div className="p-4 border-t border-[#26336F]/20 bg-[#050711]/50 text-center">
-        <p className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">
+      <div className="p-4 border-t border-[#26336F]/40 bg-[#0c122b] text-center">
+        <p className="text-[10px] font-mono text-slate-400 uppercase tracking-widest">
           Secured session
         </p>
       </div>
@@ -104,7 +104,7 @@ export function MobileSidebar() {
           <span className="sr-only">Toggle navigation menu</span>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="p-0 w-72 bg-[#050711] border-r border-[#26336F]/20 text-white">
+      <SheetContent side="left" className="p-0 w-72 bg-[#101735] border-r border-[#26336F]/40 text-white">
         <SheetTitle className="sr-only">Admin navigation</SheetTitle>
         <SidebarContent />
       </SheetContent>

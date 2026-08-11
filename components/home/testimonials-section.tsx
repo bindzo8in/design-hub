@@ -127,18 +127,18 @@ const HomeTestimonialsSection = ({ testimonials: dbTestimonials }: HomeTestimoni
     <section
       ref={containerRef}
       id="testimonials"
-      className="relative overflow-hidden bg-card/60 py-16 sm:py-24 px-4 sm:px-8 border-b border-border/40 select-none"
+      className="relative overflow-hidden bg-white dark:bg-[#101735] py-20 sm:py-28 px-4 sm:px-8 border-t border-b border-slate-200 dark:border-[#26336F]/40 select-none"
     >
       <div className="container mx-auto max-w-7xl">
         
         {/* Section Header */}
-        <header className="testi-trigger-header text-center max-w-2xl mx-auto mb-16 space-y-4">
+        <header className="testimonials-heading-reveal testi-trigger-header text-center max-w-2xl mx-auto mb-16 space-y-4">
           <div className="testi-reveal inline-flex items-center gap-3 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-accent">
             <span className="w-8 h-[1px] bg-accent" />
             Client Voices
             <span className="w-8 h-[1px] bg-accent" />
           </div>
-          <h2 className="testi-reveal font-[family-name:var(--font-bebas-neue)] text-5xl sm:text-7xl lg:text-8xl leading-[0.9] tracking-wider uppercase text-foreground">
+          <h2 className="testi-reveal font-[family-name:var(--font-bebas-neue)] text-5xl sm:text-7xl lg:text-8xl leading-[0.9] tracking-wider uppercase text-slate-900 dark:text-white">
             What Our <em className="not-italic text-accent">Clients</em> Say
           </h2>
         </header>
@@ -159,11 +159,17 @@ const HomeTestimonialsSection = ({ testimonials: dbTestimonials }: HomeTestimoni
               {displayTestimonials.map((item, idx) => (
                 <CarouselItem key={idx} className="pl-4 sm:pl-8 flex-[0_0_100%] md:flex-[0_0_50%]">
                   <article
-                    className="testi-card h-full group relative rounded-3xl border border-border/60 bg-background p-6 sm:p-8 flex flex-col justify-between min-h-[220px] transition-all duration-300 hover:border-accent/40"
+                    className="testi-card h-full group relative rounded-3xl border border-slate-200 dark:border-[#26336F] bg-slate-50 dark:bg-[#18224b] p-6 sm:p-8 flex flex-col justify-between min-h-[240px] shadow-sm transition-all duration-300 hover:border-accent/50 hover:shadow-xl"
                   >
                     <div>
-                      {/* Large visual quote icon */}
-                      <Quote className="h-10 w-10 text-accent opacity-20 group-hover:opacity-40 transition-opacity duration-300 rotate-180" />
+                      {/* Top rating stars & quote icon */}
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-1 text-amber-500 text-sm">
+                          {"★".repeat(5)}
+                          <span className="ml-2 text-xs font-semibold text-accent uppercase tracking-wider">Verified Client</span>
+                        </div>
+                        <Quote className="h-8 w-8 text-accent opacity-20 group-hover:opacity-40 transition-opacity duration-300 rotate-180" />
+                      </div>
                       
                       {/* Quote text */}
                       <p className="mt-4 text-sm sm:text-base leading-relaxed text-muted-foreground italic">
@@ -173,7 +179,7 @@ const HomeTestimonialsSection = ({ testimonials: dbTestimonials }: HomeTestimoni
 
                     {/* Author Info */}
                     <div className="flex items-center gap-4 mt-8 pt-6 border-t border-border/40">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-full bg-secondary text-primary dark:text-[#7f91ff] font-[family-name:var(--font-bebas-neue)] text-lg border border-border/60 overflow-hidden shrink-0">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/10 text-accent font-[family-name:var(--font-bebas-neue)] text-xl border border-accent/20 overflow-hidden shrink-0">
                         {item.isImage ? (
                           <img src={item.avatar} alt={item.author} className="w-full h-full object-cover" />
                         ) : (

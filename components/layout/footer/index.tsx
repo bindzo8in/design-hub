@@ -24,7 +24,7 @@ const socials = [
 
 const Footer = () => {
   return (
-    <footer className="relative overflow-hidden bg-secondary text-secondary-foreground">
+    <footer className="relative overflow-hidden bg-[#101735] text-white border-t border-[#26336F]/50">
       {/* ====================================== */}
       {/* BACKGROUND */}
       {/* ====================================== */}

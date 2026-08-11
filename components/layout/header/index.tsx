@@ -65,7 +65,8 @@ const BrandLogo = () => {
         width={180}
         height={64}
         priority
-        className="h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02] lg:h-16 dark:hidden"
+        style={{ width: "auto" }}
+        className="h-11 object-contain transition-transform duration-300 group-hover:scale-[1.02] lg:h-16 dark:hidden"
       />
 
       {/* Dark background logo (light text) for dark theme */}
@@ -75,7 +76,8 @@ const BrandLogo = () => {
         width={180}
         height={64}
         priority
-        className="hidden h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02] lg:h-16 dark:block"
+        style={{ width: "auto" }}
+        className="hidden h-11 object-contain transition-transform duration-300 group-hover:scale-[1.02] lg:h-16 dark:block"
       />
     </Link>
   );
@@ -100,36 +102,72 @@ const PublicHeader = () => {
             <BrandLogo />
 
             {/* Navigation links */}
-            <div className="flex items-center gap-1 rounded-full border border-border bg-secondary/70 p-1.5 shadow-sm backdrop-blur-xl">
+            <div className="flex items-center gap-1 rounded-full border border-[#26336F]/60 dark:border-[#26336F] bg-secondary/70 dark:bg-[#18224b]/80 p-1.5 shadow-sm backdrop-blur-xl">
               {navRoutes.map((route) => {
                 const active = isActiveRoute(route.href);
+                const isServices = route.href === "/services";
 
                 return (
-                  <Link
-                    href={route.href}
-                    key={route.href}
-                    className={cn(
-                      "group relative flex items-center gap-2 overflow-hidden rounded-full px-5 py-3",
-                      "text-sm font-semibold text-muted-foreground transition-all duration-300",
-                      "hover:bg-background hover:text-foreground",
-                      active &&
-                      "bg-primary text-primary-foreground shadow-md hover:bg-primary hover:text-primary-foreground"
-                    )}
-                  >
-                    {active && (
-                      <span className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.22),transparent_55%)]" />
-                    )}
-
-                    <route.icon
+                  <div key={route.href} className="relative group/nav">
+                    <Link
+                      href={route.href}
                       className={cn(
-                        "relative z-10 h-4 w-4 transition-transform duration-300",
-                        "group-hover:scale-110",
-                        active && "text-current"
+                        "group relative flex items-center gap-2 overflow-hidden rounded-full px-5 py-3",
+                        "text-sm font-semibold text-muted-foreground transition-all duration-300",
+                        "hover:bg-background hover:text-foreground",
+                        active &&
+                        "bg-primary text-primary-foreground shadow-md hover:bg-primary hover:text-primary-foreground"
                       )}
-                    />
+                    >
+                      {active && (
+                        <span className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.22),transparent_55%)]" />
+                      )}
 
-                    <span className="relative z-10">{route.title}</span>
-                  </Link>
+                      <route.icon
+                        className={cn(
+                          "relative z-10 h-4 w-4 transition-transform duration-300",
+                          "group-hover:scale-110",
+                          active && "text-current"
+                        )}
+                      />
+
+                      <span className="relative z-10">{route.title}</span>
+                    </Link>
+
+                    {/* Services Mega-Menu Popover */}
+                    {isServices && (
+                      <div className="absolute left-1/2 top-full pt-2.5 -translate-x-1/2 w-80 opacity-0 pointer-events-none group-hover/nav:opacity-100 group-hover/nav:pointer-events-auto transition-all duration-200 z-50 before:absolute before:-top-4 before:left-0 before:right-0 before:h-6 before:content-['']">
+                        <div className="rounded-2xl border border-border bg-card/95 p-3 shadow-2xl backdrop-blur-2xl">
+                          <div className="text-[10px] font-bold uppercase tracking-widest text-accent px-3 py-1.5 border-b border-border/50 mb-1">
+                            Core Capabilities
+                          </div>
+                          <div className="grid gap-1">
+                            {[
+                              { title: "Web Development", href: "/services/web-design", desc: "Next.js, High-Speed Apps" },
+                              { title: "Digital Marketing", href: "/services/digital-marketing", desc: "SEO, PPC & Growth" },
+                              { title: "Design Solution", href: "/services/design-solution", desc: "Brand Identity Systems" },
+                              { title: "Packaging Design", href: "/services/packaging-design", desc: "Structural Print & Box" },
+                              { title: "Printing", href: "/services/printing", desc: "High-Quality Materials" },
+                              { title: "Photography", href: "/services/photography", desc: "Editorial & Product Shoot" },
+                            ].map((s, idx) => (
+                              <Link
+                                key={idx}
+                                href={s.href}
+                                className="group/item flex flex-col rounded-xl px-3 py-2 text-xs transition-colors hover:bg-accent/10"
+                              >
+                                <span className="font-bold text-foreground group-hover/item:text-accent">
+                                  {s.title}
+                                </span>
+                                <span className="text-[11px] text-muted-foreground">
+                                  {s.desc}
+                                </span>
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 );
               })}
             </div>
@@ -168,7 +206,7 @@ const PublicHeader = () => {
       <div className="h-16 lg:hidden" />
 
       {/* Mobile bottom menu bar */}
-      <nav className="fixed bottom-0 left-0 z-50 w-full border-t border-border bg-background/92 pb-[env(safe-area-inset-bottom)] shadow-[0_-18px_60px_rgba(0,0,0,0.12)] backdrop-blur-xl lg:hidden">
+      <nav className="fixed bottom-0 left-0 z-50 w-full border-t border-border dark:border-[#26336F]/50 bg-background/92 dark:bg-[#101735]/95 pb-[env(safe-area-inset-bottom)] shadow-[0_-18px_60px_rgba(0,0,0,0.12)] backdrop-blur-xl lg:hidden">
         <div className="mx-auto flex h-20 max-w-md items-center justify-around px-2">
           {navRoutes.map((route) => {
             const active = isActiveRoute(route.href);

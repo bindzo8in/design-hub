@@ -42,22 +42,22 @@ const HomeCTASection = () => {
       className="
         relative
         overflow-hidden
-        bg-[#050711]
-        py-10
-        sm:py-14
-        lg:py-20
-        lg:min-h-[92vh]
+        bg-[#101735]
+        text-white
+        py-12
+        sm:py-16
+        lg:py-24
         flex
         items-center
       "
     >
       {/* Background Glow */}
       <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-        <div className="absolute left-1/2 top-0 h-[400px] w-[400px] sm:h-[500px] sm:w-[500px] -translate-x-1/2 rounded-full bg-accent/10 blur-[120px]" />
+        <div className="absolute left-1/2 top-0 h-[400px] w-[400px] sm:h-[500px] sm:w-[500px] -translate-x-1/2 rounded-full bg-accent/15 blur-[120px]" />
       </div>
 
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="cta-wrapper relative overflow-hidden rounded-2xl sm:rounded-[2rem] border border-border/50 bg-card/40 backdrop-blur-xl">
+        <div className="cta-wrapper relative overflow-hidden rounded-2xl sm:rounded-[2rem] border border-[#26336F] bg-[#18224b]/80 backdrop-blur-xl shadow-2xl">
 
           {/* Gradient border overlay */}
           <div className="absolute inset-0 rounded-2xl sm:rounded-[2rem] bg-gradient-to-br from-accent/20 via-transparent to-primary/20 pointer-events-none" />
@@ -144,20 +144,80 @@ const HomeCTASection = () => {
               </div>
             </div>
 
-            {/* ── RIGHT ANIMATION ── */}
-            <div className="cta-item relative flex items-center justify-center order-first lg:order-last">
-              {/* Glow blob */}
-              <div className="absolute h-[260px] w-[260px] sm:h-[380px] sm:w-[380px] lg:h-[500px] lg:w-[500px] rounded-full bg-accent/20 blur-[80px] sm:blur-[100px] pointer-events-none" />
-
-              {/* Animation — scales fluidly via clamp-like Tailwind steps */}
-              <div className="relative z-10 w-[220px] xs:w-[280px] sm:w-[360px] md:w-[440px] lg:w-[520px] xl:w-[640px] 2xl:w-[720px]">
-                <DotLottieReact
-                  src="/lottie/team.lottie"
-                  loop
-                  autoplay
-                  className="h-full w-full"
-                />
+            {/* ── RIGHT INLINE LEAD CAPTURE FORM ── */}
+            <div className="cta-item relative z-10 w-full rounded-2xl sm:rounded-3xl border border-slate-800 bg-slate-950/80 p-6 sm:p-8 backdrop-blur-xl shadow-2xl">
+              <div className="mb-6">
+                <h3 className="font-[family-name:var(--font-bebas-neue)] text-3xl sm:text-4xl text-white uppercase tracking-wide">
+                  Request A <span className="text-accent">Free Quote</span>
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-400 mt-1">
+                  Tell us about your project & get a response within 24 hours.
+                </p>
               </div>
+
+              <form onSubmit={(e) => { e.preventDefault(); alert("Thank you! Your quote request has been received. Our team will contact you shortly."); }} className="space-y-4">
+                <div>
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">
+                    What service do you need?
+                  </label>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    {["Web Development", "Branding", "Packaging", "Photography", "Digital Marketing", "Printing"].map((svc, i) => (
+                      <label key={i} className="flex items-center gap-2 rounded-xl border border-slate-800 bg-slate-900/60 p-2.5 text-xs text-slate-300 hover:border-accent/40 cursor-pointer transition-colors">
+                        <input type="checkbox" className="accent-red-600 rounded" defaultChecked={i === 0} />
+                        <span className="truncate">{svc}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Your Name *</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="John Doe"
+                      className="w-full rounded-xl border border-slate-800 bg-slate-900 px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-accent focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-300 mb-1">Phone / WhatsApp *</label>
+                    <input
+                      type="tel"
+                      required
+                      placeholder="+91 99947 13122"
+                      className="w-full rounded-xl border border-slate-800 bg-slate-900 px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-accent focus:outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-slate-300 mb-1">Email Address *</label>
+                  <input
+                    type="email"
+                    required
+                    placeholder="john@company.com"
+                    className="w-full rounded-xl border border-slate-800 bg-slate-900 px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-accent focus:outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-slate-300 mb-1">Project Details</label>
+                  <textarea
+                    rows={3}
+                    placeholder="Describe your project goals, budget, or timeline..."
+                    className="w-full rounded-xl border border-slate-800 bg-slate-900 px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-accent focus:outline-none resize-none"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-accent py-4 text-sm font-bold text-white shadow-lg shadow-accent/25 hover:bg-accent/90 transition-all hover:scale-[1.01]"
+                >
+                  Submit Proposal Request
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+              </form>
             </div>
 
           </div>

@@ -10,7 +10,7 @@ interface AdminShellProps {
 
 export function AdminShell({ children }: AdminShellProps) {
   return (
-    <div className="min-h-screen bg-[#050711] text-white">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#101735] text-slate-900 dark:text-white">
       {/* Desktop Sidebar */}
       <DesktopSidebar />
 
@@ -20,10 +20,10 @@ export function AdminShell({ children }: AdminShellProps) {
         <AdminHeader />
 
         {/* Dynamic Route Pages */}
-        <main className="flex-1 p-6 md:p-8 bg-gradient-to-b from-[#050711] via-[#0b0e26] to-[#050711] relative overflow-x-hidden">
+        <main className="flex-1 p-6 md:p-8 bg-slate-100/70 dark:bg-[#101735] relative overflow-x-hidden">
           {/* Background Blurred Spheres for Luxury Vibe */}
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#26336F]/5 rounded-full blur-[140px] pointer-events-none" />
-          <div className="absolute bottom-10 right-10 w-[300px] h-[300px] bg-[#DF1B25]/5 rounded-full blur-[100px] pointer-events-none" />
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#26336F]/10 rounded-full blur-[140px] pointer-events-none" />
+          <div className="absolute bottom-10 right-10 w-[300px] h-[300px] bg-[#DF1B25]/10 rounded-full blur-[100px] pointer-events-none" />
           
           <div className="relative z-10 w-full max-w-7xl mx-auto space-y-8">
             {children}

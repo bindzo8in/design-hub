@@ -3,30 +3,47 @@ import HomeMarquee from "@/components/home/marquee";
 import HomeAboutSection from "@/components/home/about-section";
 import HomeProcessSection from "@/components/home/process-section";
 import HomeServicesSection from "@/components/home/services-section";
+import HomePortfolioShowcase from "@/components/home/portfolio-showcase";
 import HomeTestimonialsSection from "@/components/home/testimonials-section";
 import HomeClientsMarquee from "@/components/home/clients-marquee";
 import HomeContactCTA from "@/components/home/contact-cta";
+import HomeScrollAnimations from "@/components/home/scroll-animations";
 import { prisma } from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function Home() {
-  const testimonials = await prisma.testimonial.findMany({
-    orderBy: { createdAt: "desc" },
-  });
-
-  const clients = await prisma.client.findMany({
-    orderBy: { name: "asc" },
-    select: {
-      name: true,
-      logoUrl: true,
-    },
-  });
+  const [testimonials, clients, projects, categories] = await Promise.all([
+    prisma.testimonial.findMany({
+      orderBy: { createdAt: "desc" },
+    }),
+    prisma.client.findMany({
+      orderBy: { name: "asc" },
+      select: {
+        name: true,
+        logoUrl: true,
+      },
+    }),
+    prisma.project.findMany({
+      orderBy: { createdAt: "desc" },
+      take: 6,
+      include: {
+        category: true,
+        client: true,
+      },
+    }),
+    prisma.category.findMany({
+      orderBy: { name: "asc" },
+    }),
+  ]);
 
   return (
     <div className="flex flex-col flex-1 w-full font-sans">
       <main className="w-full">
+        {/* Scroll-triggered parallax & reveal animations orchestrator */}
+        <HomeScrollAnimations />
+
         {/* Homepage Hero with grid lines and typing effect */}
         <HomeHeroSection />
 
@@ -36,11 +53,14 @@ export default async function Home() {
         {/* About section with stats count-up */}
         <HomeAboutSection />
 
-        {/* Process timelines */}
-        <HomeProcessSection />
-
         {/* 8-card Services grid with shine highlights */}
         <HomeServicesSection />
+
+        {/* Dedicated interactive Portfolio Showcase section */}
+        <HomePortfolioShowcase initialProjects={projects as any[]} categories={categories} />
+
+        {/* Process timelines */}
+        <HomeProcessSection />
 
         {/* Infinite client marquee */}
         <HomeClientsMarquee clients={clients} />

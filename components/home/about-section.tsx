@@ -80,11 +80,11 @@ const HomeAboutSection = () => {
     <section
       ref={containerRef}
       id="about"
-      className="relative overflow-hidden bg-background py-16 sm:py-24 px-4 sm:px-8 border-t border-border/40"
+      className="relative overflow-hidden bg-white dark:bg-[#101735] py-20 sm:py-28 px-4 sm:px-8 border-t border-slate-200 dark:border-[#26336F]/40"
     >
       <div className="container mx-auto max-w-7xl">
         {/* Top small label */}
-        <div className="reveal-item flex items-center gap-3 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-accent mb-8">
+        <div className="about-badge flex items-center gap-3 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-accent mb-8">
           <span className="w-8 h-[1px] bg-accent" />
           Discovering Design Hub Solutions
         </div>
@@ -93,7 +93,7 @@ const HomeAboutSection = () => {
           
           {/* Left Column: Heading and description */}
           <div className="space-y-6 sm:space-y-8">
-            <h2 className="reveal-item font-[family-name:var(--font-bebas-neue)] text-5xl sm:text-7xl lg:text-8xl leading-[0.9] tracking-wider uppercase text-foreground">
+            <h2 className="about-heading font-[family-name:var(--font-bebas-neue)] text-5xl sm:text-7xl lg:text-8xl leading-[0.9] tracking-wider uppercase text-foreground">
               Who Is <br />
               <em className="not-italic text-accent">Design Hub</em> <br />
               Solutions?
@@ -142,7 +142,7 @@ const HomeAboutSection = () => {
           </div>
 
           {/* Right Column: Commitments visual card */}
-          <div className="reveal-item relative">
+          <div className="about-commitment-card relative">
             {/* Visual Glassmorphic Card */}
             <div className="relative rounded-3xl border border-border bg-card/40 p-6 sm:p-8 overflow-hidden backdrop-blur-md">
               {/* Left Accent Glow line */}

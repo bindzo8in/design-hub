@@ -2,7 +2,9 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import gsap from "gsap";
+import { ArrowRight, Users } from "lucide-react";
 
 type TeamMember = {
   name: string;
@@ -18,6 +20,103 @@ type FamilySectionProps = {
   bottomContent?: string;
 };
 
+/* ─── Team Member Card ───────────────────────────────────── */
+const TeamCard = ({ member }: { member: TeamMember }) => {
+  const cardRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const card = cardRef.current;
+    if (!card || window.innerWidth < 1024) return;
+
+    const handleMove = (e: MouseEvent) => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+      gsap.to(card, {
+        rotateY: x * 10,
+        rotateX: -y * 10,
+        transformPerspective: 800,
+        ease: "power2.out",
+        duration: 0.6,
+      });
+    };
+
+    const handleLeave = () => {
+      gsap.to(card, {
+        rotateY: 0,
+        rotateX: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      });
+    };
+
+    card.addEventListener("mousemove", handleMove);
+    card.addEventListener("mouseleave", handleLeave);
+
+    return () => {
+      card.removeEventListener("mousemove", handleMove);
+      card.removeEventListener("mouseleave", handleLeave);
+    };
+  }, []);
+
+  return (
+    <article
+      ref={cardRef}
+      className="
+        team-card-reveal
+        group
+        relative
+        overflow-hidden
+        rounded-3xl
+        border border-[#26336F]/50
+        bg-[#18224b]/60
+        backdrop-blur-sm
+        cursor-pointer
+        will-change-transform
+        transition-shadow duration-300
+        hover:shadow-[0_20px_60px_rgba(223,27,37,0.15)]
+        hover:border-accent/40
+      "
+      style={{ transformStyle: "preserve-3d" }}
+    >
+      {/* Image */}
+      <figure className="relative aspect-[3/4] overflow-hidden">
+        <Image
+          src={member.image}
+          alt={member.alt ?? member.name}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="
+            object-cover
+            grayscale
+            transition-all duration-700
+            group-hover:grayscale-0
+            group-hover:scale-105
+          "
+        />
+
+        {/* Gradient overlay — always visible at bottom */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#101735] via-[#101735]/30 to-transparent" />
+
+        {/* Glowing ring on hover */}
+        <div className="absolute inset-0 rounded-3xl ring-0 ring-accent/0 group-hover:ring-2 group-hover:ring-accent/30 transition-all duration-500" />
+
+        {/* Name / Role — floating over image */}
+        <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
+          <h3 className="text-lg font-bold text-white leading-tight">
+            {member.name}
+          </h3>
+          <p className="mt-1 text-xs font-semibold uppercase tracking-widest text-accent">
+            {member.role}
+          </p>
+        </div>
+      </figure>
+    </article>
+  );
+};
+
+/* ─── Family Section ─────────────────────────────────────── */
 const FamilySection = ({
   title = "Design Hub Family",
   description = "Design Hub is fortunate to be guided by some of the most skilled minds in the creative and technology space, supported by a team with decades of combined industry experience.",
@@ -31,16 +130,16 @@ const FamilySection = ({
       import("gsap/ScrollTrigger").then(({ ScrollTrigger }) => {
         gsap.registerPlugin(ScrollTrigger);
 
-        // Heading & description reveal
+        // Header reveal
         gsap.fromTo(
           ".family-header-reveal",
-          { opacity: 0, y: 30 },
+          { opacity: 0, y: 35 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.8,
-            stagger: 0.15,
-            ease: "power3.out",
+            duration: 0.9,
+            stagger: 0.12,
+            ease: "power4.out",
             scrollTrigger: {
               trigger: ".family-header-trigger",
               start: "top 85%",
@@ -49,15 +148,16 @@ const FamilySection = ({
           }
         );
 
-        // Team members stagger reveal
+        // Cards stagger with perspective
         gsap.fromTo(
           ".team-card-reveal",
-          { opacity: 0, y: 35 },
+          { opacity: 0, y: 60, rotateX: 6 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.8,
-            stagger: 0.12,
+            rotateX: 0,
+            duration: 0.9,
+            stagger: 0.1,
             ease: "power3.out",
             scrollTrigger: {
               trigger: ".team-grid-trigger",
@@ -67,24 +167,22 @@ const FamilySection = ({
           }
         );
 
-        // Bottom paragraph reveal
-        if (bottomContent) {
-          gsap.fromTo(
-            ".family-bottom-reveal",
-            { opacity: 0, y: 30 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.8,
-              ease: "power3.out",
-              scrollTrigger: {
-                trigger: ".family-bottom-reveal",
-                start: "top 85%",
-                once: true,
-              },
-            }
-          );
-        }
+        // Mission panel
+        gsap.fromTo(
+          ".mission-panel",
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: ".mission-panel",
+              start: "top 85%",
+              once: true,
+            },
+          }
+        );
       });
     }, containerRef);
 
@@ -92,61 +190,98 @@ const FamilySection = ({
   }, [bottomContent]);
 
   return (
-    <section ref={containerRef} className="relative overflow-hidden bg-background py-16 text-foreground sm:py-20 lg:py-24 border-t border-border/40 select-none">
-      {/* decorative shape */}
-      <div className="pointer-events-none absolute -top-20 left-20 h-40 w-80 rounded-b-full bg-accent/5 blur-sm" />
+    <section
+      ref={containerRef}
+      className="relative overflow-hidden bg-[#101735] text-white py-20 sm:py-24 lg:py-32 border-t border-[#26336F]/50 select-none"
+    >
+      {/* Ambient glows */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -top-24 left-1/4 h-[400px] w-[500px] rounded-full bg-accent/8 blur-[120px]" />
+        <div className="absolute bottom-0 right-0 h-[350px] w-[400px] rounded-full bg-[#26336F]/30 blur-[100px]" />
+      </div>
 
       <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
-        {/* heading */}
-        <div className="family-header-trigger mx-auto max-w-4xl text-center space-y-4">
-          <div className="family-header-reveal inline-flex items-center gap-3 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-accent justify-center">
-            <span className="w-8 h-[1px] bg-accent" />
-            Our Creative Minds
-            <span className="w-8 h-[1px] bg-accent" />
+
+        {/* Section header */}
+        <div className="family-header-trigger mb-14 lg:mb-16 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+          <div className="max-w-2xl space-y-4">
+            <div className="family-header-reveal inline-flex items-center gap-3 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-accent">
+              <span className="w-8 h-[1px] bg-accent" />
+              Our Creative Minds
+            </div>
+            <h2 className="family-header-reveal font-[family-name:var(--font-bebas-neue)] text-5xl sm:text-6xl lg:text-7xl leading-[0.9] tracking-wider uppercase text-foreground">
+              {title}
+            </h2>
+            <p className="family-header-reveal text-sm sm:text-base text-muted-foreground leading-relaxed max-w-xl">
+              {description}
+            </p>
           </div>
-          <h2 className="family-header-reveal font-[family-name:var(--font-bebas-neue)] text-4xl sm:text-6xl lg:text-7xl leading-none tracking-wider uppercase text-foreground">
-            {title}
-          </h2>
 
-          <p className="family-header-reveal mt-4 text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
-            {description}
-          </p>
-        </div>
-
-        {/* team grid */}
-        <div className="team-grid-trigger mt-14 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
-          {members.map((member) => (
-            <article key={member.name} className="team-card-reveal group relative rounded-3xl border border-border/60 bg-card p-4 overflow-hidden shadow-sm hover:border-accent/40 transition-colors duration-300
-            ">
-              <figure className="relative aspect-[1/1] overflow-hidden rounded-2xl bg-secondary/35">
-                <Image
-                  src={member.image}
-                  alt={member.alt ?? member.name}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover grayscale transition duration-500 group-hover:scale-103 group-hover:grayscale-0
-                  group-hover:bg-white bg-black group-hover:shadow-lg group-hover:shadow-accent/20
-                  "
-                />
-              </figure>
-
-              <div className="pt-6 pb-2 text-center">
-                <h3 className="text-lg font-bold text-foreground">
-                  {member.name}
-                </h3>
-
-                <p className="mt-1 text-xs sm:text-sm text-muted-foreground uppercase tracking-wider font-semibold">{member.role}</p>
+          {/* Team count badge */}
+          <div className="family-header-reveal flex-shrink-0 flex items-center gap-3 rounded-2xl border border-[#26336F] bg-[#18224b]/60 px-5 py-4">
+            <Users className="h-5 w-5 text-accent" />
+            <div>
+              <div className="font-[family-name:var(--font-bebas-neue)] text-3xl text-white leading-none">
+                {members.length}+
               </div>
-            </article>
-          ))}
+              <div className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold">
+                Team Members
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* bottom paragraph */}
+        {/* Team grid */}
+        {members.length > 0 ? (
+          <div
+            className="team-grid-trigger grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+          >
+            {members.map((member) => (
+              <TeamCard key={member.name} member={member} />
+            ))}
+          </div>
+        ) : (
+          <div className="team-grid-trigger flex items-center justify-center py-20">
+            <p className="text-muted-foreground text-sm">Team members coming soon.</p>
+          </div>
+        )}
+
+        {/* Mission statement panel */}
         {bottomContent && (
-          <p className="family-bottom-reveal mx-auto mt-16 sm:mt-20 max-w-5xl text-center text-sm sm:text-base leading-relaxed text-muted-foreground italic bg-card/40 border border-border/60 rounded-3xl p-6 sm:p-10 backdrop-blur-md">
-            &ldquo;{bottomContent}&rdquo;
-          </p>
+          <div className="mission-panel mt-20 sm:mt-24 relative rounded-3xl overflow-hidden border border-[#26336F]/50 bg-[#18224b]/40 backdrop-blur-md">
+            {/* Left accent bar */}
+            <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-accent via-accent/50 to-transparent rounded-l-3xl" />
+
+            <div className="p-8 sm:p-10 lg:p-14 flex flex-col lg:flex-row lg:items-center gap-8">
+              <div className="flex-1 space-y-4">
+                <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
+                  <span className="flex h-2 w-2 rounded-full bg-accent animate-pulse" />
+                  Our Mission
+                </div>
+                <p className="text-base sm:text-lg lg:text-xl leading-relaxed text-slate-200 max-w-3xl">
+                  &ldquo;{bottomContent}&rdquo;
+                </p>
+              </div>
+
+              <div className="flex-shrink-0">
+                <Link
+                  href="/contact"
+                  className="
+                    inline-flex items-center gap-2
+                    rounded-2xl bg-accent
+                    px-6 py-3.5
+                    text-sm font-bold text-white
+                    shadow-lg shadow-accent/25
+                    transition-all duration-300
+                    hover:bg-accent/90 hover:scale-[1.03]
+                  "
+                >
+                  Work With Us
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+          </div>
         )}
       </div>
     </section>
