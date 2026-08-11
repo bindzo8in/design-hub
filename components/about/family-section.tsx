@@ -69,8 +69,8 @@ const TeamCard = ({ member }: { member: TeamMember }) => {
         relative
         overflow-hidden
         rounded-3xl
-        border border-[#26336F]/50
-        bg-[#18224b]/60
+        border border-border/50
+        bg-card/60
         backdrop-blur-sm
         cursor-pointer
         will-change-transform
@@ -192,7 +192,7 @@ const FamilySection = ({
   return (
     <section
       ref={containerRef}
-      className="relative overflow-hidden bg-[#101735] text-white py-20 sm:py-24 lg:py-32 border-t border-[#26336F]/50 select-none"
+      className="relative overflow-hidden bg-background text-foreground py-20 sm:py-24 lg:py-32 border-t border-border/50 select-none"
     >
       {/* Ambient glows */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -218,10 +218,10 @@ const FamilySection = ({
           </div>
 
           {/* Team count badge */}
-          <div className="family-header-reveal flex-shrink-0 flex items-center gap-3 rounded-2xl border border-[#26336F] bg-[#18224b]/60 px-5 py-4">
+          <div className="family-header-reveal flex-shrink-0 flex items-center gap-3 rounded-2xl border border-border bg-card/60 px-5 py-4">
             <Users className="h-5 w-5 text-accent" />
             <div>
-              <div className="font-[family-name:var(--font-bebas-neue)] text-3xl text-white leading-none">
+              <div className="font-[family-name:var(--font-bebas-neue)] text-3xl text-foreground leading-none">
                 {members.length}+
               </div>
               <div className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold">
@@ -248,7 +248,7 @@ const FamilySection = ({
 
         {/* Mission statement panel */}
         {bottomContent && (
-          <div className="mission-panel mt-20 sm:mt-24 relative rounded-3xl overflow-hidden border border-[#26336F]/50 bg-[#18224b]/40 backdrop-blur-md">
+          <div className="mission-panel mt-20 sm:mt-24 relative rounded-3xl overflow-hidden border border-border/50 bg-card/40 backdrop-blur-md">
             {/* Left accent bar */}
             <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-accent via-accent/50 to-transparent rounded-l-3xl" />
 
@@ -258,7 +258,7 @@ const FamilySection = ({
                   <span className="flex h-2 w-2 rounded-full bg-accent animate-pulse" />
                   Our Mission
                 </div>
-                <p className="text-base sm:text-lg lg:text-xl leading-relaxed text-slate-200 max-w-3xl">
+                <p className="text-base sm:text-lg lg:text-xl leading-relaxed text-foreground/90 max-w-3xl">
                   &ldquo;{bottomContent}&rdquo;
                 </p>
               </div>

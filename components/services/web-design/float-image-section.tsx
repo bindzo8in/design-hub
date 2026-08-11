@@ -19,24 +19,22 @@ const row2 = [...reversedImages, ...reversedImages];
 
 const FloatImageSection = () => {
   return (
-    <section className="relative overflow-hidden bg-[#050711] py-24">
+    <section className="relative overflow-hidden bg-background py-24">
       {/* background glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,255,255,0.08),transparent_40%)]" />
 
-      {/* top fade */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-32 bg-gradient-to-r from-[#050711] to-transparent" />
-
-      {/* right fade */}
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-32 bg-gradient-to-l from-[#050711] to-transparent" />
+      {/* Fade edges */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-32 bg-gradient-to-r from-background to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-32 bg-gradient-to-l from-background to-transparent" />
 
       <div className="relative z-10 mb-16 text-center">
-        <p className="mb-4 text-xs uppercase tracking-[0.35em] text-white/40">
+        <p className="mb-4 text-xs uppercase tracking-[0.35em] text-foreground/40">
           Creative Showcase
         </p>
 
-        <h2 className="text-4xl font-light leading-tight text-white sm:text-5xl lg:text-6xl">
+        <h2 className="text-4xl font-light leading-tight text-foreground sm:text-5xl lg:text-6xl">
           Digital Design
-          <span className="text-white/40"> Experience</span>
+          <span className="text-foreground/40"> Experience</span>
         </h2>
       </div>
 
@@ -52,9 +50,9 @@ const FloatImageSection = () => {
                 shrink-0
                 overflow-hidden
                 rounded-[2rem]
-                border border-white/10
-                bg-white/[0.03]
-                shadow-2xl shadow-black/40
+                border border-border/10
+                bg-foreground/[0.03]
+                shadow-2xl shadow-foreground/40
               "
             >
               <Image
@@ -98,9 +96,9 @@ const FloatImageSection = () => {
                 shrink-0
                 overflow-hidden
                 rounded-[2rem]
-                border border-white/10
-                bg-white/[0.03]
-                shadow-2xl shadow-black/40
+                border border-border/10
+                bg-foreground/[0.03]
+                shadow-2xl shadow-foreground/40
               "
             >
               <Image
@@ -170,7 +168,7 @@ export default FloatImageSection;
 //       }}
 //     >
 //       {/* dark overlay */}
-//       <div className="absolute inset-0 bg-black/40" />
+//       <div className="absolute inset-0 bg-background/40" />
 
 //       {/* cinematic glow */}
 //       <div
@@ -200,7 +198,7 @@ export default FloatImageSection;
 //       <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
 //         {/* heading */}
 //         <div className="mb-16 text-center">
-//           <p className="mb-4 text-xs uppercase tracking-[0.35em] text-white/40">
+//           <p className="mb-4 text-xs uppercase tracking-[0.35em] text-foreground/40">
 //             Creative Showcase
 //           </p>
 
@@ -209,7 +207,7 @@ export default FloatImageSection;
 //               text-4xl
 //               font-light
 //               leading-tight
-//               text-white
+//               text-foreground
 
 //               sm:text-5xl
 
@@ -217,7 +215,7 @@ export default FloatImageSection;
 //             "
 //           >
 //             Floating Visual
-//             <span className="text-white/50"> Gallery</span>
+//             <span className="text-foreground/50"> Gallery</span>
 //           </h2>
 //         </div>
 
@@ -275,10 +273,10 @@ export default FloatImageSection;
 //                     group
 //                     overflow-hidden
 //                     rounded-[1.5rem]
-//                     border border-white/10
-//                     bg-white/[0.03]
+//                     border border-border/10
+//                     bg-foreground/[0.03]
 //                     p-2
-//                     shadow-2xl shadow-black/40
+//                     shadow-2xl shadow-foreground/40
 //                     backdrop-blur-xl
 //                   "
 //                 >

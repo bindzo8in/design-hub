@@ -69,12 +69,12 @@ const StatisticsSection = () => {
   return (
     <section
       ref={ref}
-      className="
-        relative overflow-hidden bg-[#050711]
+      className={`
+        relative overflow-hidden bg-background
         px-4 py-12
         sm:px-6 sm:py-16
         lg:px-8 lg:py-20
-      "
+      `}
     >
       {/* Background */}
       <div
@@ -96,7 +96,7 @@ const StatisticsSection = () => {
           "
         >
           <div>
-            <p className="text-sm uppercase tracking-[0.35em] text-[#DF1B25]">
+            <p className="text-sm uppercase tracking-[0.35em] text-accent">
               Statistics
             </p>
 
@@ -106,7 +106,7 @@ const StatisticsSection = () => {
                 text-3xl
                 font-semibold
                 leading-tight
-                text-white
+                text-foreground
                 sm:text-4xl
                 lg:text-5xl
               "
@@ -124,22 +124,22 @@ const StatisticsSection = () => {
           viewport={{ once: true }}
           className="
             overflow-hidden rounded-[2rem]
-            border border-white/10
+            border border-border/10
             bg-slate-950/90
             p-4 sm:p-6
-            shadow-2xl shadow-black/40
+            shadow-2xl shadow-foreground/40
             backdrop-blur-xl
           "
         >
           {/* Legend */}
           <div className="mb-8 flex flex-wrap gap-4">
-            <div className="flex items-center gap-2 text-sm text-white">
-              <span className="inline-block h-2.5 w-2.5 rounded-full bg-[#DF1B25]" />
+            <div className="flex items-center gap-2 text-sm text-foreground">
+              <span className="inline-block h-2.5 w-2.5 rounded-full bg-accent" />
               Desktop Traffic
             </div>
 
             <div className="flex items-center gap-2 text-sm text-slate-300">
-              <span className="inline-block h-2.5 w-2.5 rounded-full bg-[#4EA7FF]" />
+              <span className="inline-block h-2.5 w-2.5 rounded-full bg-blue-500" />
               Mobile Traffic
             </div>
           </div>

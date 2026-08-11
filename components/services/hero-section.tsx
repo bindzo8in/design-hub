@@ -7,7 +7,7 @@ import ServiceBadge from "./badge";
 
 const Hero = () => {
   return (
-    <section className="relative w-full h-[100vh] min-h-[700px] bg-[#030303] overflow-hidden flex items-center">
+    <section className="relative w-full h-[100vh] min-h-[700px] bg-background overflow-hidden flex items-center">
       {/* Background Noise & Gradients */}
       <div className="absolute inset-0 opacity-20 pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')] brightness-50" />
       <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-blue-600/20 blur-[120px] rounded-full" />
@@ -29,26 +29,26 @@ const Hero = () => {
             <span className="inline-block px-4 py-1.5 mb-6 text-xs font-semibold tracking-widest uppercase text-blue-400 border border-blue-400/30 rounded-full bg-blue-400/5 backdrop-blur-md">
               Next-Gen Creative Agency
             </span>
-            <h1 className="text-6xl md:text-8xl font-bold text-white leading-[0.9] tracking-tight mb-8">
+            <h1 className="text-6xl md:text-8xl font-bold text-foreground leading-[0.9] tracking-tight mb-8">
               CRAFTING <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-100 via-blue-400 to-indigo-500">
                 DIGITAL
               </span> <br />
               ARTEFACTS
             </h1>
-            <p className="text-lg md:text-xl text-zinc-400 font-light leading-relaxed mb-10 max-w-lg">
+            <p className="text-lg md:text-xl text-muted-foreground font-light leading-relaxed mb-10 max-w-lg">
               We merge futuristic design with high-performance engineering to build brands that define the next decade.
             </p>
 
             <div className="flex flex-wrap gap-5">
-              <button className="group relative px-8 py-4 bg-white text-black font-bold rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95">
+              <button className="group relative px-8 py-4 bg-foreground text-black font-bold rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95">
                 <span className="relative z-10 flex items-center gap-2">
                   Start Project <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-200 to-white opacity-0 group-hover:opacity-100 transition-opacity" />
               </button>
               
-              <button className="px-8 py-4 bg-transparent border border-white/20 text-white font-medium rounded-full backdrop-blur-sm transition-all hover:bg-white/5 hover:border-white/40">
+              <button className="px-8 py-4 bg-transparent border border-border/20 text-foreground font-medium rounded-full backdrop-blur-sm transition-all hover:bg-foreground/5 hover:border-border/40">
                 View Showcase
               </button>
             </div>
@@ -89,12 +89,12 @@ const Hero = () => {
           transition={{ delay: 1.5 }}
           className="flex flex-col items-center gap-3"
         >
-          <span className="text-[10px] uppercase tracking-[0.3em] text-zinc-500 vertical-text font-medium">Scroll</span>
+          <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground vertical-text font-medium">Scroll</span>
           <div className="w-[1px] h-12 bg-gradient-to-b from-blue-500 to-transparent relative overflow-hidden">
             <motion.div 
               animate={{ y: [0, 48] }}
               transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
-              className="absolute top-0 left-0 w-full h-1/3 bg-white"
+              className="absolute top-0 left-0 w-full h-1/3 bg-foreground"
             />
           </div>
         </motion.div>
@@ -106,8 +106,8 @@ const Hero = () => {
             { label: "Industry Awards", val: "18" }
           ].map((stat, i) => (
             <div key={i} className="flex flex-col">
-              <span className="text-white text-2xl font-bold tracking-tighter">{stat.val}</span>
-              <span className="text-zinc-500 text-[10px] uppercase tracking-widest uppercase">{stat.label}</span>
+              <span className="text-foreground text-2xl font-bold tracking-tighter">{stat.val}</span>
+              <span className="text-muted-foreground text-[10px] uppercase tracking-widest uppercase">{stat.label}</span>
             </div>
           ))}
         </div>

@@ -24,7 +24,7 @@ const socials = [
 
 const Footer = () => {
   return (
-    <footer className="relative overflow-hidden bg-[#101735] text-white border-t border-[#26336F]/50">
+    <footer className="relative overflow-hidden bg-background text-foreground border-t border-border/20">
       {/* ====================================== */}
       {/* BACKGROUND */}
       {/* ====================================== */}
@@ -44,7 +44,7 @@ const Footer = () => {
 
           rounded-full
           border-[28px]
-          border-secondary-foreground/5
+          border-border/5
 
           sm:-right-40
           sm:-top-40
@@ -71,7 +71,7 @@ const Footer = () => {
           w-[240px]
 
           rounded-full
-          bg-white/5
+          bg-foreground/5
           blur-[120px]
 
           sm:h-[340px]
@@ -113,13 +113,14 @@ const Footer = () => {
           {/* brand */}
           <div className="max-w-sm">
             {/* logo */}
-            <div className="mb-6">
+            <div className="mb-6 inline-block rounded-xl bg-background px-6 py-4 shadow-lg">
               <Image
                 src="/logo/light.png"
                 alt="Design Hub Logo"
                 width={180}
                 height={64}
-                className="h-10 w-auto object-contain dark:hidden sm:h-12"
+                style={{ width: "auto", height: "auto" }}
+                className="h-10 object-contain dark:hidden sm:h-12"
               />
 
               <Image
@@ -127,7 +128,8 @@ const Footer = () => {
                 alt="Design Hub Logo"
                 width={180}
                 height={64}
-                className="hidden h-10 w-auto object-contain dark:block sm:h-12"
+                style={{ width: "auto", height: "auto" }}
+                className="hidden h-10 object-contain dark:block sm:h-12"
               />
             </div>
 
@@ -160,8 +162,8 @@ const Footer = () => {
                     justify-center
 
                     rounded-full
-                    border border-secondary-foreground/10
-                    bg-white/[0.03]
+                    border border-border/10
+                    bg-foreground/[0.03]
 
                     text-muted-foreground
 
@@ -169,8 +171,8 @@ const Footer = () => {
                     duration-300
 
                     hover:-translate-y-1
-                    hover:border-secondary-foreground/30
-                    hover:text-secondary-foreground
+                    hover:border-border/30
+                    hover:text-foreground
                   "
                 >
                   <item.Icon className="h-4 w-4" />
@@ -207,7 +209,7 @@ const Footer = () => {
                       transition-colors
                       duration-300
 
-                      hover:text-secondary-foreground
+                      hover:text-foreground
                     "
                   >
                     {link.title}
@@ -232,7 +234,7 @@ const Footer = () => {
                         transition-colors
                         duration-300
 
-                        hover:text-secondary-foreground
+                        hover:text-foreground
                       "
                   >
                     {feature.title}
@@ -253,7 +255,7 @@ const Footer = () => {
                   className="
                     flex items-start gap-3
                     transition-colors duration-300
-                    hover:text-secondary-foreground
+                    hover:text-foreground
                   "
                 >
                   <FaMapMarker className="mt-1 h-4 w-4 shrink-0" />
@@ -268,7 +270,7 @@ const Footer = () => {
                   className="
                     flex items-center gap-3
                     transition-colors duration-300
-                    hover:text-secondary-foreground
+                    hover:text-foreground
                   "
                 >
                   <IoIosPhonePortrait className="h-4 w-4 shrink-0" />
@@ -282,7 +284,7 @@ const Footer = () => {
                     flex items-center gap-3
                     break-all
                     transition-colors duration-300
-                    hover:text-secondary-foreground
+                    hover:text-foreground
                   "
                 >
                   <IoMdMailOpen className="h-4 w-4 shrink-0" />
@@ -295,7 +297,7 @@ const Footer = () => {
         </div>
 
         {/* divider */}
-        <Separator className="my-10 bg-secondary-foreground/10 lg:my-14" />
+        <Separator className="my-10 bg-background-foreground/20 lg:my-14" />
 
         {/* bottom */}
         <div

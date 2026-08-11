@@ -53,13 +53,7 @@ const HeroSection = ({
       }}
     >
       {/* Overlay */}
-      <div
-        className="absolute inset-0 opacity-40"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, #0f0c29, #0d113d, #0a1351, #071466, #07137b)",
-        }}
-      />
+      <div className="absolute inset-0 opacity-80 bg-gradient-to-r from-background via-background/90 to-background/40" />
 
       {/* Main Container */}
       <div

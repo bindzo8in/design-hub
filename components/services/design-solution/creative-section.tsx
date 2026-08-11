@@ -1,6 +1,6 @@
 const CreativeSection = () => {
   return (
-    <section className="relative overflow-hidden bg-black py-20 min-h-fit">
+    <section className="relative overflow-hidden bg-background py-20 min-h-fit">
       {/* Red Glow */}
       <div className="absolute inset-0 z-[1] bg-[radial-gradient(circle_at_center,rgba(255,0,0,0.45),transparent_60%)]" />
       {/* top left pattern */}
@@ -56,7 +56,7 @@ const CreativeSection = () => {
             ───────────────────────────────────────── */}
       <div className="relative z-10 flex flex-col items-center gap-6 px-5 lg:hidden">
         {/* Label */}
-        <p className="text-[10px] uppercase tracking-[0.35em] text-white/60">
+        <p className="text-[10px] uppercase tracking-[0.35em] text-foreground/60">
           Product Overview
         </p>
 
@@ -137,7 +137,7 @@ const CreativeSection = () => {
             {/* column 2 */}
             <div className="flex h-[620px] flex-col">
               <div className="flex h-14 items-center justify-center">
-                <p className="text-xs uppercase tracking-[0.35em] text-white">
+                <p className="text-xs uppercase tracking-[0.35em] text-foreground">
                   Product Overview
                 </p>
               </div>

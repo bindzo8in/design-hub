@@ -36,18 +36,18 @@ const ServiceShowcase = ({
       }}
     >
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/80" />
+      <div className="absolute inset-0 bg-background/80" />
 
       {/* Content */}
       <div className="relative z-10">
         {/* Heading */}
         <div className="mx-auto max-w-4xl px-4 text-center">
-          <h2 className="text-3xl font-bold uppercase tracking-wide text-white sm:text-4xl lg:text-5xl">
+          <h2 className="text-3xl font-bold uppercase tracking-wide text-foreground sm:text-4xl lg:text-5xl">
             {title}
           </h2>
 
           {description && (
-            <p className="mx-auto mt-6 max-w-2xl text-sm leading-7 text-white/70 sm:text-base">
+            <p className="mx-auto mt-6 max-w-2xl text-sm leading-7 text-foreground/70 sm:text-base">
               {description}
             </p>
           )}
@@ -64,15 +64,15 @@ const ServiceShowcase = ({
                   sm:w-[320px]
                   rounded-2xl
                   border
-                  border-white/10
-                  bg-white/10
+                  border-border/10
+                  bg-foreground/10
                   p-8
                   shadow-xl
                   backdrop-blur-md
                   transition-all
                   duration-300
                   hover:-translate-y-2
-                  hover:bg-white/15
+                  hover:bg-foreground/15
                 "
               >
                 <img
@@ -81,11 +81,11 @@ const ServiceShowcase = ({
                   className="mx-auto mb-6 h-24 w-24 object-contain"
                 />
 
-                <h3 className="text-center text-xl font-bold text-white">
+                <h3 className="text-center text-xl font-bold text-foreground">
                   {item.title}
                 </h3>
 
-                <p className="mt-3 text-center leading-7 text-white/70">
+                <p className="mt-3 text-center leading-7 text-foreground/70">
                   {item.desc}
                 </p>
               </div>
@@ -115,7 +115,7 @@ const ServiceShowcase = ({
               {features.map((item, index) => (
                 <div key={index} className="relative">
                   {index !== features.length - 1 && (
-                    <div className="absolute right-[-20px] top-0 hidden h-full w-px bg-black/10 lg:block" />
+                    <div className="absolute right-[-20px] top-0 hidden h-full w-px bg-background/10 lg:block" />
                   )}
 
                   <h4 className="border-b border-black/10 pb-4 text-xl font-semibold leading-tight">

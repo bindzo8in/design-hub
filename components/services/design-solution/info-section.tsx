@@ -1,17 +1,13 @@
 const InfoSection = () => {
   return (
     <section
-      className="relative overflow-hidden py-12 sm:py-16 lg:py-24"
-      style={{
-        backgroundImage:
-          "linear-gradient(41deg, #1E2383 27%, #000000 100%)",
-      }}
+      className="relative overflow-hidden py-12 sm:py-16 lg:py-24 bg-background"
     >
       <div className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-12">
-        <div className="rounded-[28px] border border-white/10 bg-white/5 p-6 backdrop-blur-md sm:p-8 lg:p-12">
+        <div className="rounded-[28px] border border-border/10 bg-foreground/5 p-6 backdrop-blur-md sm:p-8 lg:p-12">
           <div className="space-y-8">
             {/* Intro */}
-            <p className="text-sm leading-7 text-white/80 sm:text-base sm:leading-8 lg:text-lg lg:leading-9">
+            <p className="text-sm leading-7 text-foreground/80 sm:text-base sm:leading-8 lg:text-lg lg:leading-9">
               At Design Hub, our design solutions are built to support digital
               marketing success by combining creativity, strategy, and
               performance-driven thinking. We believe design is not just about
@@ -22,11 +18,11 @@ const InfoSection = () => {
 
             {/* Features */}
             <div>
-              <h6 className="text-lg font-semibold text-white sm:text-xl">
+              <h6 className="text-lg font-semibold text-foreground sm:text-xl">
                 What Our Design Solutions Include:
               </h6>
 
-              <ul className="mt-5 grid gap-4 pl-5 text-sm leading-7 text-white/75 sm:text-base lg:grid-cols-2">
+              <ul className="mt-5 grid gap-4 pl-5 text-sm leading-7 text-foreground/75 sm:text-base lg:grid-cols-2">
                 {[
                   "Business-Oriented Design: Designs created with clear marketing and growth objectives",
 
@@ -42,7 +38,7 @@ const InfoSection = () => {
                 ].map((item, index) => (
                   <li
                     key={index}
-                    className="list-disc marker:text-white/40"
+                    className="list-disc marker:text-foreground/40"
                   >
                     {item}
                   </li>

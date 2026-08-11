@@ -6,22 +6,22 @@ import HeroContent from "./HeroContent";
 const HeroScene = dynamic(() => import("./HeroScene"), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-[300px] sm:h-[420px] lg:h-[700px] rounded-2xl bg-gradient-to-b from-[#060e1e] to-[#03060f] animate-pulse" />
+    <div className="w-full h-[300px] sm:h-[420px] lg:h-[700px] rounded-2xl bg-gradient-to-b from-background/90 to-background animate-pulse" />
   ),
 });
 
 export default function ServicesHeroCinematic() {
   return (
-    <section className="relative w-full min-h-screen overflow-hidden bg-[#03060f]">
+    <section className="relative w-full min-h-screen overflow-hidden bg-background">
 
       {/* ── Background radials ─────────────────────────────────────────── */}
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           background: `
-            radial-gradient(ellipse 80% 60% at 20% 10%, rgba(24,56,120,0.28) 0%, transparent 65%),
-            radial-gradient(ellipse 60% 50% at 80% 80%, rgba(60,20,100,0.22) 0%, transparent 60%),
-            radial-gradient(ellipse 100% 100% at 50% 0%, rgba(5,12,32,0.95) 0%, #03060f 100%)
+            radial-gradient(ellipse 80% 60% at 20% 10%, color-mix(in srgb, var(--primary) 15%, transparent) 0%, transparent 65%),
+            radial-gradient(ellipse 60% 50% at 80% 80%, color-mix(in srgb, var(--accent) 10%, transparent) 0%, transparent 60%),
+            radial-gradient(ellipse 100% 100% at 50% 0%, color-mix(in srgb, var(--background) 95%, transparent) 0%, var(--background) 100%)
           `,
         }}
       />
@@ -61,7 +61,7 @@ export default function ServicesHeroCinematic() {
               className="pointer-events-none absolute inset-0 rounded-3xl"
               style={{
                 background:
-                  "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(50,100,220,0.13) 0%, transparent 75%)",
+                  "radial-gradient(ellipse 70% 60% at 50% 50%, color-mix(in srgb, var(--primary) 15%, transparent) 0%, transparent 75%)",
                 filter: "blur(32px)",
               }}
             />
@@ -80,7 +80,7 @@ export default function ServicesHeroCinematic() {
 
       {/* ── Scroll hint — hidden on mobile to avoid overlap ───────────── */}
       <div className="hidden sm:flex absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex-col items-center gap-2">
-        <span className="text-[11px] uppercase tracking-[0.2em] text-white/25 select-none">
+        <span className="text-[11px] uppercase tracking-[0.2em] text-foreground/25 select-none">
           Scroll
         </span>
         <div

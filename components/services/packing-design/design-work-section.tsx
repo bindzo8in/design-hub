@@ -7,7 +7,7 @@ const DesignWorkSection = () => {
       <div className="@container w-full max-w-[1400px]">
         <div className="grid grid-cols-[auto_1fr_auto] items-stretch w-full gap-0">
           {/* LEFT TEXTS */}
-          <div className="flex gap-2 p-[2cqw] items-center bg-orange-950">
+          <div className="flex gap-2 p-[2cqw] items-center bg-orange-950 text-orange-50">
             {[1, 0.6, 0.4, 0.2].map((opacity, i) => (
               <p
                 key={i}
@@ -38,7 +38,7 @@ const DesignWorkSection = () => {
 </div>
 
           {/* RIGHT TEXTS */}
-          <div className="bg-orange-950 flex gap-2 p-[2cqw] items-center">
+          <div className="bg-orange-950 text-orange-50 flex gap-2 p-[2cqw] items-center">
             {[0.2, 0.4, 0.6, 1].map((opacity, i) => (
               <p
                 key={i}

@@ -19,8 +19,8 @@ const KeyFeaturesSection = () => {
           height={388}
           className="w-full h-auto object-contain opacity-20"
         />
-        <h4 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-3xl md:text-5xl font-bold text-white text-start">
-          <span className="text-glow-white font-extrabold text-8xl">KEY</span><br />
+        <h4 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-3xl md:text-5xl font-bold text-foreground text-start">
+          <span className="text-foreground drop-shadow-lg font-extrabold text-8xl">KEY</span><br />
           <span className="text-primary"> FEATURES</span>
         </h4>
       </div>

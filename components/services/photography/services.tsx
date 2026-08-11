@@ -29,7 +29,7 @@ const PhotographyServices = () => {
     <section
       className="
         relative overflow-hidden
-        bg-black
+        bg-background
 
         py-16
         sm:py-20
@@ -92,13 +92,13 @@ const PhotographyServices = () => {
       />
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/40" />
+      <div className="absolute inset-0 bg-background/40" />
 
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <div className="mb-14 lg:mb-20">
-          <p className="mb-4 text-xs uppercase tracking-[0.35em] text-white/50">
+          <p className="mb-4 text-xs uppercase tracking-[0.35em] text-foreground/50">
             Creative Studio
           </p>
 
@@ -108,7 +108,7 @@ const PhotographyServices = () => {
               font-light
               uppercase
               tracking-wide
-              text-white
+              text-foreground
 
               sm:text-5xl
 
@@ -116,7 +116,7 @@ const PhotographyServices = () => {
             "
           >
             Photography
-            <span className="text-white/40"> Services</span>
+            <span className="text-foreground/40"> Services</span>
           </h2>
         </div>
 
@@ -158,8 +158,8 @@ const PhotographyServices = () => {
                 relative z-20
                 overflow-hidden
                 rounded-[2rem]
-                border border-white/10
-                shadow-2xl shadow-black/40
+                border border-border/10
+                shadow-2xl shadow-foreground/40
 
                 w-[72%]
 
@@ -192,8 +192,8 @@ const PhotographyServices = () => {
                 z-10
                 overflow-hidden
                 rounded-[1.75rem]
-                border border-white/10
-                shadow-xl shadow-black/30
+                border border-border/10
+                shadow-xl shadow-foreground/30
 
                 w-[38%]
 
@@ -224,8 +224,8 @@ const PhotographyServices = () => {
                 z-10
                 overflow-hidden
                 rounded-[1.75rem]
-                border border-white/10
-                shadow-xl shadow-black/30
+                border border-border/10
+                shadow-xl shadow-foreground/30
 
                 w-[40%]
 
@@ -268,7 +268,7 @@ const PhotographyServices = () => {
                 -translate-y-1/2
 
                 rounded-full
-                bg-white/10
+                bg-foreground/10
                 blur-[140px]
               "
             />
@@ -285,15 +285,15 @@ const PhotographyServices = () => {
                 className="
                   group
                   rounded-[1.75rem]
-                  border border-white/10
-                  bg-white/[0.03]
+                  border border-border/10
+                  bg-foreground/[0.03]
                   p-5
                   backdrop-blur-xl
                   transition-all
                   duration-300
 
-                  hover:border-white/20
-                  hover:bg-white/[0.05]
+                  hover:border-border/20
+                  hover:bg-foreground/[0.05]
 
                   sm:p-6
                 "
@@ -309,11 +309,11 @@ const PhotographyServices = () => {
                       items-center
                       justify-center
                       rounded-full
-                      border border-white/10
-                      bg-white/5
+                      border border-border/10
+                      bg-foreground/5
                       text-sm
                       font-medium
-                      text-white/70
+                      text-foreground/70
                     "
                   >
                     0{index + 1}
@@ -325,7 +325,7 @@ const PhotographyServices = () => {
                       className="
                         text-lg
                         font-semibold
-                        text-white
+                        text-foreground
 
                         sm:text-xl
 
@@ -340,7 +340,7 @@ const PhotographyServices = () => {
                         mt-2
                         text-sm
                         leading-7
-                        text-white/65
+                        text-foreground/65
 
                         sm:text-base
                         sm:leading-8

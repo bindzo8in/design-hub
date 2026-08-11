@@ -50,7 +50,7 @@ interface PortfolioClientProps {
 
 const statusColorMap: Record<string, { bg: string; text: string; dot: string }> = {
   PLANNING: {
-    bg: "bg-[#26336F]/10 border-[#26336F]/30",
+    bg: "bg-primary/10 border-primary/30",
     text: "text-slate-400",
     dot: "bg-slate-400",
   },
@@ -65,9 +65,9 @@ const statusColorMap: Record<string, { bg: string; text: string; dot: string }> 
     dot: "bg-emerald-400",
   },
   ON_HOLD: {
-    bg: "bg-[#DF1B25]/10 border-[#DF1B25]/20",
-    text: "text-[#DF1B25]",
-    dot: "bg-[#DF1B25]",
+    bg: "bg-accent/10 border-accent/20",
+    text: "text-accent",
+    dot: "bg-accent",
   },
 };
 
@@ -159,13 +159,13 @@ export default function PortfolioClient({ initialProjects, categories }: Portfol
     <div className="space-y-12">
       {/* Page Header Area */}
       <div ref={headerRef} className="text-center max-w-4xl mx-auto space-y-4 px-4">
-        <div className="anim-header-item inline-flex items-center gap-3 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-[#DF1B25] mb-2">
-          <span className="w-8 h-[1px] bg-[#DF1B25]" />
+        <div className="anim-header-item inline-flex items-center gap-3 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-accent mb-2">
+          <span className="w-8 h-[1px] bg-accent" />
           Our Achievements
-          <span className="w-8 h-[1px] bg-[#DF1B25]" />
+          <span className="w-8 h-[1px] bg-accent" />
         </div>
         <h1 className="anim-header-item font-[family-name:var(--font-bebas-neue)] text-6xl sm:text-8xl leading-none uppercase tracking-wider text-foreground">
-          Selected <em className="not-italic text-[#DF1B25]">Works</em>
+          Selected <em className="not-italic text-accent">Works</em>
         </h1>
         <p className="anim-header-item text-slate-400 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
           Explore our collection of custom web systems, high-performance applications, and immersive digital platforms engineered for luxury-tech businesses.
@@ -174,23 +174,23 @@ export default function PortfolioClient({ initialProjects, categories }: Portfol
 
       {/* Metrics Row */}
       <div className="grid grid-cols-3 gap-4 max-w-4xl mx-auto px-4 select-none">
-        <div className="bg-white border border-slate-200 dark:bg-[#18224b] dark:border-[#26336F] rounded-2xl p-4 text-center shadow-sm">
-          <div className="font-[family-name:var(--font-bebas-neue)] text-3xl sm:text-5xl text-slate-900 dark:text-white">
+        <div className="bg-card border border-border rounded-2xl p-4 text-center shadow-sm">
+          <div className="font-[family-name:var(--font-bebas-neue)] text-3xl sm:text-5xl text-foreground">
             {totalProjects}
           </div>
-          <div className="text-[9px] sm:text-xs font-semibold tracking-wider text-slate-500 dark:text-slate-300 uppercase mt-1">
+          <div className="text-[9px] sm:text-xs font-semibold tracking-wider text-muted-foreground uppercase mt-1">
             Total Projects
           </div>
         </div>
-        <div className="bg-white border border-slate-200 dark:bg-[#18224b] dark:border-[#26336F] rounded-2xl p-4 text-center shadow-sm">
+        <div className="bg-card border border-border rounded-2xl p-4 text-center shadow-sm">
           <div className="font-[family-name:var(--font-bebas-neue)] text-3xl sm:text-5xl text-accent">
             {activeProjects}
           </div>
-          <div className="text-[9px] sm:text-xs font-semibold tracking-wider text-slate-500 dark:text-slate-300 uppercase mt-1">
+          <div className="text-[9px] sm:text-xs font-semibold tracking-wider text-muted-foreground uppercase mt-1">
             Active Now
           </div>
         </div>
-        <div className="bg-white border border-slate-200 dark:bg-[#18224b] dark:border-[#26336F] rounded-2xl p-4 text-center shadow-sm">
+        <div className="bg-card border border-border rounded-2xl p-4 text-center shadow-sm">
           <div className="font-[family-name:var(--font-bebas-neue)] text-3xl sm:text-5xl text-emerald-600 dark:text-emerald-400">
             {completedProjects}
           </div>
@@ -202,7 +202,7 @@ export default function PortfolioClient({ initialProjects, categories }: Portfol
 
       {/* Search and Category Filter Section */}
       <div className="max-w-7xl mx-auto px-4 space-y-6">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-[#26336F]/20">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-primary/20">
           
           {/* Categories Tab list */}
           <div className="flex flex-wrap items-center gap-2 select-none">
@@ -210,8 +210,8 @@ export default function PortfolioClient({ initialProjects, categories }: Portfol
               onClick={() => setSelectedCategoryId("all")}
               className={`rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer border ${
                 selectedCategoryId === "all"
-                  ? "bg-[#DF1B25] border-[#DF1B25] text-white"
-                  : "bg-[#101735]/40 border-[#26336F]/30 text-slate-400 hover:border-[#DF1B25]/50 hover:text-white"
+                  ? "bg-accent border-accent text-accent-foreground"
+                  : "bg-muted/40 border-primary/30 text-muted-foreground hover:border-accent/50 hover:text-foreground"
               }`}
             >
               All Projects
@@ -222,8 +222,8 @@ export default function PortfolioClient({ initialProjects, categories }: Portfol
                 onClick={() => setSelectedCategoryId(category.id)}
                 className={`rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer border ${
                   selectedCategoryId === category.id
-                    ? "bg-[#DF1B25] border-[#DF1B25] text-white"
-                    : "bg-[#101735]/40 border-[#26336F]/30 text-slate-400 hover:border-[#DF1B25]/50 hover:text-white"
+                    ? "bg-accent border-accent text-accent-foreground"
+                    : "bg-muted/40 border-primary/30 text-muted-foreground hover:border-accent/50 hover:text-foreground"
                 }`}
               >
                 {category.name}
@@ -233,13 +233,13 @@ export default function PortfolioClient({ initialProjects, categories }: Portfol
 
           {/* Search bar input */}
           <div className="relative w-full md:w-80">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <input
               type="text"
               placeholder="Search selected works..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-[#101735]/40 border border-[#26336F]/30 rounded-full pl-11 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#DF1B25]/50 focus:ring-1 focus:ring-[#DF1B25]/50 transition-all font-sans"
+              className="w-full bg-muted/40 border border-primary/30 rounded-full pl-11 pr-4 py-2.5 text-xs text-foreground placeholder-muted-foreground focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/50 transition-all font-sans"
             />
           </div>
 
@@ -257,10 +257,10 @@ export default function PortfolioClient({ initialProjects, categories }: Portfol
                 <div
                   key={project.id}
                   onClick={() => setSelectedProject(project)}
-                  className="portfolio-card cursor-pointer group relative bg-[#101735]/40 border border-[#26336F]/20 rounded-3xl backdrop-blur-md hover:border-[#DF1B25]/45 hover:shadow-[0_0_30px_rgba(223,27,37,0.05)] transition-all duration-500 flex flex-col overflow-hidden"
+                  className="portfolio-card cursor-pointer group relative bg-muted/40 border border-primary/20 rounded-3xl backdrop-blur-md hover:border-accent/45 hover:shadow-[0_0_30px_rgba(223,27,37,0.05)] transition-all duration-500 flex flex-col overflow-hidden"
                 >
                   {project.thumbnail && (
-                    <div className="relative w-full h-48 sm:h-56 bg-[#0b1024] shrink-0 border-b border-[#26336F]/20 overflow-hidden">
+                    <div className="relative w-full h-48 sm:h-56 bg-background shrink-0 border-b border-primary/20 overflow-hidden">
                       <Image
                         src={project.thumbnail}
                         alt={project.title}
@@ -274,7 +274,7 @@ export default function PortfolioClient({ initialProjects, categories }: Portfol
                     <div className="space-y-4">
                     {/* Top Row: Category and Status */}
                     <div className="flex items-center justify-between">
-                      <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-[#DF1B25]">
+                      <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-accent">
                         <Tag className="h-3 w-3" />
                         {project.category?.name || "Direct Work"}
                       </span>
@@ -288,11 +288,11 @@ export default function PortfolioClient({ initialProjects, categories }: Portfol
 
                     {/* Title */}
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-bold text-white tracking-wide uppercase line-clamp-1 group-hover:text-[#DF1B25] transition-colors duration-300">
+                      <h3 className="text-xl sm:text-2xl font-bold text-foreground tracking-wide uppercase line-clamp-1 group-hover:text-accent transition-colors duration-300">
                         {project.title}
                       </h3>
-                      <p className="text-xs text-slate-400 font-sans mt-1 flex items-center gap-1.5">
-                        <Briefcase className="h-3 w-3 text-slate-500" />
+                      <p className="text-xs text-muted-foreground font-sans mt-1 flex items-center gap-1.5">
+                        <Briefcase className="h-3 w-3 text-muted-foreground/80" />
                         <span>Client:</span>
                         <strong className="text-slate-300 font-medium">
                           {project.client?.name || project.clientName || "Direct Partner"}
@@ -307,23 +307,23 @@ export default function PortfolioClient({ initialProjects, categories }: Portfol
                   </div>
 
                   {/* Bottom Panel Card Info */}
-                  <div className="mt-6 pt-4 border-t border-[#26336F]/25 flex flex-col gap-3 font-sans">
-                    <div className="flex items-center justify-between text-xs text-slate-400">
+                  <div className="mt-6 pt-4 border-t border-primary/25 flex flex-col gap-3 font-sans">
+                    <div className="flex items-center justify-between text-xs text-muted-foreground">
                       <span className="flex items-center gap-1.5">
-                        <Landmark className="h-3.5 w-3.5 text-slate-500" />
+                        <Landmark className="h-3.5 w-3.5 text-muted-foreground/80" />
                         <span>Valuation:</span>
                       </span>
-                      <span className="font-bold text-white tracking-wider">
+                      <span className="font-bold text-foreground tracking-wider">
                         {formatCurrency(project.budget)}
                       </span>
                     </div>
 
-                    <div className="flex items-center justify-between text-xs text-slate-400">
+                    <div className="flex items-center justify-between text-xs text-muted-foreground">
                       <span className="flex items-center gap-1.5">
-                        <Calendar className="h-3.5 w-3.5 text-slate-500" />
+                        <Calendar className="h-3.5 w-3.5 text-muted-foreground/80" />
                         <span>Timeline:</span>
                       </span>
-                      <span className="font-medium text-slate-300">
+                      <span className="font-medium text-muted-foreground">
                         {formatDate(project.startDate)} &mdash; {formatDate(project.endDate)}
                       </span>
                     </div>
@@ -331,15 +331,15 @@ export default function PortfolioClient({ initialProjects, categories }: Portfol
                   </div>
 
                   {/* Left accent lines hover effect */}
-                  <div className="absolute top-0 bottom-0 left-0 w-[3px] bg-[#DF1B25] rounded-l-3xl transform scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-center z-20" />
+                  <div className="absolute top-0 bottom-0 left-0 w-[3px] bg-accent rounded-l-3xl transform scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-center z-20" />
                 </div>
               );
             })}
           </div>
         ) : (
           /* Empty Search/Filter State */
-          <div className="text-center py-20 bg-[#101735]/15 border border-[#26336F]/10 rounded-3xl max-w-4xl mx-auto">
-            <p className="text-slate-400 font-sans text-sm">
+          <div className="text-center py-20 bg-muted/15 border border-primary/10 rounded-3xl max-w-4xl mx-auto">
+            <p className="text-muted-foreground font-sans text-sm">
               No selected works matched your search or category filter. Try clearing the filter tabs.
             </p>
           </div>
@@ -349,10 +349,10 @@ export default function PortfolioClient({ initialProjects, categories }: Portfol
       {/* Project Preview Modal */}
       <Dialog open={!!selectedProject} onOpenChange={(open) => !open && setSelectedProject(null)}>
         {selectedProject && (
-          <DialogContent className="sm:max-w-2xl bg-[#0b1024] border border-[#26336F]/40 text-white p-0 overflow-y-auto max-h-[90vh] rounded-3xl shadow-2xl">
+          <DialogContent className="sm:max-w-2xl bg-background border border-primary/40 text-foreground p-0 overflow-y-auto max-h-[90vh] rounded-3xl shadow-2xl">
             {/* Project Image Banner */}
             {(selectedProject.bannerImage || selectedProject.thumbnail) ? (
-              <div className="relative w-full h-48 sm:h-72 bg-[#101735] shrink-0 border-b border-[#26336F]/30">
+              <div className="relative w-full h-48 sm:h-72 bg-muted shrink-0 border-b border-primary/30">
                 <Image
                   src={selectedProject.bannerImage || selectedProject.thumbnail || ""}
                   alt={selectedProject.title}
@@ -361,16 +361,16 @@ export default function PortfolioClient({ initialProjects, categories }: Portfol
                   sizes="(max-width: 768px) 100vw, 42rem"
                   priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0b1024] via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
               </div>
             ) : (
-              <div className="h-2 w-full shrink-0 bg-gradient-to-r from-[#DF1B25] to-[#26336F]" />
+              <div className="h-2 w-full shrink-0 bg-gradient-to-r from-accent to-primary" />
             )}
             
             <div className="p-6 sm:p-8 pt-4">
               <DialogHeader className="text-left space-y-4">
                 <div className="flex flex-wrap items-center gap-3">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#26336F]/20 text-[#7f91ff] border border-[#26336F]/40">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-primary/20 text-primary border border-primary/40">
                     <Tag className="h-3.5 w-3.5" />
                     {selectedProject.category?.name || "Direct Work"}
                   </span>
@@ -384,7 +384,7 @@ export default function PortfolioClient({ initialProjects, categories }: Portfol
                   </span>
                 </div>
                 
-                <DialogTitle className="font-[family-name:var(--font-bebas-neue)] text-4xl sm:text-5xl uppercase tracking-wider text-white mt-4">
+                <DialogTitle className="font-[family-name:var(--font-bebas-neue)] text-4xl sm:text-5xl uppercase tracking-wider text-foreground mt-4">
                   {selectedProject.title}
                 </DialogTitle>
               </DialogHeader>
@@ -392,37 +392,37 @@ export default function PortfolioClient({ initialProjects, categories }: Portfol
               <div className="mt-8 space-y-6">
                 {/* Description */}
                 <div>
-                  <h4 className="text-sm font-semibold text-slate-300 uppercase tracking-widest mb-3">Project Overview</h4>
-                  <DialogDescription className="text-sm text-slate-400 leading-relaxed font-sans">
+                  <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-widest mb-3">Project Overview</h4>
+                  <DialogDescription className="text-sm text-muted-foreground leading-relaxed font-sans">
                     {selectedProject.description || "Detailed project description is currently unavailable. This project was developed as a bespoke solution tailored strictly to client requirements."}
                   </DialogDescription>
                 </div>
 
                 {/* Details Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6 border-t border-[#26336F]/30">
-                  <div className="bg-[#101735]/50 rounded-2xl p-4 border border-[#26336F]/20">
-                    <p className="flex items-center gap-2 text-xs text-slate-400 mb-1 font-semibold uppercase tracking-wider">
-                      <Briefcase className="h-4 w-4 text-slate-500" /> Client
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6 border-t border-primary/30">
+                  <div className="bg-muted/50 rounded-2xl p-4 border border-primary/20">
+                    <p className="flex items-center gap-2 text-xs text-muted-foreground mb-1 font-semibold uppercase tracking-wider">
+                      <Briefcase className="h-4 w-4 text-muted-foreground/80" /> Client
                     </p>
-                    <p className="text-base text-white font-medium">
+                    <p className="text-base text-foreground font-medium">
                       {selectedProject.client?.name || selectedProject.clientName || "Direct Partner"}
                     </p>
                   </div>
                   
-                  <div className="bg-[#101735]/50 rounded-2xl p-4 border border-[#26336F]/20">
-                    <p className="flex items-center gap-2 text-xs text-slate-400 mb-1 font-semibold uppercase tracking-wider">
-                      <Landmark className="h-4 w-4 text-slate-500" /> Valuation
+                  <div className="bg-muted/50 rounded-2xl p-4 border border-primary/20">
+                    <p className="flex items-center gap-2 text-xs text-muted-foreground mb-1 font-semibold uppercase tracking-wider">
+                      <Landmark className="h-4 w-4 text-muted-foreground/80" /> Valuation
                     </p>
-                    <p className="text-base text-white font-bold tracking-wide">
+                    <p className="text-base text-foreground font-bold tracking-wide">
                       {formatCurrency(selectedProject.budget)}
                     </p>
                   </div>
 
-                  <div className="bg-[#101735]/50 rounded-2xl p-4 border border-[#26336F]/20 sm:col-span-2">
-                    <p className="flex items-center gap-2 text-xs text-slate-400 mb-1 font-semibold uppercase tracking-wider">
-                      <Calendar className="h-4 w-4 text-slate-500" /> Timeline
+                  <div className="bg-muted/50 rounded-2xl p-4 border border-primary/20 sm:col-span-2">
+                    <p className="flex items-center gap-2 text-xs text-muted-foreground mb-1 font-semibold uppercase tracking-wider">
+                      <Calendar className="h-4 w-4 text-muted-foreground/80" /> Timeline
                     </p>
-                    <p className="text-base text-slate-300 font-medium">
+                    <p className="text-base text-muted-foreground font-medium">
                       {formatDate(selectedProject.startDate)} &mdash; {formatDate(selectedProject.endDate)}
                     </p>
                   </div>

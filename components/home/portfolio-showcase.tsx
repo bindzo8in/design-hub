@@ -253,7 +253,7 @@ export default function HomePortfolioShowcase({
         <div className="mt-16 flex justify-center">
           <Link
             href="/portfolio"
-            className="group inline-flex items-center gap-3 rounded-full border border-accent/40 bg-accent/10 px-8 py-4 text-sm font-bold uppercase tracking-wider text-white backdrop-blur-md transition-all duration-300 hover:bg-accent hover:shadow-[0_0_30px_rgba(223,27,37,0.4)]"
+            className="group inline-flex items-center gap-3 rounded-full border border-accent/40 bg-accent/10 px-8 py-4 text-sm font-bold uppercase tracking-wider text-primary backdrop-blur-md transition-all duration-300 hover:bg-accent hover:shadow-[0_0_30px_rgba(223,27,37,0.4)] hover:text-secondary"
           >
             Explore Full Portfolio
             <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />

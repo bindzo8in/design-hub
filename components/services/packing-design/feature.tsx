@@ -35,7 +35,7 @@ const PackagingFeatureStrip = () => {
           overflow-hidden
           rounded-[48px]
           border
-          border-white/10
+          border-border/10
           bg-gradient-to-r
           from-white/[0.14]
           via-white/[0.08]
@@ -81,15 +81,15 @@ const PackagingFeatureStrip = () => {
                     justify-center
                     rounded-full
                     border
-                    border-white/10
-                    bg-white/5
+                    border-border/10
+                    bg-foreground/5
                   "
                 >
                   <Icon
                     className="
                       h-7
                       w-7
-                      text-white
+                      text-foreground
                     "
                     strokeWidth={2}
                   />
@@ -102,7 +102,7 @@ const PackagingFeatureStrip = () => {
                       text-lg
                       font-bold
                       leading-tight
-                      text-white
+                      text-foreground
                       sm:text-xl
                     "
                   >
@@ -114,7 +114,7 @@ const PackagingFeatureStrip = () => {
                       mt-3
                       text-sm
                       leading-relaxed
-                      text-white/70
+                      text-foreground/70
                     "
                   >
                     {feature.description}

@@ -56,7 +56,7 @@ const PrintingWhySection = () => {
   const angle = (progress / 100) * 360;
 
   return (
-    <section className="min-h-screen bg-black text-white px-6 md:px-12 lg:px-20 py-20">
+    <section className="min-h-screen bg-background text-foreground px-6 md:px-12 lg:px-20 py-20">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         {/* LEFT SIDE */}
         <div
@@ -94,7 +94,7 @@ const PrintingWhySection = () => {
       -translate-y-1/2
 
       rounded-full
-      bg-white/10
+      bg-foreground/10
       blur-[120px]
     "
           />
@@ -111,8 +111,8 @@ const PrintingWhySection = () => {
 
       overflow-hidden
       rounded-[1.5rem]
-      border border-white/10
-      shadow-xl shadow-black/30
+      border border-border/10
+      shadow-xl shadow-foreground/30
 
       sm:block
     "
@@ -136,7 +136,7 @@ const PrintingWhySection = () => {
       relative
       overflow-hidden
       rounded-full
-      border border-white/10
+      border border-border/10
       shadow-[0_0_80px_rgba(255,255,255,0.08)]
 
       h-[240px]
@@ -189,7 +189,7 @@ const PrintingWhySection = () => {
             </div>
 
             {/* overlay */}
-            <div className="absolute inset-0 bg-black/10" />
+            <div className="absolute inset-0 bg-background/10" />
 
             {/* Circular loader */}
             <svg
@@ -210,7 +210,7 @@ const PrintingWhySection = () => {
                 cy={radius}
                 r={radius - 6}
                 fill="none"
-                stroke="white"
+                stroke="currentColor"
                 strokeWidth="4"
                 strokeLinecap="round"
                 strokeDasharray={2 * Math.PI * (radius - 6)}
@@ -239,11 +239,11 @@ const PrintingWhySection = () => {
 
       overflow-hidden
       rounded-[1.5rem]
-      border border-white/10
-      bg-white/[0.03]
+      border border-border/10
+      bg-foreground/[0.03]
       p-2
       backdrop-blur-xl
-      shadow-xl shadow-black/30
+      shadow-xl shadow-foreground/30
 
       sm:block
     "
@@ -266,7 +266,7 @@ const PrintingWhySection = () => {
         {/* RIGHT SIDE */}
         <div className="space-y-8">
           <div>
-            {/* <p className="text-sm uppercase tracking-[0.3em] text-white/50 mb-4">
+            {/* <p className="text-sm uppercase tracking-[0.3em] text-foreground/50 mb-4">
               Why Choose Us
             </p> */}
 
@@ -285,11 +285,11 @@ const PrintingWhySection = () => {
                   delay: index * 0.1,
                   duration: 0.5,
                 }}
-                className="flex items-center gap-4 border-b border-white/10 pb-5"
+                className="flex items-center gap-4 border-b border-border/10 pb-5"
               >
-                <div className="w-3 h-3 rounded-full bg-white" />
+                <div className="w-3 h-3 rounded-full bg-foreground" />
 
-                <span className="text-lg text-white/80">{item}</span>
+                <span className="text-lg text-foreground/80">{item}</span>
               </motion.li>
             ))}
           </ul>

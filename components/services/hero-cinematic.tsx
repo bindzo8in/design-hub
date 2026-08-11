@@ -44,51 +44,8 @@ export default function HeroCinematic() {
 
   return (
     <>
-      <style>{`
-        @keyframes ring-cw  { to { transform: rotate(360deg); } }
-        @keyframes ring-ccw { to { transform: rotate(-360deg); } }
-        @keyframes marquee  { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-        .ring-cw  { animation: ring-cw  28s linear infinite; }
-        .ring-ccw { animation: ring-ccw 22s linear infinite; }
-        .hero-marquee { animation: marquee 28s linear infinite; }
-
-        .hero-btn-primary:hover  { filter: brightness(1.12); }
-        .hero-btn-outline:hover  { background: rgba(255,255,255,0.07) !important; }
-
-        /* ── Responsive ─────────────────────────────── */
-        @media (max-width: 1023px) {
-          .hero-bg-rings  { display: none; }
-          .hero-bg-glow   { display: none; }
-          .hero-lottie    { width: 340px !important; height: 340px !important; right: -60px !important; opacity: 0.22 !important; }
-          .hero-bg-dots   { opacity: 0.18 !important; mask-image: none !important; -webkit-mask-image: none !important; }
-        }
-
-        @media (max-width: 639px) {
-          .hero-ghost-text  { font-size: clamp(80px, 24vw, 140px) !important; margin-right: -12px !important; }
-          .hero-badge       { margin-bottom: 20px !important; }
-          .hero-tagline-row { flex-direction: column !important; align-items: flex-start !important; gap: 20px !important; }
-          .hero-cta-group   { width: 100%; }
-          .hero-cta-group button { width: 100%; justify-content: center; }
-          .hero-stats       { gap: 24px !important; flex-wrap: wrap; }
-          .hero-lottie      { display: none !important; }
-        }
-
-        @media (max-width: 400px) {
-          .hero-marquee-item { padding: 0 20px !important; font-size: 10px !important; }
-        }
-      `}</style>
-
       <section
-      className="min-h-fit"
-        style={{
-          position: "relative",
-          overflow: "hidden",
-          background: "var(--background)",
-          // minHeight: "100svh",
-          display: "flex",
-          flexDirection: "column",
-        }}
+        className="min-h-fit relative overflow-hidden bg-background flex flex-col"
       >
         {/* ── Background layer ── */}
         <div style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
@@ -105,17 +62,9 @@ export default function HeroCinematic() {
             }}
           >
             <span
-              className="hero-ghost-text"
+              className="hero-ghost-text font-[family-name:var(--font-syne,'Syne',sans-serif)] font-extrabold text-[clamp(80px,24vw,140px)] sm:text-[clamp(80px,22vw,320px)] leading-none -mr-3 sm:-mr-8 select-none tracking-tight text-transparent"
               style={{
-                fontFamily: "'Syne', sans-serif",
-                fontWeight: 800,
-                fontSize: "clamp(80px, 22vw, 320px)",
-                color: "transparent",
-                WebkitTextStroke: "1px rgba(255,255,255,0.035)",
-                letterSpacing: "-0.02em",
-                lineHeight: 1,
-                userSelect: "none",
-                marginRight: "-30px",
+                WebkitTextStroke: "1px color-mix(in srgb, var(--foreground) 3.5%, transparent)",
               }}
             >
               STUDIO
@@ -124,8 +73,7 @@ export default function HeroCinematic() {
 
           {/* Rings */}
           <div
-            className="hero-bg-rings"
-            style={{ position: "absolute", inset: 0, pointerEvents: "none" }}
+            className="hero-bg-rings hidden lg:block absolute inset-0 pointer-events-none"
           >
             <div
               className="ring-cw"
@@ -137,7 +85,7 @@ export default function HeroCinematic() {
                 width: 640,
                 height: 640,
                 borderRadius: "50%",
-                border: "1px solid rgba(255,255,255,0.05)",
+                border: "1px solid color-mix(in srgb, var(--foreground) 5%, transparent)",
               }}
             />
             <div
@@ -150,7 +98,7 @@ export default function HeroCinematic() {
                 width: 460,
                 height: 460,
                 borderRadius: "50%",
-                border: "1px solid rgba(223,27,37,0.09)",
+                border: "1px solid color-mix(in srgb, var(--accent) 9%, transparent)",
               }}
             />
             <div
@@ -162,37 +110,27 @@ export default function HeroCinematic() {
                 width: 320,
                 height: 320,
                 borderRadius: "50%",
-                border: "1px solid rgba(223,27,37,0.05)",
+                border: "1px solid color-mix(in srgb, var(--accent) 5%, transparent)",
               }}
             />
           </div>
 
           {/* Crimson glow */}
           <div
-            className="hero-bg-glow"
+            className="hero-bg-glow hidden lg:block absolute top-1/2 right-0 -translate-y-1/2 w-[560px] h-[560px] rounded-full"
             style={{
-              position: "absolute",
-              top: "50%",
-              right: 0,
-              transform: "translateY(-50%)",
-              width: 560,
-              height: 560,
-              borderRadius: "50%",
               background:
-                "radial-gradient(circle, rgba(223,27,37,0.12) 0%, transparent 70%)",
+                "radial-gradient(circle, color-mix(in srgb, var(--accent) 12%, transparent) 0%, transparent 70%)",
             }}
           />
 
           {/* Dot grid */}
           <div
-            className="hero-bg-dots"
+            className="hero-bg-dots absolute inset-0 opacity-[0.18] lg:opacity-[0.35]"
             style={{
-              position: "absolute",
-              inset: 0,
               backgroundImage:
-                "radial-gradient(circle, rgba(255,255,255,0.18) 1px, transparent 1px)",
+                "radial-gradient(circle, color-mix(in srgb, var(--foreground) 18%, transparent) 1px, transparent 1px)",
               backgroundSize: "38px 38px",
-              opacity: 0.35,
               maskImage:
                 "radial-gradient(ellipse 50% 80% at 85% 50%, black 20%, transparent 100%)",
               WebkitMaskImage:
@@ -202,17 +140,8 @@ export default function HeroCinematic() {
 
           {/* ── Lottie — right-side asset, not full-bleed ── */}
           <div
-            className="hero-lottie"
+            className="hero-lottie hidden sm:block absolute top-1/2 -translate-y-1/2 pointer-events-none opacity-[0.22] lg:opacity-[0.72] w-[340px] h-[340px] -right-[60px] lg:w-[clamp(280px,36vw,520px)] lg:h-[clamp(280px,36vw,520px)] lg:right-[clamp(24px,6vw,80px)]"
             style={{
-              position: "absolute",
-              top: "50%",
-              right: "clamp(24px, 6vw, 80px)",
-              transform: "translateY(-50%)",
-              width: "clamp(280px, 36vw, 520px)",
-              height: "clamp(280px, 36vw, 520px)",
-              pointerEvents: "none",
-              opacity: 0.72,
-              mixBlendMode: "screen",
               /* fade out toward left edge so it doesn't clash with text */
               maskImage:
                 "radial-gradient(ellipse 80% 80% at 60% 50%, black 40%, transparent 100%)",
@@ -268,14 +197,7 @@ export default function HeroCinematic() {
               }}
             />
             <span
-              style={{
-                fontFamily: "'Syne', sans-serif",
-                fontWeight: 700,
-                fontSize: "clamp(10px, 1.1vw, 11px)",
-                letterSpacing: "0.22em",
-                textTransform: "uppercase",
-                color: "rgba(255,255,255,0.38)",
-              }}
+              className="font-[family-name:var(--font-syne,'Syne',sans-serif)] font-bold text-[clamp(10px,1.1vw,11px)] tracking-[0.22em] uppercase text-muted-foreground"
             >
               Creative Digital Studio
             </span>
@@ -287,14 +209,7 @@ export default function HeroCinematic() {
               initial={{ opacity: 0, y: 44 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.75, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-              style={{
-                fontFamily: "'Syne', sans-serif",
-                fontWeight: 800,
-                fontSize: "clamp(40px, 8.5vw, 118px)",
-                lineHeight: 0.93,
-                letterSpacing: "-0.03em",
-                color: "#ffffff",
-              }}
+              className="font-[family-name:var(--font-syne,'Syne',sans-serif)] font-extrabold text-[clamp(40px,8.5vw,118px)] leading-[0.93] tracking-tight text-foreground"
             >
               Building brands
               <br />
@@ -319,15 +234,7 @@ export default function HeroCinematic() {
                   animate={{ y: "0%", opacity: 1, skewY: 0 }}
                   exit={{ y: "-105%", opacity: 0, skewY: -4 }}
                   transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                  style={{
-                    display: "block",
-                    fontFamily: "'DM Serif Display', serif",
-                    fontStyle: "italic",
-                    fontWeight: 400,
-                    fontSize: "clamp(40px, 8.5vw, 118px)",
-                    lineHeight: 0.93,
-                    color: "var(--accent)",
-                  }}
+                  className="block font-serif italic text-[clamp(40px,8.5vw,118px)] leading-[0.93] text-accent"
                 >
                   {cyclingWords[wordIndex]}
                 </motion.span>
@@ -337,58 +244,21 @@ export default function HeroCinematic() {
 
           {/* Tagline + CTAs */}
           <motion.div
-            className="hero-tagline-row"
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-            style={{
-              marginTop: "clamp(28px, 3.5vw, 44px)",
-              display: "flex",
-              flexWrap: "wrap",
-              alignItems: "center",
-              gap: "24px 48px",
-            }}
+            className="hero-tagline-row flex flex-col sm:flex-row sm:items-center sm:gap-12 gap-5 mt-[clamp(28px,3.5vw,44px)]"
           >
             <p
-              style={{
-                fontFamily: "'Syne', sans-serif",
-                fontWeight: 400,
-                fontSize: "clamp(13px, 1.2vw, 17px)",
-                lineHeight: 1.75,
-                color: "rgba(255,255,255,0.42)",
-                maxWidth: 340,
-                margin: 0,
-              }}
+              className="font-[family-name:var(--font-syne,'Syne',sans-serif)] font-normal text-[clamp(13px,1.2vw,17px)] leading-relaxed text-muted-foreground max-w-[340px] m-0"
             >
               High-performance websites, marketing systems, and visual content
               for brands that refuse to blend in.
             </p>
 
             <div
-              className="hero-cta-group"
-              style={{ display: "flex", gap: 12, flexWrap: "wrap" }}
+              className="hero-cta-group flex flex-col sm:flex-row gap-3 w-full sm:w-auto"
             >
               <Link
                 href="/contact"
-                className="hero-btn-primary"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  background: "var(--accent)",
-                  color: "var(--accent-foreground)",
-                  fontFamily: "'Syne', sans-serif",
-                  fontWeight: 700,
-                  fontSize: "clamp(11px, 1vw, 13px)",
-                  padding: "14px 26px",
-                  borderRadius: 999,
-                  border: "none",
-                  cursor: "pointer",
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  whiteSpace: "nowrap",
-                  transition: "filter 0.2s",
-                }}
+                className="hero-btn-primary inline-flex items-center justify-center sm:justify-start gap-2 bg-accent text-accent-foreground font-[family-name:var(--font-syne,'Syne',sans-serif)] font-bold text-[clamp(11px,1vw,13px)] px-[26px] py-[14px] rounded-full tracking-[0.08em] uppercase whitespace-nowrap transition-all duration-200"
               >
                 Start a Project
                 <ArrowUpRight size={15} />
@@ -396,25 +266,7 @@ export default function HeroCinematic() {
 
               <Link
                 href="/portfolio"
-                className="hero-btn-outline"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  background: "transparent",
-                  color: "rgba(255,255,255,0.55)",
-                  fontFamily: "'Syne', sans-serif",
-                  fontWeight: 600,
-                  fontSize: "clamp(11px, 1vw, 13px)",
-                  padding: "14px 26px",
-                  borderRadius: 999,
-                  border: "1px solid rgba(255,255,255,0.12)",
-                  cursor: "pointer",
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  whiteSpace: "nowrap",
-                  transition: "background 0.2s",
-                }}
+                className="hero-btn-outline inline-flex items-center justify-center sm:justify-start gap-2 bg-transparent text-muted-foreground font-[family-name:var(--font-syne,'Syne',sans-serif)] font-semibold text-[clamp(11px,1vw,13px)] px-[26px] py-[14px] rounded-full border border-border tracking-[0.08em] uppercase whitespace-nowrap transition-colors duration-200"
               >
                 View Our Work
               </Link>
@@ -423,41 +275,17 @@ export default function HeroCinematic() {
 
           {/* Stats */}
           <motion.div
-            className="hero-stats"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            style={{
-              marginTop: "clamp(32px, 4vw, 56px)",
-              display: "flex",
-              gap: "clamp(20px, 5vw, 64px)",
-              alignItems: "flex-start",
-              flexWrap: "wrap",
-            }}
+            className="hero-stats flex flex-wrap sm:flex-nowrap items-start gap-6 sm:gap-[clamp(20px,5vw,64px)] mt-[clamp(32px,4vw,56px)]"
           >
             {stats.map(({ num, label }) => (
               <div key={label}>
                 <div
-                  style={{
-                    fontFamily: "'DM Serif Display', serif",
-                    fontStyle: "italic",
-                    fontSize: "clamp(24px, 3.5vw, 44px)",
-                    color: "#ffffff",
-                    lineHeight: 1,
-                  }}
+                  className="font-serif italic text-[clamp(24px,3.5vw,44px)] text-foreground leading-none"
                 >
                   {num}
                 </div>
                 <div
-                  style={{
-                    fontFamily: "'Syne', sans-serif",
-                    fontWeight: 600,
-                    fontSize: "clamp(10px, 0.9vw, 11px)",
-                    color: "rgba(255,255,255,0.28)",
-                    marginTop: 6,
-                    letterSpacing: "0.15em",
-                    textTransform: "uppercase",
-                  }}
+                  className="font-[family-name:var(--font-syne,'Syne',sans-serif)] font-semibold text-[clamp(10px,0.9vw,11px)] text-muted-foreground/70 mt-1.5 tracking-[0.15em] uppercase"
                 >
                   {label}
                 </div>
@@ -490,17 +318,7 @@ export default function HeroCinematic() {
             {[...services, ...services].map((s, i) => (
               <div key={i} style={{ display: "flex", alignItems: "center" }}>
                 <span
-                  className="hero-marquee-item"
-                  style={{
-                    fontFamily: "'Syne', sans-serif",
-                    fontWeight: 700,
-                    fontSize: 11,
-                    letterSpacing: "0.2em",
-                    textTransform: "uppercase",
-                    color: "rgba(255,255,255,0.25)",
-                    padding: "0 36px",
-                    whiteSpace: "nowrap",
-                  }}
+                  className="hero-marquee-item font-[family-name:var(--font-syne,'Syne',sans-serif)] font-bold text-[10px] sm:text-[11px] tracking-[0.2em] uppercase text-muted-foreground px-5 sm:px-9 whitespace-nowrap"
                 >
                   {s}
                 </span>

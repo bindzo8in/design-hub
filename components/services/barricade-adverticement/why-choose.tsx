@@ -19,7 +19,7 @@ const WhyChoose = () => {
         
         {/* Left Image */}
         <div className="w-full lg:w-1/2">
-          <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-sm">
+          <div className="relative overflow-hidden rounded-[2rem] border border-border/10 bg-foreground/5 backdrop-blur-sm">
             <Image
               src="/service/math-circle.gif"
               alt="Why Choose Design Hub"
@@ -35,15 +35,15 @@ const WhyChoose = () => {
 
         {/* Right Content */}
         <div className="w-full lg:w-1/2">
-          <span className="mb-4 inline-block rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm uppercase tracking-[0.2em] text-white/70">
+          <span className="mb-4 inline-block rounded-full border border-border/10 bg-foreground/5 px-4 py-2 text-sm uppercase tracking-[0.2em] text-foreground/70">
             Why Choose Us
           </span>
 
-          <h2 className="text-4xl font-bold leading-tight text-white sm:text-5xl">
-            Why Choose <span className="text-white/70">Design Hub</span>
+          <h2 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl">
+            Why Choose <span className="text-foreground/70">Design Hub</span>
           </h2>
 
-          <p className="mt-6 max-w-xl text-base leading-7 text-white/60">
+          <p className="mt-6 max-w-xl text-base leading-7 text-foreground/60">
             We combine creativity, strategic placement, and flawless execution
             to deliver outdoor advertising campaigns that increase visibility
             and strengthen your brand presence.
@@ -53,13 +53,13 @@ const WhyChoose = () => {
             {list.map((item, index) => (
               <li
                 key={index}
-                className="flex items-start gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur-sm transition-all duration-300 hover:border-white/20 hover:bg-white/[0.06]"
+                className="flex items-start gap-4 rounded-2xl border border-border/10 bg-foreground/[0.03] p-5 backdrop-blur-sm transition-all duration-300 hover:border-border/20 hover:bg-foreground/[0.06]"
               >
-                <div className="mt-1 flex h-6 w-6 items-center justify-center rounded-full bg-white text-black text-sm font-bold">
+                <div className="mt-1 flex h-6 w-6 items-center justify-center rounded-full bg-foreground text-black text-sm font-bold">
                   ✓
                 </div>
 
-                <p className="text-base leading-7 text-white/80">
+                <p className="text-base leading-7 text-foreground/80">
                   {item}
                 </p>
               </li>

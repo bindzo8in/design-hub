@@ -174,7 +174,7 @@ const PublicHeader = () => {
 
             {/* Right actions */}
             <div className="flex items-center gap-3">
-              {/* <ThemeToggle /> */}
+              <ThemeToggle />
 
               <Link
                 href="/contact"
@@ -198,7 +198,7 @@ const PublicHeader = () => {
       <header className="nav-glass fixed left-0 top-0 z-50 h-16 w-full lg:hidden">
         <div className="flex h-full items-center justify-between px-4">
           <BrandLogo />
-          {/* <ThemeToggle /> */}
+          <ThemeToggle />
         </div>
       </header>
 

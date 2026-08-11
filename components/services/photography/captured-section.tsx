@@ -21,7 +21,7 @@ const CapturedSection = () => {
     <section
       className="
         relative overflow-hidden
-        bg-black
+        bg-background
 
         py-20
         sm:py-24
@@ -128,7 +128,7 @@ const CapturedSection = () => {
       />
 
       {/* overlay */}
-      <div className="absolute inset-0 bg-black/55" />
+      <div className="absolute inset-0 bg-background/55" />
 
       {/* cinematic glow */}
       <div
@@ -159,7 +159,7 @@ const CapturedSection = () => {
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* heading */}
         <div className="mb-14 lg:mb-20">
-          <p className="mb-4 text-xs uppercase tracking-[0.35em] text-white/40">
+          <p className="mb-4 text-xs uppercase tracking-[0.35em] text-foreground/40">
             Photography Studio
           </p>
 
@@ -168,7 +168,7 @@ const CapturedSection = () => {
               text-4xl
               font-light
               leading-[0.95]
-              text-white
+              text-foreground
 
               sm:text-6xl
 
@@ -177,7 +177,7 @@ const CapturedSection = () => {
           >
             Captured
             <br />
-            <span className="text-white/60">With Purpose...</span>
+            <span className="text-foreground/60">With Purpose...</span>
           </h2>
         </div>
 
@@ -214,9 +214,9 @@ const CapturedSection = () => {
                   relative
                   overflow-hidden
                   rounded-[2rem]
-                  border border-white/10
-                  bg-white/[0.03]
-                  shadow-2xl shadow-black/40
+                  border border-border/10
+                  bg-foreground/[0.03]
+                  shadow-2xl shadow-foreground/40
                   backdrop-blur-xl
                 "
               >
@@ -247,7 +247,7 @@ const CapturedSection = () => {
                   className="
                     text-lg
                     font-medium
-                    text-white/85
+                    text-foreground/85
 
                     sm:text-xl
                   "
@@ -263,10 +263,10 @@ const CapturedSection = () => {
                     items-center
                     justify-center
                     rounded-full
-                    border border-white/10
-                    bg-white/5
+                    border border-border/10
+                    bg-foreground/5
                     text-sm
-                    text-white/60
+                    text-foreground/60
                   "
                 >
                   0{index + 1}

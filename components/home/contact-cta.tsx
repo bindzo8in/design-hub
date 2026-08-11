@@ -42,8 +42,8 @@ const HomeCTASection = () => {
       className="
         relative
         overflow-hidden
-        bg-[#101735]
-        text-white
+        bg-background
+        text-foreground
         py-12
         sm:py-16
         lg:py-24
@@ -57,7 +57,7 @@ const HomeCTASection = () => {
       </div>
 
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="cta-wrapper relative overflow-hidden rounded-2xl sm:rounded-[2rem] border border-[#26336F] bg-[#18224b]/80 backdrop-blur-xl shadow-2xl">
+        <div className="cta-wrapper relative overflow-hidden rounded-2xl sm:rounded-[2rem] border border-border bg-card/80 backdrop-blur-xl shadow-2xl">
 
           {/* Gradient border overlay */}
           <div className="absolute inset-0 rounded-2xl sm:rounded-[2rem] bg-gradient-to-br from-accent/20 via-transparent to-primary/20 pointer-events-none" />
@@ -145,24 +145,24 @@ const HomeCTASection = () => {
             </div>
 
             {/* ── RIGHT INLINE LEAD CAPTURE FORM ── */}
-            <div className="cta-item relative z-10 w-full rounded-2xl sm:rounded-3xl border border-slate-800 bg-slate-950/80 p-6 sm:p-8 backdrop-blur-xl shadow-2xl">
+            <div className="cta-item relative z-10 w-full rounded-2xl sm:rounded-3xl border border-border bg-secondary/80 p-6 sm:p-8 backdrop-blur-xl shadow-2xl">
               <div className="mb-6">
-                <h3 className="font-[family-name:var(--font-bebas-neue)] text-3xl sm:text-4xl text-white uppercase tracking-wide">
+                <h3 className="font-[family-name:var(--font-bebas-neue)] text-3xl sm:text-4xl text-foreground uppercase tracking-wide">
                   Request A <span className="text-accent">Free Quote</span>
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-400 mt-1">
+                <p className="text-xs sm:text-sm text-muted-foreground mt-1">
                   Tell us about your project & get a response within 24 hours.
                 </p>
               </div>
 
               <form onSubmit={(e) => { e.preventDefault(); alert("Thank you! Your quote request has been received. Our team will contact you shortly."); }} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
                     What service do you need?
                   </label>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                     {["Web Development", "Branding", "Packaging", "Photography", "Digital Marketing", "Printing"].map((svc, i) => (
-                      <label key={i} className="flex items-center gap-2 rounded-xl border border-slate-800 bg-slate-900/60 p-2.5 text-xs text-slate-300 hover:border-accent/40 cursor-pointer transition-colors">
+                      <label key={i} className="flex items-center gap-2 rounded-xl border border-border bg-background/60 p-2.5 text-xs text-muted-foreground hover:border-accent/40 cursor-pointer transition-colors">
                         <input type="checkbox" className="accent-red-600 rounded" defaultChecked={i === 0} />
                         <span className="truncate">{svc}</span>
                       </label>
@@ -172,41 +172,41 @@ const HomeCTASection = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">Your Name *</label>
+                    <label className="block text-xs font-semibold text-muted-foreground mb-1">Your Name *</label>
                     <input
                       type="text"
                       required
                       placeholder="John Doe"
-                      className="w-full rounded-xl border border-slate-800 bg-slate-900 px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-accent focus:outline-none"
+                      className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder-muted-foreground focus:border-accent focus:outline-none"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">Phone / WhatsApp *</label>
+                    <label className="block text-xs font-semibold text-muted-foreground mb-1">Phone / WhatsApp *</label>
                     <input
                       type="tel"
                       required
                       placeholder="+91 99947 13122"
-                      className="w-full rounded-xl border border-slate-800 bg-slate-900 px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-accent focus:outline-none"
+                      className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder-muted-foreground focus:border-accent focus:outline-none"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Email Address *</label>
+                  <label className="block text-xs font-semibold text-muted-foreground mb-1">Email Address *</label>
                   <input
                     type="email"
                     required
                     placeholder="john@company.com"
-                    className="w-full rounded-xl border border-slate-800 bg-slate-900 px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-accent focus:outline-none"
+                    className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder-muted-foreground focus:border-accent focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Project Details</label>
+                  <label className="block text-xs font-semibold text-muted-foreground mb-1">Project Details</label>
                   <textarea
                     rows={3}
                     placeholder="Describe your project goals, budget, or timeline..."
-                    className="w-full rounded-xl border border-slate-800 bg-slate-900 px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-accent focus:outline-none resize-none"
+                    className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder-muted-foreground focus:border-accent focus:outline-none resize-none"
                   />
                 </div>
 

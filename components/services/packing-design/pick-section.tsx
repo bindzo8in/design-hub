@@ -51,13 +51,13 @@ const PickSection = () => {
       }}
     >
       {/* overlay */}
-      <div className="absolute inset-0 bg-black/55" />
+      <div className="absolute inset-0 bg-background/55" />
 
       {/* subtle gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-black/70" />
 
       {/* background glow */}
-      <div className="absolute left-1/2 top-0 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-white/5 blur-[140px]" />
+      <div className="absolute left-1/2 top-0 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-foreground/5 blur-[140px]" />
 
       {/* CONTENT */}
       <div
@@ -128,7 +128,7 @@ const PickSection = () => {
                   text-[10px]
                   uppercase
                   tracking-[0.35em]
-                  text-white/70
+                  text-foreground/70
                   sm:text-xs
                 "
               >
@@ -143,7 +143,7 @@ const PickSection = () => {
                 font-black
                 leading-[0.9]
                 tracking-tight
-                text-white
+                text-foreground
                 sm:text-5xl
                 md:text-6xl
                 lg:text-7xl
@@ -182,7 +182,7 @@ const PickSection = () => {
                 max-w-2xl
                 text-sm
                 leading-relaxed
-                text-white/70
+                text-foreground/70
                 sm:text-base
                 md:text-lg
               "
@@ -195,7 +195,7 @@ const PickSection = () => {
         </div>
 
         {/* FEATURES */}
-        <div className="border-t border-white/10">
+        <div className="border-t border-border/10">
           <div className="grid grid-cols-1 md:grid-cols-2">
             {packagingFeatures.map((feature, index) => (
               <div
@@ -203,14 +203,14 @@ const PickSection = () => {
                 className={cn(
                   `
                   border-b
-                  border-white/10
+                  border-border/10
                   py-6
                   sm:py-7
                   md:px-6
                   lg:px-8
                 `,
                   index % 2 !== 0 &&
-                    "md:border-l md:border-white/10",
+                    "md:border-l md:border-border/10",
                 )}
               >
                 <h3
@@ -220,7 +220,7 @@ const PickSection = () => {
                     uppercase
                     leading-tight
                     tracking-tight
-                    text-white
+                    text-foreground
                     sm:text-xl
                     lg:text-2xl
                   "
@@ -234,7 +234,7 @@ const PickSection = () => {
                     max-w-[520px]
                     text-sm
                     leading-relaxed
-                    text-white/65
+                    text-foreground/65
                     sm:text-[15px]
                     lg:text-base
                   "

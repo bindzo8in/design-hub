@@ -137,7 +137,7 @@ export default function PrintingSection() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-black py-32">
+    <section className="relative overflow-hidden bg-background py-32">
       {/* background pattern */}
       <div className="absolute inset-0 opacity-20">
         <div
@@ -181,8 +181,8 @@ export default function PrintingSection() {
         className="
           relative overflow-hidden
           rounded-[2rem]
-          border border-white/10
-          bg-white/5
+          border border-border/10
+          bg-foreground/5
           p-3
           backdrop-blur-xl
         "
@@ -268,7 +268,7 @@ export default function PrintingSection() {
 
     {/* bottom gallery */}
     <div className="grid grid-cols-2 gap-4">
-      <div className="relative overflow-hidden rounded-[1.5rem] border border-white/10">
+      <div className="relative overflow-hidden rounded-[1.5rem] border border-border/10">
         <Image
            src="/service/printing/fashion-magazine.webp"
           alt=""
@@ -303,6 +303,43 @@ export default function PrintingSection() {
   {/* ===================================== */}
 
   <div className="relative hidden grid-cols-3 gap-16 lg:grid">
+    {/* SVG CONNECTIONS */}
+    <svg className="pointer-events-none absolute inset-0 h-full w-full">
+      <path
+        d={paths.topLeft}
+        stroke="currentColor"
+        strokeWidth="1.5"
+        fill="none"
+        opacity="0.5"
+      />
+
+      <path
+        d={paths.topRight}
+        stroke="currentColor"
+        strokeWidth="1.5"
+        fill="none"
+        opacity="0.5"
+      />
+
+      <path
+        d={paths.bottomLeft}
+        stroke="currentColor"
+        strokeWidth="1.5"
+        fill="none"
+        opacity="0.5"
+      />
+
+      <path
+        d={paths.bottomRight}
+        stroke="currentColor"
+        strokeWidth="1.5"
+        fill="none"
+        opacity="0.5"
+      />
+
+      <circle cx="50%" cy="50%" r="4" fill="currentColor" />
+    </svg>
+
     {/* LEFT */}
     <div className="flex flex-col justify-between gap-20">
       {/* top image */}
@@ -312,7 +349,7 @@ export default function PrintingSection() {
       >
         <Glow />
 
-        <div className="relative overflow-hidden rounded-md border border-white/20 bg-zinc-900 p-2">
+        <div className="relative overflow-hidden rounded-md border border-border/20 bg-card p-2">
           <Image
             src="/service/printing/Billboard_Mockup.jpg"
             alt=""
@@ -366,7 +403,7 @@ export default function PrintingSection() {
       >
         <Glow large />
 
-        <div className="relative overflow-hidden rounded-lg border border-white/10 bg-white/5 p-4 backdrop-blur-xl">
+        <div className="relative overflow-hidden rounded-lg border border-border/10 bg-foreground/5 p-4 backdrop-blur-xl">
           <Image
             src="/service/printing/fashion-magazine.webp"
             alt=""
@@ -421,7 +458,7 @@ export default function PrintingSection() {
       >
         <Glow />
 
-        <div className="overflow-hidden rounded-md border border-cyan-400/50 bg-zinc-900 p-2 shadow-[0_0_40px_rgba(59,130,246,0.35)]">
+        <div className="overflow-hidden rounded-md border border-cyan-400/50 bg-card p-2 shadow-[0_0_40px_rgba(59,130,246,0.35)]">
           <Image
             src="/service/printing/Box-Packaging.jpg"
             alt=""
@@ -433,42 +470,6 @@ export default function PrintingSection() {
       </div>
     </div>
 
-    {/* SVG CONNECTIONS */}
-    <svg className="pointer-events-none absolute inset-0 h-full w-full">
-      <path
-        d={paths.topLeft}
-        stroke="white"
-        strokeWidth="1.5"
-        fill="none"
-        opacity="0.5"
-      />
-
-      <path
-        d={paths.topRight}
-        stroke="white"
-        strokeWidth="1.5"
-        fill="none"
-        opacity="0.5"
-      />
-
-      <path
-        d={paths.bottomLeft}
-        stroke="white"
-        strokeWidth="1.5"
-        fill="none"
-        opacity="0.5"
-      />
-
-      <path
-        d={paths.bottomRight}
-        stroke="white"
-        strokeWidth="1.5"
-        fill="none"
-        opacity="0.5"
-      />
-
-      <circle cx="50%" cy="50%" r="4" fill="white" />
-    </svg>
   </div>
 </div>
     </section>
@@ -481,7 +482,7 @@ function GlassCard({
   children: React.ReactNode;
 }) {
   return (
-    <div className="rounded-[32px] border border-white/10 bg-white/5 p-8 text-sm leading-7 text-white/80 backdrop-blur-xl">
+    <div className="rounded-[32px] border border-border/10 bg-foreground/5 p-8 text-sm leading-7 text-foreground/80 backdrop-blur-xl">
       {children}
     </div>
   );

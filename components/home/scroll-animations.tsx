@@ -3,6 +3,8 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
+gsap.config({ nullTargetWarn: false });
+
 /**
  * HomeScrollAnimations
  * Orchestrates all scroll-triggered parallax & reveal animations

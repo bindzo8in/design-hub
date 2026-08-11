@@ -57,11 +57,11 @@ const InfoCard = ({
       {/* Content */}
       <div className="relative z-10 flex h-full flex-col justify-start">
         <CardHeader className="space-y-3 p-5 sm:p-6">
-          <CardTitle className="text-sm font-light leading-relaxed text-white sm:text-base">
+          <CardTitle className="text-sm font-light leading-relaxed text-foreground sm:text-base">
             {title}
           </CardTitle>
 
-          <CardDescription className="text-xs font-extralight leading-relaxed text-white/80 sm:text-sm">
+          <CardDescription className="text-xs font-extralight leading-relaxed text-foreground/80 sm:text-sm">
             {description}
           </CardDescription>
         </CardHeader>

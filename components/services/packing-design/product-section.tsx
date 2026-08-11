@@ -73,11 +73,11 @@ function CardOverlay({ title, desc }: { title: string; desc: string }) {
         className="
           absolute left-5 top-5
           rounded-full
-          border border-white/10
-          bg-white/10
+          border border-border/10
+          bg-foreground/10
           px-4 py-2
           text-[10px] uppercase tracking-[0.25em]
-          text-white
+          text-foreground
           backdrop-blur-md
         "
       >
@@ -86,8 +86,8 @@ function CardOverlay({ title, desc }: { title: string; desc: string }) {
 
       {/* text */}
       <div className="absolute bottom-0 left-0 w-full p-7">
-        <h3 className="text-2xl font-bold text-white">{title}</h3>
-        <p className="mt-2 text-sm text-white/70">{desc}</p>
+        <h3 className="text-2xl font-bold text-foreground">{title}</h3>
+        <p className="mt-2 text-sm text-foreground/70">{desc}</p>
       </div>
     </>
   );
@@ -157,7 +157,7 @@ export default function ProductShowcaseSection() {
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute left-[10%] top-[20%] h-[500px] w-[500px] rounded-full bg-accent/20 blur-[140px]" />
             <div className="absolute bottom-[-10%] right-[5%] h-[420px] w-[420px] rounded-full bg-primary/30 blur-[120px]" />
-            <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/5 blur-[180px]" />
+            <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-foreground/5 blur-[180px]" />
           </div>
 
           {/* content */}
@@ -188,7 +188,7 @@ export default function ProductShowcaseSection() {
                       product-card group relative
                       h-[520px] min-w-[340px]
                       overflow-hidden rounded-[36px]
-                      border border-white/10
+                      border border-border/10
                       bg-card/50 backdrop-blur-2xl brand-glow
                     "
                   >
@@ -241,7 +241,7 @@ export default function ProductShowcaseSection() {
                 key={product.id}
                 className={`
                   group relative overflow-hidden
-                  rounded-[32px] border border-white/10
+                  rounded-[32px] border border-border/10
                   bg-card/60 backdrop-blur-2xl
                   ${index % 2 === 0 ? "translate-y-10" : ""}
                 `}
@@ -297,7 +297,7 @@ export default function ProductShowcaseSection() {
                 key={product.id}
                 className="
                   group relative overflow-hidden
-                  rounded-[24px] border border-white/10
+                  rounded-[24px] border border-border/10
                   bg-card/60 backdrop-blur-xl
                 "
               >
@@ -315,17 +315,17 @@ export default function ProductShowcaseSection() {
                 <div
                   className="
                     absolute left-5 top-5
-                    rounded-full border border-white/10
-                    bg-white/10 px-3 py-1
+                    rounded-full border border-border/10
+                    bg-foreground/10 px-3 py-1
                     text-[10px] uppercase tracking-[0.25em]
-                    text-white backdrop-blur-md
+                    text-foreground backdrop-blur-md
                   "
                 >
                   Packaging Design
                 </div>
                 <div className="absolute bottom-0 left-0 w-full p-5">
-                  <h3 className="text-lg font-bold text-white">{product.title}</h3>
-                  <p className="mt-1 text-sm text-white/70">{product.desc}</p>
+                  <h3 className="text-lg font-bold text-foreground">{product.title}</h3>
+                  <p className="mt-1 text-sm text-foreground/70">{product.desc}</p>
                 </div>
               </div>
             ))}

@@ -3,7 +3,6 @@ import HomeMarquee from "@/components/home/marquee";
 import HomeAboutSection from "@/components/home/about-section";
 import HomeProcessSection from "@/components/home/process-section";
 import HomeServicesSection from "@/components/home/services-section";
-import HomePortfolioShowcase from "@/components/home/portfolio-showcase";
 import HomeTestimonialsSection from "@/components/home/testimonials-section";
 import HomeClientsMarquee from "@/components/home/clients-marquee";
 import HomeContactCTA from "@/components/home/contact-cta";
@@ -55,9 +54,6 @@ export default async function Home() {
 
         {/* 8-card Services grid with shine highlights */}
         <HomeServicesSection />
-
-        {/* Dedicated interactive Portfolio Showcase section */}
-        <HomePortfolioShowcase initialProjects={projects as any[]} categories={categories} />
 
         {/* Process timelines */}
         <HomeProcessSection />

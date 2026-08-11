@@ -61,13 +61,18 @@ const OutDoor = () => {
         }}
       >
         {/* Overlay */}
-        <div className="absolute inset-0 bg-black/80" />
+        <div className="absolute inset-0 bg-background/80" />
 
         {/* Content */}
         <div className="relative z-10">
-          <h3 className="text-center text-4xl uppercase">
-            outdoor advertising services
+          <h3 className="text-center text-4xl uppercase font-bold">
+            Advertising Services
           </h3>
+          <p className="text-center font-light max-w-2xl mx-auto mt-6 text-foreground/90">
+            Our team manages the entire process—from concept and design to
+            production and execution—ensuring consistency, quality, and
+            effectiveness across all outdoor formats.
+          </p>
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 py-12">
             <div className="flex flex-wrap justify-center items-stretch gap-8">
               {data.map((item) => (
@@ -76,16 +81,16 @@ const OutDoor = () => {
                   className="
     w-full
     sm:w-[320px]
-    bg-white/10
+    bg-foreground/10
     backdrop-blur-md
-    border border-white/10
+    border border-border/10
     rounded-2xl
     p-8
     shadow-xl
     transition-all
     duration-300
     hover:-translate-y-2
-    hover:bg-white/15
+    hover:bg-foreground/15
   "
                 >
                   <img
@@ -106,14 +111,7 @@ const OutDoor = () => {
         </div>
       </section>
 
-          <p className="text-center font-light max-w-2xl mx-auto my-8 text-white">
-            Our team manages the entire process—from concept and design to
-            production and execution—ensuring consistency, quality, and
-            effectiveness across all outdoor formats. Our team manages the
-            entire process—from concept and design to production and
-            execution—ensuring consistency, quality, and effectiveness across
-            all outdoor formats.
-          </p>
+
       <section
         className="
       mx-auto
@@ -136,7 +134,7 @@ const OutDoor = () => {
           <div key={index} className="relative">
             {/* Divider */}
             {index !== features.length - 1 && (
-              <div className="absolute right-[-20px] top-0 hidden h-full w-px bg-black/10 lg:block" />
+              <div className="absolute right-[-20px] top-0 hidden h-full w-px bg-background/10 lg:block" />
             )}
 
             <h3 className="text-xl font-semibold leading-tight border-b border-black/10 pb-4">

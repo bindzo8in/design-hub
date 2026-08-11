@@ -41,9 +41,9 @@ export function SidebarContent() {
   const pathname = usePathname();
 
   return (
-    <div className="flex h-full flex-col bg-[#101735] border-r border-[#26336F]/40 text-white">
+    <div className="flex h-full flex-col bg-background border-r border-border/40 text-foreground">
       {/* Brand Header */}
-      <div className="flex h-16 items-center px-6 border-b border-[#26336F]/40">
+      <div className="flex h-16 items-center px-6 border-b border-border/40">
         <Link href="/admin" className="flex items-center gap-2.5 group">
           <div className="bg-[#DF1B25]/10 border border-[#DF1B25]/30 p-1.5 rounded-lg text-[#DF1B25] group-hover:scale-105 transition-transform duration-300">
             <Shield className="w-5 h-5" />
@@ -66,8 +66,8 @@ export function SidebarContent() {
               className={cn(
                 "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 group relative overflow-hidden",
                 isActive
-                  ? "bg-[#18224b] text-white border border-[#26336F] shadow-md"
-                  : "text-slate-300 hover:text-white hover:bg-[#18224b]/60 border border-transparent"
+                  ? "bg-card text-foreground border border-border shadow-md"
+                  : "text-muted-foreground hover:text-foreground hover:bg-card/60 border border-transparent"
               )}
             >
               {isActive && (
@@ -86,8 +86,8 @@ export function SidebarContent() {
       </div>
 
       {/* Footer Info */}
-      <div className="p-4 border-t border-[#26336F]/40 bg-[#0c122b] text-center">
-        <p className="text-[10px] font-mono text-slate-400 uppercase tracking-widest">
+      <div className="p-4 border-t border-border/40 bg-secondary/20 text-center">
+        <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">
           Secured session
         </p>
       </div>
@@ -99,12 +99,12 @@ export function MobileSidebar() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="lg:hidden text-white hover:bg-white/5">
+        <Button variant="ghost" size="icon" className="lg:hidden text-foreground hover:bg-accent/10">
           <Menu className="w-5 h-5" />
           <span className="sr-only">Toggle navigation menu</span>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="p-0 w-72 bg-[#101735] border-r border-[#26336F]/40 text-white">
+      <SheetContent side="left" className="p-0 w-72 bg-background border-r border-border/40 text-foreground">
         <SheetTitle className="sr-only">Admin navigation</SheetTitle>
         <SidebarContent />
       </SheetContent>

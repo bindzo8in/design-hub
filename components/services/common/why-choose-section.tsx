@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import React from "react";
+import { Check } from "lucide-react";
 
 interface WhyChooseSectionProps {
   badge?: string;
@@ -25,20 +26,20 @@ const WhyChooseSection = ({
   reverse = false,
 }: WhyChooseSectionProps) => {
   return (
-    <section className="relative overflow-hidden bg-[#050711] py-20">
+    <section className="relative overflow-hidden bg-background px-4 py-20 sm:px-6 lg:px-8">
       {/* Background Glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.05),transparent_70%)]" />
 
       <div
         className={`
           relative z-10 mx-auto flex max-w-7xl flex-col items-center gap-14
-          px-4 sm:px-6 lg:gap-20 lg:px-8
+          lg:gap-20 lg:flex-row
           ${reverse ? "lg:flex-row-reverse" : "lg:flex-row"}
         `}
       >
         {/* Image */}
         <div className="w-full lg:w-1/2">
-          <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-sm">
+          <div className="relative overflow-hidden rounded-[2rem] border border-border bg-card backdrop-blur-sm">
             <Image
               src={image}
               alt={imageAlt}
@@ -55,20 +56,20 @@ const WhyChooseSection = ({
         {/* Content */}
         <div className="w-full lg:w-1/2">
           {/* Badge */}
-          <span className="mb-4 inline-block rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm uppercase tracking-[0.2em] text-white/70">
+          <span className="mb-4 inline-block rounded-full border border-border bg-card px-4 py-2 text-sm uppercase tracking-[0.2em] text-muted-foreground">
             {badge}
           </span>
 
           {/* Title */}
-          <h2 className="text-4xl font-bold leading-tight text-white sm:text-5xl">
+          <h2 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl">
             {title}{" "}
             {highlightText && (
-              <span className="text-white/70">{highlightText}</span>
+              <span className="text-accent">{highlightText}</span>
             )}
           </h2>
 
           {/* Description */}
-          <p className="mt-6 max-w-xl text-base leading-7 text-white/60">
+          <p className="mt-6 max-w-xl text-base leading-7 text-muted-foreground">
             {description}
           </p>
 
@@ -78,16 +79,16 @@ const WhyChooseSection = ({
               <li
                 key={index}
                 className="
-                  flex items-start gap-4 rounded-2xl border border-white/10
-                  bg-white/[0.03] p-5 backdrop-blur-sm transition-all
-                  duration-300 hover:border-white/20 hover:bg-white/[0.06]
+                  flex items-start gap-4 rounded-2xl border border-border
+                  bg-card p-5 backdrop-blur-sm transition-all
+                  duration-300 hover:border-accent/50
                 "
               >
-                <div className="mt-1 flex h-6 w-6 items-center justify-center rounded-full bg-white text-sm font-bold text-black">
-                  ✓
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10">
+                  <Check className="h-6 w-6 text-accent" />
                 </div>
 
-                <p className="text-base leading-7 text-white/80">
+                <p className="text-base leading-7 text-foreground">
                   {item}
                 </p>
               </li>
