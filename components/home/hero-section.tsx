@@ -2,9 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, CheckCircle2, MessageSquare } from "lucide-react";
 import gsap from "gsap";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 const headlines = [
   { line1: "We Believe In", line2: "Thinking ", highlight: "Different" },
@@ -33,6 +33,9 @@ const HomeHeroSection = () => {
   const subRef = useRef<HTMLDivElement>(null);
   const typingContainerRef = useRef<HTMLDivElement>(null);
   const heroImageRef = useRef<HTMLDivElement>(null);
+  const floatCard1Ref = useRef<HTMLDivElement>(null);
+  const floatCard2Ref = useRef<HTMLDivElement>(null);
+  const parallaxWrapperRef = useRef<HTMLDivElement>(null);
 
   // animations
   useEffect(() => {
@@ -95,28 +98,61 @@ const HomeHeroSection = () => {
       if (heroImageRef.current) {
         tl.fromTo(
           heroImageRef.current,
-          {
-            opacity: 0,
-            scale: 0.95,
-            y: 30,
-          },
-          {
-            opacity: 1,
-            scale: 1,
-            y: 0,
-            duration: 1.2,
-            delay: 0.4,
-          },
+          { opacity: 0, scale: 0.95, y: 30 },
+          { opacity: 1, scale: 1, y: 0, duration: 1.2, delay: 0.4 },
           "-=0.8"
         );
+      }
 
-        gsap.to(heroImageRef.current, {
-          y: -12,
-          duration: 3.5,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
+      if (floatCard1Ref.current) {
+        tl.fromTo(
+          floatCard1Ref.current,
+          { opacity: 0, x: 30, scale: 0.9 },
+          { opacity: 1, x: 0, scale: 1, duration: 0.8 },
+          "-=1"
+        );
+        gsap.to(floatCard1Ref.current, {
+          y: -8, duration: 2.8, repeat: -1, yoyo: true, ease: "sine.inOut", delay: 0.2
         });
+      }
+
+      if (floatCard2Ref.current) {
+        tl.fromTo(
+          floatCard2Ref.current,
+          { opacity: 0, x: -30, scale: 0.9 },
+          { opacity: 1, x: 0, scale: 1, duration: 0.8 },
+          "-=0.8"
+        );
+        gsap.to(floatCard2Ref.current, {
+          y: 10, duration: 3.2, repeat: -1, yoyo: true, ease: "sine.inOut", delay: 0.5
+        });
+      }
+
+      // Optimized 3D mouse parallax using gsap.quickTo
+      if (parallaxWrapperRef.current && containerRef.current) {
+        const xTo = gsap.quickTo(parallaxWrapperRef.current, "x", { duration: 0.8, ease: "power3" });
+        const yTo = gsap.quickTo(parallaxWrapperRef.current, "y", { duration: 0.8, ease: "power3" });
+        const rotateXTo = gsap.quickTo(parallaxWrapperRef.current, "rotationX", { duration: 0.8, ease: "power3" });
+        const rotateYTo = gsap.quickTo(parallaxWrapperRef.current, "rotationY", { duration: 0.8, ease: "power3" });
+
+        const handleMouseMove = (e: MouseEvent) => {
+          const { clientX, clientY } = e;
+          const { innerWidth, innerHeight } = window;
+          
+          const xPos = (clientX / innerWidth - 0.5) * 2;
+          const yPos = (clientY / innerHeight - 0.5) * 2;
+          
+          xTo(xPos * 30);
+          yTo(yPos * 30);
+          rotateXTo(-yPos * 25);
+          rotateYTo(xPos * 25);
+        };
+
+        window.addEventListener("mousemove", handleMouseMove);
+        
+        return () => {
+          window.removeEventListener("mousemove", handleMouseMove);
+        };
       }
     }, containerRef);
 
@@ -387,11 +423,10 @@ const HomeHeroSection = () => {
                 <div className="absolute inset-0 bg-gradient-to-tr from-[#26336F]/10 via-[#050711]/60 to-[#DF1B25]/5" />
 
                 <div className="relative flex h-full items-center justify-center overflow-hidden rounded-[1.5rem]">
-                  <DotLottieReact
-                    src="/lottie/digital_marketing.lottie"
-                    loop
-                    autoplay
-                    className="h-full w-full object-contain"
+                  <img
+                    src="/home/spiderman.png"
+                    alt="Spiderman Hero"
+                    className="absolute inset-0 w-full h-full object-contain object-center"
                   />
                 </div>
               </div>
@@ -415,11 +450,10 @@ const HomeHeroSection = () => {
                 <div className="absolute inset-0 bg-gradient-to-tr from-[#26336F]/10 via-[#050711]/60 to-[#DF1B25]/5" />
 
                 <div className="relative flex h-full items-center justify-center overflow-hidden rounded-[1.25rem]">
-                  <DotLottieReact
-                    src="/lottie/digital_marketing.lottie"
-                    loop
-                    autoplay
-                    className="h-full w-full object-contain"
+                  <img
+                    src="/home/spiderman.png"
+                    alt="Spiderman Hero"
+                    className="absolute inset-0 w-full h-full object-contain object-center"
                   />
                 </div>
               </div>
@@ -597,14 +631,74 @@ const HomeHeroSection = () => {
           >
             <div
               ref={heroImageRef}
-              className="w-full h-[520px]"
+              className="relative w-full h-[600px] flex items-center justify-center"
+              style={{ perspective: "1000px" }}
             >
-              <DotLottieReact
-                src="/lottie/digital_marketing.lottie"
-                loop
-                autoplay
-                className="h-full w-full object-contain"
-              />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(38,51,111,0.4)_0%,transparent_70%)]" />
+              
+              {/* 3D Wrapper */}
+              <div 
+                ref={parallaxWrapperRef}
+                className="relative w-full h-full flex items-center justify-center will-change-transform"
+                style={{ transformStyle: "preserve-3d" }}
+              >
+                <div
+                  className="absolute inset-0 w-full h-full z-10 pointer-events-none"
+                  style={{ transform: "translateZ(20px)" }}
+                >
+                  <img
+                    src="/home/spiderman.webp"
+                    alt="Spiderman Hero"
+                    className="w-full h-full object-contain object-center"
+                  />
+                  {/* Overlay for image */}
+                  <div className="absolute bottom-0 left-0 right-0 h-[40%] bg-gradient-to-t from-background via-background/80 to-transparent" />
+                </div>
+
+                {/* Float Card 1: 550+ Projects */}
+                <div 
+                  ref={floatCard1Ref}
+                  className="absolute right-[5%] top-[25%] z-20 flex flex-col items-center justify-center gap-1 rounded-2xl border border-white/10 bg-[#0A102A]/80 backdrop-blur-md px-6 py-4 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
+                  style={{ transform: "translateZ(80px)" }}
+                >
+                  <div className="absolute -top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full bg-amber-400 text-[#0A102A]">
+                    <CheckCircle2 className="h-5 w-5" />
+                  </div>
+                  <span className="text-2xl font-bold text-white">550+</span>
+                  <span className="text-xs font-medium text-muted-foreground">Project Completed</span>
+                </div>
+
+                {/* Float Card 2: Team Members */}
+                <div 
+                  ref={floatCard2Ref}
+                  className="absolute left-[0%] bottom-[20%] z-20 flex flex-col gap-3 rounded-2xl border border-white/10 bg-[#0A102A]/80 backdrop-blur-md p-4 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
+                  style={{ transform: "translateZ(100px)" }}
+                >
+                  <span className="text-xs font-semibold text-white/90">Team Members</span>
+                  <div className="flex -space-x-3">
+                    <Image src="/team/balaji.png" alt="Team" width={32} height={32} className="h-8 w-8 rounded-full border-2 border-[#0A102A] object-cover" />
+                    <Image src="/team/mani.png" alt="Team" width={32} height={32} className="h-8 w-8 rounded-full border-2 border-[#0A102A] object-cover" />
+                    <Image src="/team/ranjani.png" alt="Team" width={32} height={32} className="h-8 w-8 rounded-full border-2 border-[#0A102A] object-cover" />
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-[#0A102A] bg-amber-400 text-xs font-bold text-[#0A102A]">+</div>
+                  </div>
+                </div>
+
+                {/* Floating Message Icon */}
+                <div 
+                  className="absolute right-[15%] bottom-[15%] z-10 flex h-12 w-12 items-center justify-center rounded-full bg-transparent text-[#3b82f6] shadow-lg animate-[bounce_3s_infinite]"
+                  style={{ transform: "translateZ(60px)" }}
+                >
+                  <MessageSquare className="h-8 w-8" />
+                </div>
+                
+                {/* Floating megaphone or icon at top left */}
+                <div 
+                  className="absolute left-[15%] top-[10%] z-10 animate-[bounce_4s_infinite]"
+                  style={{ transform: "translateZ(50px)" }}
+                >
+                   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#eab308" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 11 18-5v12L3 14v-3z"></path><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"></path></svg>
+                </div>
+              </div>
             </div>
           </div>
         </div>

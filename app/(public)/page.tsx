@@ -13,7 +13,7 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function Home() {
-  const [testimonials, clients, projects, categories] = await Promise.all([
+  const [testimonials, clients] = await Promise.all([
     prisma.testimonial.findMany({
       orderBy: { createdAt: "desc" },
     }),
@@ -23,17 +23,6 @@ export default async function Home() {
         name: true,
         logoUrl: true,
       },
-    }),
-    prisma.project.findMany({
-      orderBy: { createdAt: "desc" },
-      take: 6,
-      include: {
-        category: true,
-        client: true,
-      },
-    }),
-    prisma.category.findMany({
-      orderBy: { name: "asc" },
     }),
   ]);
 
