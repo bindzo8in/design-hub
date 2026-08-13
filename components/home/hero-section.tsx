@@ -36,6 +36,8 @@ const HomeHeroSection = () => {
   const floatCard1Ref = useRef<HTMLDivElement>(null);
   const floatCard2Ref = useRef<HTMLDivElement>(null);
   const parallaxWrapperRef = useRef<HTMLDivElement>(null);
+  const mobileSpideyRef = useRef<HTMLImageElement>(null);
+  const tabletSpideyRef = useRef<HTMLImageElement>(null);
 
   // animations
   useEffect(() => {
@@ -103,6 +105,8 @@ const HomeHeroSection = () => {
           "-=0.8"
         );
       }
+
+
 
       if (floatCard1Ref.current) {
         tl.fromTo(
@@ -251,10 +255,12 @@ const HomeHeroSection = () => {
         justify-center
 
         px-4
-        py-20
+        pt-6
+        pb-16
 
         sm:px-6
-        sm:py-24
+        sm:pt-12
+        sm:pb-20
 
         lg:px-6
         lg:py-10
@@ -363,7 +369,9 @@ const HomeHeroSection = () => {
                 tracking-tight
                 text-foreground
 
-                text-[clamp(3.2rem,12vw,5rem)]
+                text-[clamp(2.2rem,9.5vw,4rem)]
+
+                sm:text-[clamp(3.2rem,12vw,5rem)]
 
                 md:text-[clamp(4rem,9vw,6rem)]
 
@@ -411,22 +419,24 @@ const HomeHeroSection = () => {
                 className="
                   relative
                   h-[360px]
-                  overflow-hidden
                   rounded-[2rem]
                   border border-[#26336F]/20
                   bg-card/10
-                  p-5
                   shadow-2xl
                   backdrop-blur-md
                 "
               >
-                <div className="absolute inset-0 bg-gradient-to-tr from-[#26336F]/10 via-[#050711]/60 to-[#DF1B25]/5" />
+                <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-tr from-[#26336F]/10 via-[#050711]/60 to-[#DF1B25]/5" />
 
-                <div className="relative flex h-full items-center justify-center overflow-hidden rounded-[1.5rem]">
+                <div 
+                  className="relative flex h-full items-center justify-center"
+                  style={{ clipPath: "inset(-50% 0 0 0 round 0 0 2rem 2rem)" }}
+                >
                   <img
+                    ref={tabletSpideyRef}
                     src="/home/spiderman.webp"
                     alt="Spiderman Hero"
-                    className="absolute inset-0 w-full h-full object-contain object-center"
+                    className="spidey-breath absolute inset-0 w-full h-full object-cover object-center"
                   />
                 </div>
               </div>
@@ -438,22 +448,24 @@ const HomeHeroSection = () => {
                 className="
                   relative
                   h-[260px]
-                  overflow-hidden
                   rounded-[1.75rem]
                   border border-[#26336F]/20
                   bg-card/10
-                  p-4
                   shadow-2xl
                   backdrop-blur-md
                 "
               >
-                <div className="absolute inset-0 bg-gradient-to-tr from-[#26336F]/10 via-[#050711]/60 to-[#DF1B25]/5" />
+                <div className="absolute inset-0 rounded-[1.75rem] bg-gradient-to-tr from-[#26336F]/10 via-[#050711]/60 to-[#DF1B25]/5" />
 
-                <div className="relative flex h-full items-center justify-center overflow-hidden rounded-[1.25rem]">
+                <div 
+                  className="relative flex h-full items-center justify-center"
+                  style={{ clipPath: "inset(-50% 0 0 0 round 0 0 1.75rem 1.75rem)" }}
+                >
                   <img
+                    ref={mobileSpideyRef}
                     src="/home/spiderman.webp"
                     alt="Spiderman Hero"
-                    className="absolute inset-0 w-full h-full object-contain object-center"
+                    className="spidey-breath absolute inset-0 w-full h-full object-cover object-center"
                   />
                 </div>
               </div>
@@ -595,10 +607,11 @@ const HomeHeroSection = () => {
                   flex items-center
                   min-h-8 sm:min-h-9
                   min-w-[200px] sm:min-w-[280px]
+                  whitespace-nowrap
 
                   font-(family-name:--font-bebas-neue)
 
-                  text-2xl
+                  text-xl
                   tracking-wide
                   text-foreground
 
@@ -652,7 +665,7 @@ const HomeHeroSection = () => {
                     className="w-full h-full object-contain object-center"
                   />
                   {/* Overlay for image */}
-                  <div className="absolute bottom-0 left-0 right-0 h-[40%] bg-gradient-to-t from-background via-background/80 to-transparent" />
+                  {/* <div className="absolute bottom-0 left-0 right-0 h-[40%] bg-gradient-to-t from-background via-background/80 to-transparent" /> */}
                 </div>
 
                 {/* Float Card 1: 550+ Projects */}

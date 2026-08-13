@@ -15,11 +15,11 @@ const marqueeItems = [
 const HomeMarquee = () => {
   return (
     <section className="relative h-48 overflow-hidden">
-      <div className="absolute left-1/2 top-1/2 w-[110%] -translate-x-1/2 -translate-y-1/2 rotate-3">
+      <div className="absolute left-1/2 top-1/2 w-[110%] -translate-x-1/2 -translate-y-1/2 rotate-12 sm:rotate-3">
         <Marquee />
       </div>
 
-      <div className="absolute left-1/2 top-1/2 w-[110%] -translate-x-1/2 -translate-y-1/2 -rotate-3">
+      <div className="absolute left-1/2 top-1/2 w-[110%] -translate-x-1/2 -translate-y-1/2 -rotate-12 sm:-rotate-3">
         <Marquee className="bg-red-600" reverse />
       </div>
     </section>
@@ -27,6 +27,8 @@ const HomeMarquee = () => {
 };
 
 const Marquee = ({ className, reverse = false }: { className?: string, reverse?: boolean }) => {
+  const items = reverse ? [...marqueeItems].reverse() : marqueeItems;
+
   return (
     <div className={cn("marquee-section relative border-t border-b border-primary/10 py-2 overflow-hidden bg-[#314085] shadow-lg select-none z-10", className)}>
       <style
@@ -62,7 +64,7 @@ const Marquee = ({ className, reverse = false }: { className?: string, reverse?:
         )}
       >
         <div className="flex w-max items-center gap-12 sm:gap-16">
-          {[...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, idx) => (
+          {items.map((item, idx) => (
             <span
               key={idx}
               className="inline-flex items-center gap-3 font-[family-name:var(--font-bebas-neue)] text-xl tracking-widest text-white uppercase drop-shadow-sm sm:text-2xl lg:text-3xl"

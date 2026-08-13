@@ -396,6 +396,20 @@
   animation: printWipe 3.4s ease-in-out infinite;
 }
 
+@keyframes spideyBreath {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+.spidey-breath {
+  animation: spideyBreath 6s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
 }
 /* 
 @keyframes marquee {
