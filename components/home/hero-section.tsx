@@ -424,7 +424,7 @@ const HomeHeroSection = () => {
 
                 <div className="relative flex h-full items-center justify-center overflow-hidden rounded-[1.5rem]">
                   <img
-                    src="/home/spiderman.png"
+                    src="/home/spiderman.webp"
                     alt="Spiderman Hero"
                     className="absolute inset-0 w-full h-full object-contain object-center"
                   />
@@ -451,7 +451,7 @@ const HomeHeroSection = () => {
 
                 <div className="relative flex h-full items-center justify-center overflow-hidden rounded-[1.25rem]">
                   <img
-                    src="/home/spiderman.png"
+                    src="/home/spiderman.webp"
                     alt="Spiderman Hero"
                     className="absolute inset-0 w-full h-full object-contain object-center"
                   />
