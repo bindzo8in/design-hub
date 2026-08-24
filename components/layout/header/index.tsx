@@ -96,7 +96,7 @@ const PublicHeader = () => {
     <>
       {/* Desktop navigation bar */}
       <header className="hidden lg:block">
-        <nav className="nav-glass fixed left-0 top-0 z-50 h-24 w-full">
+        <nav className="nav-glass fixed left-0 top-0 z-100 h-24 w-full">
           <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-6 xl:px-0">
             {/* Logo */}
             <BrandLogo />

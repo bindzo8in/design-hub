@@ -81,8 +81,8 @@ model Project {
   thumbnail         String? @map("thumbnail")
   thumbnailPublicId String? @map("thumbnail_public_id")
 
-  bannerImage    String?   @map("banner_image")
-  bannerPublicId String?   @map("banner_public_id")
+  projectImages ProjectImage[]
+
   
   budget         Float?
   status         String    @default("PLANNING")
@@ -99,6 +99,19 @@ model Project {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("projects")
+}
+
+model ProjectImage {
+  id        String   @id @default(cuid())
+  projectId String   @map("project_id")
+  url       String
+  publicId  String   @map("public_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("project_images")
 }
 
 model Category {

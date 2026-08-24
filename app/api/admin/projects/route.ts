@@ -30,14 +30,20 @@ export async function GET() {
 }
 
 // POST: Create a new project (Admin only)
+// POST: Create a new project (Admin only)
 export async function POST(req: NextRequest) {
   const session = await auth();
+
   if (!session || (session.user as any)?.role !== "ADMIN") {
-    return NextResponse.json({ message: "Forbidden" }, { status: 403 });
+    return NextResponse.json(
+      { message: "Forbidden" },
+      { status: 403 },
+    );
   }
 
   try {
     const body = await req.json();
+
     const result = projectFormSchema.safeParse(body);
 
     if (!result.success) {
@@ -55,7 +61,7 @@ export async function POST(req: NextRequest) {
       description,
       clientName,
       thumbnail,
-      bannerImage,
+      projectImages,
       budget,
       status,
       startDate,
@@ -64,29 +70,80 @@ export async function POST(req: NextRequest) {
       clientId,
     } = result.data;
 
-    const project = await prisma.project.create({
-      data: {
-        title,
-        description,
-        clientName,
-        budget,
-        status,
-        startDate: startDate ? new Date(startDate) : null,
-        endDate: endDate ? new Date(endDate) : null,
-        categoryId: categoryId && categoryId !== "none" ? categoryId : null,
-        clientId: clientId && clientId !== "none" ? clientId : null,
-        thumbnail: thumbnail?.url || null,
-        thumbnailPublicId: thumbnail?.publicId || null,
-        bannerImage: bannerImage?.url || null,
-        bannerPublicId: bannerImage?.publicId || null,
-      },
-    });
+const project = await prisma.project.create({
+  data: {
+    title,
+    description,
+    clientName,
 
-    return NextResponse.json(project, { status: 201 });
+    budget,
+    status,
+
+    startDate: startDate
+      ? new Date(startDate)
+      : null,
+
+    endDate: endDate
+      ? new Date(endDate)
+      : null,
+
+    // Category relation
+    category:
+      categoryId && categoryId !== "none"
+        ? {
+            connect: {
+              id: categoryId,
+            },
+          }
+        : undefined,
+
+    // Client relation
+    client:
+      clientId && clientId !== "none"
+        ? {
+            connect: {
+              id: clientId,
+            },
+          }
+        : undefined,
+
+    // Thumbnail
+    thumbnail: thumbnail?.url || null,
+
+    thumbnailPublicId:
+      thumbnail?.publicId || null,
+
+    // Project gallery images
+    projectImages: {
+      create: (projectImages || []).map((image) => ({
+        url: image.url,
+        publicId: image.publicId,
+      })),
+    },
+  },
+
+  include: {
+    projectImages: true,
+    category: true,
+    client: true,
+  },
+});
+
+
+
+
+    return NextResponse.json(project, {
+      status: 201,
+    });
   } catch (error: any) {
-    console.error(error);
+    console.error("Create project error:", error);
+
     return NextResponse.json(
-      { message: error.message || "Failed to create project" },
+      {
+        message:
+          error.message ||
+          "Failed to create project",
+      },
       { status: 500 },
     );
   }

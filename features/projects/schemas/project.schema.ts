@@ -43,7 +43,7 @@ export const projectFormSchema = z.object({
 
   thumbnail: cloudinaryImageSchema.nullable().optional(),
 
-  bannerImage: cloudinaryImageSchema.nullable().optional(),
+  projectImages: z.array(cloudinaryImageSchema).optional(),
 });
 
 export type ProjectFormValues = z.infer<typeof projectFormSchema>;

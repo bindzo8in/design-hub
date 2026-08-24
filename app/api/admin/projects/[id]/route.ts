@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { projectFormSchema } from "@/features/projects/schemas/project.schema";
+import { deleteCloudinaryImage } from "@/lib/cloudinary";
 
 // Helper to check user authorization
 async function checkAuth() {
@@ -69,12 +70,16 @@ export async function PUT(
       );
     }
 
-    const { title, description, clientName, budget, status, startDate, endDate, categoryId, clientId, thumbnail, bannerImage } = result.data;
+    const { title, description, clientName, budget, status, startDate, endDate, categoryId, clientId, thumbnail, projectImages } = result.data;
 
     // Check if project exists
     const projectExists = await prisma.project.findUnique({ where: { id } });
     if (!projectExists) {
       return NextResponse.json({ message: "Project not found" }, { status: 404 });
+    }
+
+    if (result.data.thumbnail?.publicId && projectExists.thumbnailPublicId && projectExists.thumbnailPublicId !== result.data.thumbnail?.publicId) {
+      await deleteCloudinaryImage(projectExists.thumbnailPublicId)
     }
 
     const updatedProject = await prisma.project.update({
@@ -91,8 +96,7 @@ export async function PUT(
         clientId: clientId && clientId !== "none" ? clientId : null,
         thumbnail: thumbnail?.url || null,
         thumbnailPublicId: thumbnail?.publicId || null,
-        bannerImage: bannerImage?.url || null,
-        bannerPublicId: bannerImage?.publicId || null,
+        
       },
     });
 

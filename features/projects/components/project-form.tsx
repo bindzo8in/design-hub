@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import {ProjectImageUploadField} from "@/components/project-image-upload-field";
 import {
   projectFormSchema,
   ProjectFormValues,
@@ -176,11 +176,11 @@ export function ProjectForm({
             folder="projects/thumbnails"
           />
 
-          <ImageUploadField
-            name="bannerImage"
+          <ProjectImageUploadField
             control={form.control}
-            label="Project Banner"
-            folder="projects/banners"
+            name="projectImages"
+            label="Project Images"
+            folder="projects/images"
           />
         </div>
 

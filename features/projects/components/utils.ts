@@ -23,11 +23,13 @@ export const emptyProjectFormValues: ProjectFormValues = {
 
   thumbnail: null,
 
-  bannerImage: null,
+  projectImages: [],
 };
 
 type ProjectFormSource = ProjectRow &
-  Partial<Pick<Project, "thumbnail" | "thumbnailPublicId" | "bannerImage" | "bannerPublicId">>;
+  Partial<Pick<Project, "thumbnail" | "thumbnailPublicId">> & {
+    projectImages?: ProjectFormValues["projectImages"];
+  };
 
 export function mapProjectToFormValues(project: ProjectFormSource): ProjectFormValues {
   return {
@@ -60,11 +62,6 @@ export function mapProjectToFormValues(project: ProjectFormSource): ProjectFormV
         }
       : null,
 
-    bannerImage: project.bannerImage
-      ? {
-          url: project.bannerImage,
-          publicId: project.bannerPublicId ?? "",
-        }
-      : null,
+    projectImages: project.projectImages ?? [],
   };
 }

@@ -1,16 +1,32 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import Image from "next/image";
-import { Search, Calendar, Landmark, Briefcase, Tag } from "lucide-react";
-import gsap from "gsap";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
+  useState,
+  useEffect,
+  useRef,
+  useMemo,
+} from "react";
+import Image from "next/image";
+import {
+  Search,
+  Briefcase,
+  Tag,
+  Loader2,
+} from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import gsap from "gsap";
+
+import Masonry, {
+  ResponsiveMasonry,
+} from "react-responsive-masonry";
+
+import { useRouter } from "next/navigation";
 
 interface Category {
   id: string;
@@ -48,24 +64,31 @@ interface PortfolioClientProps {
   categories: Category[];
 }
 
-const statusColorMap: Record<string, { bg: string; text: string; dot: string }> = {
+const PAGE_SIZE = 12;
+
+const statusColorMap: Record<
+  string,
+  {
+    text: string;
+    dot: string;
+  }
+> = {
   PLANNING: {
-    bg: "bg-primary/10 border-primary/30",
-    text: "text-slate-400",
-    dot: "bg-slate-400",
+    text: "text-slate-300",
+    dot: "bg-slate-300",
   },
+
   IN_PROGRESS: {
-    bg: "bg-amber-500/10 border-amber-500/20",
-    text: "text-amber-400",
-    dot: "bg-amber-400",
+    text: "text-amber-300",
+    dot: "bg-amber-300",
   },
+
   COMPLETED: {
-    bg: "bg-emerald-500/10 border-emerald-500/20",
-    text: "text-emerald-400",
-    dot: "bg-emerald-400",
+    text: "text-emerald-300",
+    dot: "bg-emerald-300",
   },
+
   ON_HOLD: {
-    bg: "bg-accent/10 border-accent/20",
     text: "text-accent",
     dot: "bg-accent",
   },
@@ -78,62 +101,234 @@ const statusLabelMap: Record<string, string> = {
   ON_HOLD: "On Hold",
 };
 
-export default function PortfolioClient({ initialProjects, categories }: PortfolioClientProps) {
-  const [selectedCategoryId, setSelectedCategoryId] = useState<string>("all");
-  const [searchQuery, setSearchQuery] = useState<string>("");
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
+export default function PortfolioClient({
+  initialProjects,
+  categories,
+}: PortfolioClientProps) {
+  const [selectedCategoryId, setSelectedCategoryId] =
+    useState("all");
 
-  // Stagger reveal on grid mount and changes
-  useEffect(() => {
-    if (!gridRef.current) return;
-    
-    // Clear initial state
-    gsap.set(".portfolio-card", { opacity: 0, y: 20, scale: 0.98 });
-    
-    gsap.to(".portfolio-card", {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      duration: 0.7,
-      stagger: 0.08,
-      ease: "power3.out",
-      overwrite: "auto",
+  const [searchQuery, setSearchQuery] =
+    useState("");
+
+  /*
+   * Mobile:
+   * Clicking an image shows the overlay.
+   */
+
+
+  const [visibleCount, setVisibleCount] =
+    useState(PAGE_SIZE);
+
+  const [isLoadingMore, setIsLoadingMore] =
+    useState(false);
+
+  const headerRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+  const loadMoreRef = useRef<HTMLDivElement>(null);
+
+  /*
+   * ---------------------------------------------------------
+   * FILTER
+   * ---------------------------------------------------------
+   */
+
+  const filteredProjects = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+
+    return initialProjects.filter((project) => {
+      const matchesCategory =
+        selectedCategoryId === "all" ||
+        project.categoryId === selectedCategoryId;
+
+      if (!query) {
+        return matchesCategory;
+      }
+
+      const matchesSearch =
+        project.title
+          .toLowerCase()
+          .includes(query) ||
+        project.description
+          ?.toLowerCase()
+          .includes(query) ||
+        project.clientName
+          ?.toLowerCase()
+          .includes(query) ||
+        project.client?.name
+          ?.toLowerCase()
+          .includes(query);
+
+      return matchesCategory && matchesSearch;
     });
+  }, [
+    initialProjects,
+    selectedCategoryId,
+    searchQuery,
+  ]);
+
+  /*
+   * ---------------------------------------------------------
+   * VISIBLE PROJECTS
+   * ---------------------------------------------------------
+   */
+
+  const visibleProjects = useMemo(() => {
+    return filteredProjects.slice(0, visibleCount);
+  }, [filteredProjects, visibleCount]);
+
+  const hasMore =
+    visibleCount < filteredProjects.length;
+
+  /*
+   * ---------------------------------------------------------
+   * RESET PAGINATION
+   * ---------------------------------------------------------
+   */
+
+  useEffect(() => {
+    setVisibleCount(PAGE_SIZE);
   }, [selectedCategoryId, searchQuery]);
 
-  // Entrance animation for header elements
+  /*
+   * ---------------------------------------------------------
+   * INFINITE SCROLL
+   * ---------------------------------------------------------
+   */
+
+  useEffect(() => {
+    const target = loadMoreRef.current;
+
+    if (!target || !hasMore) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      async (entries) => {
+        if (!entries[0]?.isIntersecting) {
+          return;
+        }
+
+        if (isLoadingMore) {
+          return;
+        }
+
+        setIsLoadingMore(true);
+
+        await new Promise((resolve) =>
+          setTimeout(resolve, 100)
+        );
+
+        setVisibleCount((current) =>
+          Math.min(
+            current + PAGE_SIZE,
+            filteredProjects.length
+          )
+        );
+
+        setIsLoadingMore(false);
+      },
+      {
+        rootMargin: "800px 0px",
+        threshold: 0,
+      }
+    );
+
+    observer.observe(target);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [
+    filteredProjects.length,
+    hasMore,
+    isLoadingMore,
+  ]);
+
+  /*
+   * ---------------------------------------------------------
+   * HEADER ANIMATION
+   * ---------------------------------------------------------
+   */
+
   useEffect(() => {
     if (!headerRef.current) return;
-    const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+    const tl = gsap.timeline({
+      defaults: {
+        ease: "power4.out",
+      },
+    });
+
     tl.fromTo(
       ".anim-header-item",
-      { opacity: 0, y: 15 },
-      { opacity: 1, y: 0, duration: 0.8, stagger: 0.15 }
+      {
+        opacity: 0,
+        y: 15,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.15,
+      }
     );
+
+    return () => {
+      tl.kill();
+    };
   }, []);
 
-  // Filter projects based on selected Category and search query
-  const filteredProjects = initialProjects.filter((project) => {
-    const matchesCategory =
-      selectedCategoryId === "all" || project.categoryId === selectedCategoryId;
+  /*
+   * ---------------------------------------------------------
+   * IMAGE ANIMATION
+   * ---------------------------------------------------------
+   */
 
-    const matchesSearch =
-      project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (project.description &&
-        project.description.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      (project.clientName &&
-        project.clientName.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      (project.client?.name &&
-        project.client.name.toLowerCase().includes(searchQuery.toLowerCase()));
+  useEffect(() => {
+    if (!gridRef.current) return;
 
-    return matchesCategory && matchesSearch;
-  });
+    const images =
+      gridRef.current.querySelectorAll(
+        ".portfolio-item"
+      );
 
-  // Format budget currency helper
-  const formatCurrency = (value: number | null) => {
-    if (value === null || value === undefined) return "Undisclosed";
+    if (!images.length) return;
+
+    gsap.fromTo(
+      images,
+      {
+        opacity: 0,
+        y: 20,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.04,
+        ease: "power3.out",
+        overwrite: "auto",
+      }
+    );
+  }, [
+    visibleCount,
+    selectedCategoryId,
+    searchQuery,
+  ]);
+
+  /*
+   * ---------------------------------------------------------
+   * FORMATTERS
+   * ---------------------------------------------------------
+   */
+
+  const formatCurrency = (
+    value: number | null
+  ) => {
+    if (value === null || value === undefined) {
+      return "Undisclosed";
+    }
+
     return new Intl.NumberFormat("en-IN", {
       style: "currency",
       currency: "INR",
@@ -141,297 +336,420 @@ export default function PortfolioClient({ initialProjects, categories }: Portfol
     }).format(value);
   };
 
-  // Format date helper
-  const formatDate = (dateString: string | null) => {
+  const formatDate = (
+    dateString: string | null
+  ) => {
     if (!dateString) return "Ongoing";
-    return new Date(dateString).toLocaleDateString("en-US", {
+
+    return new Date(
+      dateString
+    ).toLocaleDateString("en-US", {
       month: "short",
       year: "numeric",
     });
   };
 
-  // Metrics
-  const totalProjects = initialProjects.length;
-  const completedProjects = initialProjects.filter(p => p.status === "COMPLETED").length;
-  const activeProjects = initialProjects.filter(p => p.status === "IN_PROGRESS").length;
+  /*
+   * ---------------------------------------------------------
+   * METRICS
+   * ---------------------------------------------------------
+   */
+
+  const totalProjects =
+    initialProjects.length;
+
+  const completedProjects =
+    initialProjects.filter(
+      (project) =>
+        project.status === "COMPLETED"
+    ).length;
+
+  const activeProjects =
+    initialProjects.filter(
+      (project) =>
+        project.status === "IN_PROGRESS"
+    ).length;
+
+  /*
+   * ---------------------------------------------------------
+   * RENDER
+   * ---------------------------------------------------------
+   */
+
+  const router = useRouter();
 
   return (
     <div className="space-y-12">
-      {/* Page Header Area */}
-      <div ref={headerRef} className="text-center max-w-4xl mx-auto space-y-4 px-4">
+      {/* =====================================================
+          HEADER
+      ====================================================== */}
+
+      <div
+        ref={headerRef}
+        className="text-center max-w-4xl mx-auto space-y-4 px-4"
+      >
         <div className="anim-header-item inline-flex items-center gap-3 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-accent mb-2">
           <span className="w-8 h-[1px] bg-accent" />
+
           Our Achievements
+
           <span className="w-8 h-[1px] bg-accent" />
         </div>
+
         <h1 className="anim-header-item font-[family-name:var(--font-bebas-neue)] text-6xl sm:text-8xl leading-none uppercase tracking-wider text-foreground">
-          Selected <em className="not-italic text-accent">Works</em>
+          Selected{" "}
+          <em className="not-italic text-accent">
+            Works
+          </em>
         </h1>
+
         <p className="anim-header-item text-slate-400 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
-          Explore our collection of custom web systems, high-performance applications, and immersive digital platforms engineered for luxury-tech businesses.
+          Explore our collection of custom web systems,
+          high-performance applications, and immersive
+          digital platforms engineered for luxury-tech
+          businesses.
         </p>
       </div>
 
-      {/* Metrics Row */}
-      <div className="grid grid-cols-3 gap-4 max-w-4xl mx-auto px-4 select-none">
-        <div className="bg-card border border-border rounded-2xl p-4 text-center shadow-sm">
+      {/* =====================================================
+          METRICS
+      ====================================================== */}
+
+      <div className="grid grid-cols-3 gap-4 max-w-4xl mx-auto px-4">
+        <div className="text-center">
           <div className="font-[family-name:var(--font-bebas-neue)] text-3xl sm:text-5xl text-foreground">
             {totalProjects}
           </div>
-          <div className="text-[9px] sm:text-xs font-semibold tracking-wider text-muted-foreground uppercase mt-1">
+
+          <div className="text-[9px] sm:text-xs font-semibold tracking-wider text-muted-foreground uppercase">
             Total Projects
           </div>
         </div>
-        <div className="bg-card border border-border rounded-2xl p-4 text-center shadow-sm">
+
+        <div className="text-center">
           <div className="font-[family-name:var(--font-bebas-neue)] text-3xl sm:text-5xl text-accent">
             {activeProjects}
           </div>
-          <div className="text-[9px] sm:text-xs font-semibold tracking-wider text-muted-foreground uppercase mt-1">
+
+          <div className="text-[9px] sm:text-xs font-semibold tracking-wider text-muted-foreground uppercase">
             Active Now
           </div>
         </div>
-        <div className="bg-card border border-border rounded-2xl p-4 text-center shadow-sm">
-          <div className="font-[family-name:var(--font-bebas-neue)] text-3xl sm:text-5xl text-emerald-600 dark:text-emerald-400">
+
+        <div className="text-center">
+          <div className="font-[family-name:var(--font-bebas-neue)] text-3xl sm:text-5xl text-emerald-500">
             {completedProjects}
           </div>
-          <div className="text-[9px] sm:text-xs font-semibold tracking-wider text-slate-500 dark:text-slate-300 uppercase mt-1">
-            Success Rate
+
+          <div className="text-[9px] sm:text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+            Completed
           </div>
         </div>
       </div>
 
-      {/* Search and Category Filter Section */}
-      <div className="max-w-7xl mx-auto px-4 space-y-6">
+      {/* =====================================================
+          FILTERS
+      ====================================================== */}
+
+      <div className="max-w-7xl mx-auto px-4">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-primary/20">
-          
-          {/* Categories Tab list */}
-          <div className="flex flex-wrap items-center gap-2 select-none">
-            <button
-              onClick={() => setSelectedCategoryId("all")}
-              className={`rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer border ${
-                selectedCategoryId === "all"
-                  ? "bg-accent border-accent text-accent-foreground"
-                  : "bg-muted/40 border-primary/30 text-muted-foreground hover:border-accent/50 hover:text-foreground"
-              }`}
+          {/* Categories */}
+
+          <div className="flex items-center gap-3">
+            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground whitespace-nowrap">
+              Category
+            </span>
+
+            <Select
+              value={selectedCategoryId}
+              onValueChange={(value) =>
+                setSelectedCategoryId(value)
+              }
             >
-              All Projects
-            </button>
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => setSelectedCategoryId(category.id)}
-                className={`rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer border ${
-                  selectedCategoryId === category.id
-                    ? "bg-accent border-accent text-accent-foreground"
-                    : "bg-muted/40 border-primary/30 text-muted-foreground hover:border-accent/50 hover:text-foreground"
-                }`}
-              >
-                {category.name}
-              </button>
-            ))}
+              <SelectTrigger className="w-[200px] h-10 rounded-full bg-muted/40 border-primary/30 text-xs font-semibold uppercase tracking-wider focus:ring-accent/50">
+                <SelectValue placeholder="Select category" />
+              </SelectTrigger>
+
+              <SelectContent>
+                <SelectItem value="all">
+                  All Projects
+                </SelectItem>
+
+                {categories.map((category) => (
+                  <SelectItem
+                    key={category.id}
+                    value={category.id}
+                  >
+                    {category.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
-          {/* Search bar input */}
+          {/* Search */}
+
           <div className="relative w-full md:w-80">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+
             <input
               type="text"
               placeholder="Search selected works..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-muted/40 border border-primary/30 rounded-full pl-11 pr-4 py-2.5 text-xs text-foreground placeholder-muted-foreground focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/50 transition-all font-sans"
+              onChange={(event) =>
+                setSearchQuery(event.target.value)
+              }
+              className="w-full bg-muted/40 border border-primary/30 rounded-full pl-11 pr-4 py-2.5 text-xs text-foreground placeholder-muted-foreground focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/50 transition-all"
             />
           </div>
-
         </div>
+      </div>
 
-        {/* Projects Grid Display */}
+      {/* =====================================================
+          MASONRY GALLERY
+      ====================================================== */}
+
+      <div className="max-w-[1600px] mx-auto px-4">
         {filteredProjects.length > 0 ? (
-          <div
-            ref={gridRef}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-4"
-          >
-            {filteredProjects.map((project) => {
-              const statusColors = statusColorMap[project.status] || statusColorMap.PLANNING;
-              return (
-                <div
-                  key={project.id}
-                  onClick={() => setSelectedProject(project)}
-                  className="portfolio-card cursor-pointer group relative bg-muted/40 border border-primary/20 rounded-3xl backdrop-blur-md hover:border-accent/45 hover:shadow-[0_0_30px_rgba(223,27,37,0.05)] transition-all duration-500 flex flex-col overflow-hidden"
-                >
-                  {project.thumbnail && (
-                    <div className="relative w-full h-48 sm:h-56 bg-background shrink-0 border-b border-primary/20 overflow-hidden">
-                      <Image
-                        src={project.thumbnail}
-                        alt={project.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-700"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      />
-                    </div>
+          <>
+            <div ref={gridRef}>
+              <ResponsiveMasonry
+                columnsCountBreakPoints={{
+                  350: 1,
+                  640: 2,
+                  900: 3,
+                  1200: 4,
+                }}
+              >
+                <Masonry gutter="16px">
+                  {visibleProjects.map(
+                    (project) => {
+                      const status =
+                        statusColorMap[
+                        project.status
+                        ] ||
+                        statusColorMap.PLANNING;
+
+                      return (
+                        <div
+                          key={project.id}
+                          className="portfolio-item relative group overflow-hidden rounded-xl cursor-pointer"
+                          onClick={() => {
+                            router.push(`/portfolio/${project.id}`);
+                          }}
+                        >
+                          {/* =================================================
+                              IMAGE
+                          ================================================== */}
+
+                          {project.thumbnail ? (
+                            <Image
+                              src={
+                                project.thumbnail
+                              }
+                              alt={
+                                project.title
+                              }
+                              width={
+                                1600
+                              }
+                              height={
+                                1200
+                              }
+                              loading="lazy"
+                              className="block w-full h-auto object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                              sizes="
+                                (max-width: 640px) 100vw,
+                                (max-width: 900px) 50vw,
+                                (max-width: 1200px) 33vw,
+                                25vw
+                              "
+                            />
+                          ) : (
+                            <div className="aspect-[4/3] bg-muted flex items-center justify-center">
+                              <span className="text-xs text-muted-foreground">
+                                No image
+                              </span>
+                            </div>
+                          )}
+
+                          {/* =================================================
+                              DARK GRADIENT
+                          ================================================== */}
+
+                          <div
+                            className={`
+                              absolute inset-0
+                              bg-gradient-to-t
+                              from-black/90
+                              via-black/20
+                              to-transparent
+                              transition-opacity
+                              duration-500
+                              pointer-events-none
+
+                              opacity-0
+                              group-hover:opacity-100
+                            `}
+                          />
+
+                          {/* =================================================
+                              HOVER / TAP CONTENT
+                          ================================================== */}
+
+                          <div
+                            className={`
+                              absolute
+                              inset-x-0
+                              bottom-0
+                              p-5
+                              sm:p-6
+                              text-white
+
+                              transition-all
+                              duration-500
+
+                              translate-y-5
+                              opacity-0
+
+                              group-hover:translate-y-0
+                              group-hover:opacity-100
+                            `}
+                          >
+                            {/* Category */}
+
+                            <div className="flex items-center gap-2 mb-2">
+                              <Tag className="w-3 h-3 text-accent" />
+
+                              <span className="text-[10px] uppercase tracking-[0.18em] font-bold text-accent">
+                                {project.category
+                                  ?.name ||
+                                  "Direct Work"}
+                              </span>
+                            </div>
+
+                            {/* Title */}
+
+                            <h3 className="text-xl sm:text-2xl font-bold uppercase tracking-wide leading-tight">
+                              {project.title}
+                            </h3>
+
+                            {/* Client */}
+
+                            <p className="mt-2 text-xs text-white/60 flex items-center gap-1.5">
+                              <Briefcase className="w-3 h-3" />
+
+                              {project.client
+                                ?.name ||
+                                project.clientName ||
+                                "Direct Partner"}
+                            </p>
+
+                            {/* Status */}
+
+                            <div className="mt-4 flex items-center justify-between gap-4">
+                              <span
+                                className={`flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider ${status.text}`}
+                              >
+                                <span
+                                  className={`w-1.5 h-1.5 rounded-full ${status.dot}`}
+                                />
+
+                                {statusLabelMap[
+                                  project
+                                    .status
+                                ] ||
+                                  project.status}
+                              </span>
+
+                              <span className="text-[10px] text-white/50">
+                                View project →
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* =================================================
+                              TOP RIGHT CATEGORY
+                          ================================================== */}
+
+                          <div
+                            className={`
+                              absolute
+                              top-4
+                              right-4
+
+                              px-3
+                              py-1.5
+                              rounded-full
+
+                              bg-black/40
+                              backdrop-blur-md
+
+                              border
+                              border-white/10
+
+                              text-[9px]
+                              uppercase
+                              tracking-wider
+                              font-semibold
+                              text-white/80
+
+                              transition-all
+                              duration-300
+
+                              group-hover:opacity-0
+
+                            
+                            `}
+                          >
+                            {project.category
+                              ?.name ||
+                              "Project"}
+                          </div>
+                        </div>
+                      );
+                    }
                   )}
-                  <div className="p-6 flex flex-col justify-between flex-1">
-                    <div className="space-y-4">
-                    {/* Top Row: Category and Status */}
-                    <div className="flex items-center justify-between">
-                      <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-accent">
-                        <Tag className="h-3 w-3" />
-                        {project.category?.name || "Direct Work"}
-                      </span>
-                      <span
-                        className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-semibold border ${statusColors.bg} ${statusColors.text}`}
-                      >
-                        <span className={`h-1.5 w-1.5 rounded-full ${statusColors.dot}`} />
-                        {statusLabelMap[project.status] || project.status}
-                      </span>
-                    </div>
+                </Masonry>
+              </ResponsiveMasonry>
+            </div>
 
-                    {/* Title */}
-                    <div>
-                      <h3 className="text-xl sm:text-2xl font-bold text-foreground tracking-wide uppercase line-clamp-1 group-hover:text-accent transition-colors duration-300">
-                        {project.title}
-                      </h3>
-                      <p className="text-xs text-muted-foreground font-sans mt-1 flex items-center gap-1.5">
-                        <Briefcase className="h-3 w-3 text-muted-foreground/80" />
-                        <span>Client:</span>
-                        <strong className="text-slate-300 font-medium">
-                          {project.client?.name || project.clientName || "Direct Partner"}
-                        </strong>
-                      </p>
-                    </div>
+            {/* =====================================================
+                LOAD MORE
+            ====================================================== */}
 
-                    {/* Description */}
-                    <p className="text-xs sm:text-sm text-slate-400 leading-relaxed line-clamp-3 font-sans">
-                      {project.description || "No project description provided. Explore our customized solutions by initiating contact."}
-                    </p>
-                  </div>
+            <div
+              ref={loadMoreRef}
+              className="h-32 flex items-center justify-center"
+            >
+              {hasMore ? (
+                <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                  <Loader2 className="w-4 h-4 animate-spin" />
 
-                  {/* Bottom Panel Card Info */}
-                  <div className="mt-6 pt-4 border-t border-primary/25 flex flex-col gap-3 font-sans">
-                    <div className="flex items-center justify-between text-xs text-muted-foreground">
-                      <span className="flex items-center gap-1.5">
-                        <Landmark className="h-3.5 w-3.5 text-muted-foreground/80" />
-                        <span>Valuation:</span>
-                      </span>
-                      <span className="font-bold text-foreground tracking-wider">
-                        {formatCurrency(project.budget)}
-                      </span>
-                    </div>
-
-                    <div className="flex items-center justify-between text-xs text-muted-foreground">
-                      <span className="flex items-center gap-1.5">
-                        <Calendar className="h-3.5 w-3.5 text-muted-foreground/80" />
-                        <span>Timeline:</span>
-                      </span>
-                      <span className="font-medium text-muted-foreground">
-                        {formatDate(project.startDate)} &mdash; {formatDate(project.endDate)}
-                      </span>
-                    </div>
-                  </div>
-                  </div>
-
-                  {/* Left accent lines hover effect */}
-                  <div className="absolute top-0 bottom-0 left-0 w-[3px] bg-accent rounded-l-3xl transform scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-center z-20" />
+                  <span>
+                    Loading more projects...
+                  </span>
                 </div>
-              );
-            })}
-          </div>
+              ) : (
+                <p className="text-xs text-muted-foreground">
+                  You&apos;ve reached the end.
+                </p>
+              )}
+            </div>
+          </>
         ) : (
-          /* Empty Search/Filter State */
-          <div className="text-center py-20 bg-muted/15 border border-primary/10 rounded-3xl max-w-4xl mx-auto">
-            <p className="text-muted-foreground font-sans text-sm">
-              No selected works matched your search or category filter. Try clearing the filter tabs.
+          /* =====================================================
+             EMPTY STATE
+          ====================================================== */
+
+          <div className="text-center py-20">
+            <p className="text-muted-foreground text-sm">
+              No selected works matched your search
+              or category filter.
             </p>
           </div>
         )}
       </div>
-
-      {/* Project Preview Modal */}
-      <Dialog open={!!selectedProject} onOpenChange={(open) => !open && setSelectedProject(null)}>
-        {selectedProject && (
-          <DialogContent className="sm:max-w-2xl bg-background border border-primary/40 text-foreground p-0 overflow-y-auto max-h-[90vh] rounded-3xl shadow-2xl">
-            {/* Project Image Banner */}
-            {(selectedProject.bannerImage || selectedProject.thumbnail) ? (
-              <div className="relative w-full h-48 sm:h-72 bg-muted shrink-0 border-b border-primary/30">
-                <Image
-                  src={selectedProject.bannerImage || selectedProject.thumbnail || ""}
-                  alt={selectedProject.title}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 42rem"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-              </div>
-            ) : (
-              <div className="h-2 w-full shrink-0 bg-gradient-to-r from-accent to-primary" />
-            )}
-            
-            <div className="p-6 sm:p-8 pt-4">
-              <DialogHeader className="text-left space-y-4">
-                <div className="flex flex-wrap items-center gap-3">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-primary/20 text-primary border border-primary/40">
-                    <Tag className="h-3.5 w-3.5" />
-                    {selectedProject.category?.name || "Direct Work"}
-                  </span>
-                  
-                  {/* Status Badge */}
-                  <span
-                    className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border ${statusColorMap[selectedProject.status]?.bg || statusColorMap.PLANNING.bg} ${statusColorMap[selectedProject.status]?.text || statusColorMap.PLANNING.text}`}
-                  >
-                    <span className={`h-2 w-2 rounded-full ${statusColorMap[selectedProject.status]?.dot || statusColorMap.PLANNING.dot}`} />
-                    {statusLabelMap[selectedProject.status] || selectedProject.status}
-                  </span>
-                </div>
-                
-                <DialogTitle className="font-[family-name:var(--font-bebas-neue)] text-4xl sm:text-5xl uppercase tracking-wider text-foreground mt-4">
-                  {selectedProject.title}
-                </DialogTitle>
-              </DialogHeader>
-
-              <div className="mt-8 space-y-6">
-                {/* Description */}
-                <div>
-                  <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-widest mb-3">Project Overview</h4>
-                  <DialogDescription className="text-sm text-muted-foreground leading-relaxed font-sans">
-                    {selectedProject.description || "Detailed project description is currently unavailable. This project was developed as a bespoke solution tailored strictly to client requirements."}
-                  </DialogDescription>
-                </div>
-
-                {/* Details Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6 border-t border-primary/30">
-                  <div className="bg-muted/50 rounded-2xl p-4 border border-primary/20">
-                    <p className="flex items-center gap-2 text-xs text-muted-foreground mb-1 font-semibold uppercase tracking-wider">
-                      <Briefcase className="h-4 w-4 text-muted-foreground/80" /> Client
-                    </p>
-                    <p className="text-base text-foreground font-medium">
-                      {selectedProject.client?.name || selectedProject.clientName || "Direct Partner"}
-                    </p>
-                  </div>
-                  
-                  <div className="bg-muted/50 rounded-2xl p-4 border border-primary/20">
-                    <p className="flex items-center gap-2 text-xs text-muted-foreground mb-1 font-semibold uppercase tracking-wider">
-                      <Landmark className="h-4 w-4 text-muted-foreground/80" /> Valuation
-                    </p>
-                    <p className="text-base text-foreground font-bold tracking-wide">
-                      {formatCurrency(selectedProject.budget)}
-                    </p>
-                  </div>
-
-                  <div className="bg-muted/50 rounded-2xl p-4 border border-primary/20 sm:col-span-2">
-                    <p className="flex items-center gap-2 text-xs text-muted-foreground mb-1 font-semibold uppercase tracking-wider">
-                      <Calendar className="h-4 w-4 text-muted-foreground/80" /> Timeline
-                    </p>
-                    <p className="text-base text-muted-foreground font-medium">
-                      {formatDate(selectedProject.startDate)} &mdash; {formatDate(selectedProject.endDate)}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </DialogContent>
-        )}
-      </Dialog>
     </div>
   );
 }

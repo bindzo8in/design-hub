@@ -5,13 +5,16 @@ import WhatsAppButton from "@/components/ui/whatsapp-button";
 
 export default async function PublicLayout({
   children,
+  modal
 }: {
   children: React.ReactNode;
+  modal: React.ReactNode;
 }) {
   return (
     <>
       <PublicHeader />
       {children}
+      {modal}
       <ContactPopupTrigger />
       <WhatsAppButton />
       <Footer />
