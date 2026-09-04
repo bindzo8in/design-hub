@@ -30,7 +30,7 @@ export default function HeroCinematic() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="font-[family-name:var(--font-chillax)] font-light text-5xl md:text-7xl lg:text-8xl font-bold uppercase text-foreground leading-[1.1] tracking-tight mb-8"
+          className="font-[family-name:var(--font-heading)] font-light text-5xl md:text-7xl lg:text-8xl font-bold uppercase text-foreground leading-[1.1] tracking-tight mb-8"
         >
           Our <br className="md:hidden" />
           <span className="text-accent italic font-light">Services</span>

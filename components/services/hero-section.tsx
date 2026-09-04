@@ -28,7 +28,7 @@ const Hero = () => {
             <span className="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-[0.3em] uppercase text-accent border border-accent/30 rounded-full bg-accent/5 backdrop-blur-md">
               What We Do
             </span>
-            <h1 className="font-[family-name:var(--font-chillax)] font-light text-[clamp(3.5rem,8vw,7rem)] font-bold text-foreground leading-[0.9] tracking-tight mb-8 uppercase">
+            <h1 className="font-[family-name:var(--font-heading)] font-light text-[clamp(3.5rem,8vw,7rem)] font-bold text-foreground leading-[0.9] tracking-tight mb-8 uppercase">
               OUR <br />
               <span className="text-accent italic font-light">
                 SERVICES

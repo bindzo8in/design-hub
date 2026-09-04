@@ -73,7 +73,7 @@ const HeroSection = ({
             className="
       relative
       text-center
-      font-[family-name:var(--font-chillax)]
+      font-[family-name:var(--font-heading)]
       font-light
       text-foreground
 
@@ -123,7 +123,7 @@ const HeroSection = ({
           >
             <h2
               className="
-                font-[family-name:var(--font-chillax)] font-light
+                font-[family-name:var(--font-heading)] font-light
                 text-2xl
                 leading-tight
 

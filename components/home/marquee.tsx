@@ -66,7 +66,7 @@ const Marquee = ({ className, reverse = false }: { className?: string, reverse?:
         {items.map((item, idx) => (
           <span
             key={`first-${idx}`}
-            className="inline-flex items-center gap-3 font-[family-name:var(--font-chillax)] font-light text-xl tracking-widest text-white uppercase drop-shadow-sm sm:text-2xl lg:text-3xl"
+            className="inline-flex items-center gap-3 font-[family-name:var(--font-heading)] font-light text-xl tracking-widest text-white uppercase drop-shadow-sm sm:text-2xl lg:text-3xl"
           >
             <span>{item}</span>
 
@@ -79,7 +79,7 @@ const Marquee = ({ className, reverse = false }: { className?: string, reverse?:
         {items.map((item, idx) => (
           <span
             key={`second-${idx}`}
-            className="inline-flex items-center gap-3 font-[family-name:var(--font-chillax)] font-light text-xl tracking-widest text-white uppercase drop-shadow-sm sm:text-2xl lg:text-3xl"
+            className="inline-flex items-center gap-3 font-[family-name:var(--font-heading)] font-light text-xl tracking-widest text-white uppercase drop-shadow-sm sm:text-2xl lg:text-3xl"
           >
             <span>{item}</span>
 

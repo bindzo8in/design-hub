@@ -88,7 +88,7 @@ const HomeProcessSection = () => {
           
           {/* Left: Sticky Header */}
           <div className="lg:w-1/3 lg:sticky lg:top-40 flex flex-col gap-8">
-            <h2 className="font-[family-name:var(--font-chillax)] font-light text-[clamp(2.5rem,5vw,5rem)] leading-[1.1] uppercase tracking-tight text-foreground/90">
+            <h2 className="font-[family-name:var(--font-heading)] font-light text-[clamp(2.5rem,5vw,5rem)] leading-[1.1] uppercase tracking-tight text-foreground/90">
               Our <span className="text-accent italic font-light">Process</span>
             </h2>
             <p className="text-lg text-foreground/80 font-light max-w-sm leading-relaxed">
@@ -109,11 +109,11 @@ const HomeProcessSection = () => {
           <div className="lg:w-2/3 flex flex-col gap-24 lg:pt-32">
             {steps.map((step, idx) => (
               <div key={idx} className="process-step flex flex-col md:flex-row gap-8 md:gap-16 border-t border-border pt-12">
-                <div className="font-[family-name:var(--font-chillax)] font-light text-[clamp(4rem,8vw,8rem)] leading-none text-muted-foreground/30 font-light w-32">
+                <div className="font-[family-name:var(--font-heading)] font-light text-[clamp(4rem,8vw,8rem)] leading-none text-muted-foreground/30 font-light w-32">
                   {step.num}
                 </div>
                 <div className="flex flex-col gap-6 pt-2">
-                  <h3 className="font-[family-name:var(--font-chillax)] font-light text-3xl md:text-5xl uppercase tracking-wide text-foreground">
+                  <h3 className="font-[family-name:var(--font-heading)] font-light text-3xl md:text-5xl uppercase tracking-wide text-foreground">
                     {step.title}
                   </h3>
                   <p className="text-lg md:text-xl text-foreground/70 font-light leading-relaxed max-w-md">
@@ -131,7 +131,7 @@ const HomeProcessSection = () => {
           <div className="process-banner-content relative rounded-3xl border border-border bg-foreground/[0.02] overflow-hidden p-12 md:p-24 flex flex-col lg:flex-row items-center gap-16">
             
             <div className="lg:w-1/2 flex flex-col gap-8">
-              <h3 className="font-[family-name:var(--font-chillax)] font-light text-4xl md:text-6xl uppercase tracking-wide text-foreground">
+              <h3 className="font-[family-name:var(--font-heading)] font-light text-4xl md:text-6xl uppercase tracking-wide text-foreground">
                 Engineered for <span className="text-accent italic">Performance</span>
               </h3>
               <p className="text-lg text-foreground/70 font-light leading-relaxed max-w-xl">

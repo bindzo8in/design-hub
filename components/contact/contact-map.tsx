@@ -9,7 +9,7 @@ const ContactMap = () => {
     >
       {/* Section header */}
       <div className="max-w-2xl mb-8">
-        <h2 className="font-[family-name:var(--font-chillax)] font-light text-3xl text-foreground mb-2">
+        <h2 className="font-[family-name:var(--font-heading)] font-light text-3xl text-foreground mb-2">
           Find Us
         </h2>
         <p className="text-muted-foreground text-base">

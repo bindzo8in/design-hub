@@ -45,7 +45,7 @@ const CareersHeroSection = () => {
           <span className="w-8 h-[1px] bg-accent" />
         </div>
         
-        <h1 className="careers-hero-reveal font-[family-name:var(--font-chillax)] font-light text-6xl sm:text-8xl lg:text-9xl leading-[0.9] tracking-wider uppercase text-foreground">
+        <h1 className="careers-hero-reveal font-[family-name:var(--font-heading)] font-light text-6xl sm:text-8xl lg:text-9xl leading-[0.9] tracking-wider uppercase text-foreground">
           Join Our <em className="not-italic text-accent">Creative</em> Team
         </h1>
         

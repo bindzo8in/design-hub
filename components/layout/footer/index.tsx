@@ -197,7 +197,7 @@ const Footer = () => {
           >
             {/* quick links */}
             <div>
-              <h2 className="mb-5 text-xl font-[family-name:var(--font-chillax)] font-light">Quick Links</h2>
+              <h2 className="mb-5 text-xl font-[family-name:var(--font-heading)] font-light">Quick Links</h2>
 
               <nav className="flex flex-col gap-3">
                 {footer_items.quick_links.map((link, index) => (
@@ -222,7 +222,7 @@ const Footer = () => {
 
             {/* features */}
             <div>
-              <h2 className="mb-5 text-xl font-[family-name:var(--font-chillax)] font-light">Our Features</h2>
+              <h2 className="mb-5 text-xl font-[family-name:var(--font-heading)] font-light">Our Features</h2>
 
               <nav className="flex flex-col gap-3">
                 {footer_items.our_features.map((feature, index) => (
@@ -247,7 +247,7 @@ const Footer = () => {
 
             {/* contact */}
             <div className="sm:col-span-2 lg:col-span-1">
-              <h2 className="mb-5 text-xl font-[family-name:var(--font-chillax)] font-light">Contact Us</h2>
+              <h2 className="mb-5 text-xl font-[family-name:var(--font-heading)] font-light">Contact Us</h2>
 
               <div className="space-y-5 text-sm text-muted-foreground">
                 <a

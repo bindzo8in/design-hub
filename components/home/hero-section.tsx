@@ -222,7 +222,7 @@ const HomeHeroSection = () => {
         
         <h1 
           ref={headlineRef}
-          className="font-[family-name:var(--font-chillax)] w-full max-w-[1600px] text-[clamp(3rem,12vw,12rem)] uppercase font-light leading-[0.8] tracking-[0.01em] text-foreground dark:text-white dark:mix-blend-difference"
+          className="font-[family-name:var(--font-heading)] w-full max-w-[1600px] text-[clamp(3rem,12vw,12rem)] uppercase font-bold leading-[0.8] tracking-[0.01em] text-foreground dark:text-white dark:mix-blend-difference"
         >
           {/* Initial content to prevent flash before JS runs */}
           {headlines[0].line1} <br />

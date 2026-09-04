@@ -265,7 +265,7 @@ const FAQSection = () => {
             Frequently Asked Questions
           </div>
 
-          <h2 className="faq-title-reveal font-[family-name:var(--font-chillax)] font-light text-5xl sm:text-6xl lg:text-7xl leading-[0.9] tracking-wider uppercase text-foreground">
+          <h2 className="faq-title-reveal font-[family-name:var(--font-heading)] font-light text-5xl sm:text-6xl lg:text-7xl leading-[0.9] tracking-wider uppercase text-foreground">
             Got <em className="not-italic text-accent">Questions?</em>
             <br />
             We Have Answers.

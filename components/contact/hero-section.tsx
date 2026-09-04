@@ -45,7 +45,7 @@ const ContactHeroSection = () => {
           <span className="w-8 h-[1px] bg-accent" />
         </div>
         
-        <h1 className="contact-hero-reveal font-[family-name:var(--font-chillax)] font-light text-6xl sm:text-8xl lg:text-9xl leading-[0.9] tracking-wider uppercase text-foreground">
+        <h1 className="contact-hero-reveal font-[family-name:var(--font-heading)] font-light text-6xl sm:text-8xl lg:text-9xl leading-[0.9] tracking-wider uppercase text-foreground">
           Contact <em className="not-italic text-accent">Us</em>
         </h1>
         

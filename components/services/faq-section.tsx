@@ -66,7 +66,7 @@ const FAQSection = () => {
             <div className="pointer-events-none absolute left-1/2 top-1/2 hidden h-[320px] w-[620px] -translate-x-1/2 -translate-y-1/2 rotate-12 rounded-full border-t border-accent/15 blur-sm lg:block" />
 
             <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <h2 className="font-[family-name:var(--font-chillax)] font-light text-left text-3xl tracking-wide text-accent sm:text-4xl lg:text-5xl">
+                <h2 className="font-[family-name:var(--font-heading)] font-light text-left text-3xl tracking-wide text-accent sm:text-4xl lg:text-5xl">
                     Frequently Asked Questions:
                 </h2>
 

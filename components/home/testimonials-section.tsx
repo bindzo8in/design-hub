@@ -77,7 +77,7 @@ const HomeTestimonialsSection = ({ testimonials: dbTestimonials }: HomeTestimoni
     >
       <div className="mx-auto w-full max-w-[1600px] px-6 sm:px-12 testi-content">
         
-        <h2 className="font-[family-name:var(--font-chillax)] font-light text-xs uppercase tracking-[0.3em] text-accent mb-20 flex items-center gap-4">
+        <h2 className="font-[family-name:var(--font-heading)] font-light text-xs uppercase tracking-[0.3em] text-accent mb-20 flex items-center gap-4">
           <span className="h-px w-12 bg-accent/50" />
           Client Voices
         </h2>
@@ -98,7 +98,7 @@ const HomeTestimonialsSection = ({ testimonials: dbTestimonials }: HomeTestimoni
             <CarouselContent>
               {displayTestimonials.map((item, idx) => (
                 <CarouselItem key={idx} className="flex flex-col items-center justify-center text-center pb-8">
-                  <h3 className="font-[family-name:var(--font-chillax)] font-light text-[clamp(1.5rem,3vw,3rem)] leading-[1.3] text-foreground/90 mb-12">
+                  <h3 className="font-[family-name:var(--font-heading)] font-light text-[clamp(1.5rem,3vw,3rem)] leading-[1.3] text-foreground/90 mb-12">
                     "{item.text}"
                   </h3>
                   

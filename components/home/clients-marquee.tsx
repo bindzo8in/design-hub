@@ -42,7 +42,7 @@ export default function HomeClientsMarquee({ clients }: HomeClientsMarqueeProps)
             <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-accent">
               Trusted by ambitious brands
             </p>
-            <h2 className="mt-2 font-[family-name:var(--font-chillax)] font-light text-3xl sm:text-4xl tracking-wider uppercase text-foreground">
+            <h2 className="mt-2 font-[family-name:var(--font-heading)] font-light text-3xl sm:text-4xl tracking-wider uppercase text-foreground">
               Trusted by Ambitious Brands
             </h2>
           </div>
@@ -70,7 +70,7 @@ export default function HomeClientsMarquee({ clients }: HomeClientsMarqueeProps)
               </span>
             )}
 
-            <span className="font-[family-name:var(--font-chillax)] font-light text-lg sm:text-xl uppercase tracking-[0.2em] text-foreground">
+            <span className="font-[family-name:var(--font-heading)] font-light text-lg sm:text-xl uppercase tracking-[0.2em] text-foreground">
               {client.name}
             </span>
           </div>

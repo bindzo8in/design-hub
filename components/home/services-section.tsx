@@ -187,7 +187,7 @@ const HomeServicesSection = () => {
         {/* Section Header */}
         <div ref={headerRef} className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-20 lg:mb-32">
           <div className="max-w-2xl space-y-8">
-            <h2 className="font-[family-name:var(--font-chillax)] font-light text-[clamp(2.5rem,6vw,5.5rem)] leading-[1.1] uppercase tracking-tight text-foreground/90">
+            <h2 className="font-[family-name:var(--font-heading)] font-light text-[clamp(2.5rem,6vw,5.5rem)] leading-[1.1] uppercase tracking-tight text-foreground/90">
               Our <span className="text-accent italic font-light">Expertise</span>
             </h2>
             <p className="text-lg md:text-xl leading-relaxed text-foreground/80 font-light max-w-lg">
@@ -231,7 +231,7 @@ const HomeServicesSection = () => {
                   {service.num}
                 </span>
                 
-                <h3 className="font-[family-name:var(--font-chillax)] font-light text-3xl md:text-5xl uppercase tracking-wide text-foreground/90 group-hover:text-foreground transition-colors relative z-10">
+                <h3 className="font-[family-name:var(--font-heading)] font-light text-3xl md:text-5xl uppercase tracking-wide text-foreground/90 group-hover:text-foreground transition-colors relative z-10">
                   {service.title}
                 </h3>
               </div>

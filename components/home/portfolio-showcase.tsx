@@ -115,7 +115,7 @@ export default function HomePortfolioShowcase({
               <Sparkles className="h-3.5 w-3.5" />
               Selected Agency Portfolio
             </div>
-            <h2 className="portfolio-header-reveal font-[family-name:var(--font-chillax)] font-light text-5xl sm:text-7xl lg:text-8xl leading-[0.9] uppercase text-slate-900 dark:text-white tracking-wide">
+            <h2 className="portfolio-header-reveal font-[family-name:var(--font-heading)] font-light text-5xl sm:text-7xl lg:text-8xl leading-[0.9] uppercase text-slate-900 dark:text-white tracking-wide">
               Crafted With <span className="text-accent">Precision</span> & <br />
               Digital Excellence
             </h2>
@@ -187,7 +187,7 @@ export default function HomePortfolioShowcase({
                       />
                     ) : (
                       <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-slate-900 via-[#101735] to-slate-950 p-6 text-center">
-                        <span className="font-[family-name:var(--font-chillax)] font-light text-3xl uppercase tracking-wider text-slate-600">
+                        <span className="font-[family-name:var(--font-heading)] font-light text-3xl uppercase tracking-wider text-slate-600">
                           {project.title}
                         </span>
                       </div>
@@ -221,7 +221,7 @@ export default function HomePortfolioShowcase({
                   {/* Card Body */}
                   <div className="flex flex-1 flex-col justify-between p-6">
                     <div>
-                      <h3 className="font-[family-name:var(--font-chillax)] font-light text-2xl sm:text-3xl text-white tracking-wide uppercase transition-colors group-hover:text-accent">
+                      <h3 className="font-[family-name:var(--font-heading)] font-light text-2xl sm:text-3xl text-white tracking-wide uppercase transition-colors group-hover:text-accent">
                         {project.title}
                       </h3>
                       <p className="mt-2 text-xs sm:text-sm text-slate-400 leading-relaxed line-clamp-2">

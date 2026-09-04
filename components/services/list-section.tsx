@@ -15,7 +15,7 @@ const ServicesListSection = () => {
     <section className="bg-background py-24 relative">
       <div className="container mx-auto px-6 max-w-[1600px]">
         <header className="mb-20 max-w-3xl">
-          <h2 className="font-[family-name:var(--font-chillax)] font-light text-4xl md:text-6xl font-bold tracking-tight text-foreground uppercase">
+          <h2 className="font-[family-name:var(--font-heading)] font-light text-4xl md:text-6xl font-bold tracking-tight text-foreground uppercase">
             Our Core <span className="text-accent italic font-light">Expertise</span>
           </h2>
           <p className="mt-6 text-lg text-muted-foreground font-light leading-relaxed">
@@ -56,7 +56,7 @@ const ServicesListSection = () => {
                           0{idx + 1}
                         </span>
                         <h3 className={cn(
-                          "font-[family-name:var(--font-chillax)] font-light text-4xl uppercase tracking-wide transition-all duration-500",
+                          "font-[family-name:var(--font-heading)] font-light text-4xl uppercase tracking-wide transition-all duration-500",
                           isActive ? "text-foreground" : "text-foreground/40 group-hover:text-foreground/70"
                         )}>
                           {service.title}
@@ -157,7 +157,7 @@ const ServicesListSection = () => {
                         0{idx + 1}
                       </span>
                       <h3 className={cn(
-                        "font-[family-name:var(--font-chillax)] font-light text-2xl uppercase tracking-wide transition-colors duration-300",
+                        "font-[family-name:var(--font-heading)] font-light text-2xl uppercase tracking-wide transition-colors duration-300",
                         isActive ? "text-foreground" : "text-foreground/70"
                       )}>
                         {service.title}

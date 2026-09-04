@@ -141,7 +141,7 @@ const ContactForm = () => {
             <div className="relative rounded-3xl border border-border/60 bg-card/45 p-6 sm:p-8 overflow-hidden backdrop-blur-md">
               <div className="absolute top-0 left-0 w-[3px] h-full bg-gradient-to-b from-accent to-transparent" />
 
-              <h2 className="font-[family-name:var(--font-chillax)] font-light text-3xl sm:text-4xl tracking-wider text-foreground mb-8">
+              <h2 className="font-[family-name:var(--font-heading)] font-light text-3xl sm:text-4xl tracking-wider text-foreground mb-8">
                 Get In Touch
               </h2>
 
