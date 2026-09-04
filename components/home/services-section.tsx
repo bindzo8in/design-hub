@@ -177,6 +177,7 @@ const HomeServicesSection = () => {
             src={activeImage}
             alt="Service preview"
             fill
+            sizes="350px"
             className="object-cover"
           />
         )}

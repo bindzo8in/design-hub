@@ -88,6 +88,7 @@ export function AdminHeader() {
                   src={session.user.image}
                   alt={session.user.name || "Admin profile"}
                   fill
+                  sizes="36px"
                   className="object-cover"
                 />
               ) : (
