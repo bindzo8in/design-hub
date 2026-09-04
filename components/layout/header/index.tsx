@@ -7,7 +7,9 @@ import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
+import React, { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 const ThemeToggle = () => {
   const { theme, setTheme } = useTheme();
@@ -85,6 +87,48 @@ const BrandLogo = () => {
 
 const PublicHeader = () => {
   const pathname = usePathname();
+  const navRef = useRef<HTMLElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
+  const navLinksRef = useRef<HTMLDivElement>(null);
+  const rightActionsRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const tl = gsap.timeline();
+    
+    // Load animation: delayed slightly so hero goes first
+    tl.from(logoRef.current, { y: -20, opacity: 0, duration: 0.6, ease: "power2.out", delay: 0.2 })
+      .from(
+        navLinksRef.current?.children ? Array.from(navLinksRef.current.children) : [], 
+        { y: -20, opacity: 0, duration: 0.5, stagger: 0.08, ease: "power2.out" },
+        "-=0.4"
+      )
+      .from(rightActionsRef.current, { y: -20, opacity: 0, duration: 0.6, ease: "power2.out" }, "-=0.4");
+
+    // Scroll animation: shrink header
+    gsap.to(navRef.current, {
+      height: "4.5rem", // Shrink from h-24 to a smaller height
+      scrollTrigger: {
+        trigger: document.body,
+        start: "top -50",
+        end: "top -150",
+        scrub: true,
+      }
+    });
+
+    // Shrink logo slightly
+    gsap.to(logoRef.current, {
+      scale: 0.85,
+      transformOrigin: "left center",
+      scrollTrigger: {
+        trigger: document.body,
+        start: "top -50",
+        end: "top -150",
+        scrub: true,
+      }
+    });
+  }, { scope: navRef });
 
   const isActiveRoute = (href: string) => {
     if (!pathname) return false;
@@ -96,13 +140,15 @@ const PublicHeader = () => {
     <>
       {/* Desktop navigation bar */}
       <header className="hidden lg:block">
-        <nav className="nav-glass fixed left-0 top-0 z-100 h-24 w-full">
+        <nav ref={navRef} className="nav-glass fixed left-0 top-0 z-100 h-24 w-full">
           <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-6 xl:px-0">
             {/* Logo */}
-            <BrandLogo />
+            <div ref={logoRef}>
+              <BrandLogo />
+            </div>
 
             {/* Navigation links */}
-            <div className="flex items-center gap-1 rounded-full border border-[#26336F]/60 dark:border-[#26336F] bg-secondary/70 dark:bg-[#18224b]/80 p-1.5 shadow-sm backdrop-blur-xl">
+            <div ref={navLinksRef} className="flex items-center gap-1 rounded-full border border-[#26336F]/60 dark:border-[#26336F] bg-secondary/70 dark:bg-[#18224b]/80 p-1.5 shadow-sm backdrop-blur-xl">
               {navRoutes.map((route) => {
                 const active = isActiveRoute(route.href);
                 const isServices = route.href === "/services";
@@ -173,7 +219,7 @@ const PublicHeader = () => {
             </div>
 
             {/* Right actions */}
-            <div className="flex items-center gap-3">
+            <div ref={rightActionsRef} className="flex items-center gap-3">
               <ThemeToggle />
 
               <Link

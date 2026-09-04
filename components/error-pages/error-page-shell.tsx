@@ -36,7 +36,7 @@ export function ErrorPageShell({
 
           <div className="space-y-4">
             <p className="text-sm text-muted-foreground sm:text-base">{description}</p>
-            <h1 className="font-[family-name:var(--font-bebas-neue)] text-5xl leading-none tracking-[0.2em] text-foreground sm:text-6xl lg:text-7xl">
+            <h1 className="font-[family-name:var(--font-chillax)] font-light text-5xl leading-none tracking-[0.2em] text-foreground sm:text-6xl lg:text-7xl">
               {title}
             </h1>
           </div>

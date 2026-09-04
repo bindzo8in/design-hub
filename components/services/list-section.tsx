@@ -1,90 +1,229 @@
-import { servicesList } from './utils'
-import Image from 'next/image'
-import Link from 'next/link'
-import { ArrowUpRight } from 'lucide-react'
+"use client";
+
+import { useState } from "react";
+import { servicesList } from "./utils";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight, Plus, Minus } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import { cn } from "@/lib/utils";
 
 const ServicesListSection = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
   return (
-    /* Services List Section */
-<section className="bg-background">
-  <div className="container mx-auto max-w-7xl px-4 pb-16 pt-4 sm:px-6 lg:px-8">
-  <header className="mb-12 max-w-3xl lg:mb-16">
-    <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-      Our Core Services
-    </h2>
-    <p className="mt-4 text-base text-muted-foreground sm:text-lg">
-      We blend creativity, design, and advanced technology to build outstanding
-      products, establish powerful brands, and accelerate growth for our clients.
-    </p>
-  </header>
+    <section className="bg-background py-24 relative">
+      <div className="container mx-auto px-6 max-w-[1600px]">
+        <header className="mb-20 max-w-3xl">
+          <h2 className="font-[family-name:var(--font-chillax)] font-light text-4xl md:text-6xl font-bold tracking-tight text-foreground uppercase">
+            Our Core <span className="text-accent italic font-light">Expertise</span>
+          </h2>
+          <p className="mt-6 text-lg text-muted-foreground font-light leading-relaxed">
+            We blend creativity, design, and advanced technology to build outstanding
+            products, establish powerful brands, and accelerate growth for our clients.
+          </p>
+        </header>
 
-  <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-    {servicesList.map((service, idx) => (
-      <article
-        key={idx}
-        className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-border/60 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-md"
-      >
-        <div>
-          {/* Illustration Visual */}
-          <div className="relative m-4 mb-0 overflow-hidden rounded-2xl bg-secondary/60">
-            <div className="absolute inset-0 bg-linear-to-br from-primary/10 via-transparent to-accent/10" />
-
-            <figure className="relative aspect-4/3 w-full">
-              <Image
-                src={service.illustration}
-                alt={`${service.title} illustration`}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-            </figure>
-          </div>
-
-          {/* Content */}
-          <div className="p-6 pt-5 lg:p-8 lg:pt-6">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <h3 className="text-xl font-bold tracking-tight text-foreground">
-                  {service.title}
-                </h3>
-              </div>
-
-              <Link
-                href={service.href}
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border bg-background text-muted-foreground transition-all group-hover:border-accent group-hover:bg-accent group-hover:text-accent-foreground"
-                aria-label={`Explore ${service.title}`}
-              >
-                <ArrowUpRight className="h-4 w-4" />
-              </Link>
-            </div>
-
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              {service.description}
-            </p>
-
-            {/* Features Checklist */}
-            <ul className="mt-6 space-y-2 border-t border-border/40 pt-6">
-              {service.features.map((feature, fIdx) => (
-                <li
-                  key={fIdx}
-                  className="flex items-center text-xs font-semibold text-foreground/80"
+        {/* 
+          DESKTOP: Sticky Layout with Hover 
+          MOBILE: Hidden on small screens
+        */}
+        <div className="hidden lg:grid grid-cols-12 gap-16 relative items-start">
+          
+          {/* Left: List of Services */}
+          <div className="col-span-6 xl:col-span-5 flex flex-col gap-4 pb-32">
+            {servicesList.map((service, idx) => {
+              const isActive = activeIndex === idx;
+              
+              return (
+                <div
+                  key={idx}
+                  onMouseEnter={() => setActiveIndex(idx)}
+                  className="group relative"
                 >
-                  <span className="mr-2 h-1.5 w-1.5 rounded-full bg-accent" />
-                  {feature}
-                </li>
-              ))}
-            </ul>
+                  <div 
+                    className={cn(
+                      "py-8 border-b transition-colors duration-500 cursor-pointer flex flex-col gap-6",
+                      isActive ? "border-accent" : "border-border/40 group-hover:border-accent/50"
+                    )}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-baseline gap-6">
+                        <span className={cn(
+                          "font-mono text-sm tracking-widest transition-colors duration-500",
+                          isActive ? "text-accent" : "text-muted-foreground/50 group-hover:text-accent/50"
+                        )}>
+                          0{idx + 1}
+                        </span>
+                        <h3 className={cn(
+                          "font-[family-name:var(--font-chillax)] font-light text-4xl uppercase tracking-wide transition-all duration-500",
+                          isActive ? "text-foreground" : "text-foreground/40 group-hover:text-foreground/70"
+                        )}>
+                          {service.title}
+                        </h3>
+                      </div>
+                      
+                      <Link
+                        href={service.href}
+                        className={cn(
+                          "flex h-12 w-12 shrink-0 items-center justify-center rounded-full border transition-all duration-500",
+                          isActive 
+                            ? "border-accent bg-accent text-accent-foreground scale-100" 
+                            : "border-border/40 bg-transparent text-muted-foreground scale-90 group-hover:border-accent/50 group-hover:text-accent"
+                        )}
+                        aria-label={`Explore ${service.title}`}
+                      >
+                        <ArrowUpRight className="h-5 w-5" />
+                      </Link>
+                    </div>
+
+                    <AnimatePresence>
+                      {isActive && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                          className="overflow-hidden"
+                        >
+                          <div className="pt-2 pb-4 pl-12 pr-4">
+                            <p className="text-lg text-muted-foreground font-light leading-relaxed mb-8">
+                              {service.description}
+                            </p>
+                            <div className="grid grid-cols-2 gap-y-4 gap-x-8">
+                              {service.features.map((feature, fIdx) => (
+                                <div key={fIdx} className="flex items-center gap-3">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-accent/70" />
+                                  <span className="text-sm font-medium text-foreground/80">{feature}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </div>
+              );
+            })}
           </div>
+
+          {/* Right: Sticky Image Reveal */}
+          <div className="col-span-6 xl:col-span-7 sticky top-32 h-[calc(100vh-16rem)] min-h-[500px] rounded-[2.5rem] overflow-hidden bg-secondary/20">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeIndex}
+                initial={{ opacity: 0, scale: 1.05 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute inset-0 w-full h-full"
+              >
+                <Image
+                  src={servicesList[activeIndex].illustration}
+                  alt={servicesList[activeIndex].title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1200px) 50vw, 60vw"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-60" />
+              </motion.div>
+            </AnimatePresence>
+          </div>
+          
         </div>
 
-        {/* Bottom Card Effect */}
-        <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-accent transition-all duration-300 group-hover:w-full" />
-      </article>
-    ))}
-  </div>
-  </div>
-</section>
-  )
-}
+        {/* 
+          MOBILE: Click Accordion 
+          Hidden on Desktop
+        */}
+        <div className="flex flex-col lg:hidden border-t border-border/40">
+          {servicesList.map((service, idx) => {
+            const isActive = activeIndex === idx;
+            
+            return (
+              <div key={idx} className="border-b border-border/40">
+                <button
+                  onClick={() => setActiveIndex(isActive ? -1 : idx)}
+                  className="w-full py-8 flex flex-col gap-4 text-left"
+                >
+                  <div className="w-full flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <span className={cn(
+                        "font-mono text-xs tracking-widest transition-colors duration-300",
+                        isActive ? "text-accent" : "text-muted-foreground/50"
+                      )}>
+                        0{idx + 1}
+                      </span>
+                      <h3 className={cn(
+                        "font-[family-name:var(--font-chillax)] font-light text-2xl uppercase tracking-wide transition-colors duration-300",
+                        isActive ? "text-foreground" : "text-foreground/70"
+                      )}>
+                        {service.title}
+                      </h3>
+                    </div>
+                    <div className={cn(
+                      "flex h-8 w-8 items-center justify-center rounded-full border transition-colors duration-300",
+                      isActive ? "border-accent text-accent" : "border-border/40 text-muted-foreground"
+                    )}>
+                      {isActive ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                    </div>
+                  </div>
+                </button>
 
-export default ServicesListSection
+                <AnimatePresence>
+                  {isActive && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pb-10 pt-2 flex flex-col gap-6">
+                        <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden">
+                          <Image
+                            src={service.illustration}
+                            alt={service.title}
+                            fill
+                            className="object-cover"
+                            sizes="100vw"
+                          />
+                        </div>
+                        
+                        <p className="text-base text-muted-foreground font-light leading-relaxed">
+                          {service.description}
+                        </p>
+                        
+                        <div className="flex flex-col gap-3">
+                          {service.features.map((feature, fIdx) => (
+                            <div key={fIdx} className="flex items-center gap-3">
+                              <span className="w-1.5 h-1.5 rounded-full bg-accent/70" />
+                              <span className="text-sm font-medium text-foreground/80">{feature}</span>
+                            </div>
+                          ))}
+                        </div>
+
+                        <Link
+                          href={service.href}
+                          className="mt-4 inline-flex items-center justify-between px-6 py-4 rounded-full bg-accent text-white font-bold uppercase tracking-wider text-xs"
+                        >
+                          Explore Service
+                          <ArrowUpRight className="w-4 h-4" />
+                        </Link>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
+        </div>
+
+      </div>
+    </section>
+  );
+};
+
+export default ServicesListSection;

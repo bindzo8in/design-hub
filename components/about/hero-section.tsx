@@ -190,7 +190,7 @@ const HeroSection = () => {
               </div>
 
               {/* Big headline — clipped for line reveal */}
-              <h1 className="font-[family-name:var(--font-bebas-neue)] uppercase leading-[0.88] tracking-tight text-foreground text-[clamp(3.5rem,10vw,8rem)]">
+              <h1 className="font-[family-name:var(--font-chillax)] font-light uppercase leading-[0.88] tracking-tight text-foreground text-[clamp(3.5rem,10vw,8rem)]">
                 <span className="block overflow-hidden">
                   <span className="about-hero-line block">Crafting</span>
                 </span>
@@ -217,7 +217,7 @@ const HeroSection = () => {
                     key={stat.label}
                     className="about-stat-item flex flex-col items-center text-center rounded-2xl border border-slate-200 dark:border-[#26336F]/60 bg-white dark:bg-[#18224b]/50 py-6 px-3 shadow-sm"
                   >
-                    <div className="font-[family-name:var(--font-bebas-neue)] text-4xl sm:text-5xl text-foreground leading-none">
+                    <div className="font-[family-name:var(--font-chillax)] font-light text-4xl sm:text-5xl text-foreground leading-none">
                       <span
                         ref={(el) => { statRefs.current[i] = el; }}
                       >
@@ -357,7 +357,7 @@ const PremiumAboutCard = ({
           </div>
 
           <h2 className="
-            font-[family-name:var(--font-bebas-neue)]
+            font-[family-name:var(--font-chillax)] font-light
             uppercase tracking-tight leading-[0.95]
             text-4xl sm:text-5xl lg:text-6xl
             text-foreground

@@ -8,6 +8,7 @@ import {
   FaFacebook,
   FaLinkedin,
   FaMapMarker,
+  FaWhatsapp,
 } from "react-icons/fa";
 import { IoIosPhonePortrait, IoMdMailOpen } from "react-icons/io";
 import { FaXTwitter } from "react-icons/fa6";
@@ -20,6 +21,7 @@ const socials = [
   { Icon: FaLinkedin, href: env.NEXT_PUBLIC_SOCIAL_LINKEDIN },
   { Icon: FaFacebook, href: env.NEXT_PUBLIC_SOCIAL_FACEBOOK },
   { Icon: FaGoogle, href: env.NEXT_PUBLIC_SOCIAL_GOOGLE },
+  { Icon: FaWhatsapp, href: "https://wa.me/919884344503" },
 ];
 
 const Footer = () => {
@@ -195,7 +197,7 @@ const Footer = () => {
           >
             {/* quick links */}
             <div>
-              <h2 className="mb-5 text-lg font-semibold">Quick Links</h2>
+              <h2 className="mb-5 text-xl font-[family-name:var(--font-chillax)] font-light">Quick Links</h2>
 
               <nav className="flex flex-col gap-3">
                 {footer_items.quick_links.map((link, index) => (
@@ -220,7 +222,7 @@ const Footer = () => {
 
             {/* features */}
             <div>
-              <h2 className="mb-5 text-lg font-semibold">Our Features</h2>
+              <h2 className="mb-5 text-xl font-[family-name:var(--font-chillax)] font-light">Our Features</h2>
 
               <nav className="flex flex-col gap-3">
                 {footer_items.our_features.map((feature, index) => (
@@ -245,7 +247,7 @@ const Footer = () => {
 
             {/* contact */}
             <div className="sm:col-span-2 lg:col-span-1">
-              <h2 className="mb-5 text-lg font-semibold">Contact Us</h2>
+              <h2 className="mb-5 text-xl font-[family-name:var(--font-chillax)] font-light">Contact Us</h2>
 
               <div className="space-y-5 text-sm text-muted-foreground">
                 <a

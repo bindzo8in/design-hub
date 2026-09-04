@@ -105,6 +105,12 @@ export default function PortfolioClient({
   initialProjects,
   categories,
 }: PortfolioClientProps) {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const [selectedCategoryId, setSelectedCategoryId] =
     useState("all");
 
@@ -311,6 +317,7 @@ export default function PortfolioClient({
       }
     );
   }, [
+    isMounted,
     visibleCount,
     selectedCategoryId,
     searchQuery,
@@ -396,7 +403,7 @@ export default function PortfolioClient({
           <span className="w-8 h-[1px] bg-accent" />
         </div>
 
-        <h1 className="anim-header-item font-[family-name:var(--font-bebas-neue)] text-6xl sm:text-8xl leading-none uppercase tracking-wider text-foreground">
+        <h1 className="anim-header-item font-[family-name:var(--font-chillax)] font-light text-6xl sm:text-8xl leading-none uppercase tracking-wider text-foreground">
           Selected{" "}
           <em className="not-italic text-accent">
             Works
@@ -417,7 +424,7 @@ export default function PortfolioClient({
 
       <div className="grid grid-cols-3 gap-4 max-w-4xl mx-auto px-4">
         <div className="text-center">
-          <div className="font-[family-name:var(--font-bebas-neue)] text-3xl sm:text-5xl text-foreground">
+          <div className="font-[family-name:var(--font-chillax)] font-light text-3xl sm:text-5xl text-foreground">
             {totalProjects}
           </div>
 
@@ -427,7 +434,7 @@ export default function PortfolioClient({
         </div>
 
         <div className="text-center">
-          <div className="font-[family-name:var(--font-bebas-neue)] text-3xl sm:text-5xl text-accent">
+          <div className="font-[family-name:var(--font-chillax)] font-light text-3xl sm:text-5xl text-accent">
             {activeProjects}
           </div>
 
@@ -437,7 +444,7 @@ export default function PortfolioClient({
         </div>
 
         <div className="text-center">
-          <div className="font-[family-name:var(--font-bebas-neue)] text-3xl sm:text-5xl text-emerald-500">
+          <div className="font-[family-name:var(--font-chillax)] font-light text-3xl sm:text-5xl text-emerald-500">
             {completedProjects}
           </div>
 
@@ -513,6 +520,89 @@ export default function PortfolioClient({
         {filteredProjects.length > 0 ? (
           <>
             <div ref={gridRef}>
+              {!isMounted ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+                  {visibleProjects.map(
+                    (project) => {
+                      const status =
+                        statusColorMap[
+                        project.status
+                        ] ||
+                        statusColorMap.PLANNING;
+
+                      return (
+                        <div
+                          key={project.id}
+                          className="portfolio-item relative group overflow-hidden rounded-xl cursor-pointer"
+                          onClick={() => {
+                            router.push(`/portfolio/${project.id}`);
+                          }}
+                        >
+                          {project.thumbnail ? (
+                            <Image
+                              src={
+                                project.thumbnail
+                              }
+                              alt={
+                                project.title
+                              }
+                              width={
+                                1600
+                              }
+                              height={
+                                1200
+                              }
+                              loading="lazy"
+                              className="block w-full h-auto object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                              sizes="
+                                (max-width: 640px) 100vw,
+                                (max-width: 900px) 50vw,
+                                (max-width: 1200px) 33vw,
+                                25vw
+                              "
+                            />
+                          ) : (
+                            <div className="aspect-[4/3] bg-muted flex items-center justify-center">
+                              <span className="text-xs text-muted-foreground">
+                                No image
+                              </span>
+                            </div>
+                          )}
+
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent transition-opacity duration-500 pointer-events-none opacity-0 group-hover:opacity-100" />
+
+                          <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6 text-white transition-all duration-500 translate-y-5 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+                            <div className="flex items-center gap-2 mb-2">
+                              <Tag className="w-3 h-3 text-accent" />
+                              <span className="text-[10px] uppercase tracking-[0.18em] font-bold text-accent">
+                                {project.category?.name || "Direct Work"}
+                              </span>
+                            </div>
+                            <h3 className="text-xl sm:text-2xl font-bold uppercase tracking-wide leading-tight">
+                              {project.title}
+                            </h3>
+                            <p className="mt-2 text-xs text-white/60 flex items-center gap-1.5">
+                              <Briefcase className="w-3 h-3" />
+                              {project.client?.name || project.clientName || "Direct Partner"}
+                            </p>
+                            <div className="mt-4 flex items-center justify-between gap-4">
+                              <span className={`flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider ${status.text}`}>
+                                <span className={`w-1.5 h-1.5 rounded-full ${status.dot}`} />
+                                {statusLabelMap[project.status] || project.status}
+                              </span>
+                              <span className="text-[10px] text-white/50">View project →</span>
+                            </div>
+                          </div>
+
+                          <div className="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-[9px] uppercase tracking-wider font-semibold text-white/80 transition-all duration-300 group-hover:opacity-0">
+                            {project.category?.name || "Project"}
+                          </div>
+                        </div>
+                      );
+                    }
+                  )}
+                </div>
+              ) : (
               <ResponsiveMasonry
                 columnsCountBreakPoints={{
                   350: 1,
@@ -712,6 +802,7 @@ export default function PortfolioClient({
                   )}
                 </Masonry>
               </ResponsiveMasonry>
+              )}
             </div>
 
             {/* =====================================================

@@ -73,8 +73,8 @@ const HeroSection = ({
             className="
       relative
       text-center
-      font-(family-name:--font-bodoni)
-      font-medium
+      font-[family-name:var(--font-chillax)]
+      font-light
       text-foreground
 
       tracking-[-0.04em]
@@ -123,8 +123,8 @@ const HeroSection = ({
           >
             <h2
               className="
+                font-[family-name:var(--font-chillax)] font-light
                 text-2xl
-                font-bold
                 leading-tight
 
                 sm:text-4xl

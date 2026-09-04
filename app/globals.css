@@ -61,6 +61,33 @@
   --font-cormorant: var(--font-cormorant);
   --font-cormorant: var(--font-cormorant);
   --font-audiowide: var(--font-audiowide);
+  --font-sans: "Geist", sans-serif;
+  --font-duru-sans: var(--font-duru-sans);
+  --font-mono: "Courier New", monospace;
+  --font-serif: "IBM Plex Serif", serif;
+  --radius: 0.375rem;
+  --tracking-tighter: calc(var(--tracking-normal) - 0.05em);
+  --tracking-tight: calc(var(--tracking-normal) - 0.025em);
+  --tracking-wide: calc(var(--tracking-normal) + 0.025em);
+  --tracking-wider: calc(var(--tracking-normal) + 0.05em);
+  --tracking-widest: calc(var(--tracking-normal) + 0.1em);
+  --tracking-normal: var(--tracking-normal);
+  --shadow-2xl: var(--shadow-2xl);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-md: var(--shadow-md);
+  --shadow: var(--shadow);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-xs: var(--shadow-xs);
+  --shadow-2xs: var(--shadow-2xs);
+  --spacing: var(--spacing);
+  --letter-spacing: var(--letter-spacing);
+  --shadow-offset-y: var(--shadow-offset-y);
+  --shadow-offset-x: var(--shadow-offset-x);
+  --shadow-spread: var(--shadow-spread);
+  --shadow-blur: var(--shadow-blur);
+  --shadow-opacity: var(--shadow-opacity);
+  --color-shadow-color: var(--shadow-color);
 }
 
 /* 
@@ -71,117 +98,156 @@
 */
 
 :root {
-  --radius: 0.8rem;
+  --radius: 0.375rem;
 
   /* Base */
-  --background: #f8f9ff;
-  --foreground: #101735;
+  --background: oklch(1.0000 0 0);
+  --foreground: oklch(0.2504 0.0273 271.9789);
 
   /* Surfaces */
-  --card: #ffffff;
-  --card-foreground: #101735;
+  --card: oklch(0.9816 0.0017 247.8390);
+  --card-foreground: oklch(0.2504 0.0273 271.9789);
 
-  --popover: #ffffff;
-  --popover-foreground: #101735;
+  --popover: oklch(1.0000 0 0);
+  --popover-foreground: oklch(0.2504 0.0273 271.9789);
 
   /* Brand Primary - Navy */
-  --primary: #26336f;
+  --primary: #26336F;
   --primary-foreground: #ffffff;
 
   /* Secondary - Soft Navy Surface */
-  --secondary: #eef1ff;
-  --secondary-foreground: #18245a;
+  --secondary: oklch(0.9632 0.0034 247.8585); /* Changed to light gray for light mode */
+  --secondary-foreground: #101735;
 
   /* Muted */
-  --muted: #f1f3fb;
-  --muted-foreground: #64708f;
+  --muted: oklch(0.9632 0.0034 247.8585);
+  --muted-foreground: oklch(0.5544 0.0407 257.4166);
 
   /* Accent - Logo Red */
-  --accent: #df1b25;
+  --accent: #DF1B25;
   --accent-foreground: #ffffff;
 
   /* Destructive */
-  --destructive: #dc2626;
-  --destructive-foreground: #ffffff;
+  --destructive: oklch(0.6368 0.2078 25.3313);
+  --destructive-foreground: oklch(0.9842 0.0034 247.8575);
 
   /* Borders / Inputs */
-  --border: #dfe4f3;
-  --input: #dfe4f3;
-  --ring: #df1b25;
+  --border: oklch(0.9288 0.0126 255.5078);
+  --input: oklch(0.9288 0.0126 255.5078);
+  --ring: oklch(0.5585 0.2092 26.1756);
 
   /* Charts */
-  --chart-1: #df1b25;
-  --chart-2: #26336f;
-  --chart-3: #5366c9;
-  --chart-4: #f97316;
-  --chart-5: #14b8a6;
+  --chart-1: oklch(0.3781 0.0912 268.8718);
+  --chart-2: oklch(0.5585 0.2092 26.1756);
+  --chart-3: oklch(0.4455 0.0374 257.2808);
+  --chart-4: oklch(0.6370 0.0477 266.6442);
+  --chart-5: oklch(0.5373 0.1897 25.0224);
 
   /* Sidebar */
-  --sidebar: #ffffff;
-  --sidebar-foreground: #101735;
-  --sidebar-primary: #26336f;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f1f3fb;
-  --sidebar-accent-foreground: #18245a;
-  --sidebar-border: #dfe4f3;
-  --sidebar-ring: #df1b25;
+  --sidebar: oklch(0.9816 0.0017 247.8390);
+  --sidebar-foreground: oklch(0.2504 0.0273 271.9789);
+  --sidebar-primary: oklch(0.5585 0.2092 26.1756);
+  --sidebar-primary-foreground: oklch(1.0000 0 0);
+  --sidebar-accent: oklch(0.9417 0.0052 247.8790);
+  --sidebar-accent-foreground: oklch(0.2504 0.0273 271.9789);
+  --sidebar-border: oklch(0.9109 0.0070 247.9014);
+  --sidebar-ring: oklch(0.5585 0.2092 26.1756);
+  --font-sans: "Geist", sans-serif;
+  --font-serif: "IBM Plex Serif", serif;
+  --font-mono: "Courier New", monospace;
+  --shadow-color: #000000;
+  --shadow-opacity: 0.05;
+  --shadow-blur: 10px;
+  --shadow-spread: 0px;
+  --shadow-offset-x: 0px;
+  --shadow-offset-y: 4px;
+  --letter-spacing: -0.02em;
+  --spacing: 0.25rem;
+  --shadow-2xs: 0px 4px 10px 0px hsl(0 0% 0% / 0.03);
+  --shadow-xs: 0px 4px 10px 0px hsl(0 0% 0% / 0.03);
+  --shadow-sm: 0px 4px 10px 0px hsl(0 0% 0% / 0.05), 0px 1px 2px -1px hsl(0 0% 0% / 0.05);
+  --shadow: 0px 4px 10px 0px hsl(0 0% 0% / 0.05), 0px 1px 2px -1px hsl(0 0% 0% / 0.05);
+  --shadow-md: 0px 4px 10px 0px hsl(0 0% 0% / 0.05), 0px 2px 4px -1px hsl(0 0% 0% / 0.05);
+  --shadow-lg: 0px 4px 10px 0px hsl(0 0% 0% / 0.05), 0px 4px 6px -1px hsl(0 0% 0% / 0.05);
+  --shadow-xl: 0px 4px 10px 0px hsl(0 0% 0% / 0.05), 0px 8px 10px -1px hsl(0 0% 0% / 0.05);
+  --shadow-2xl: 0px 4px 10px 0px hsl(0 0% 0% / 0.13);
+  --tracking-normal: -0.01em;
 
-  
 }
 
 .dark {
   /* Base - Brand Ink Navy instead of pitch black */
-  --background: #101735;
-  --foreground: #f8f9ff;
+  --background: oklch(0.1783 0.0128 270.6022);
+  --foreground: oklch(0.9842 0.0034 247.8575);
 
   /* Surfaces - Layered Navy */
-  --card: #18224b;
-  --card-foreground: #f8f9ff;
+  --card: oklch(0.2504 0.0273 271.9789);
+  --card-foreground: oklch(0.9842 0.0034 247.8575);
 
-  --popover: #18224b;
-  --popover-foreground: #f8f9ff;
+  --popover: oklch(0.1783 0.0128 270.6022);
+  --popover-foreground: oklch(0.9842 0.0034 247.8575);
 
   /* Brand Primary */
-  --primary: #ffffff;
-  --primary-foreground: #101735;
+  --primary: #26336F;
+  --primary-foreground: #ffffff;
 
   /* Secondary - Deep Navy */
-  --secondary: #1e295d;
-  --secondary-foreground: #f8f9ff;
+  --secondary: oklch(0.4602 0.1135 268.7367);
+  --secondary-foreground: oklch(1.0000 0 0);
 
   /* Muted */
-  --muted: #1e295d;
-  --muted-foreground: #9ea8cf;
+  --muted: oklch(0.2795 0.0368 260.0310);
+  --muted-foreground: oklch(0.7107 0.0351 256.7878);
 
   /* Accent - Logo Red */
-  --accent: #df1b25;
+  --accent: #DF1B25;
   --accent-foreground: #ffffff;
 
   /* Destructive */
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
+  --destructive: oklch(0.3958 0.1331 25.7230);
+  --destructive-foreground: oklch(0.9842 0.0034 247.8575);
 
   /* Borders / Inputs */
-  --border: #26336f;
-  --input: #26336f;
-  --ring: #df1b25;
+  --border: oklch(0.2795 0.0368 260.0310);
+  --input: oklch(0.2795 0.0368 260.0310);
+  --ring: oklch(0.5585 0.2092 26.1756);
 
   /* Charts */
-  --chart-1: #df1b25;
-  --chart-2: #7f91ff;
-  --chart-3: #ffffff;
-  --chart-4: #fb923c;
-  --chart-5: #2dd4bf;
+  --chart-1: oklch(0.4602 0.1135 268.7367);
+  --chart-2: oklch(0.5585 0.2092 26.1756);
+  --chart-3: oklch(0.7107 0.0351 256.7878);
+  --chart-4: oklch(0.5387 0.0814 269.2101);
+  --chart-5: oklch(0.6137 0.2039 25.5645);
 
   /* Sidebar */
-  --sidebar: #101735;
-  --sidebar-foreground: #f8f9ff;
-  --sidebar-primary: #df1b25;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #1e295d;
-  --sidebar-accent-foreground: #f8f9ff;
-  --sidebar-border: #26336f;
-  --sidebar-ring: #df1b25;
+  --sidebar: oklch(0.2184 0.0206 267.7060);
+  --sidebar-foreground: oklch(0.9842 0.0034 247.8575);
+  --sidebar-primary: oklch(0.5585 0.2092 26.1756);
+  --sidebar-primary-foreground: oklch(1.0000 0 0);
+  --sidebar-accent: oklch(0.2504 0.0273 271.9789);
+  --sidebar-accent-foreground: oklch(0.9842 0.0034 247.8575);
+  --sidebar-border: oklch(0.2795 0.0368 260.0310);
+  --sidebar-ring: oklch(0.5585 0.2092 26.1756);
+  --radius: 0.375rem;
+  --font-sans: "Geist", sans-serif;
+  --font-serif: "IBM Plex Serif", serif;
+  --font-mono: "Courier New", monospace;
+  --shadow-color: #000000;
+  --shadow-opacity: 0.4;
+  --shadow-blur: 15px;
+  --shadow-spread: 0px;
+  --shadow-offset-x: 0px;
+  --shadow-offset-y: 8px;
+  --letter-spacing: -0.01em;
+  --spacing: 0.25rem;
+  --shadow-2xs: 0px 8px 15px 0px hsl(0 0% 0% / 0.20);
+  --shadow-xs: 0px 8px 15px 0px hsl(0 0% 0% / 0.20);
+  --shadow-sm: 0px 8px 15px 0px hsl(0 0% 0% / 0.40), 0px 1px 2px -1px hsl(0 0% 0% / 0.40);
+  --shadow: 0px 8px 15px 0px hsl(0 0% 0% / 0.40), 0px 1px 2px -1px hsl(0 0% 0% / 0.40);
+  --shadow-md: 0px 8px 15px 0px hsl(0 0% 0% / 0.40), 0px 2px 4px -1px hsl(0 0% 0% / 0.40);
+  --shadow-lg: 0px 8px 15px 0px hsl(0 0% 0% / 0.40), 0px 4px 6px -1px hsl(0 0% 0% / 0.40);
+  --shadow-xl: 0px 8px 15px 0px hsl(0 0% 0% / 0.40), 0px 8px 10px -1px hsl(0 0% 0% / 0.40);
+  --shadow-2xl: 0px 8px 15px 0px hsl(0 0% 0% / 1.00);
 }
 
 @layer base {
@@ -195,6 +261,7 @@
 
   body {
     @apply bg-background text-foreground antialiased;
+    letter-spacing: var(--tracking-normal);
   }
 
   ::selection {

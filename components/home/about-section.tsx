@@ -1,173 +1,181 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import SplitType from "split-type";
+import Image from "next/image";
 
 const commitments = [
-  { num: "01", text: "100% Custom Solutions" },
-  { num: "02", text: "Creative Excellence" },
-  { num: "03", text: "Result-Driven Strategy" },
-  { num: "04", text: "Long-Term Partnership" },
-  { num: "05", text: "Transparent Communication" },
-  { num: "06", text: "Continuous Innovation" },
+  { num: "01", text: "100% Custom Solutions", image: "/who/custom-solutions.webp" },
+  { num: "02", text: "Creative Excellence", image: "/who/creative.webp" },
+  { num: "03", text: "Result-Driven Strategy", image: "/who/result.webp" },
+  { num: "04", text: "Long-Term Partnership", image: "/who/longterm.webp" },
+  { num: "05", text: "Transparent Communication", image: "/who/communication.webp" },
+  { num: "06", text: "Continuous Innovation", image: "/who/ci.webp" },
 ];
 
 const HomeAboutSection = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const stat1Ref = useRef<HTMLSpanElement>(null);
-  const stat2Ref = useRef<HTMLSpanElement>(null);
-  const stat3Ref = useRef<HTMLSpanElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
 
-  useEffect(() => {
-    let ctx = gsap.context(() => {
-      // Load ScrollTrigger dynamically on client
-      import("gsap/ScrollTrigger").then(({ ScrollTrigger }) => {
-        gsap.registerPlugin(ScrollTrigger);
+  useGSAP(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-        // Stats count-up animation
-        const stats = [
-          { ref: stat1Ref, target: 6 },
-          { ref: stat2Ref, target: 200 },
-          { ref: stat3Ref, target: 100 },
-        ];
+    // Split text for cinematic heading reveal
+    if (headingRef.current) {
+      const split = new SplitType(headingRef.current, { types: "lines,words" });
+      gsap.fromTo(
+        split.words,
+        { y: 60, opacity: 0, rotationX: -45 },
+        {
+          y: 0,
+          opacity: 1,
+          rotationX: 0,
+          duration: 1,
+          stagger: 0.05,
+          ease: "power4.out",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 75%",
+          }
+        }
+      );
+    }
 
-        stats.forEach((item) => {
-          if (!item.ref.current) return;
-          const obj = { val: 0 };
-          gsap.to(obj, {
-            val: item.target,
-            duration: 2,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: item.ref.current,
-              start: "top 90%",
-              once: true,
-            },
-            onUpdate: () => {
-              if (item.ref.current) {
-                item.ref.current.textContent = Math.floor(obj.val).toString();
-              }
-            },
-          });
-        });
+    // Paragraph reveals
+    gsap.fromTo(
+      ".about-paragraph",
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".about-paragraph",
+          start: "top 85%",
+        }
+      }
+    );
 
-        // Entrance fade-in reveals for elements with .reveal class
-        const reveals = gsap.utils.toArray(".reveal-item");
-        reveals.forEach((el: any) => {
-          gsap.fromTo(
-            el,
-            { opacity: 0, y: 30 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.8,
-              ease: "power3.out",
-              scrollTrigger: {
-                trigger: el,
-                start: "top 85%",
-                once: true,
-              },
-            }
-          );
-        });
+    // Number counters
+    const counters = gsap.utils.toArray<HTMLElement>(".stat-counter");
+    counters.forEach((counter) => {
+      const target = parseInt(counter.getAttribute("data-target") || "0", 10);
+      gsap.fromTo(counter, { innerHTML: "0" }, {
+        innerHTML: target.toString(),
+        duration: 2,
+        ease: "power3.out",
+        snap: { innerHTML: 1 },
+        scrollTrigger: {
+          trigger: counter,
+          start: "top 90%",
+        }
       });
-    }, containerRef);
+    });
 
-    return () => ctx.revert();
-  }, []);
+    // Commitments list stagger
+    gsap.fromTo(
+      ".commitment-item",
+      { opacity: 0, x: 50 },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".commitments-list",
+          start: "top 80%",
+        }
+      }
+    );
+  }, { scope: containerRef });
 
   return (
     <section
       ref={containerRef}
       id="about"
-      className="relative overflow-hidden bg-white dark:bg-[#101735] py-20 sm:py-28 px-4 sm:px-8 border-t border-slate-200 dark:border-[#26336F]/40"
+      className="relative w-full bg-background py-32 md:py-48 text-foreground overflow-hidden"
     >
-      <div className="container mx-auto max-w-7xl">
-        {/* Top small label */}
-        <div className="about-badge flex items-center gap-3 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-accent mb-8">
-          <span className="w-8 h-[1px] bg-accent" />
-          Discovering Design Hub Solutions
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div className="mx-auto w-full max-w-[1600px] px-6 sm:px-12">
+        <div className="grid grid-cols-1 gap-20 lg:grid-cols-12 lg:gap-16 items-start">
           
-          {/* Left Column: Heading and description */}
-          <div className="space-y-6 sm:space-y-8">
-            <h2 className="about-heading font-[family-name:var(--font-bebas-neue)] text-5xl sm:text-7xl lg:text-8xl leading-[0.9] tracking-wider uppercase text-foreground">
-              Who Is <br />
-              <em className="not-italic text-accent">Design Hub</em> <br />
+          {/* Left Area: Massive Typography & Text */}
+          <div className="lg:col-span-7 flex flex-col gap-12">
+            <h2 
+              ref={headingRef} 
+              className="font-[family-name:var(--font-chillax)] font-light text-[clamp(2.5rem,6vw,5.5rem)] leading-[1.1] uppercase tracking-tight text-foreground/90"
+            >
+              Who is <br />
+              <span className="text-accent italic font-light">Design Hub</span> <br />
               Solutions?
             </h2>
 
-            <p className="reveal-item text-sm sm:text-base text-muted-foreground leading-relaxed">
-              We strive to provide 100% custom websites, high-performance mobile apps, and robust enterprise software. We are superbly creative and we honestly care for your product or services â€” which is rare in these times.
-            </p>
+            <div className="flex flex-col gap-8 max-w-xl">
+              <p className="about-paragraph text-lg md:text-xl leading-relaxed text-muted-foreground/80 font-light">
+                We strive to provide 100% custom websites, high-performance mobile apps, and robust enterprise software. We are superbly creative and we honestly care for your product or services — which is rare in these times.
+              </p>
+              <p className="about-paragraph text-lg md:text-xl leading-relaxed text-muted-foreground/80 font-light">
+                Our personality is infectious throughout your brand. Our creativity always stands out from the rest in the right way. People will continually talk about your new catchy look.
+              </p>
+            </div>
 
-            <p className="reveal-item text-sm sm:text-base text-muted-foreground leading-relaxed">
-              Our personality is infectious throughout your brand. Our creativity always stands out from the rest in the right way. People will continually talk about your new catchy look.
-            </p>
-
-            {/* Stats list */}
-            <div className="grid grid-cols-3 gap-4 pt-4 border-t border-border/40 select-none">
-              <div className="reveal-item">
-                <div className="font-[family-name:var(--font-bebas-neue)] text-4xl sm:text-5xl text-foreground">
-                  <span ref={stat1Ref}>0</span>
-                  <span className="text-accent">+</span>
-                </div>
-                <div className="text-[10px] sm:text-xs font-semibold tracking-wider text-muted-foreground/60 uppercase mt-1">
-                  Years Experience
-                </div>
+            {/* Huge Stats */}
+            <div className="grid grid-cols-3 gap-8 pt-12 border-t border-border mt-4">
+              <div className="flex flex-col gap-2">
+                <div className="text-5xl md:text-7xl font-light text-foreground"><span className="stat-counter" data-target="6">0</span>+</div>
+                <div className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">Years Experience</div>
               </div>
-
-              <div className="reveal-item">
-                <div className="font-[family-name:var(--font-bebas-neue)] text-4xl sm:text-5xl text-foreground">
-                  <span ref={stat2Ref}>0</span>
-                  <span className="text-accent">+</span>
-                </div>
-                <div className="text-[10px] sm:text-xs font-semibold tracking-wider text-muted-foreground/60 uppercase mt-1">
-                  Projects Delivered
-                </div>
+              <div className="flex flex-col gap-2">
+                <div className="text-5xl md:text-7xl font-light text-foreground"><span className="stat-counter" data-target="550">0</span>+</div>
+                <div className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">Projects Delivered</div>
               </div>
-
-              <div className="reveal-item">
-                <div className="font-[family-name:var(--font-bebas-neue)] text-4xl sm:text-5xl text-foreground">
-                  <span ref={stat3Ref}>0</span>
-                  <span className="text-accent">%</span>
-                </div>
-                <div className="text-[10px] sm:text-xs font-semibold tracking-wider text-muted-foreground/60 uppercase mt-1">
-                  Client Satisfaction
-                </div>
+              <div className="flex flex-col gap-2">
+                <div className="text-5xl md:text-7xl font-light text-foreground"><span className="stat-counter" data-target="100">0</span>%</div>
+                <div className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">Client Satisfaction</div>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Commitments visual card */}
-          <div className="about-commitment-card relative">
-            {/* Visual Glassmorphic Card */}
-            <div className="relative rounded-3xl border border-border bg-card/40 p-6 sm:p-8 overflow-hidden backdrop-blur-md">
-              {/* Left Accent Glow line */}
-              <div className="absolute top-0 left-0 w-[3px] h-full bg-gradient-to-b from-accent to-transparent" />
-              
-              <h3 className="font-[family-name:var(--font-bebas-neue)] text-3xl sm:text-4xl tracking-wider text-foreground mb-6">
-                Our Commitment
-              </h3>
-
-              <ul className="flex flex-col divide-y divide-border/40 select-none">
-                {commitments.map((item, idx) => (
-                  <li
-                    key={idx}
-                    className="flex items-center gap-4 py-3.5 text-sm sm:text-base text-muted-foreground hover:text-foreground transition-colors duration-200"
-                  >
-                    <span className="font-[family-name:var(--font-bebas-neue)] text-sm sm:text-base text-accent tracking-wide w-6 flex-shrink-0">
-                      {item.num}
+          {/* Right Area: Sleek Commitments List */}
+          <div className="lg:col-span-5 lg:pl-10 lg:mt-32">
+            <h3 className="text-xs font-bold uppercase tracking-[0.3em] text-accent mb-12 flex items-center gap-4">
+              <span className="h-px w-12 bg-accent/50" />
+              Our Commitment
+            </h3>
+            
+            <ul className="commitments-list flex flex-col w-full border-t border-border">
+              {commitments.map((item, idx) => (
+                <li
+                  key={idx}
+                  className="commitment-item group flex items-center gap-8 border-b border-border py-8 transition-colors hover:border-accent"
+                >
+                  <span className="text-sm font-medium text-muted-foreground/50 transition-colors group-hover:text-accent shrink-0">
+                    {item.num}
+                  </span>
+                  
+                  <div className="flex items-center">
+                    <div className="w-0 h-0 opacity-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden rounded-xl group-hover:w-[100px] md:group-hover:w-[120px] group-hover:h-[60px] md:group-hover:h-[70px] group-hover:opacity-100 group-hover:mr-6 flex-shrink-0">
+                      <Image 
+                        src={item.image}
+                        alt={item.text}
+                        width={120}
+                        height={70}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <span className="text-xl md:text-3xl font-light text-foreground/60 transition-colors group-hover:text-foreground">
+                      {item.text}
                     </span>
-                    <span>{item.text}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
-
+          
         </div>
       </div>
     </section>

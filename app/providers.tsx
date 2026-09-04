@@ -6,6 +6,8 @@ import { getQueryClient } from "@/lib/query-client";
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "@/components/theme-provider";
 
+import { LenisProvider } from "@/components/providers/lenis-provider";
+
 export function Providers({ children }: { children: React.ReactNode }) {
   // Get the client instance (singleton on browser, fresh on server request)
   const queryClient = getQueryClient();
@@ -19,7 +21,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
           defaultTheme="light"
           disableTransitionOnChange
         >
-          {children}
+          <LenisProvider>
+            {children}
+          </LenisProvider>
         </ThemeProvider>
       </QueryClientProvider>
     </SessionProvider>

@@ -20,7 +20,7 @@ export default function GlobalError({
               Critical Error
             </p>
             <div className="space-y-4">
-              <h1 className="font-[family-name:var(--font-bebas-neue)] text-4xl leading-none tracking-[0.2em] text-foreground sm:text-5xl">
+              <h1 className="font-[family-name:var(--font-chillax)] font-light text-4xl leading-none tracking-[0.2em] text-foreground sm:text-5xl">
                 Something went wrong
               </h1>
               <p className="text-sm leading-6 text-muted-foreground sm:text-base">

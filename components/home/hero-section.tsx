@@ -2,504 +2,290 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowRight, CheckCircle2, MessageSquare } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { useGSAP } from "@gsap/react";
+import SplitType from "split-type";
 import gsap from "gsap";
+import Image from "next/image";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 const headlines = [
-  { line1: "We Believe In", line2: "Thinking ", highlight: "Different" },
-  { line1: "We Believe In", line2: "Being ", highlight: "Unique" },
-  { line1: "Discovering", line2: "Design ", highlight: "Hub" },
-];
-
-const typingPhrases = [
-  "WEB DEVELOPMENT",
-  "DIGITAL MARKETING",
-  "DESIGN SOLUTIONS",
-  "PRINTING",
-  "PACKAGING DESIGN",
-  "PHOTOGRAPHY",
+  { line1: "Thinking", highlight: "Different." },
+  { line1: "Being", highlight: "Unique." },
+  { line1: "Design", highlight: "Hub." },
 ];
 
 const HomeHeroSection = () => {
-  const [headlineIdx, setHeadlineIdx] = useState(0);
-  const [typingText, setTypingText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [phraseIdx, setPhraseIdx] = useState(0);
-  const [charIdx, setCharIdx] = useState(0);
+  const [isNavigating, setIsNavigating] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const tagRef = useRef<HTMLDivElement>(null);
-  const subRef = useRef<HTMLDivElement>(null);
-  const typingContainerRef = useRef<HTMLDivElement>(null);
-  const heroImageRef = useRef<HTMLDivElement>(null);
+  const headlineRef = useRef<HTMLHeadingElement>(null);
+  const topTextRef = useRef<HTMLDivElement>(null);
+  const bottomGridRef = useRef<HTMLDivElement>(null);
+  const bgOrbRef = useRef<HTMLDivElement>(null);
+  const leftFloatRef = useRef<HTMLDivElement>(null);
+  const rightFloatRef = useRef<HTMLDivElement>(null);
 
-  // spiderman 3D wrapper — unchanged behaviour
-  const parallaxWrapperRef = useRef<HTMLDivElement>(null);
-
-  // floating elements — now independent of the spiderman wrapper
-  const floatCard1Ref = useRef<HTMLDivElement>(null);
-  const floatCard1InnerRef = useRef<HTMLDivElement>(null);
-  const floatCard2Ref = useRef<HTMLDivElement>(null);
-  const floatCard2InnerRef = useRef<HTMLDivElement>(null);
-  const messageIconRef = useRef<HTMLDivElement>(null);
-  const megaphoneRef = useRef<HTMLDivElement>(null);
-
-  const mobileSpideyRef = useRef<HTMLImageElement>(null);
-  const tabletSpideyRef = useRef<HTMLImageElement>(null);
-
-  // animations
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        defaults: { ease: "power4.out" },
+  // Background slow orb movement and floating visuals
+  useGSAP(() => {
+    if (bgOrbRef.current) {
+      gsap.to(bgOrbRef.current, {
+        x: "15vw",
+        y: "10vh",
+        duration: 10,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
       });
-
-      tl.fromTo(
-        tagRef.current,
-        { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 0.6, delay: 0.2 }
-      )
-        .fromTo(
-          ".headline-line-inner",
-          { y: "110%", opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8, stagger: 0.15 },
-          "-=0.3"
-        )
-        .fromTo(
-          subRef.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.7 },
-          "-=0.2"
-        )
-        .fromTo(
-          typingContainerRef.current,
-          { opacity: 0, y: 10 },
-          { opacity: 1, y: 0, duration: 0.5 },
-          "-=0.1"
-        );
-
-      if (heroImageRef.current) {
-        tl.fromTo(
-          heroImageRef.current,
-          { opacity: 0, scale: 0.95, y: 30 },
-          { opacity: 1, scale: 1, y: 0, duration: 1.2, delay: 0.4 },
-          "-=0.8"
-        );
-      }
-
-      if (floatCard1Ref.current) {
-        tl.fromTo(
-          floatCard1Ref.current,
-          { opacity: 0, x: 30, scale: 0.9 },
-          { opacity: 1, x: 0, scale: 1, duration: 0.8 },
-          "-=1"
-        );
-        // idle bob now lives on the INNER element, so it doesn't fight the mouse-parallax x/y on the outer ref
-        gsap.to(floatCard1InnerRef.current, {
-          y: -8,
-          duration: 2.8,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-          delay: 0.2,
-        });
-      }
-
-      if (floatCard2Ref.current) {
-        tl.fromTo(
-          floatCard2Ref.current,
-          { opacity: 0, x: -30, scale: 0.9 },
-          { opacity: 1, x: 0, scale: 1, duration: 0.8 },
-          "-=0.8"
-        );
-        gsap.to(floatCard2InnerRef.current, {
-          y: 10,
-          duration: 3.2,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-          delay: 0.5,
-        });
-      }
-
-      // 3D mouse parallax
-      if (parallaxWrapperRef.current && containerRef.current) {
-        // spiderman — same as before
-        const xTo = gsap.quickTo(parallaxWrapperRef.current, "x", { duration: 0.8, ease: "power3" });
-        const yTo = gsap.quickTo(parallaxWrapperRef.current, "y", { duration: 0.8, ease: "power3" });
-        const rotateXTo = gsap.quickTo(parallaxWrapperRef.current, "rotationX", { duration: 0.8, ease: "power3" });
-        const rotateYTo = gsap.quickTo(parallaxWrapperRef.current, "rotationY", { duration: 0.8, ease: "power3" });
-
-        // each floating element gets its own setters + its own duration (different "weight"/lag) and direction
-        const card1XTo = floatCard1Ref.current
-          ? gsap.quickTo(floatCard1Ref.current, "x", { duration: 1, ease: "power3" })
-          : null;
-        const card1YTo = floatCard1Ref.current
-          ? gsap.quickTo(floatCard1Ref.current, "y", { duration: 1, ease: "power3" })
-          : null;
-
-        const card2XTo = floatCard2Ref.current
-          ? gsap.quickTo(floatCard2Ref.current, "x", { duration: 1.3, ease: "power3" })
-          : null;
-        const card2YTo = floatCard2Ref.current
-          ? gsap.quickTo(floatCard2Ref.current, "y", { duration: 1.3, ease: "power3" })
-          : null;
-
-        const msgXTo = messageIconRef.current
-          ? gsap.quickTo(messageIconRef.current, "x", { duration: 0.6, ease: "power2" })
-          : null;
-        const msgYTo = messageIconRef.current
-          ? gsap.quickTo(messageIconRef.current, "y", { duration: 0.6, ease: "power2" })
-          : null;
-
-        const megaRotTo = megaphoneRef.current
-          ? gsap.quickTo(megaphoneRef.current, "rotation", { duration: 0.9, ease: "power2" })
-          : null;
-        const megaXTo = megaphoneRef.current
-          ? gsap.quickTo(megaphoneRef.current, "x", { duration: 0.9, ease: "power2" })
-          : null;
-
-        const handleMouseMove = (e: MouseEvent) => {
-          const { clientX, clientY } = e;
-          const { innerWidth, innerHeight } = window;
-
-          const xPos = (clientX / innerWidth - 0.5) * 2;
-          const yPos = (clientY / innerHeight - 0.5) * 2;
-
-          // spiderman — unchanged
-          xTo(xPos * 30);
-          yTo(yPos * 30);
-          rotateXTo(-yPos * 25);
-          rotateYTo(xPos * 25);
-
-          // card 1: reads as the closest layer — moves further & faster, same direction as cursor
-          card1XTo?.(xPos * 55);
-          card1YTo?.(yPos * 40);
-
-          // card 2: moves opposite the cursor, so it visibly counters card 1 instead of matching it
-          card2XTo?.(xPos * -35);
-          card2YTo?.(yPos * -25);
-
-          // message bubble: light diagonal drift, inverted on y for a bit of criss-cross motion
-          msgXTo?.(xPos * 18);
-          msgYTo?.(-yPos * 15);
-
-          // megaphone: tilts and slides sideways instead of translating on both axes like the rest
-          megaRotTo?.(xPos * 12);
-          megaXTo?.(-xPos * 20);
-        };
-
-        window.addEventListener("mousemove", handleMouseMove);
-
-        return () => {
-          window.removeEventListener("mousemove", handleMouseMove);
-        };
-      }
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  // headline cycler
-  useEffect(() => {
-    const interval = setInterval(() => {
-      gsap.to(".headline-line-inner", {
-        y: -30,
-        opacity: 0,
-        duration: 0.4,
-        ease: "power2.in",
-        stagger: 0.05,
-        onComplete: () => {
-          setHeadlineIdx((prev) => (prev + 1) % headlines.length);
-          gsap.fromTo(
-            ".headline-line-inner",
-            { y: "110%", opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.7, ease: "power4.out", stagger: 0.08 }
-          );
-        },
-      });
-    }, 4500);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  // typewriter
-  useEffect(() => {
-    const phrase = typingPhrases[phraseIdx];
-    let timer: NodeJS.Timeout;
-
-    if (!isDeleting) {
-      timer = setTimeout(() => {
-        setTypingText(phrase.slice(0, charIdx + 1));
-        setCharIdx((prev) => prev + 1);
-        if (charIdx === phrase.length) {
-          setIsDeleting(true);
-        }
-      }, 90);
-    } else {
-      timer = setTimeout(() => {
-        setTypingText(phrase.slice(0, charIdx - 1));
-        setCharIdx((prev) => prev - 1);
-        if (charIdx === 0) {
-          setIsDeleting(false);
-          setPhraseIdx((prev) => (prev + 1) % typingPhrases.length);
-        }
-      }, 50);
     }
 
-    return () => clearTimeout(timer);
-  }, [charIdx, isDeleting, phraseIdx]);
+    if (leftFloatRef.current) {
+      gsap.to(leftFloatRef.current, {
+        y: "-3vh",
+        rotation: 2,
+        duration: 4,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+    }
+
+    if (rightFloatRef.current) {
+      gsap.to(rightFloatRef.current, {
+        y: "3vh",
+        rotation: -2,
+        duration: 5,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+    }
+  }, { scope: containerRef });
+
+  // Load Animation
+  useGSAP(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      gsap.set([topTextRef.current, bottomGridRef.current], { opacity: 1 });
+      return;
+    }
+
+    const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+    // Initial fade in for peripheral elements
+    tl.fromTo(topTextRef.current, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 1, delay: 0.5 })
+      .fromTo(bottomGridRef.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1 }, "-=0.8");
+      
+    // Stat counters
+    const statNumbers = containerRef.current?.querySelectorAll(".stat-number");
+    if (statNumbers) {
+      statNumbers.forEach((stat) => {
+        const target = stat.getAttribute("data-target");
+        if (target) {
+          gsap.fromTo(stat, { innerHTML: "0" }, {
+            innerHTML: target,
+            duration: 2,
+            ease: "power3.out",
+            snap: { innerHTML: 1 },
+            delay: 1
+          });
+        }
+      });
+    }
+
+  }, { scope: containerRef });
+
+  // Headline Animation (Cycler)
+  useGSAP(() => {
+    if (!headlineRef.current) return;
+    
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      gsap.set(headlineRef.current, { opacity: 1 });
+      return;
+    }
+
+    let currentIdx = 0;
+    let split: SplitType;
+    let isActive = true;
+
+    const playCycle = () => {
+      if (!isActive || !headlineRef.current) return;
+
+      // Update DOM text directly to bypass React renders
+      const data = headlines[currentIdx];
+      headlineRef.current.innerHTML = `${data.line1} <br /> <span class="text-accent italic">${data.highlight}</span>`;
+      
+      // Split new text
+      split = new SplitType(headlineRef.current, { types: "chars,words" });
+
+      const tl = gsap.timeline({
+        onComplete: () => {
+          if (!isActive) return;
+          currentIdx = (currentIdx + 1) % headlines.length;
+          if (split) split.revert(); // clean up DOM
+          playCycle(); // Loop
+        }
+      });
+
+      // Animate IN
+      tl.fromTo(
+        split.chars,
+        { y: 100, opacity: 0, rotationX: -90 },
+        { 
+          y: 0, 
+          opacity: 1, 
+          rotationX: 0, 
+          duration: 1.2, 
+          stagger: 0.04, 
+          ease: "expo.out",
+          delay: 0.2
+        }
+      )
+      // Wait for reading
+      .to({}, { duration: 3.5 })
+      // Animate OUT
+      .to(
+        split.chars,
+        {
+          y: -100,
+          opacity: 0,
+          rotationX: 90,
+          duration: 0.6,
+          stagger: 0.02,
+          ease: "power3.in"
+        }
+      );
+    };
+
+    // Start
+    playCycle();
+
+    return () => {
+      isActive = false;
+      if (split) split.revert();
+    };
+  }, { scope: containerRef });
 
   return (
     <section
       id="hero"
       ref={containerRef}
-      className="
-        relative
-        overflow-hidden
-        bg-background
-        min-h-auto
-        lg:min-h-[78vh]
-        flex
-        items-center
-        justify-center
-        px-4
-        pt-6
-        pb-16
-        sm:px-6
-        sm:pt-12
-        sm:pb-20
-        lg:px-6
-        lg:py-10
-      "
+      className="relative flex min-h-[calc(100svh-4rem)] lg:min-h-[calc(100svh-6rem)] w-full flex-col items-center justify-between overflow-hidden bg-background px-6 pt-12 pb-6 sm:px-12 md:pt-16 md:pb-8"
     >
-      {/* background */}
-      <div className="hero-bg-radial absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_60%_40%,rgba(223,27,37,0.08)_0%,transparent_65%)] dark:bg-[radial-gradient(ellipse_80%_60%_at_60%_40%,rgba(223,27,37,0.12)_0%,transparent_65%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_70%_at_10%_80%,rgba(38,51,111,0.06)_0%,transparent_60%)] dark:bg-[radial-gradient(ellipse_50%_70%_at_10%_80%,rgba(38,51,111,0.1)_0%,transparent_60%)]" />
-        <div
-          className="hero-grid-layer absolute inset-0 opacity-[0.04] dark:opacity-[0.03]"
-          style={{
-            backgroundImage: `
-              linear-gradient(var(--foreground) 1px, transparent 1px),
-              linear-gradient(90deg, var(--foreground) 1px, transparent 1px)
-            `,
-            backgroundSize: "80px 80px",
-            maskImage: "radial-gradient(ellipse 70% 70% at 50% 50%, black 0%, transparent 100%)",
-            WebkitMaskImage: "radial-gradient(ellipse 70% 70% at 50% 50%, black 0%, transparent 100%)",
-          }}
+      {/* Abstract Background */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {/* Soft radial glow */}
+        <div 
+          ref={bgOrbRef}
+          className="absolute left-1/2 top-1/2 h-[80vh] w-[80vw] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(223,27,37,0.15)_0%,transparent_60%)] mix-blend-screen blur-[80px]"
         />
-      </div>
-
-      {/* desktop dots */}
-      <div className="hidden xl:flex absolute left-6 top-1/2 -translate-y-1/2 flex-col gap-4 z-10">
-        {headlines.map((_, idx) => (
-          <div
-            key={idx}
-            className={`w-2.5 h-2.5 rounded-full border border-border/80 transition-all duration-300 ${
-              idx === headlineIdx ? "bg-accent scale-125 border-accent" : "bg-muted-foreground/30"
-            }`}
+        {/* Film grain noise overlay */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')" }} />
+        
+        {/* Left Floating Visual (Desktop Only) */}
+        <div ref={leftFloatRef} className="hidden lg:block absolute top-[25%] left-[2%] xl:left-[8%] w-64 xl:w-72 aspect-square -rotate-6 transform-gpu opacity-90 dark:opacity-80">
+          <DotLottieReact
+            src="/lottie/graphic_design.lottie"
+            autoplay
+            loop
+            className="w-full h-full object-contain"
           />
-        ))}
+        </div>
+
+        {/* Right Floating Visual (Desktop Only) */}
+        <div ref={rightFloatRef} className="hidden lg:block absolute top-[15%] right-[2%] xl:right-[8%] w-64 xl:w-72 aspect-square rotate-6 transform-gpu opacity-90 dark:opacity-80">
+          <DotLottieReact
+            src="/lottie/developer.lottie"
+            autoplay
+            loop
+            className="w-full h-full object-contain scale-175"
+          />
+        </div>
       </div>
 
-      <div className="hero-content-parallax relative z-10 mx-auto w-full max-w-[1380px]">
-        <div className="grid items-center gap-8 md:gap-10 lg:grid-cols-12 lg:gap-4">
-          {/* LEFT */}
-          <div className="space-y-5 md:space-y-6 lg:col-span-7 lg:order-2">
-            {/* tagline */}
-            <div
-              ref={tagRef}
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-card/40 px-4 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground sm:text-xs"
-            >
-              <span className="flex h-2 w-2 rounded-full bg-accent animate-pulse" />
-              Digital Excellence
-            </div>
+      {/* Top Header/Tagline area */}
+      <div ref={topTextRef} className="relative z-10 flex w-full max-w-[1600px] flex-col items-center justify-between gap-6 md:flex-row md:items-start pt-4">
+        <div className="flex items-center gap-3 rounded-full border border-border bg-foreground/5 px-5 py-2 backdrop-blur-md">
+          <div className="h-2 w-2 rounded-full bg-accent animate-pulse" />
+          <span className="text-xs font-medium tracking-[0.2em] text-foreground/70 uppercase">Digital Excellence</span>
+        </div>
+        
+        <p className="max-w-md text-center md:text-right text-sm leading-relaxed text-muted-foreground font-medium">
+          We craft high-converting digital products, brand identities, and packaging design that help ambitious businesses scale.
+        </p>
+      </div>
 
-            {/* headline */}
-            <h1 className="relative font-audiowide uppercase leading-[0.88] tracking-tight text-foreground text-[clamp(2.2rem,9.5vw,4rem)] sm:text-[clamp(3.2rem,12vw,5rem)] md:text-[clamp(4rem,9vw,6rem)] lg:text-[clamp(4.5rem,7vw,7rem)]">
-              <div className="invisible pointer-events-none select-none" aria-hidden="true">
-                <span className="block overflow-hidden py-1">
-                  <span className="block">We Believe In</span>
-                </span>
-                <span className="block overflow-hidden py-1">
-                  <span className="block">
-                    Thinking <em className="not-italic text-accent">Different</em>
-                  </span>
-                </span>
-              </div>
+      {/* Center Massive Typography */}
+      <div className="relative z-10 flex w-full flex-1 flex-col items-center justify-center py-6 md:py-8 text-center">
+        <div className="text-muted-foreground text-sm md:text-xl font-medium tracking-[0.3em] uppercase mb-4 md:mb-6 block overflow-hidden">
+          <span>We Believe In</span>
+        </div>
+        
+        <h1 
+          ref={headlineRef}
+          className="font-[family-name:var(--font-chillax)] w-full max-w-[1600px] text-[clamp(3rem,12vw,12rem)] uppercase font-light leading-[0.8] tracking-[0.01em] text-foreground dark:text-white dark:mix-blend-difference"
+        >
+          {/* Initial content to prevent flash before JS runs */}
+          {headlines[0].line1} <br />
+          <span className="text-accent italic">{headlines[0].highlight}</span>
+        </h1>
+      </div>
 
-              <div className="absolute inset-0 flex flex-col justify-start">
-                <span className="block overflow-hidden py-1">
-                  <span className="headline-line-inner block">{headlines[headlineIdx].line1}</span>
-                </span>
-                <span className="block overflow-hidden py-1">
-                  <span className="headline-line-inner block">
-                    {headlines[headlineIdx].line2}
-                    <em className="not-italic text-accent">{headlines[headlineIdx].highlight}</em>
-                  </span>
-                </span>
-              </div>
-            </h1>
+      {/* Bottom Data Grid */}
+      <div ref={bottomGridRef} className="relative z-10 grid w-full max-w-[1600px] grid-cols-1 gap-6 border-t border-border pt-6 md:grid-cols-3 lg:grid-cols-4 pb-2">
+        
+        {/* Metric 1 */}
+        <div className="flex flex-col gap-2">
+          <div className="text-4xl font-light text-foreground"><span className="stat-number" data-target="550">0</span>+</div>
+          <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Projects Delivered</div>
+        </div>
 
-            {/* TABLET HERO VISUAL */}
-            <div className="hidden md:block lg:hidden">
-              <div className="relative h-[360px] rounded-[2rem] border border-[#26336F]/20 bg-card/10 shadow-2xl backdrop-blur-md">
-                <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-tr from-[#26336F]/10 via-[#050711]/60 to-[#DF1B25]/5" />
-                <div
-                  className="relative flex h-full items-center justify-center"
-                  style={{ clipPath: "inset(-50% 0 0 0 round 0 0 2rem 2rem)" }}
-                >
-                  <img
-                    ref={tabletSpideyRef}
-                    src="/home/spiderman.webp"
-                    alt="Spiderman Hero"
-                    className="spidey-breath absolute inset-0 w-full h-full object-cover object-center"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* mobile visual */}
-            <div className="md:hidden">
-              <div className="relative h-[260px] rounded-[1.75rem] border border-[#26336F]/20 bg-card/10 shadow-2xl backdrop-blur-md">
-                <div className="absolute inset-0 rounded-[1.75rem] bg-gradient-to-tr from-[#26336F]/10 via-[#050711]/60 to-[#DF1B25]/5" />
-                <div
-                  className="relative flex h-full items-center justify-center"
-                  style={{ clipPath: "inset(-50% 0 0 0 round 0 0 1.75rem 1.75rem)" }}
-                >
-                  <img
-                    ref={mobileSpideyRef}
-                    src="/home/spiderman.webp"
-                    alt="Spiderman Hero"
-                    className="spidey-breath absolute inset-0 w-full h-full object-cover object-center"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* sub */}
-            <div ref={subRef} className="flex flex-col gap-5 pt-2 sm:flex-row sm:items-start sm:justify-between">
-              <div className="space-y-4">
-                <p className="max-w-[540px] text-sm leading-relaxed text-muted-foreground sm:text-base">
-                  We craft high-converting digital products, brand identities, packaging design, and performance marketing campaigns that help ambitious businesses scale faster.
-                </p>
-
-                <div className="flex flex-wrap items-center gap-3 text-xs font-semibold text-muted-foreground">
-                  <span className="flex items-center gap-1 text-amber-500 font-bold">
-                    ★★★★★ <span className="text-foreground ml-1">4.9/5 Rating</span>
-                  </span>
-                  <span className="h-3 w-[1px] bg-border" />
-                  <span>200+ Projects Delivered</span>
-                  <span className="h-3 w-[1px] bg-border" />
-                  <span className="text-accent font-medium">100% Custom Solutions</span>
-                </div>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-3 shrink-0">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-2 rounded-2xl bg-accent px-7 py-4 text-sm font-bold text-accent-foreground shadow-lg shadow-accent/25 transition-all duration-300 hover:scale-[1.03] hover:bg-accent/90"
-                >
-                  Start Your Project
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-
-                <Link
-                  href="/portfolio"
-                  className="inline-flex items-center gap-2 rounded-2xl border border-border bg-secondary/60 px-6 py-4 text-sm font-bold text-foreground transition-all duration-300 hover:border-accent/40 hover:bg-secondary"
-                >
-                  View Work
-                </Link>
-              </div>
-            </div>
-
-            {/* typing */}
-            <div
-              ref={typingContainerRef}
-              className="flex flex-col gap-3 border-t border-border/50 pt-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground/60 sm:flex-row sm:items-center sm:gap-4"
-            >
-              <span>We are experts in:</span>
-              <div className="flex items-center min-h-8 sm:min-h-9 min-w-[200px] sm:min-w-[280px] whitespace-nowrap font-(family-name:--font-bebas-neue) text-xl tracking-wide text-foreground sm:text-3xl">
-                <span>{typingText || "\u200B"}</span>
-                <span className="ml-1 inline-block h-[1.1em] w-[3px] bg-accent animate-[pulse_0.9s_steps(2,start)_infinite]" />
-              </div>
-            </div>
+        {/* Metric 2 */}
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center gap-2 text-2xl text-amber-500">
+            ★★★★★
           </div>
+          <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground"><span className="text-foreground">4.9/5</span> Client Rating</div>
+        </div>
 
-          {/* DESKTOP RIGHT VISUAL */}
-          <div className="hidden lg:flex lg:col-span-5 lg:order-1 relative items-center justify-center">
-            <div
-              ref={heroImageRef}
-              className="relative w-full h-[600px] flex items-center justify-center"
-              style={{ perspective: "1000px" }}
-            >
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(38,51,111,0.4)_0%,transparent_70%)]" />
-
-              {/* 3D Wrapper — spiderman only, motion unchanged */}
-              <div
-                ref={parallaxWrapperRef}
-                className="relative w-full h-full flex items-center justify-center will-change-transform"
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <div
-                  className="absolute inset-0 w-full h-full z-10 pointer-events-none"
-                  style={{ transform: "translateZ(20px)" }}
-                >
-                  <img
-                    src="/home/spiderman.webp"
-                    alt="Spiderman Hero"
-                    className="w-full h-full object-contain object-center"
-                  />
-                </div>
-              </div>
-
-              {/* Floating elements — now independent, react differently from the spiderman */}
-              <div ref={floatCard1Ref} className="absolute right-[5%] top-[25%] z-20 will-change-transform">
-                <div
-                  ref={floatCard1InnerRef}
-                  className="flex flex-col items-center justify-center gap-1 rounded-2xl border border-white/10 bg-[#0A102A]/80 backdrop-blur-md px-6 py-4 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
-                >
-                  <div className="absolute -top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full bg-amber-400 text-[#0A102A]">
-                    <CheckCircle2 className="h-5 w-5" />
-                  </div>
-                  <span className="text-2xl font-bold text-white">550+</span>
-                  <span className="text-xs font-medium text-muted-foreground">Project Completed</span>
-                </div>
-              </div>
-
-              <div ref={floatCard2Ref} className="absolute left-[0%] bottom-[20%] z-20 will-change-transform">
-                <div
-                  ref={floatCard2InnerRef}
-                  className="flex flex-col gap-3 rounded-2xl border border-white/10 bg-[#0A102A]/80 backdrop-blur-md p-4 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
-                >
-                  <span className="text-xs font-semibold text-white/90">Team Members</span>
-                  <div className="flex -space-x-3">
-                    <Image src="/team/balaji.png" alt="Team" width={32} height={32} className="h-8 w-8 rounded-full border-2 border-[#0A102A] object-cover" />
-                    <Image src="/team/mani.png" alt="Team" width={32} height={32} className="h-8 w-8 rounded-full border-2 border-[#0A102A] object-cover" />
-                    <Image src="/team/ranjani.png" alt="Team" width={32} height={32} className="h-8 w-8 rounded-full border-2 border-[#0A102A] object-cover" />
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-[#0A102A] bg-amber-400 text-xs font-bold text-[#0A102A]">+</div>
-                  </div>
-                </div>
-              </div>
-
-              <div ref={messageIconRef} className="absolute right-[15%] bottom-[15%] z-10 will-change-transform">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-transparent text-[#3b82f6] shadow-lg animate-[bounce_3s_infinite]">
-                  <MessageSquare className="h-8 w-8" />
-                </div>
-              </div>
-
-              <div ref={megaphoneRef} className="absolute left-[15%] top-[10%] z-10 will-change-transform">
-                <div className="animate-[bounce_4s_infinite]">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#eab308" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="m3 11 18-5v12L3 14v-3z"></path>
-                    <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"></path>
-                  </svg>
-                </div>
-              </div>
-            </div>
+        {/* Team Avatars */}
+        <div className="flex flex-col gap-3">
+          <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Expert Team</div>
+          <div className="flex -space-x-3">
+            <Image src="/team/balaji.png" alt="Team" width={40} height={40} className="bg-background/90 h-10 w-10 rounded-full border border-background object-cover grayscale transition-all hover:grayscale-0" />
+            <Image src="/team/mani.png" alt="Team" width={40} height={40} className="bg-background/90 h-10 w-10 rounded-full border border-background object-cover grayscale transition-all hover:grayscale-0" />
+            <Image src="/team/ranjani.png" alt="Team" width={40} height={40} className="bg-background/90 h-10 w-10 rounded-full border border-background object-cover grayscale transition-all hover:grayscale-0" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-full border border-background bg-foreground text-xs font-bold text-background">+</div>
           </div>
+        </div>
+
+        {/* CTA */}
+        <div className="flex items-center md:justify-end lg:col-span-1">
+          <Link
+            href="/contact"
+            onClick={() => {
+              setIsNavigating(true);
+              setTimeout(() => setIsNavigating(false), 2000);
+            }}
+            className={`group flex h-20 w-full items-center justify-between md:gap-4 rounded-full px-8 transition-all duration-500 md:w-auto relative overflow-hidden ${
+              isNavigating 
+                ? "bg-foreground text-background scale-95 shadow-inner" 
+                : "bg-accent text-white hover:bg-foreground hover:text-background"
+            }`}
+          >
+            <span className="text-sm font-bold uppercase tracking-wider relative z-10">Start Project</span>
+            <div className={`flex h-10 w-10 items-center justify-center rounded-full bg-foreground/20 transition-all duration-500 z-10 ${
+              isNavigating ? "translate-x-12 opacity-0" : "group-hover:scale-110 group-hover:bg-background/10"
+            }`}>
+              <ArrowRight className="h-5 w-5" />
+            </div>
+
+            {/* Click ripple effect */}
+            {isNavigating && (
+              <div className="absolute inset-0 z-0 flex items-center justify-center">
+                <div className="h-4 w-4 rounded-full bg-background/20 animate-[ping_1s_cubic-bezier(0,0,0.2,1)_infinite]" />
+              </div>
+            )}
+          </Link>
         </div>
       </div>
     </section>
@@ -507,727 +293,3 @@ const HomeHeroSection = () => {
 };
 
 export default HomeHeroSection;
-
-// "use client";
-
-// import { useEffect, useRef, useState } from "react";
-// import Link from "next/link";
-// import Image from "next/image";
-// import { ArrowRight, CheckCircle2, MessageSquare } from "lucide-react";
-// import gsap from "gsap";
-
-// const headlines = [
-//   { line1: "We Believe In", line2: "Thinking ", highlight: "Different" },
-//   { line1: "We Believe In", line2: "Being ", highlight: "Unique" },
-//   { line1: "Discovering", line2: "Design ", highlight: "Hub" },
-// ];
-
-// const typingPhrases = [
-//   "WEB DEVELOPMENT",
-//   "DIGITAL MARKETING",
-//   "DESIGN SOLUTIONS",
-//   "PRINTING",
-//   "PACKAGING DESIGN",
-//   "PHOTOGRAPHY",
-// ];
-
-// const HomeHeroSection = () => {
-//   const [headlineIdx, setHeadlineIdx] = useState(0);
-//   const [typingText, setTypingText] = useState("");
-//   const [isDeleting, setIsDeleting] = useState(false);
-//   const [phraseIdx, setPhraseIdx] = useState(0);
-//   const [charIdx, setCharIdx] = useState(0);
-
-//   const containerRef = useRef<HTMLDivElement>(null);
-//   const tagRef = useRef<HTMLDivElement>(null);
-//   const subRef = useRef<HTMLDivElement>(null);
-//   const typingContainerRef = useRef<HTMLDivElement>(null);
-//   const heroImageRef = useRef<HTMLDivElement>(null);
-//   const floatCard1Ref = useRef<HTMLDivElement>(null);
-//   const floatCard2Ref = useRef<HTMLDivElement>(null);
-//   const parallaxWrapperRef = useRef<HTMLDivElement>(null);
-//   const mobileSpideyRef = useRef<HTMLImageElement>(null);
-//   const tabletSpideyRef = useRef<HTMLImageElement>(null);
-
-//   // animations
-//   useEffect(() => {
-//     const ctx = gsap.context(() => {
-//       const tl = gsap.timeline({
-//         defaults: { ease: "power4.out" },
-//       });
-
-//       tl.fromTo(
-//         tagRef.current,
-//         { opacity: 0, y: 15 },
-//         {
-//           opacity: 1,
-//           y: 0,
-//           duration: 0.6,
-//           delay: 0.2,
-//         }
-//       )
-//         .fromTo(
-//           ".headline-line-inner",
-//           {
-//             y: "110%",
-//             opacity: 0,
-//           },
-//           {
-//             y: 0,
-//             opacity: 1,
-//             duration: 0.8,
-//             stagger: 0.15,
-//           },
-//           "-=0.3"
-//         )
-//         .fromTo(
-//           subRef.current,
-//           {
-//             opacity: 0,
-//             y: 20,
-//           },
-//           {
-//             opacity: 1,
-//             y: 0,
-//             duration: 0.7,
-//           },
-//           "-=0.2"
-//         )
-//         .fromTo(
-//           typingContainerRef.current,
-//           {
-//             opacity: 0,
-//             y: 10,
-//           },
-//           {
-//             opacity: 1,
-//             y: 0,
-//             duration: 0.5,
-//           },
-//           "-=0.1"
-//         );
-
-//       if (heroImageRef.current) {
-//         tl.fromTo(
-//           heroImageRef.current,
-//           { opacity: 0, scale: 0.95, y: 30 },
-//           { opacity: 1, scale: 1, y: 0, duration: 1.2, delay: 0.4 },
-//           "-=0.8"
-//         );
-//       }
-
-
-
-//       if (floatCard1Ref.current) {
-//         tl.fromTo(
-//           floatCard1Ref.current,
-//           { opacity: 0, x: 30, scale: 0.9 },
-//           { opacity: 1, x: 0, scale: 1, duration: 0.8 },
-//           "-=1"
-//         );
-//         gsap.to(floatCard1Ref.current, {
-//           y: -8, duration: 2.8, repeat: -1, yoyo: true, ease: "sine.inOut", delay: 0.2
-//         });
-//       }
-
-//       if (floatCard2Ref.current) {
-//         tl.fromTo(
-//           floatCard2Ref.current,
-//           { opacity: 0, x: -30, scale: 0.9 },
-//           { opacity: 1, x: 0, scale: 1, duration: 0.8 },
-//           "-=0.8"
-//         );
-//         gsap.to(floatCard2Ref.current, {
-//           y: 10, duration: 3.2, repeat: -1, yoyo: true, ease: "sine.inOut", delay: 0.5
-//         });
-//       }
-
-//       // Optimized 3D mouse parallax using gsap.quickTo
-//       if (parallaxWrapperRef.current && containerRef.current) {
-//         const xTo = gsap.quickTo(parallaxWrapperRef.current, "x", { duration: 0.8, ease: "power3" });
-//         const yTo = gsap.quickTo(parallaxWrapperRef.current, "y", { duration: 0.8, ease: "power3" });
-//         const rotateXTo = gsap.quickTo(parallaxWrapperRef.current, "rotationX", { duration: 0.8, ease: "power3" });
-//         const rotateYTo = gsap.quickTo(parallaxWrapperRef.current, "rotationY", { duration: 0.8, ease: "power3" });
-
-//         const handleMouseMove = (e: MouseEvent) => {
-//           const { clientX, clientY } = e;
-//           const { innerWidth, innerHeight } = window;
-          
-//           const xPos = (clientX / innerWidth - 0.5) * 2;
-//           const yPos = (clientY / innerHeight - 0.5) * 2;
-          
-//           xTo(xPos * 30);
-//           yTo(yPos * 30);
-//           rotateXTo(-yPos * 25);
-//           rotateYTo(xPos * 25);
-//         };
-
-//         window.addEventListener("mousemove", handleMouseMove);
-        
-//         return () => {
-//           window.removeEventListener("mousemove", handleMouseMove);
-//         };
-//       }
-//     }, containerRef);
-
-//     return () => ctx.revert();
-//   }, []);
-
-//   // headline cycler
-//   useEffect(() => {
-//     const interval = setInterval(() => {
-//       gsap.to(".headline-line-inner", {
-//         y: -30,
-//         opacity: 0,
-//         duration: 0.4,
-//         ease: "power2.in",
-//         stagger: 0.05,
-
-//         onComplete: () => {
-//           setHeadlineIdx(
-//             (prev) => (prev + 1) % headlines.length
-//           );
-
-//           gsap.fromTo(
-//             ".headline-line-inner",
-//             {
-//               y: "110%",
-//               opacity: 0,
-//             },
-//             {
-//               y: 0,
-//               opacity: 1,
-//               duration: 0.7,
-//               ease: "power4.out",
-//               stagger: 0.08,
-//             }
-//           );
-//         },
-//       });
-//     }, 4500);
-
-//     return () => clearInterval(interval);
-//   }, []);
-
-//   // typewriter
-//   useEffect(() => {
-//     const phrase = typingPhrases[phraseIdx];
-//     let timer: NodeJS.Timeout;
-
-//     if (!isDeleting) {
-//       timer = setTimeout(() => {
-//         setTypingText(
-//           phrase.slice(0, charIdx + 1)
-//         );
-
-//         setCharIdx((prev) => prev + 1);
-
-//         if (charIdx === phrase.length) {
-//           setIsDeleting(true);
-//         }
-//       }, 90);
-//     } else {
-//       timer = setTimeout(() => {
-//         setTypingText(
-//           phrase.slice(0, charIdx - 1)
-//         );
-
-//         setCharIdx((prev) => prev - 1);
-
-//         if (charIdx === 0) {
-//           setIsDeleting(false);
-
-//           setPhraseIdx(
-//             (prev) =>
-//               (prev + 1) % typingPhrases.length
-//           );
-//         }
-//       }, 50);
-//     }
-
-//     return () => clearTimeout(timer);
-//   }, [charIdx, isDeleting, phraseIdx]);
-
-//   return (
-//     <section
-//       id="hero"
-//       ref={containerRef}
-//       className="
-//         relative
-//         overflow-hidden
-//         bg-background
-
-//         min-h-auto
-//         lg:min-h-[78vh]
-
-//         flex
-//         items-center
-//         justify-center
-
-//         px-4
-//         pt-6
-//         pb-16
-
-//         sm:px-6
-//         sm:pt-12
-//         sm:pb-20
-
-//         lg:px-6
-//         lg:py-10
-//       "
-//     >
-//       {/* background */}
-//       <div className="hero-bg-radial absolute inset-0 z-0 pointer-events-none">
-//         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_60%_40%,rgba(223,27,37,0.08)_0%,transparent_65%)] dark:bg-[radial-gradient(ellipse_80%_60%_at_60%_40%,rgba(223,27,37,0.12)_0%,transparent_65%)]" />
-
-//         <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_70%_at_10%_80%,rgba(38,51,111,0.06)_0%,transparent_60%)] dark:bg-[radial-gradient(ellipse_50%_70%_at_10%_80%,rgba(38,51,111,0.1)_0%,transparent_60%)]" />
-
-//         {/* grid */}
-//         <div
-//           className="hero-grid-layer absolute inset-0 opacity-[0.04] dark:opacity-[0.03]"
-//           style={{
-//             backgroundImage: `
-//               linear-gradient(var(--foreground) 1px, transparent 1px),
-//               linear-gradient(90deg, var(--foreground) 1px, transparent 1px)
-//             `,
-//             backgroundSize: "80px 80px",
-//             maskImage:
-//               "radial-gradient(ellipse 70% 70% at 50% 50%, black 0%, transparent 100%)",
-//             WebkitMaskImage:
-//               "radial-gradient(ellipse 70% 70% at 50% 50%, black 0%, transparent 100%)",
-//           }}
-//         />
-//       </div>
-
-//       {/* desktop dots */}
-//       <div className="hidden xl:flex absolute left-6 top-1/2 -translate-y-1/2 flex-col gap-4 z-10">
-//         {headlines.map((_, idx) => (
-//           <div
-//             key={idx}
-//             className={`w-2.5 h-2.5 rounded-full border border-border/80 transition-all duration-300 ${
-//               idx === headlineIdx
-//                 ? "bg-accent scale-125 border-accent"
-//                 : "bg-muted-foreground/30"
-//             }`}
-//           />
-//         ))}
-//       </div>
-
-//       <div className="hero-content-parallax relative z-10 mx-auto w-full max-w-[1380px]">
-//         <div
-//           className="
-//             grid
-//             items-center
-
-//             gap-8
-
-//             md:gap-10
-
-//             lg:grid-cols-12
-//             lg:gap-4
-//           "
-//         >
-//           {/* ====================================== */}
-//           {/* LEFT */}
-//           {/* ====================================== */}
-
-//           <div
-//             className="
-//               space-y-5
-
-//               md:space-y-6
-
-//               lg:col-span-7
-//               lg:order-2
-//             "
-//           >
-//             {/* tagline */}
-//             <div
-//               ref={tagRef}
-//               className="
-//                 inline-flex
-//                 items-center
-//                 gap-2
-
-//                 rounded-full
-//                 border border-border
-//                 bg-card/40
-
-//                 px-4 py-1.5
-
-//                 text-[10px]
-//                 font-semibold
-//                 uppercase
-//                 tracking-[0.2em]
-//                 text-muted-foreground
-
-//                 sm:text-xs
-//               "
-//             >
-//               <span className="flex h-2 w-2 rounded-full bg-accent animate-pulse" />
-
-//               Digital Excellence
-//             </div>
-
-//             {/* headline */}
-//             <h1
-//               className="
-//                 relative
-//                 font-audiowide
-//                 uppercase
-//                 leading-[0.88]
-//                 tracking-tight
-//                 text-foreground
-
-//                 text-[clamp(2.2rem,9.5vw,4rem)]
-
-//                 sm:text-[clamp(3.2rem,12vw,5rem)]
-
-//                 md:text-[clamp(4rem,9vw,6rem)]
-
-//                 lg:text-[clamp(4.5rem,7vw,7rem)]
-//               "
-//             >
-//               {/* Invisible spacer with longest text to maintain consistent height */}
-//               <div className="invisible pointer-events-none select-none" aria-hidden="true">
-//                 <span className="block overflow-hidden py-1">
-//                   <span className="block">We Believe In</span>
-//                 </span>
-//                 <span className="block overflow-hidden py-1">
-//                   <span className="block">
-//                     Thinking <em className="not-italic text-accent">Different</em>
-//                   </span>
-//                 </span>
-//               </div>
-
-//               {/* Animated text layer */}
-//               <div className="absolute inset-0 flex flex-col justify-start">
-//                 <span className="block overflow-hidden py-1">
-//                   <span className="headline-line-inner block">
-//                     {headlines[headlineIdx].line1}
-//                   </span>
-//                 </span>
-
-//                 <span className="block overflow-hidden py-1">
-//                   <span className="headline-line-inner block">
-//                     {headlines[headlineIdx].line2}
-
-//                     <em className="not-italic text-accent">
-//                       {headlines[headlineIdx].highlight}
-//                     </em>
-//                   </span>
-//                 </span>
-//               </div>
-//             </h1>
-
-//             {/* ====================================== */}
-//             {/* TABLET HERO VISUAL */}
-//             {/* ====================================== */}
-
-//             <div className="hidden md:block lg:hidden">
-//               <div
-//                 className="
-//                   relative
-//                   h-[360px]
-//                   rounded-[2rem]
-//                   border border-[#26336F]/20
-//                   bg-card/10
-//                   shadow-2xl
-//                   backdrop-blur-md
-//                 "
-//               >
-//                 <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-tr from-[#26336F]/10 via-[#050711]/60 to-[#DF1B25]/5" />
-
-//                 <div 
-//                   className="relative flex h-full items-center justify-center"
-//                   style={{ clipPath: "inset(-50% 0 0 0 round 0 0 2rem 2rem)" }}
-//                 >
-//                   <img
-//                     ref={tabletSpideyRef}
-//                     src="/home/spiderman.webp"
-//                     alt="Spiderman Hero"
-//                     className="spidey-breath absolute inset-0 w-full h-full object-cover object-center"
-//                   />
-//                 </div>
-//               </div>
-//             </div>
-
-//             {/* mobile visual */}
-//             <div className="md:hidden">
-//               <div
-//                 className="
-//                   relative
-//                   h-[260px]
-//                   rounded-[1.75rem]
-//                   border border-[#26336F]/20
-//                   bg-card/10
-//                   shadow-2xl
-//                   backdrop-blur-md
-//                 "
-//               >
-//                 <div className="absolute inset-0 rounded-[1.75rem] bg-gradient-to-tr from-[#26336F]/10 via-[#050711]/60 to-[#DF1B25]/5" />
-
-//                 <div 
-//                   className="relative flex h-full items-center justify-center"
-//                   style={{ clipPath: "inset(-50% 0 0 0 round 0 0 1.75rem 1.75rem)" }}
-//                 >
-//                   <img
-//                     ref={mobileSpideyRef}
-//                     src="/home/spiderman.webp"
-//                     alt="Spiderman Hero"
-//                     className="spidey-breath absolute inset-0 w-full h-full object-cover object-center"
-//                   />
-//                 </div>
-//               </div>
-//             </div>
-
-//             {/* sub */}
-//             <div
-//               ref={subRef}
-//               className="
-//                 flex flex-col
-//                 gap-5
-//                 pt-2
-
-//                 sm:flex-row
-//                 sm:items-start
-//                 sm:justify-between
-//               "
-//             >
-//               <div className="space-y-4">
-//                 <p
-//                   className="
-//                     max-w-[540px]
-//                     text-sm
-//                     leading-relaxed
-//                     text-muted-foreground
-
-//                     sm:text-base
-//                   "
-//                 >
-//                   We craft high-converting digital products, brand identities, packaging design, and performance marketing campaigns that help ambitious businesses scale faster.
-//                 </p>
-
-//                 {/* Trust Badges */}
-//                 <div className="flex flex-wrap items-center gap-3 text-xs font-semibold text-muted-foreground">
-//                   <span className="flex items-center gap-1 text-amber-500 font-bold">
-//                     ★★★★★ <span className="text-foreground ml-1">4.9/5 Rating</span>
-//                   </span>
-//                   <span className="h-3 w-[1px] bg-border" />
-//                   <span>200+ Projects Delivered</span>
-//                   <span className="h-3 w-[1px] bg-border" />
-//                   <span className="text-accent font-medium">100% Custom Solutions</span>
-//                 </div>
-//               </div>
-
-//               {/* buttons */}
-//               <div
-//                 className="
-//                   flex
-//                   flex-wrap
-//                   items-center
-//                   gap-3
-//                   shrink-0
-//                 "
-//               >
-//                 <Link
-//                   href="/contact"
-//                   className="
-//                     inline-flex
-//                     items-center
-//                     gap-2
-
-//                     rounded-2xl
-//                     bg-accent
-
-//                     px-7 py-4
-
-//                     text-sm
-//                     font-bold
-//                     text-accent-foreground
-//                     shadow-lg
-//                     shadow-accent/25
-
-//                     transition-all
-//                     duration-300
-
-//                     hover:scale-[1.03]
-//                     hover:bg-accent/90
-//                   "
-//                 >
-//                   Start Your Project
-
-//                   <ArrowRight className="h-4 w-4" />
-//                 </Link>
-
-//                 <Link
-//                   href="/portfolio"
-//                   className="
-//                     inline-flex
-//                     items-center
-//                     gap-2
-
-//                     rounded-2xl
-//                     border border-border
-//                     bg-secondary/60
-
-//                     px-6 py-4
-
-//                     text-sm
-//                     font-bold
-//                     text-foreground
-
-//                     transition-all
-//                     duration-300
-
-//                     hover:border-accent/40
-//                     hover:bg-secondary
-//                   "
-//                 >
-//                   View Work
-//                 </Link>
-//               </div>
-//             </div>
-
-//             {/* typing */}
-//             <div
-//               ref={typingContainerRef}
-//               className="
-//                 flex flex-col
-//                 gap-3
-
-//                 border-t border-border/50
-//                 pt-4
-
-//                 text-xs
-//                 font-semibold
-//                 uppercase
-//                 tracking-wider
-//                 text-muted-foreground/60
-
-//                 sm:flex-row
-//                 sm:items-center
-//                 sm:gap-4
-//               "
-//             >
-//               <span>We are experts in:</span>
-
-//               <div
-//                 className="
-//                   flex items-center
-//                   min-h-8 sm:min-h-9
-//                   min-w-[200px] sm:min-w-[280px]
-//                   whitespace-nowrap
-
-//                   font-(family-name:--font-bebas-neue)
-
-//                   text-xl
-//                   tracking-wide
-//                   text-foreground
-
-//                   sm:text-3xl
-//                 "
-//               >
-//                 <span>{typingText || '\u200B'}</span>
-
-//                 <span className="ml-1 inline-block h-[1.1em] w-[3px] bg-accent animate-[pulse_0.9s_steps(2,start)_infinite]" />
-//               </div>
-//             </div>
-//           </div>
-
-//           {/* ====================================== */}
-//           {/* DESKTOP RIGHT VISUAL */}
-//           {/* ====================================== */}
-
-//           <div
-//             className="
-//               hidden
-//               lg:flex
-
-//               lg:col-span-5
-//               lg:order-1
-
-//               relative
-//               items-center
-//               justify-center
-//             "
-//           >
-//             <div
-//               ref={heroImageRef}
-//               className="relative w-full h-[600px] flex items-center justify-center"
-//               style={{ perspective: "1000px" }}
-//             >
-//               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(38,51,111,0.4)_0%,transparent_70%)]" />
-              
-//               {/* 3D Wrapper */}
-//               <div 
-//                 ref={parallaxWrapperRef}
-//                 className="relative w-full h-full flex items-center justify-center will-change-transform"
-//                 style={{ transformStyle: "preserve-3d" }}
-//               >
-//                 <div
-//                   className="absolute inset-0 w-full h-full z-10 pointer-events-none"
-//                   style={{ transform: "translateZ(20px)" }}
-//                 >
-//                   <img
-//                     src="/home/spiderman.webp"
-//                     alt="Spiderman Hero"
-//                     className="w-full h-full object-contain object-center"
-//                   />
-//                   {/* Overlay for image */}
-//                   {/* <div className="absolute bottom-0 left-0 right-0 h-[40%] bg-gradient-to-t from-background via-background/80 to-transparent" /> */}
-//                 </div>
-
-//                 {/* Float Card 1: 550+ Projects */}
-//                 <div 
-//                   ref={floatCard1Ref}
-//                   className="absolute right-[5%] top-[25%] z-20 flex flex-col items-center justify-center gap-1 rounded-2xl border border-white/10 bg-[#0A102A]/80 backdrop-blur-md px-6 py-4 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
-//                   style={{ transform: "translateZ(80px)" }}
-//                 >
-//                   <div className="absolute -top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full bg-amber-400 text-[#0A102A]">
-//                     <CheckCircle2 className="h-5 w-5" />
-//                   </div>
-//                   <span className="text-2xl font-bold text-white">550+</span>
-//                   <span className="text-xs font-medium text-muted-foreground">Project Completed</span>
-//                 </div>
-
-//                 {/* Float Card 2: Team Members */}
-//                 <div 
-//                   ref={floatCard2Ref}
-//                   className="absolute left-[0%] bottom-[20%] z-20 flex flex-col gap-3 rounded-2xl border border-white/10 bg-[#0A102A]/80 backdrop-blur-md p-4 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
-//                   style={{ transform: "translateZ(100px)" }}
-//                 >
-//                   <span className="text-xs font-semibold text-white/90">Team Members</span>
-//                   <div className="flex -space-x-3">
-//                     <Image src="/team/balaji.png" alt="Team" width={32} height={32} className="h-8 w-8 rounded-full border-2 border-[#0A102A] object-cover" />
-//                     <Image src="/team/mani.png" alt="Team" width={32} height={32} className="h-8 w-8 rounded-full border-2 border-[#0A102A] object-cover" />
-//                     <Image src="/team/ranjani.png" alt="Team" width={32} height={32} className="h-8 w-8 rounded-full border-2 border-[#0A102A] object-cover" />
-//                     <div className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-[#0A102A] bg-amber-400 text-xs font-bold text-[#0A102A]">+</div>
-//                   </div>
-//                 </div>
-
-//                 {/* Floating Message Icon */}
-//                 <div 
-//                   className="absolute right-[15%] bottom-[15%] z-10 flex h-12 w-12 items-center justify-center rounded-full bg-transparent text-[#3b82f6] shadow-lg animate-[bounce_3s_infinite]"
-//                   style={{ transform: "translateZ(60px)" }}
-//                 >
-//                   <MessageSquare className="h-8 w-8" />
-//                 </div>
-                
-//                 {/* Floating megaphone or icon at top left */}
-//                 <div 
-//                   className="absolute left-[15%] top-[10%] z-10 animate-[bounce_4s_infinite]"
-//                   style={{ transform: "translateZ(50px)" }}
-//                 >
-//                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#eab308" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 11 18-5v12L3 14v-3z"></path><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"></path></svg>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default HomeHeroSection;

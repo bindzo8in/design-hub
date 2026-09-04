@@ -16,8 +16,8 @@ export default function ProjectDetail({
   images,
 }: ProjectDetailProps) {
   return (
-    <main className="min-h-screen bg-background">
-      <section className="mx-auto w-full md:max-w-5xl lg:max-w-6xl xl:max-w-7xl">
+    <main className="min-h-screen bg-background pt-0 md:pt-24 lg:pt-32">
+      <section className="mx-auto w-full md:max-w-5xl lg:max-w-6xl xl:max-w-7xl rounded-xl overflow-hidden shadow-2xl">
         {images.map((image) => (
           <Image
             key={image.id}

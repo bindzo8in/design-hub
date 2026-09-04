@@ -120,10 +120,13 @@ const OutDoor = () => {
       grid-cols-1
       gap-8
       rounded-[2.5rem]
-      bg-[#d9d9d9]
+      bg-card/40
+      border
+      border-border/50
+      backdrop-blur-md
       px-8
       py-10
-      text-black
+      text-foreground
       sm:grid-cols-2
       lg:grid-cols-4
       lg:gap-10
@@ -137,11 +140,11 @@ const OutDoor = () => {
               <div className="absolute right-[-20px] top-0 hidden h-full w-px bg-background/10 lg:block" />
             )}
 
-            <h3 className="text-xl font-semibold leading-tight border-b border-black/10 pb-4">
+            <h3 className="text-xl font-semibold leading-tight border-b border-border/50 pb-4">
               {item.title}
             </h3>
 
-            <p className="mt-4 text-sm leading-6 text-black/60">
+            <p className="mt-4 text-sm leading-6 text-muted-foreground">
               {item.description}
             </p>
           </div>

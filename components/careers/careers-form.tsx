@@ -390,7 +390,7 @@ const CareersForm = () => {
 
           {/* Right Column: Positions List */}
           <div className="careers-list-reveal lg:col-span-5 space-y-6">
-            <h2 className="font-[family-name:var(--font-bebas-neue)] text-3xl sm:text-4xl tracking-wider text-foreground">
+            <h2 className="font-[family-name:var(--font-chillax)] font-light text-3xl sm:text-4xl tracking-wider text-foreground">
               Opening Positions:
             </h2>
 

@@ -209,7 +209,7 @@ const FamilySection = ({
               <span className="w-8 h-[1px] bg-accent" />
               Our Creative Minds
             </div>
-            <h2 className="family-header-reveal font-[family-name:var(--font-bebas-neue)] text-5xl sm:text-6xl lg:text-7xl leading-[0.9] tracking-wider uppercase text-foreground">
+            <h2 className="family-header-reveal font-[family-name:var(--font-chillax)] font-light text-5xl sm:text-6xl lg:text-7xl leading-[0.9] tracking-wider uppercase text-foreground">
               {title}
             </h2>
             <p className="family-header-reveal text-sm sm:text-base text-muted-foreground leading-relaxed max-w-xl">
@@ -221,7 +221,7 @@ const FamilySection = ({
           <div className="family-header-reveal flex-shrink-0 flex items-center gap-3 rounded-2xl border border-border bg-card/60 px-5 py-4">
             <Users className="h-5 w-5 text-accent" />
             <div>
-              <div className="font-[family-name:var(--font-bebas-neue)] text-3xl text-foreground leading-none">
+              <div className="font-[family-name:var(--font-chillax)] font-light text-3xl text-foreground leading-none">
                 {members.length}+
               </div>
               <div className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold">

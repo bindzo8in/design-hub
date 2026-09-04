@@ -56,7 +56,7 @@ const BrandCreationSection = () => {
             </div>
 
             {/* Display Heading */}
-            <h2 className="font-[family-name:var(--font-bebas-neue)] text-4xl sm:text-6xl md:text-7xl uppercase leading-none tracking-wider text-foreground">
+            <h2 className="font-[family-name:var(--font-chillax)] font-light text-4xl sm:text-6xl md:text-7xl uppercase leading-none tracking-wider text-foreground">
               We Create <em className="not-italic text-accent">Brands</em> <br className="hidden sm:inline" />
               That Create Success
             </h2>

@@ -57,26 +57,37 @@ const Marquee = ({ className, reverse = false }: { className?: string, reverse?:
 
       <div
         className={cn(
-          "flex w-[200%] whitespace-nowrap gap-12 sm:gap-16",
+          "flex w-max items-center gap-12 sm:gap-16",
           reverse
             ? "animate-marquee-loop-reverse"
             : "animate-marquee-loop"
         )}
       >
-        <div className="flex w-max items-center gap-12 sm:gap-16">
-          {items.map((item, idx) => (
-            <span
-              key={idx}
-              className="inline-flex items-center gap-3 font-[family-name:var(--font-bebas-neue)] text-xl tracking-widest text-white uppercase drop-shadow-sm sm:text-2xl lg:text-3xl"
-            >
-              <span>{item}</span>
+        {items.map((item, idx) => (
+          <span
+            key={`first-${idx}`}
+            className="inline-flex items-center gap-3 font-[family-name:var(--font-chillax)] font-light text-xl tracking-widest text-white uppercase drop-shadow-sm sm:text-2xl lg:text-3xl"
+          >
+            <span>{item}</span>
 
-              <span className="relative top-[1px] inline-block text-sm text-white/70 select-none sm:text-base">
-                &#10022;
-              </span>
+            <span className="relative top-[1px] inline-block text-sm text-white/70 select-none sm:text-base">
+              &#10022;
             </span>
-          ))}
-        </div>
+          </span>
+        ))}
+        {/* Duplicate items for seamless infinite loop */}
+        {items.map((item, idx) => (
+          <span
+            key={`second-${idx}`}
+            className="inline-flex items-center gap-3 font-[family-name:var(--font-chillax)] font-light text-xl tracking-widest text-white uppercase drop-shadow-sm sm:text-2xl lg:text-3xl"
+          >
+            <span>{item}</span>
+
+            <span className="relative top-[1px] inline-block text-sm text-white/70 select-none sm:text-base">
+              &#10022;
+            </span>
+          </span>
+        ))}
       </div>
     </div>
   );
