@@ -11,26 +11,40 @@ interface BlogInteractionsProps {
 
 export function BlogInteractions({ url, title }: BlogInteractionsProps) {
   const [isLiked, setIsLiked] = useState(false);
+  const [canShare, setCanShare] = useState(false);
+
+  React.useEffect(() => {
+    if (typeof navigator !== "undefined" && "share" in navigator) {
+      setCanShare(true);
+    }
+  }, []);
+
+  const handleCopyLink = async () => {
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      try {
+        await navigator.clipboard.writeText(url);
+        alert("Link copied to clipboard!");
+      } catch (err) {
+        console.error("Error copying to clipboard:", err);
+      }
+    }
+  };
 
   const handleShare = async () => {
-    if (navigator.share) {
+    if (typeof navigator !== "undefined" && "share" in navigator) {
       try {
         await navigator.share({
           title,
           url,
         });
-      } catch (err) {
-        console.error("Error sharing:", err);
+      } catch (err: unknown) {
+        if (err instanceof Error && err.name !== "AbortError") {
+          console.error("Error sharing:", err);
+        }
       }
     } else {
-      navigator.clipboard.writeText(url);
-      alert("Link copied to clipboard!");
+      await handleCopyLink();
     }
-  };
-
-  const handleCopyLink = () => {
-    navigator.clipboard.writeText(url);
-    alert("Link copied to clipboard!");
   };
 
   const encodedUrl = encodeURIComponent(url);
@@ -99,7 +113,7 @@ export function BlogInteractions({ url, title }: BlogInteractionsProps) {
           <LinkIcon className="w-4 h-4" />
         </button>
 
-        {typeof navigator !== "undefined" && navigator.share && (
+        {canShare && (
           <button
             onClick={handleShare}
             className="w-10 h-10 rounded-full bg-muted flex items-center justify-center hover:bg-muted/80 text-foreground transition-colors md:hidden"
