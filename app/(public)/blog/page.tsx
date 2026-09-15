@@ -16,22 +16,54 @@ export const metadata = buildMetadata({
   keywords: ["blog", "web design", "software architecture", "next.js blog", "design hub one"],
 });
 
-export default async function BlogPage() {
-  const [posts, categories] = await Promise.all([
+export default async function BlogPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const params = await searchParams;
+  const page = typeof params.page === "string" ? parseInt(params.page) : 1;
+  const limit = 9; // Number of posts per page
+  const categoryFilter = typeof params.category === "string" && params.category !== "All" ? params.category : undefined;
+  const search = typeof params.search === "string" ? params.search : undefined;
+
+  const skip = (page - 1) * limit;
+
+  const whereCondition: any = {
+    status: "PUBLISHED",
+  };
+
+  if (categoryFilter) {
+    whereCondition.category = {
+      name: categoryFilter,
+    };
+  }
+
+  if (search) {
+    whereCondition.OR = [
+      { title: { contains: search, mode: "insensitive" } },
+      { excerpt: { contains: search, mode: "insensitive" } },
+    ];
+  }
+
+  const [posts, totalPosts, categories] = await Promise.all([
     prisma.blogPost.findMany({
-      where: {
-        status: "PUBLISHED",
-      },
+      where: whereCondition,
       orderBy: { publishedAt: "desc" },
       include: {
         category: true,
         author: true,
       },
+      skip,
+      take: limit,
     }),
+    prisma.blogPost.count({ where: whereCondition }),
     prisma.blogCategory.findMany({
       orderBy: { name: "asc" },
     }),
   ]);
+
+  const totalPages = Math.ceil(totalPosts / limit);
 
   const breadcrumbSchema = buildBreadcrumbSchema([
     { name: "Home", url: buildAbsoluteUrl("/") },
@@ -58,7 +90,14 @@ export default async function BlogPage() {
           </p>
         </div>
 
-        <PublicBlogClient initialPosts={posts} categories={categories} />
+        <PublicBlogClient 
+          initialPosts={posts} 
+          categories={categories} 
+          currentPage={page} 
+          totalPages={totalPages} 
+          activeCategory={categoryFilter || "All"}
+          searchQuery={search || ""}
+        />
       </div>
     </main>
   );

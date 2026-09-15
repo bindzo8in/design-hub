@@ -35,6 +35,14 @@ interface DataTableProps<TData, TValue> {
   searchPlaceholder?: string;
   loading?: boolean;
   error?: Error | null;
+  // Optional props for server-side (manual) mode
+  pageCount?: number;
+  manualPagination?: boolean;
+  manualFiltering?: boolean;
+  onSearchChange?: (value: string) => void;
+  searchValue?: string;
+  paginationState?: { pageIndex: number; pageSize: number };
+  onPaginationChange?: (updater: any) => void;
 }
 
 export function DataTable<TData, TValue>({
@@ -44,6 +52,13 @@ export function DataTable<TData, TValue>({
   searchPlaceholder = "Filter records...",
   loading = false,
   error = null,
+  pageCount,
+  manualPagination = false,
+  manualFiltering = false,
+  onSearchChange,
+  searchValue,
+  paginationState,
+  onPaginationChange,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
@@ -61,11 +76,16 @@ export function DataTable<TData, TValue>({
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+    manualPagination,
+    manualFiltering,
+    pageCount,
+    ...(onPaginationChange && { onPaginationChange }),
     state: {
       sorting,
       columnFilters,
       columnVisibility,
       rowSelection,
+      ...(paginationState && { pagination: paginationState }),
     },
   });
 
@@ -79,10 +99,14 @@ export function DataTable<TData, TValue>({
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
               <Input
                 placeholder={searchPlaceholder}
-                value={(table.getColumn(searchKey)?.getFilterValue() as string) ?? ""}
-                onChange={(event) =>
-                  table.getColumn(searchKey)?.setFilterValue(event.target.value)
-                }
+                value={searchValue !== undefined ? searchValue : ((table.getColumn(searchKey)?.getFilterValue() as string) ?? "")}
+                onChange={(event) => {
+                  if (onSearchChange) {
+                    onSearchChange(event.target.value);
+                  } else {
+                    table.getColumn(searchKey)?.setFilterValue(event.target.value);
+                  }
+                }}
                 className="w-full bg-[#101735]/40 border-[#26336F]/30 pl-9 text-slate-200 placeholder-slate-400 focus:border-[#DF1B25]/50 focus:ring-1 focus:ring-[#DF1B25]/20 focus-visible:ring-0 focus-visible:ring-offset-0 rounded-xl"
               />
             </div>

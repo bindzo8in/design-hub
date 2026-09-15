@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { DataTable } from "@/components/data-table/data-table";
 import { getBlogColumns, BlogPostRow } from "@/features/blog/components/blog-columns";
 import { Button } from "@/components/ui/button";
@@ -18,14 +18,26 @@ import {
 } from "@/components/ui/alert-dialog";
 import { deleteBlogPostAction } from "@/lib/actions/blog-actions";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
 interface BlogListingAdminClientProps {
   posts: BlogPostRow[];
+  pageCount?: number;
+  currentPage?: number;
+  pageSize?: number;
+  searchValue?: string;
 }
 
-export function BlogListingAdminClient({ posts }: BlogListingAdminClientProps) {
+export function BlogListingAdminClient({ 
+  posts, 
+  pageCount, 
+  currentPage = 0, 
+  pageSize = 10,
+  searchValue = ""
+}: BlogListingAdminClientProps) {
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -36,6 +48,50 @@ export function BlogListingAdminClient({ posts }: BlogListingAdminClientProps) {
       }),
     []
   );
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      if (value) {
+        params.set(name, value);
+      } else {
+        params.delete(name);
+      }
+      return params.toString();
+    },
+    [searchParams]
+  );
+
+  const handlePaginationChange = (updater: any) => {
+    // updater can be a function or a state object
+    let newPageIndex = currentPage;
+    let newPageSize = pageSize;
+    
+    if (typeof updater === "function") {
+      const newState = updater({ pageIndex: currentPage, pageSize });
+      newPageIndex = newState.pageIndex;
+      newPageSize = newState.pageSize;
+    } else {
+      newPageIndex = updater.pageIndex ?? currentPage;
+      newPageSize = updater.pageSize ?? pageSize;
+    }
+
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("page", (newPageIndex + 1).toString());
+    params.set("pageSize", newPageSize.toString());
+    router.push(`${pathname}?${params.toString()}`);
+  };
+
+  const handleSearchChange = (value: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("page", "1");
+    if (value) {
+      params.set("search", value);
+    } else {
+      params.delete("search");
+    }
+    router.push(`${pathname}?${params.toString()}`);
+  };
 
   const handleDeleteConfirm = async () => {
     if (!deleteId) return;
@@ -84,6 +140,13 @@ export function BlogListingAdminClient({ posts }: BlogListingAdminClientProps) {
           data={posts}
           searchKey="title"
           searchPlaceholder="Search articles..."
+          manualPagination={true}
+          manualFiltering={true}
+          pageCount={pageCount}
+          paginationState={{ pageIndex: currentPage, pageSize: pageSize }}
+          onPaginationChange={handlePaginationChange}
+          onSearchChange={handleSearchChange}
+          searchValue={searchValue}
         />
       </div>
 

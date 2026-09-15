@@ -1,12 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { format } from "date-fns";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Search } from "lucide-react";
+import { Search, ChevronLeft, ChevronRight } from "lucide-react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { useDebounce } from "@/hooks/use-debounce";
 
 export interface PublicBlogPost {
   id: string;
@@ -22,22 +25,56 @@ export interface PublicBlogPost {
 interface PublicBlogClientProps {
   initialPosts: PublicBlogPost[];
   categories: { id: string; name: string }[];
+  currentPage: number;
+  totalPages: number;
+  activeCategory: string;
+  searchQuery: string;
 }
 
-export function PublicBlogClient({ initialPosts, categories }: PublicBlogClientProps) {
-  const [activeCategory, setActiveCategory] = useState<string>("All");
-  const [searchQuery, setSearchQuery] = useState("");
+export function PublicBlogClient({ 
+  initialPosts, 
+  categories,
+  currentPage,
+  totalPages,
+  activeCategory,
+  searchQuery
+}: PublicBlogClientProps) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  
+  const [localSearch, setLocalSearch] = useState(searchQuery);
+  const debouncedSearch = useDebounce(localSearch, 500);
 
-  const filteredPosts = initialPosts.filter((post) => {
-    const matchesCategory = activeCategory === "All" || post.category?.name === activeCategory;
-    const matchesSearch =
-      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (post.excerpt && post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()));
-    return matchesCategory && matchesSearch;
-  });
+  useEffect(() => {
+    if (debouncedSearch !== searchQuery) {
+      updateUrl("search", debouncedSearch);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedSearch]);
 
-  const featuredPost = filteredPosts.find((p) => p.isFeatured);
-  const regularPosts = filteredPosts.filter((p) => p.id !== featuredPost?.id);
+  const updateUrl = (key: string, value: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (value && value !== "All") {
+      params.set(key, value);
+    } else {
+      params.delete(key);
+    }
+    
+    if (key !== "page") {
+      params.set("page", "1"); // Reset to page 1 on filter change
+    }
+    
+    router.push(`${pathname}?${params.toString()}`);
+  };
+
+  const featuredPost = currentPage === 1 && activeCategory === "All" && !searchQuery 
+    ? initialPosts.find((p) => p.isFeatured) 
+    : undefined;
+    
+  const regularPosts = featuredPost 
+    ? initialPosts.filter((p) => p.id !== featuredPost.id) 
+    : initialPosts;
 
   return (
     <div className="space-y-12">
@@ -50,7 +87,7 @@ export function PublicBlogClient({ initialPosts, categories }: PublicBlogClientP
                 ? "bg-[#DF1B25] text-white border-transparent"
                 : "bg-muted text-muted-foreground border-border hover:bg-muted/80 hover:text-foreground"
             }`}
-            onClick={() => setActiveCategory("All")}
+            onClick={() => updateUrl("category", "All")}
           >
             All
           </Badge>
@@ -63,7 +100,7 @@ export function PublicBlogClient({ initialPosts, categories }: PublicBlogClientP
                   ? "bg-[#DF1B25] text-white border-transparent"
                   : "bg-muted text-muted-foreground border-border hover:bg-muted/80 hover:text-foreground"
               }`}
-              onClick={() => setActiveCategory(cat.name)}
+              onClick={() => updateUrl("category", cat.name)}
             >
               {cat.name}
             </Badge>
@@ -74,8 +111,8 @@ export function PublicBlogClient({ initialPosts, categories }: PublicBlogClientP
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <Input
             placeholder="Search articles..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            value={localSearch}
+            onChange={(e) => setLocalSearch(e.target.value)}
             className="pl-10 bg-card border-border text-foreground rounded-full focus-visible:ring-[#DF1B25]"
           />
         </div>
@@ -162,9 +199,35 @@ export function PublicBlogClient({ initialPosts, categories }: PublicBlogClientP
         ))}
       </div>
 
-      {filteredPosts.length === 0 && (
+      {initialPosts.length === 0 && (
         <div className="text-center py-24 text-muted-foreground">
           <p className="text-lg">No articles found matching your criteria.</p>
+        </div>
+      )}
+
+      {totalPages > 1 && (
+        <div className="flex items-center justify-center gap-4 pt-12">
+          <Button
+            variant="outline"
+            className="rounded-full bg-card hover:bg-muted border-border cursor-pointer"
+            onClick={() => updateUrl("page", (currentPage - 1).toString())}
+            disabled={currentPage <= 1}
+          >
+            <ChevronLeft className="w-4 h-4 mr-2" />
+            Previous
+          </Button>
+          <div className="text-sm text-muted-foreground font-medium">
+            Page {currentPage} of {totalPages}
+          </div>
+          <Button
+            variant="outline"
+            className="rounded-full bg-card hover:bg-muted border-border cursor-pointer"
+            onClick={() => updateUrl("page", (currentPage + 1).toString())}
+            disabled={currentPage >= totalPages}
+          >
+            Next
+            <ChevronRight className="w-4 h-4 ml-2" />
+          </Button>
         </div>
       )}
     </div>
