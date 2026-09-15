@@ -1,4 +1,4 @@
-import { BadgeInfo, BriefcaseBusiness, Home, Images, PhoneCall, Sparkles } from "lucide-react"
+import { BadgeInfo, BriefcaseBusiness, Home, Images, PhoneCall, Sparkles, BookOpen } from "lucide-react"
 
 export const PUBLIC_ROUTES = [
     // pages
@@ -7,6 +7,8 @@ export const PUBLIC_ROUTES = [
     "/services",
     "/contact",
     "/portfolio",
+    "/careers",
+    "/blog",
 
     // api routes
 
@@ -37,6 +39,11 @@ export const navRoutes = [
     title: "Careers",
     href: "/careers",
     icon: BriefcaseBusiness,
+  },
+  {
+    title: "Blog",
+    href: "/blog",
+    icon: BookOpen,
   },
   {
     title: "Contact",
