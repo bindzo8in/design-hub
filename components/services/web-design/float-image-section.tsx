@@ -32,7 +32,7 @@ const FloatImageSection = () => {
           Creative Showcase
         </p>
 
-        <h2 className="text-4xl font-light leading-tight text-foreground sm:text-5xl lg:text-6xl">
+        <h2 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl lg:text-6xl">
           Digital Design
           <span className="text-foreground/40"> Experience</span>
         </h2>
@@ -205,7 +205,7 @@ export default FloatImageSection;
 //           <h2
 //             className="
 //               text-4xl
-//               font-light
+//               font-bold
 //               leading-tight
 //               text-foreground
 

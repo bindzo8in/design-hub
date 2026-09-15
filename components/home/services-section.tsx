@@ -72,8 +72,8 @@ const HomeServicesSection = () => {
   const [activeImage, setActiveImage] = useState<string | null>(null);
   
   // Track GSAP quickTo functions
-  const xTo = useRef<any>(null);
-  const yTo = useRef<any>(null);
+  const xTo = useRef<gsap.QuickToFunc | null>(null);
+  const yTo = useRef<gsap.QuickToFunc | null>(null);
 
   useGSAP(() => {
     // Setup quickTo for image follower
@@ -174,6 +174,7 @@ const HomeServicesSection = () => {
       >
         {activeImage && (
           <Image 
+            key={activeImage}
             src={activeImage}
             alt="Service preview"
             fill
@@ -188,10 +189,10 @@ const HomeServicesSection = () => {
         {/* Section Header */}
         <div ref={headerRef} className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-20 lg:mb-32">
           <div className="max-w-2xl space-y-8">
-            <h2 className="font-[family-name:var(--font-heading)] font-light text-[clamp(2.5rem,6vw,5.5rem)] leading-[1.1] uppercase tracking-tight text-foreground/90">
-              Our <span className="text-accent italic font-light">Expertise</span>
+            <h2 className="font-heading font-semibold text-[clamp(2.5rem,6vw,5.5rem)] leading-[1.1] uppercase tracking-tight text-foreground/90">
+              Our <span className="text-accent  font-semibold">Expertise</span>
             </h2>
-            <p className="text-lg md:text-xl leading-relaxed text-foreground/80 font-light max-w-lg">
+            <p className="text-lg md:text-xl leading-relaxed text-foreground/80 font-normal max-w-lg">
               We combine strategy, design systems, and web technology to build complete digital ecosystems that scale your business.
             </p>
           </div>
@@ -232,13 +233,13 @@ const HomeServicesSection = () => {
                   {service.num}
                 </span>
                 
-                <h3 className="font-[family-name:var(--font-heading)] font-light text-3xl md:text-5xl uppercase tracking-wide text-foreground/90 group-hover:text-foreground transition-colors relative z-10">
+                <h3 className="font-heading font-semibold text-3xl md:text-5xl uppercase tracking-wide text-foreground/90 group-hover:text-foreground transition-colors relative z-10">
                   {service.title}
                 </h3>
               </div>
 
               <div className="flex flex-col gap-6 w-full lg:w-1/3 relative z-10">
-                <p className="text-sm md:text-base text-foreground/70 font-light leading-relaxed group-hover:text-foreground/90 transition-colors">
+                <p className="text-sm md:text-base text-foreground/70 font-normal leading-relaxed group-hover:text-foreground/90 transition-colors">
                   {service.description}
                 </p>
                 

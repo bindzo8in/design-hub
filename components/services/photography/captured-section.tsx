@@ -166,7 +166,7 @@ const CapturedSection = () => {
           <h2
             className="
               text-4xl
-              font-light
+              font-bold
               leading-[0.95]
               text-foreground
 

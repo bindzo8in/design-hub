@@ -31,12 +31,12 @@ export function AdminHeader() {
   };
 
   return (
-    <header className="sticky top-0 z-20 flex h-16 w-full items-center justify-between border-b border-border/40 bg-background/95 px-6 backdrop-blur-md text-foreground">
+    <header className="sticky top-0 z-20 flex h-16 w-full items-center justify-between border-b border-white/5 bg-[#050711]/80 px-6 backdrop-blur-xl text-slate-200">
       {/* Mobile Toggle & Title */}
       <div className="flex items-center gap-4">
         <MobileSidebar />
         <div className="hidden sm:block">
-          <h1 className="text-lg font-bold tracking-tight text-foreground font-sans">
+          <h1 className="text-lg font-bold tracking-tight text-white font-sans">
             {getPageTitle()}
           </h1>
         </div>
@@ -46,30 +46,18 @@ export function AdminHeader() {
       <div className="flex items-center gap-4">
         {/* Global Search Bar */}
         <div className="relative hidden md:block w-64">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
           <Input
             placeholder="Search records..."
-            className="w-full bg-background/40 border-border/30 pl-9 pr-4 text-sm text-foreground placeholder-muted-foreground focus:border-accent/50 focus:ring-1 focus:ring-accent/20 focus-visible:ring-0 focus-visible:ring-offset-0 rounded-xl"
+            className="w-full bg-[#101735]/50 border-white/5 pl-9 pr-4 text-sm text-slate-200 placeholder-slate-500 focus:border-[#DF1B25]/50 focus:ring-1 focus:ring-[#DF1B25]/20 focus-visible:ring-0 focus-visible:ring-offset-0 rounded-xl"
           />
         </div>
-
-        {/* Theme Toggle */}
-        <Button
-          variant="ghost"
-          size="icon"
-          className="text-muted-foreground hover:text-foreground hover:bg-accent/10 rounded-xl"
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-        >
-          <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
 
         {/* System Notifications */}
         <Button
           variant="ghost"
           size="icon"
-          className="relative text-muted-foreground hover:text-foreground hover:bg-accent/10 rounded-xl"
+          className="relative text-slate-400 hover:text-white hover:bg-white/5 rounded-xl"
         >
           <Bell className="h-4 w-4" />
           <span className="absolute top-2.5 right-2.5 h-1.5 w-1.5 rounded-full bg-[#DF1B25]" />
@@ -81,7 +69,7 @@ export function AdminHeader() {
           <DropdownMenuTrigger asChild>
             <Button
               variant="ghost"
-              className="relative h-9 w-9 rounded-xl border border-border/30 bg-background p-0 overflow-hidden cursor-pointer"
+              className="relative h-9 w-9 rounded-xl border border-white/10 bg-[#101735] p-0 overflow-hidden cursor-pointer"
             >
               {session?.user?.image ? (
                 <Image
@@ -92,37 +80,37 @@ export function AdminHeader() {
                   className="object-cover"
                 />
               ) : (
-                <User className="h-4 w-4 text-muted-foreground" />
+                <User className="h-4 w-4 text-slate-400" />
               )}
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent
             align="end"
-            className="w-56 bg-background border border-border/30 text-foreground rounded-xl shadow-xl"
+            className="w-56 bg-[#101735] border border-white/10 text-slate-200 rounded-xl shadow-2xl"
           >
             <DropdownMenuLabel className="font-normal">
               <div className="flex flex-col space-y-1">
-                <p className="text-sm font-bold leading-none text-foreground">
+                <p className="text-sm font-bold leading-none text-white">
                   {session?.user?.name || "System Admin"}
                 </p>
-                <p className="text-xs leading-none text-muted-foreground font-mono">
+                <p className="text-xs leading-none text-slate-400 font-mono">
                   {session?.user?.email || "admin@designhub.com"}
                 </p>
               </div>
             </DropdownMenuLabel>
-            <DropdownMenuSeparator className="bg-border/20" />
-            <DropdownMenuItem className="focus:bg-accent/10 focus:text-foreground cursor-pointer rounded-lg py-2">
-              <User className="mr-2 h-4 w-4 text-muted-foreground" />
+            <DropdownMenuSeparator className="bg-white/10" />
+            <DropdownMenuItem className="focus:bg-white/5 focus:text-white cursor-pointer rounded-lg py-2">
+              <User className="mr-2 h-4 w-4 text-slate-400" />
               Profile Settings
             </DropdownMenuItem>
-            <DropdownMenuItem className="focus:bg-accent/10 focus:text-foreground cursor-pointer rounded-lg py-2">
-              <Settings className="mr-2 h-4 w-4 text-muted-foreground" />
+            <DropdownMenuItem className="focus:bg-white/5 focus:text-white cursor-pointer rounded-lg py-2">
+              <Settings className="mr-2 h-4 w-4 text-slate-400" />
               Global Settings
             </DropdownMenuItem>
-            <DropdownMenuSeparator className="bg-border/20" />
+            <DropdownMenuSeparator className="bg-white/10" />
             <DropdownMenuItem
               onClick={() => signOut({ callbackUrl: "/" })}
-              className="focus:bg-destructive/20 focus:text-destructive text-destructive cursor-pointer rounded-lg py-2"
+              className="focus:bg-[#DF1B25]/20 focus:text-[#DF1B25] text-[#DF1B25] cursor-pointer rounded-lg py-2"
             >
               <LogOut className="mr-2 h-4 w-4" />
               Sign Out Session

@@ -18,17 +18,18 @@ enum Role {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String     @id @default(cuid())
   name          String?
-  email         String?   @unique
-  emailVerified DateTime? @map("email_verified")
+  email         String?    @unique
+  emailVerified DateTime?  @map("email_verified")
   image         String?
   password      String?
-  role          Role      @default(USER)
+  role          Role       @default(USER)
   accounts      Account[]
   sessions      Session[]
-  createdAt     DateTime  @default(now()) @map("created_at")
-  updatedAt     DateTime  @updatedAt @map("updated_at")
+  createdAt     DateTime   @default(now()) @map("created_at")
+  updatedAt     DateTime   @updatedAt @map("updated_at")
+  blogPosts     BlogPost[]
 
   @@map("users")
 }
@@ -83,11 +84,10 @@ model Project {
 
   projectImages ProjectImage[]
 
-  
-  budget         Float?
-  status         String    @default("PLANNING")
-  startDate      DateTime? @map("start_date")
-  endDate        DateTime? @map("end_date")
+  budget    Float?
+  status    String    @default("PLANNING")
+  startDate DateTime? @map("start_date")
+  endDate   DateTime? @map("end_date")
 
   categoryId String?   @map("category_id")
   category   Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
@@ -138,29 +138,97 @@ model Client {
 }
 
 model TeamMember {
-  id          String   @id @default(cuid())
-  name        String
-  role        String
-  imageUrl    String?  @map("image_url")
+  id            String   @id @default(cuid())
+  name          String
+  role          String
+  imageUrl      String?  @map("image_url")
   imagePublicId String?  @map("image_public_id")
-  bio         String?
-  githubUrl   String?  @map("github_url")
-  linkedinUrl String?  @map("linkedin_url")
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
+  bio           String?
+  githubUrl     String?  @map("github_url")
+  linkedinUrl   String?  @map("linkedin_url")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
 
   @@map("team_members")
 }
 
 model Testimonial {
-  id        String   @id @default(cuid())
-  author    String
-  role      String
-  text      String   @db.Text
-  avatarUrl String?  @map("avatar_url")
+  id             String   @id @default(cuid())
+  author         String
+  role           String
+  text           String   @db.Text
+  avatarUrl      String?  @map("avatar_url")
   avatarPublicId String?  @map("avatar_public_id")
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
 
   @@map("testimonials")
+}
+
+// Blog System Models
+
+model BlogCategory {
+  id          String     @id @default(cuid())
+  name        String     @unique
+  slug        String     @unique
+  description String?
+  posts       BlogPost[]
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+
+  @@map("blog_categories")
+}
+
+model BlogTag {
+  id        String     @id @default(cuid())
+  name      String     @unique
+  slug      String     @unique
+  posts     BlogPost[]
+  createdAt DateTime   @default(now()) @map("created_at")
+  updatedAt DateTime   @updatedAt @map("updated_at")
+
+  @@map("blog_tags")
+}
+
+enum BlogStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model BlogPost {
+  id      String  @id @default(cuid())
+  title   String
+  slug    String  @unique
+  excerpt String? @db.Text
+  content String  @db.Text
+
+  featuredImage         String? @map("featured_image")
+  featuredImagePublicId String? @map("featured_image_public_id")
+  featuredImageAlt      String? @map("featured_image_alt")
+
+  status      BlogStatus @default(DRAFT)
+  readingTime Int?       @map("reading_time")
+  isFeatured  Boolean    @default(false) @map("is_featured")
+
+  metaTitle       String? @map("meta_title")
+  metaDescription String? @map("meta_description") @db.Text
+
+  publishedAt DateTime? @map("published_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  authorId String @map("author_id")
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  categoryId String?       @map("category_id")
+  category   BlogCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+
+  tags BlogTag[]
+
+  @@index([slug])
+  @@index([status])
+  @@index([publishedAt])
+  @@index([categoryId])
+  @@index([isFeatured])
+  @@map("blog_posts")
 }

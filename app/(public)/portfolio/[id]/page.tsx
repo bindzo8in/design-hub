@@ -38,6 +38,7 @@ export default async function PortfolioDetailPage({
   if (!project) {
     notFound();
   }
+  console.log(project.projectImages)
 
   return (
     <ProjectDetail

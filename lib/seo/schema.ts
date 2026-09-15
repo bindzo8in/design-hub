@@ -75,6 +75,45 @@ export function buildServiceSchema(service: {
   };
 }
 
+export function buildBlogSchema(url: string, description: string): SchemaObject {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    url,
+    description,
+    publisher: buildOrganizationSchema(),
+  };
+}
+
+export function buildArticleSchema(article: {
+  headline: string;
+  description: string;
+  image?: string | null;
+  datePublished: string;
+  dateModified: string;
+  authorName: string;
+  url: string;
+}): SchemaObject {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.headline,
+    description: article.description,
+    image: article.image ? buildAssetUrl(article.image) : buildAssetUrl(seoConfig.ogImagePath),
+    datePublished: article.datePublished,
+    dateModified: article.dateModified,
+    author: {
+      "@type": "Person",
+      name: article.authorName,
+    },
+    publisher: buildOrganizationSchema(),
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": article.url,
+    },
+  };
+}
+
 export function buildStructuredDataPayload(schema: SchemaObject | SchemaObject[]) {
   return Array.isArray(schema) ? schema : [schema];
 }

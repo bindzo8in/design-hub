@@ -16,6 +16,9 @@ import {
   Settings,
   Shield,
   Menu,
+  FileText,
+  Library,
+  Hash,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
@@ -28,6 +31,9 @@ export interface SidebarItem {
 
 export const sidebarItems: SidebarItem[] = [
   { title: "Overview", href: "/admin", icon: LayoutDashboard },
+  { title: "Blog Posts", href: "/admin/blog", icon: FileText },
+  { title: "Blog Categories", href: "/admin/blog-categories", icon: Library },
+  { title: "Blog Tags", href: "/admin/blog-tags", icon: Hash },
   { title: "Users", href: "/admin/users", icon: Users },
   { title: "Projects", href: "/admin/projects", icon: FolderGit2 },
   { title: "Categories", href: "/admin/categories", icon: Tags },
@@ -41,14 +47,14 @@ export function SidebarContent() {
   const pathname = usePathname();
 
   return (
-    <div className="flex h-full flex-col bg-background border-r border-border/40 text-foreground">
+    <div className="flex h-full flex-col bg-[#050711]/80 backdrop-blur-xl border-r border-white/5 text-slate-300">
       {/* Brand Header */}
-      <div className="flex h-16 items-center px-6 border-b border-border/40">
+      <div className="flex h-16 items-center px-6 border-b border-white/5">
         <Link href="/admin" className="flex items-center gap-2.5 group">
           <div className="bg-[#DF1B25]/10 border border-[#DF1B25]/30 p-1.5 rounded-lg text-[#DF1B25] group-hover:scale-105 transition-transform duration-300">
             <Shield className="w-5 h-5" />
           </div>
-          <span className="font-sans font-bold tracking-tight text-lg">
+          <span className="font-sans font-bold tracking-tight text-lg text-white">
             DESIGN<span className="text-[#DF1B25]">HUB</span> <span className="text-xs uppercase px-1.5 py-0.5 rounded bg-[#26336F] text-white font-mono tracking-widest ml-1 border border-[#26336F]">Admin</span>
           </span>
         </Link>
@@ -66,8 +72,8 @@ export function SidebarContent() {
               className={cn(
                 "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 group relative overflow-hidden",
                 isActive
-                  ? "bg-card text-foreground border border-border shadow-md"
-                  : "text-muted-foreground hover:text-foreground hover:bg-card/60 border border-transparent"
+                  ? "bg-[#101735] text-white border border-white/10 shadow-md"
+                  : "text-slate-400 hover:text-white hover:bg-white/5 border border-transparent"
               )}
             >
               {isActive && (
@@ -76,7 +82,7 @@ export function SidebarContent() {
               <item.icon
                 className={cn(
                   "w-4 h-4 transition-transform duration-300 group-hover:scale-110",
-                  isActive ? "text-[#DF1B25]" : "text-slate-400 group-hover:text-slate-200"
+                  isActive ? "text-[#DF1B25]" : "text-slate-500 group-hover:text-slate-300"
                 )}
               />
               {item.title}
@@ -86,8 +92,8 @@ export function SidebarContent() {
       </div>
 
       {/* Footer Info */}
-      <div className="p-4 border-t border-border/40 bg-secondary/20 text-center">
-        <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">
+      <div className="p-4 border-t border-white/5 bg-[#101735]/30 text-center">
+        <p className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">
           Secured session
         </p>
       </div>
@@ -99,12 +105,12 @@ export function MobileSidebar() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="lg:hidden text-foreground hover:bg-accent/10">
+        <Button variant="ghost" size="icon" className="lg:hidden text-slate-200 hover:bg-white/5">
           <Menu className="w-5 h-5" />
           <span className="sr-only">Toggle navigation menu</span>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="p-0 w-72 bg-background border-r border-border/40 text-foreground">
+      <SheetContent side="left" className="p-0 w-72 bg-[#050711] border-r border-white/5 text-slate-200">
         <SheetTitle className="sr-only">Admin navigation</SheetTitle>
         <SidebarContent />
       </SheetContent>

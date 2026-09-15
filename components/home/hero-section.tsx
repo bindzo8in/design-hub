@@ -112,7 +112,7 @@ const HomeHeroSection = () => {
 
       // Update DOM text directly to bypass React renders
       const data = headlines[currentIdx];
-      headlineRef.current.innerHTML = `${data.line1} <br /> <span class="text-accent italic">${data.highlight}</span>`;
+      headlineRef.current.innerHTML = `${data.line1} <br /> <span class="text-accent ">${data.highlight}</span>`;
       
       // Split new text
       split = new SplitType(headlineRef.current, { types: "chars,words" });
@@ -222,11 +222,11 @@ const HomeHeroSection = () => {
         
         <h1 
           ref={headlineRef}
-          className="font-[family-name:var(--font-heading)] w-full max-w-[1600px] text-[clamp(3rem,12vw,12rem)] uppercase font-bold leading-[0.8] tracking-[0.01em] text-foreground dark:text-white dark:mix-blend-difference"
+          className="font-heading w-full max-w-[1600px] text-[clamp(3rem,12vw,12rem)] uppercase font-bold leading-[0.8] tracking-[0.01em] text-foreground dark:text-white dark:mix-blend-difference"
         >
           {/* Initial content to prevent flash before JS runs */}
           {headlines[0].line1} <br />
-          <span className="text-accent italic">{headlines[0].highlight}</span>
+          <span className="text-accent ">{headlines[0].highlight}</span>
         </h1>
       </div>
 

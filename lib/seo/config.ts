@@ -37,6 +37,7 @@ export const seoConfig = {
     { href: "/services/photography", changeFrequency: "weekly", priority: 0.8 },
     { href: "/services/printing", changeFrequency: "weekly", priority: 0.8 },
     { href: "/services/design-solution", changeFrequency: "weekly", priority: 0.8 },
+    { href: "/blog", changeFrequency: "weekly", priority: 0.9 },
   ],
 } as const;
 

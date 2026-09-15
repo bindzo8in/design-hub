@@ -1,8 +1,8 @@
 export class ApiError extends Error {
   status: number;
-  data: any;
+  data: unknown;
 
-  constructor(message: string, status: number, data?: any) {
+  constructor(message: string, status: number, data?: unknown) {
     super(message);
     this.name = "ApiError";
     this.status = status;
@@ -47,14 +47,14 @@ export const apiClient = {
   get<T>(path: string, options?: RequestInit): Promise<T> {
     return request<T>(path, { ...options, method: "GET" });
   },
-  post<T>(path: string, data: any, options?: RequestInit): Promise<T> {
+  post<T>(path: string, data: unknown, options?: RequestInit): Promise<T> {
     return request<T>(path, {
       ...options,
       method: "POST",
       body: JSON.stringify(data),
     });
   },
-  put<T>(path: string, data: any, options?: RequestInit): Promise<T> {
+  put<T>(path: string, data: unknown, options?: RequestInit): Promise<T> {
     return request<T>(path, {
       ...options,
       method: "PUT",

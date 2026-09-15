@@ -107,10 +107,10 @@ const HomeAboutSection = () => {
           <div className="lg:col-span-7 flex flex-col gap-12">
             <h2 
               ref={headingRef} 
-              className="font-[family-name:var(--font-heading)] font-light text-[clamp(2.5rem,6vw,5.5rem)] leading-[1.1] uppercase tracking-tight text-foreground/90"
+              className="font-heading font-bold text-[clamp(2.5rem,6vw,5.5rem)] leading-[1.1] uppercase tracking-tight text-foreground/90"
             >
               Who is <br />
-              <span className="text-accent italic font-light">Design Hub</span> <br />
+              <span className="text-accent  font-light">Design Hub</span> <br />
               Solutions?
             </h2>
 

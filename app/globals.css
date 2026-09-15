@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "shadcn/tailwind.css";
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -56,7 +57,7 @@
   --radius-4xl: calc(var(--radius) * 2.6);
   --font-stick-no-bills: var(--font-stick-no-bills);
   --font-orbitron: var(--font-orbitron);
-  --font-heading: var(--font-heading);
+  --font-heading: var(--font-geist-sans);
   --font-mono: "Courier New", monospace;
   --font-serif: "IBM Plex Serif", serif;
   --radius: 0.375rem;
@@ -514,4 +515,99 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+}
+
+/* TipTap Editor Styles */
+.ProseMirror {
+  outline: none;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  color: #94a3b8;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.ProseMirror p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.ProseMirror > *:first-child {
+  margin-top: 0;
+}
+
+.ProseMirror > *:last-child {
+  margin-bottom: 0;
+}
+
+.ProseMirror pre {
+  background: #0f172a;
+  color: #f8fafc;
+  font-family: 'JetBrainsMono', monospace;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.ProseMirror code {
+  font-size: 0.9em;
+  padding: 0.25em;
+  border-radius: 0.25em;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: inherit;
+  box-decoration-break: clone;
+}
+
+.ProseMirror pre code {
+  color: inherit;
+  padding: 0;
+  background: none;
+  font-size: 0.8rem;
+}
+
+.ProseMirror img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  display: block;
+  margin: 1.5rem auto;
+}
+
+.ProseMirror blockquote {
+  border-left: 3px solid #DF1B25;
+  margin: 1.5rem 0;
+  padding-left: 1rem;
+  font-style: italic;
+}
+
+.ProseMirror hr {
+  border: none;
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
+  margin: 2rem 0;
+}
+
+.ProseMirror ul,
+.ProseMirror ol {
+  padding: 0 1rem;
+  margin: 1.25rem 1rem 1.25rem 0.4rem;
+  list-style-type: disc;
+}
+
+.ProseMirror ol {
+  list-style-type: decimal;
+}
+
+.ProseMirror ul li p,
+.ProseMirror ol li p {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+.ProseMirror mark {
+  background-color: #DF1B25;
+  color: white;
+  border-radius: 2px;
+  padding: 0.125em 0.25em;
 }

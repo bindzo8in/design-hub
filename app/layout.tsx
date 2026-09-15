@@ -3,8 +3,8 @@ import {
   Geist_Mono,
   Stick_No_Bills,
   Orbitron,
-  Plus_Jakarta_Sans,
 } from "next/font/google";
+
 import "./globals.css";
 import { Providers } from "./providers";
 import MouseFollower from "@/components/ui/mouse-follower";
@@ -36,12 +36,6 @@ const orbitron = Orbitron({
   weight: ["400", "500", "600", "700", "800", "900"],
 });
 
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-heading",
-  weight: ["400", "500", "600", "700", "800"],
-  display: "swap",
-});
 
 export const metadata = buildRootMetadata();
 
@@ -57,7 +51,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${stickNoBills.variable} ${orbitron.variable} ${plusJakartaSans.variable} antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${stickNoBills.variable} ${orbitron.variable} antialiased`}
       suppressHydrationWarning
       data-scroll-behavior="smooth"
     >

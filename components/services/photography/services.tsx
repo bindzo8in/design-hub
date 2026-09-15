@@ -105,7 +105,7 @@ const PhotographyServices = () => {
           <h2
             className="
               text-4xl
-              font-light
+              font-bold
               uppercase
               tracking-wide
               text-foreground

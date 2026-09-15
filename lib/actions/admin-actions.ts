@@ -10,6 +10,7 @@ export type ActionResponse = {
   success: boolean;
   message: string;
   errors?: Record<string, string[]>;
+  data?: any;
 };
 
 /**
@@ -20,7 +21,7 @@ export async function updateSystemSettingsAction(
 ): Promise<ActionResponse> {
   // 1. Authenticate & Authorize session at database level
   const session = await auth();
-  if (!session || (session.user as any)?.role !== "ADMIN") {
+  if (!session || (session.user as { role?: string, email?: string })?.role !== "ADMIN") {
     return { success: false, message: "Unauthorized access. Administrator privileges required." };
   }
 
@@ -51,10 +52,10 @@ export async function updateSystemSettingsAction(
       success: true,
       message: "System settings updated successfully.",
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     return {
       success: false,
-      message: error.message || "An unexpected system error occurred.",
+      message: error instanceof Error ? error.message : "An unexpected system error occurred.",
     };
   }
 }

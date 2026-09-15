@@ -9,12 +9,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     select: { updatedAt: true },
   });
 
+  const blogPosts = await prisma.blogPost.findMany({
+    where: { status: "PUBLISHED" },
+    select: { slug: true, updatedAt: true },
+  });
+
   const baseDate = latestProject?.updatedAt ?? new Date();
 
-  return seoConfig.routes.map((route) => ({
+  const staticRoutes = seoConfig.routes.map((route) => ({
     url: buildAbsoluteUrl(route.href),
     lastModified: route.href === "/portfolio" ? baseDate : new Date(),
-    changeFrequency: route.changeFrequency,
+    changeFrequency: route.changeFrequency as "daily" | "monthly" | "weekly" | "always" | "hourly" | "yearly" | "never" | undefined,
     priority: route.priority,
   }));
+
+  const blogRoutes = blogPosts.map((post) => ({
+    url: buildAbsoluteUrl(`/blog/${post.slug}`),
+    lastModified: post.updatedAt,
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
+  return [...staticRoutes, ...blogRoutes];
 }

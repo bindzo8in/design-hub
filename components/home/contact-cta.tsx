@@ -10,7 +10,7 @@ const HomeCTASection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let ctx = gsap.context(() => {
+    const ctx = gsap.context(() => {
       import("gsap/ScrollTrigger").then(({ ScrollTrigger }) => {
         gsap.registerPlugin(ScrollTrigger);
 
@@ -58,7 +58,7 @@ const HomeCTASection = () => {
 
       <div className="cta-wrapper relative z-10 mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center text-center py-20 lg:py-32">
-          
+
           {/* Subtle Accent Line */}
           <div className="cta-item h-16 w-px bg-gradient-to-b from-transparent via-accent/50 to-transparent mb-8" />
 
@@ -66,24 +66,24 @@ const HomeCTASection = () => {
           <h2
             className="
               cta-item
-              font-[family-name:var(--font-heading)]
+              font-heading
               text-[2.5rem]
-              font-light
+              font-bold
               leading-[1.1]
-              tracking-tight
+              tracking-[4px]
               text-foreground
               sm:text-[4rem]
               md:text-[5.5rem]
               lg:text-[6.5rem]
             "
           >
-            Ready to <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/60 italic font-medium">Elevate</span> <br />
+            Ready to <span className="text-transparent bg-clip-text bg-linear-to-r from-accent to-accent/60  font-medium">Elevate</span> <br />
             Your Brand?
           </h2>
 
           {/* Description */}
           <p className="cta-item mt-8 max-w-2xl text-base sm:text-lg leading-relaxed text-muted-foreground/80 font-light tracking-wide">
-            Partner with us to create digital experiences that transcend the ordinary. 
+            Partner with us to create digital experiences that transcend the ordinary.
             From visionary design to flawless execution, we bring your ideas to life.
           </p>
 
@@ -113,17 +113,17 @@ const HomeCTASection = () => {
           <div className="cta-item mt-24 grid grid-cols-1 sm:grid-cols-3 gap-12 sm:gap-24 text-center">
             <div className="flex flex-col items-center gap-2">
               <span className="text-sm uppercase tracking-[0.3em] text-muted-foreground/60">Delivered</span>
-              <span className="font-[family-name:var(--font-heading)] font-light text-4xl sm:text-5xl font-light text-foreground">120+</span>
+              <span className="font-heading font-light text-4xl sm:text-5xl font-light text-foreground">120+</span>
             </div>
-            
+
             <div className="flex flex-col items-center gap-2">
               <span className="text-sm uppercase tracking-[0.3em] text-muted-foreground/60">Experience</span>
-              <span className="font-[family-name:var(--font-heading)] font-light text-4xl sm:text-5xl font-light text-foreground">6<span className="text-accent/60">Yrs</span></span>
+              <span className="font-heading font-light text-4xl sm:text-5xl font-light text-foreground">6<span className="text-accent/60">Yrs</span></span>
             </div>
 
             <div className="flex flex-col items-center gap-2">
               <span className="text-sm uppercase tracking-[0.3em] text-muted-foreground/60">Support</span>
-              <span className="font-[family-name:var(--font-heading)] font-light text-4xl sm:text-5xl font-light text-foreground">24/7</span>
+              <span className="font-heading font-light text-4xl sm:text-5xl font-light text-foreground">24/7</span>
             </div>
           </div>
 

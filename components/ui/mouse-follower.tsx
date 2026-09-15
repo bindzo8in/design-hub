@@ -10,6 +10,11 @@ export default function MouseFollower() {
   const pathname = usePathname();
 
   useEffect(() => {
+    // Disable on admin routes
+    if (pathname?.startsWith("/admin")) {
+      return;
+    }
+
     const cursorDot = cursorDotRef.current;
     const cursorRing = cursorRingRef.current;
     if (!cursorDot || !cursorRing) return;
@@ -127,6 +132,10 @@ export default function MouseFollower() {
       document.removeEventListener("mouseout", handleMouseOut);
     };
   }, [pathname]);
+
+  if (pathname?.startsWith("/admin")) {
+    return null;
+  }
 
   return (
     <>
