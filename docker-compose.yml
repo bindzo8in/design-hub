@@ -1,0 +1,17 @@
+services:
+  web:
+    image: ghcr.io/bindzo8in/design-hub:latest
+    container_name: design-hub
+    restart: unless-stopped
+
+    init: true
+
+    env_file:
+      - .env
+
+    networks:
+      - web_network
+
+networks:
+  web_network:
+    external: true
