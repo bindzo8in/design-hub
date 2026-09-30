@@ -3,6 +3,8 @@ import type { MetadataRoute } from "next";
 import { prisma } from "@/lib/prisma";
 import { seoConfig, buildAbsoluteUrl } from "@/lib/seo/config";
 
+export const dynamic = "force-dynamic";
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const latestProject = await prisma.project.findFirst({
     orderBy: { updatedAt: "desc" },
