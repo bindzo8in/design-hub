@@ -3,6 +3,23 @@
 import React, { useState, useEffect, useRef } from "react";
 import { MessageCircle, X, Send, Bot } from "lucide-react";
 import gsap from "gsap";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 type Message = {
   id: string;
@@ -12,22 +29,32 @@ type Message = {
 
 type Step = "name" | "email" | "phone" | "services" | "description" | "done";
 
+const chatFormSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  phone: z.string().min(10, "Please enter a valid phone number"),
+  services: z.string().min(2, "Please specify a service (e.g. Web Design)"),
+  description: z.string().min(10, "Description must be at least 10 characters"),
+});
+
 export default function FloatingChatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     { id: "1", sender: "bot", text: "Hi there! I'm here to help you get in touch. What's your name?" }
   ]);
   const [currentStep, setCurrentStep] = useState<Step>("name");
-  const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    subject: "Chatbot Inquiry",
-    services: [] as string[],
-    description: "",
+  const form = useForm<z.infer<typeof chatFormSchema>>({
+    resolver: zodResolver(chatFormSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      services: "",
+      description: "",
+    },
+    mode: "onSubmit",
   });
 
   const chatContainerRef = useRef<HTMLDivElement>(null);
@@ -71,51 +98,46 @@ export default function FloatingChatbot() {
   }, [isTyping, isOpen, currentStep]);
 
   const handleSend = async () => {
-    if (!inputValue.trim() || currentStep === "done") return;
+    if (currentStep === "done") return;
 
-    const userText = inputValue.trim();
-    setInputValue("");
+    const isValid = await form.trigger(currentStep as keyof z.infer<typeof chatFormSchema>);
+    if (!isValid) return;
+
+    const userText = form.getValues(currentStep as keyof z.infer<typeof chatFormSchema>);
+    if (!userText || !userText.trim()) return;
     
     // Add user message
-    setMessages(prev => [...prev, { id: Date.now().toString(), sender: "user", text: userText }]);
+    setMessages(prev => [...prev, { id: Date.now().toString(), sender: "user", text: userText.trim() }]);
     setIsTyping(true);
 
     // Process step
     setTimeout(() => {
       let nextStep: Step = currentStep;
       let nextBotMessage = "";
-      
-      const newFormData = { ...formData };
 
       switch (currentStep) {
         case "name":
-          newFormData.name = userText;
-          nextBotMessage = `Nice to meet you, ${userText}! What's your email address?`;
+          nextBotMessage = `Nice to meet you, ${userText.trim()}! What's your email address?`;
           nextStep = "email";
           break;
         case "email":
-          newFormData.email = userText;
           nextBotMessage = "Got it. And your phone number?";
           nextStep = "phone";
           break;
         case "phone":
-          newFormData.phone = userText;
           nextBotMessage = "Thanks! Which service are you interested in? (e.g. Web Design, Digital Marketing)";
           nextStep = "services";
           break;
         case "services":
-          newFormData.services = [userText];
           nextBotMessage = "Perfect. Finally, could you provide a brief description of your project?";
           nextStep = "description";
           break;
         case "description":
-          newFormData.description = userText;
           nextBotMessage = "Thank you! I'm sending your request now...";
           nextStep = "done";
           break;
       }
 
-      setFormData(newFormData);
       setCurrentStep(nextStep);
       
       if (nextStep !== "done") {
@@ -123,12 +145,20 @@ export default function FloatingChatbot() {
         setIsTyping(false);
       } else {
         // Submit form
-        submitForm(newFormData);
+        const data = form.getValues();
+        submitForm({
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          subject: "Chatbot Inquiry",
+          services: [data.services],
+          description: data.description,
+        });
       }
     }, 1000);
   };
 
-  const submitForm = async (data: typeof formData) => {
+  const submitForm = async (data: { name: string; email: string; phone: string; subject: string; services: string[]; description: string; }) => {
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -143,7 +173,7 @@ export default function FloatingChatbot() {
         sender: "bot", 
         text: "Request sent successfully! Our team will contact you within 24 hours." 
       }]);
-    } catch (error) {
+    } catch {
       setMessages(prev => [...prev, { 
         id: Date.now().toString(), 
         sender: "bot", 
@@ -181,7 +211,7 @@ export default function FloatingChatbot() {
         </div>
 
         {/* Messages Area */}
-        <div className="flex h-[380px] flex-col gap-4 overflow-y-auto p-5 scrollbar-thin scrollbar-thumb-accent/20">
+        <div className="flex h-[380px] flex-col gap-4 overflow-y-auto overscroll-contain p-5 scrollbar-thin scrollbar-thumb-accent/20">
           {messages.map((msg) => (
             <div
               key={msg.id}
@@ -212,30 +242,79 @@ export default function FloatingChatbot() {
 
         {/* Input Area */}
         <div className="border-t border-border/50 p-4 bg-background/80">
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleSend();
-            }}
-            className="flex items-center gap-3"
-          >
-            <input
-              ref={inputRef}
-              type={currentStep === "email" ? "email" : currentStep === "phone" ? "tel" : "text"}
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              disabled={currentStep === "done" || isTyping}
-              placeholder={currentStep === "done" ? "Chat ended" : "Type your answer..."}
-              className="flex-1 rounded-full border border-border/60 bg-background/50 px-4 py-2.5 text-sm text-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent disabled:opacity-50"
-            />
-            <button
-              type="submit"
-              disabled={!inputValue.trim() || currentStep === "done" || isTyping}
-              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent text-accent-foreground hover:bg-accent/90 disabled:opacity-50 transition-colors"
+          <Form {...form}>
+            <form
+              noValidate
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSend();
+              }}
+              className="flex flex-col gap-2"
             >
-              <Send className="h-4 w-4 ml-0.5" />
-            </button>
-          </form>
+              <div className="flex items-start gap-3">
+                {currentStep !== "done" ? (
+                  <FormField
+                    control={form.control}
+                    name={currentStep as keyof z.infer<typeof chatFormSchema>}
+                    render={({ field }) => (
+                      <FormItem className="flex-1">
+                        {currentStep === "services" ? (
+                          <Select
+                            disabled={isTyping}
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
+                            <FormControl>
+                              <SelectTrigger className="w-full rounded-full border border-border/60 bg-background/50 h-[42px] px-4 text-sm text-foreground focus:ring-1 focus:ring-accent focus:border-accent data-[state=open]:ring-1 data-[state=open]:ring-accent data-[state=open]:border-accent">
+                                <SelectValue placeholder="Select a service..." />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent className="z-[10000]">
+                              <SelectItem value="Web Design">Web Design</SelectItem>
+                              <SelectItem value="Digital Marketing">Digital Marketing</SelectItem>
+                              <SelectItem value="SEO">SEO</SelectItem>
+                              <SelectItem value="App Development">App Development</SelectItem>
+                              <SelectItem value="Other">Other</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        ) : (
+                          <FormControl>
+                            <input
+                              {...field}
+                              ref={(e) => {
+                                field.ref(e);
+                                if (e) (inputRef as any).current = e;
+                              }}
+                              type={currentStep === "email" ? "email" : currentStep === "phone" ? "tel" : "text"}
+                              disabled={isTyping}
+                              placeholder="Type your answer..."
+                              className="w-full rounded-full border border-border/60 bg-background/50 px-4 py-2.5 text-sm text-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent disabled:opacity-50"
+                            />
+                          </FormControl>
+                        )}
+                        <FormMessage className="text-[10px] ml-4 mt-1" />
+                      </FormItem>
+                    )}
+                  />
+                ) : (
+                  <div className="flex-1">
+                    <input
+                      disabled
+                      placeholder="Chat ended"
+                      className="w-full rounded-full border border-border/60 bg-background/50 px-4 py-2.5 text-sm text-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent disabled:opacity-50"
+                    />
+                  </div>
+                )}
+                <button
+                  type="submit"
+                  disabled={currentStep === "done" || isTyping}
+                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent text-accent-foreground hover:bg-accent/90 disabled:opacity-50 transition-colors"
+                >
+                  <Send className="h-4 w-4 ml-0.5" />
+                </button>
+              </div>
+            </form>
+          </Form>
         </div>
       </div>
     </>

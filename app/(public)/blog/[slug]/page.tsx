@@ -10,6 +10,8 @@ import { buildAbsoluteUrl } from "@/lib/seo/config";
 import { buildArticleSchema, buildBreadcrumbSchema } from "@/lib/seo/schema";
 import { Metadata } from "next";
 import { BlogInteractions } from "@/features/blog/components/blog-interactions";
+import "@/features/blog/components/tiptap-table.css";
+import "@/features/blog/components/tiptap-plugins.css";
 
 export const dynamic = "force-dynamic";
 
@@ -162,7 +164,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               )}
 
               <div
-                className="prose prose-lg dark:prose-invert max-w-none prose-p:leading-relaxed dark:prose-p:text-slate-300 dark:prose-headings:text-white prose-headings:font-bold prose-a:text-[#DF1B25] hover:prose-a:text-[#DF1B25]/80 dark:prose-strong:text-white prose-blockquote:border-[#DF1B25] dark:prose-blockquote:bg-muted/40 prose-blockquote:bg-muted/60 prose-blockquote:p-4 prose-blockquote:rounded-r-xl prose-img:rounded-2xl dark:prose-pre:bg-[#101735] prose-pre:bg-slate-900 prose-pre:border dark:prose-pre:border-border"
+                className="tiptap ProseMirror prose prose-lg dark:prose-invert max-w-none prose-p:leading-relaxed dark:prose-p:text-slate-300 dark:prose-headings:text-white prose-headings:font-bold prose-a:text-[#DF1B25] hover:prose-a:text-[#DF1B25]/80 dark:prose-strong:text-white prose-blockquote:border-[#DF1B25] dark:prose-blockquote:bg-muted/40 prose-blockquote:bg-muted/60 prose-blockquote:p-4 prose-blockquote:rounded-r-xl prose-img:rounded-2xl dark:prose-pre:bg-[#101735] prose-pre:bg-slate-900 prose-pre:border dark:prose-pre:border-border"
                 dangerouslySetInnerHTML={{ __html: post.content }}
               />
 

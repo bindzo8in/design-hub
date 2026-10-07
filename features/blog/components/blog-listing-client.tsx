@@ -49,20 +49,7 @@ export function BlogListingAdminClient({
     []
   );
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
-      if (value) {
-        params.set(name, value);
-      } else {
-        params.delete(name);
-      }
-      return params.toString();
-    },
-    [searchParams]
-  );
-
-  const handlePaginationChange = (updater: any) => {
+  const handlePaginationChange = (updater: import("@tanstack/react-table").Updater<import("@tanstack/react-table").PaginationState>) => {
     // updater can be a function or a state object
     let newPageIndex = currentPage;
     let newPageSize = pageSize;
@@ -105,7 +92,7 @@ export function BlogListingAdminClient({
       } else {
         toast.error(res.message);
       }
-    } catch (error) {
+    } catch {
       toast.error("An error occurred");
     } finally {
       setIsDeleting(false);

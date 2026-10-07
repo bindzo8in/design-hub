@@ -179,7 +179,7 @@ const HomeHeroSection = () => {
           className="absolute left-1/2 top-1/2 h-[80vh] w-[80vw] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(223,27,37,0.15)_0%,transparent_60%)] mix-blend-screen blur-[80px]"
         />
         {/* Film grain noise overlay */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')" }} />
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "url('/noise.svg')" }} />
         
         {/* Left Floating Visual (Desktop Only) */}
         <div ref={leftFloatRef} className="hidden lg:block absolute top-[25%] left-[2%] xl:left-[8%] w-64 xl:w-72 aspect-square -rotate-6 transform-gpu opacity-90 dark:opacity-80">
@@ -222,7 +222,7 @@ const HomeHeroSection = () => {
         
         <h1 
           ref={headlineRef}
-          className="font-heading w-full max-w-[1600px] text-[clamp(3rem,12vw,12rem)] uppercase font-bold leading-[0.8] tracking-[0.01em] text-foreground dark:text-white dark:mix-blend-difference"
+          className="font-heading w-full max-w-[1600px] text-[clamp(2.5rem,10vw,9rem)] uppercase font-bold leading-[0.8] tracking-[0.01em] text-foreground dark:text-white dark:mix-blend-difference"
         >
           {/* Initial content to prevent flash before JS runs */}
           {headlines[0].line1} <br />

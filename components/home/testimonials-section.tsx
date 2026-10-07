@@ -89,9 +89,10 @@ const HomeTestimonialsSection = ({ testimonials: dbTestimonials }: HomeTestimoni
           </div>
           
           <Carousel
+            // eslint-disable-next-line react-hooks/refs
             plugins={[plugin.current]}
-            onMouseEnter={plugin.current.stop}
-            onMouseLeave={plugin.current.reset}
+            onMouseEnter={() => plugin.current.stop()}
+            onMouseLeave={() => plugin.current.reset()}
             opts={{ align: "center", loop: true }}
             className="w-full relative z-10"
           >

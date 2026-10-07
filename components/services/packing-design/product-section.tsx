@@ -124,8 +124,8 @@ export default function ProductShowcaseSection() {
       });
 
       // individual card parallax
-      cards.forEach((card: any, index: number) => {
-        gsap.to(card, {
+      cards.forEach((card: unknown, index: number) => {
+        gsap.to(card as HTMLElement, {
           y: index % 2 === 0 ? -90 : 70,
           rotate: index % 2 === 0 ? -8 : 8,
           ease: "none",

@@ -15,6 +15,7 @@ export function BlogInteractions({ url, title }: BlogInteractionsProps) {
 
   React.useEffect(() => {
     if (typeof navigator !== "undefined" && "share" in navigator) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setCanShare(true);
     }
   }, []);

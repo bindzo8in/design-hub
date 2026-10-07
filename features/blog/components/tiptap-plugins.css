@@ -1,0 +1,51 @@
+/* Link Styles */
+.prose.tiptap.ProseMirror a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.prose.tiptap.ProseMirror a:hover {
+  opacity: 0.8;
+}
+
+/* Highlight Styles */
+.prose.tiptap.ProseMirror mark {
+  background-color: var(--accent);
+  color: white;
+  padding: 0.1em 0.3em;
+  border-radius: 4px;
+  box-decoration-break: clone;
+}
+
+/* Inline Code Styles */
+.prose.tiptap.ProseMirror code {
+  background-color: color-mix(in srgb, var(--primary) 10%, transparent);
+  color: var(--foreground);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.875em;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+}
+
+/* Code Block Styles */
+.prose.tiptap.ProseMirror pre {
+  background-color: var(--card); /* Match design-hub dark background */
+  color: var(--foreground);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border); 
+  font-family: var(--font-mono, monospace);
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.prose.tiptap.ProseMirror pre code {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+  border-radius: 0;
+  font-size: 0.875rem;
+}

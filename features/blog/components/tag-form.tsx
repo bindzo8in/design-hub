@@ -74,7 +74,7 @@ export function BlogTagForm({ initialData }: BlogTagFormProps) {
           });
         }
       }
-    } catch (error) {
+    } catch {
       toast.error("Something went wrong");
     } finally {
       setIsPending(false);

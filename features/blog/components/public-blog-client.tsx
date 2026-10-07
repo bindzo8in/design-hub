@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { format } from "date-fns";
@@ -46,14 +46,7 @@ export function PublicBlogClient({
   const [localSearch, setLocalSearch] = useState(searchQuery);
   const debouncedSearch = useDebounce(localSearch, 500);
 
-  useEffect(() => {
-    if (debouncedSearch !== searchQuery) {
-      updateUrl("search", debouncedSearch);
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debouncedSearch]);
-
-  const updateUrl = (key: string, value: string) => {
+  const updateUrl = useCallback((key: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString());
     if (value && value !== "All") {
       params.set(key, value);
@@ -66,7 +59,13 @@ export function PublicBlogClient({
     }
     
     router.push(`${pathname}?${params.toString()}`);
-  };
+  }, [searchParams, pathname, router]);
+
+  useEffect(() => {
+    if (debouncedSearch !== searchQuery) {
+      updateUrl("search", debouncedSearch);
+    }
+  }, [debouncedSearch, searchQuery, updateUrl]);
 
   const featuredPost = currentPage === 1 && activeCategory === "All" && !searchQuery 
     ? initialPosts.find((p) => p.isFeatured) 

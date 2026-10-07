@@ -26,19 +26,19 @@ export function ErrorPageShell({
   onRetry,
 }: ErrorPageShellProps) {
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(223,27,37,0.12),_transparent_28%),linear-gradient(180deg,#050711,#0b1228)] px-4 py-16 sm:px-6 lg:px-8">
+    <main className="min-h-screen flex flex-col justify-center bg-[radial-gradient(circle_at_top,_rgba(223,27,37,0.12),_transparent_28%),linear-gradient(180deg,#050711,#0b1228)] px-4 py-16 sm:px-6 lg:px-8 overflow-hidden">
       <div className="mx-auto flex max-w-5xl flex-col items-center gap-10 text-center lg:flex-row lg:text-left">
-        <div className="flex-1 space-y-6">
+        <div className="flex-1 space-y-6 min-w-0 w-full">
           <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-card/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-accent">
             <ShieldAlert className="h-3.5 w-3.5" />
             {badge}
           </div>
 
           <div className="space-y-4">
-            <p className="text-sm text-muted-foreground sm:text-base">{description}</p>
-            <h1 className="font-heading font-bold text-5xl leading-none tracking-[0.2em] text-foreground sm:text-6xl lg:text-7xl">
+            <h1 className="font-heading font-bold text-4xl leading-tight tracking-[0.1em] text-foreground sm:text-5xl lg:text-6xl break-words">
               {title}
             </h1>
+            <p className="text-sm text-muted-foreground sm:text-base break-words">{description}</p>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-3 lg:justify-start">
@@ -69,7 +69,7 @@ export function ErrorPageShell({
           </div>
         </div>
 
-        <div className="flex-1">
+        <div className="flex-1 min-w-0 w-full">
           <div className="rounded-[2rem] border border-border/60 bg-card/80 p-8 shadow-[0_30px_80px_rgba(5,7,17,0.45)] backdrop-blur-sm sm:p-10">
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="rounded-2xl border border-border/60 bg-background/80 p-5 text-left">

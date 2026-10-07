@@ -1,7 +1,6 @@
 "use server";
 
 import { auth } from "@/auth";
-import { z } from "zod";
 import { revalidatePath } from "next/cache";
 
 import { settingsSchema, SettingsFormValues } from "@/lib/schemas/settings.schema";
@@ -10,7 +9,7 @@ export type ActionResponse = {
   success: boolean;
   message: string;
   errors?: Record<string, string[]>;
-  data?: any;
+  data?: unknown;
 };
 
 /**
@@ -39,7 +38,7 @@ export async function updateSystemSettingsAction(
 
   try {
     // Perform server-side configurations update
-    console.log(`[Admin Server Action] Settings updated by ${(session?.user as any)?.email || "unknown"}:`, {
+    console.log(`[Admin Server Action] Settings updated by ${(session?.user as { email?: string })?.email || "unknown"}:`, {
       siteName,
       contactEmail,
       maintenanceMode,

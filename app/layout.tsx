@@ -3,6 +3,8 @@ import {
   Geist_Mono,
   Stick_No_Bills,
   Orbitron,
+  Nova_Oval,
+  Eagle_Lake,
 } from "next/font/google";
 
 import "./globals.css";
@@ -36,6 +38,18 @@ const orbitron = Orbitron({
   weight: ["400", "500", "600", "700", "800", "900"],
 });
 
+const novaOval = Nova_Oval({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-nova-oval",
+});
+
+const eagleLake = Eagle_Lake({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-eagle-lake",
+});
+
 
 export const metadata = buildRootMetadata();
 
@@ -51,7 +65,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${stickNoBills.variable} ${orbitron.variable} antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${stickNoBills.variable} ${orbitron.variable} ${novaOval.variable} ${eagleLake.variable} antialiased`}
       suppressHydrationWarning
       data-scroll-behavior="smooth"
     >

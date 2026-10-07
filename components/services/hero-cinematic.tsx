@@ -7,7 +7,7 @@ export default function HeroCinematic() {
     <section className="relative w-full min-h-[50vh] md:min-h-[60vh] bg-background flex flex-col items-center justify-center pt-32 pb-20 overflow-hidden border-b border-border/40">
       
       {/* Subtle Background Elements */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('/noise.svg')]" />
       <div className="absolute top-0 left-1/2 w-[80vw] h-[80vh] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(circle_at_center,rgba(223,27,37,0.08)_0%,transparent_70%)] blur-[80px] rounded-full pointer-events-none" />
 
       {/* Content */}

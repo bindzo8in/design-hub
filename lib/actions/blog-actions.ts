@@ -155,7 +155,7 @@ export async function createBlogPostAction(values: BlogPostFormValues): Promise<
 
     const authorId = data.authorId && data.authorId !== "unknown" 
       ? data.authorId 
-      : (session.user as any).id;
+      : (session.user as { id?: string }).id;
       
     if (!authorId) {
       return { success: false, message: "Author ID is missing from session. Please log out and log back in." };

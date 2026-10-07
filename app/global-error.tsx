@@ -14,16 +14,16 @@ export default function GlobalError({
   return (
     <html lang="en">
       <body className="bg-[radial-gradient(circle_at_top,_rgba(223,27,37,0.12),_transparent_28%),linear-gradient(180deg,#050711,#0b1228)] text-foreground antialiased">
-        <main className="min-h-screen px-4 py-16 sm:px-6 lg:px-8">
+        <main className="min-h-screen flex flex-col justify-center px-4 py-16 sm:px-6 lg:px-8 overflow-hidden">
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-8 rounded-[2rem] border border-border/60 bg-card/80 px-6 py-12 text-center shadow-[0_30px_80px_rgba(5,7,17,0.45)] backdrop-blur sm:px-10">
             <p className="rounded-full border border-border/60 bg-background/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-accent">
               Critical Error
             </p>
             <div className="space-y-4">
-              <h1 className="font-heading font-bold text-4xl leading-none tracking-[0.2em] text-foreground sm:text-5xl">
+              <h1 className="font-heading font-bold text-3xl leading-tight tracking-[0.1em] text-foreground sm:text-4xl break-words">
                 Something went wrong
               </h1>
-              <p className="text-sm leading-6 text-muted-foreground sm:text-base">
+              <p className="text-sm leading-6 text-muted-foreground sm:text-base break-words">
                 {error.message || "A critical error prevented the application from rendering correctly. Please refresh the page or return to the homepage."}
               </p>
             </div>

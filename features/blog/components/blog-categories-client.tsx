@@ -49,7 +49,7 @@ export function BlogCategoriesAdminClient({ categories }: BlogCategoriesAdminCli
       } else {
         toast.error(res.message);
       }
-    } catch (error) {
+    } catch {
       toast.error("An error occurred");
     } finally {
       setIsDeleting(false);

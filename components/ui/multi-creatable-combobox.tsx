@@ -31,6 +31,7 @@ export function MultiCreatableCombobox({
   const [isCreating, setIsCreating] = React.useState(false);
 
   React.useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLocalOptions(options);
   }, [options]);
 

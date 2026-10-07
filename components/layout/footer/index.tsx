@@ -21,7 +21,7 @@ const socials = [
   { Icon: FaLinkedin, href: env.NEXT_PUBLIC_SOCIAL_LINKEDIN },
   { Icon: FaFacebook, href: env.NEXT_PUBLIC_SOCIAL_FACEBOOK },
   { Icon: FaGoogle, href: env.NEXT_PUBLIC_SOCIAL_GOOGLE },
-  { Icon: FaWhatsapp, href: "https://wa.me/919884344503" },
+  { Icon: FaWhatsapp, href: "https://wa.me/919003117326" },
 ];
 
 const Footer = () => {

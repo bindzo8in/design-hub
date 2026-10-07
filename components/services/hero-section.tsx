@@ -9,7 +9,7 @@ const Hero = () => {
   return (
     <section className="relative w-full h-[100vh] min-h-[700px] bg-background overflow-hidden flex items-center">
       {/* Background Noise & Gradients */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('/noise.svg')]" />
       <div className="absolute top-1/2 left-1/2 w-[60vw] h-[60vh] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(circle_at_center,rgba(223,27,37,0.1)_0%,transparent_60%)] blur-[80px] rounded-full pointer-events-none mix-blend-screen" />
 
       {/* 3D Scene Layer */}
