@@ -54,6 +54,7 @@ RUN --mount=type=secret,id=DATABASE_URL,env=DATABASE_URL \
     --mount=type=secret,id=PRISMA_DATABASE_URL,env=PRISMA_DATABASE_URL \
     --mount=type=secret,id=AUTH_TRUST_HOST,env=AUTH_TRUST_HOST \
     --mount=type=secret,id=AUTH_SECRET,env=AUTH_SECRET \
+    --mount=type=secret,id=AUTH_URL,env=AUTH_URL \
     --mount=type=secret,id=GOOGLE_CLIENT_ID,env=GOOGLE_CLIENT_ID \
     --mount=type=secret,id=GOOGLE_CLIENT_SECRET,env=GOOGLE_CLIENT_SECRET \
     --mount=type=secret,id=ADMIN_EMAIL,env=ADMIN_EMAIL \
