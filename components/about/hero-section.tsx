@@ -217,7 +217,7 @@ const HeroSection = () => {
                     key={stat.label}
                     className="about-stat-item flex flex-col items-center text-center rounded-2xl border border-slate-200 dark:border-[#26336F]/60 bg-white dark:bg-[#18224b]/50 py-6 px-3 shadow-sm"
                   >
-                    <div className="font-heading font-light text-4xl sm:text-5xl text-foreground leading-none">
+                    <div className="font-heading font-medium text-4xl sm:text-5xl text-foreground leading-none">
                       <span
                         ref={(el) => { statRefs.current[i] = el; }}
                       >

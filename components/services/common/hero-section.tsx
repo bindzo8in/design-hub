@@ -139,7 +139,7 @@ const HeroSection = ({
             <p
               className="
                 text-sm
-                font-light
+                font-medium
                 leading-relaxed
                 text-muted-foreground
 

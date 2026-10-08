@@ -30,11 +30,11 @@ const Hero = () => {
             </span>
             <h1 className="font-heading font-bold text-[clamp(3.5rem,8vw,7rem)] font-bold text-foreground leading-[0.9] tracking-tight mb-8 uppercase">
               OUR <br />
-              <span className="text-accent  font-light">
+              <span className="text-accent  font-medium">
                 SERVICES
               </span>
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground font-light leading-relaxed max-w-lg">
+            <p className="text-lg md:text-xl text-muted-foreground font-medium leading-relaxed max-w-lg">
               Comprehensive digital solutions tailored to elevate your brand. From identity to high-performance applications, we deliver excellence across every touchpoint.
             </p>
           </motion.div>

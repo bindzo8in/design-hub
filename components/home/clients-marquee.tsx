@@ -70,7 +70,7 @@ export default function HomeClientsMarquee({ clients }: HomeClientsMarqueeProps)
               </span>
             )}
 
-            <span className="font-heading font-light text-lg sm:text-xl uppercase tracking-[0.2em] text-foreground">
+            <span className="font-heading font-medium text-lg sm:text-xl uppercase tracking-[0.2em] text-foreground">
               {client.name}
             </span>
           </div>

@@ -16,9 +16,9 @@ const ServicesListSection = () => {
       <div className="container mx-auto px-6 max-w-[1600px]">
         <header className="mb-20 max-w-3xl">
           <h2 className="font-heading font-bold text-4xl md:text-6xl font-bold tracking-tight text-foreground uppercase">
-            Our Core <span className="text-accent  font-light">Expertise</span>
+            Our Core <span className="text-accent  font-medium">Expertise</span>
           </h2>
-          <p className="mt-6 text-lg text-muted-foreground font-light leading-relaxed">
+          <p className="mt-6 text-lg text-muted-foreground font-medium leading-relaxed">
             We blend creativity, design, and advanced technology to build outstanding
             products, establish powerful brands, and accelerate growth for our clients.
           </p>
@@ -87,7 +87,7 @@ const ServicesListSection = () => {
                           className="overflow-hidden"
                         >
                           <div className="pt-2 pb-4 pl-12 pr-4">
-                            <p className="text-lg text-muted-foreground font-light leading-relaxed mb-8">
+                            <p className="text-lg text-muted-foreground font-medium leading-relaxed mb-8">
                               {service.description}
                             </p>
                             <div className="grid grid-cols-2 gap-y-4 gap-x-8">
@@ -192,7 +192,7 @@ const ServicesListSection = () => {
                           />
                         </div>
                         
-                        <p className="text-base text-muted-foreground font-light leading-relaxed">
+                        <p className="text-base text-muted-foreground font-medium leading-relaxed">
                           {service.description}
                         </p>
                         

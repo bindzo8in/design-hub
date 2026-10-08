@@ -424,7 +424,7 @@ export default function PortfolioClient({
 
       <div className="grid grid-cols-3 gap-4 max-w-4xl mx-auto px-4">
         <div className="text-center">
-          <div className="font-heading font-light text-3xl sm:text-5xl text-foreground">
+          <div className="font-heading font-medium text-3xl sm:text-5xl text-foreground">
             {totalProjects}
           </div>
 
@@ -434,7 +434,7 @@ export default function PortfolioClient({
         </div>
 
         <div className="text-center">
-          <div className="font-heading font-light text-3xl sm:text-5xl text-accent">
+          <div className="font-heading font-medium text-3xl sm:text-5xl text-accent">
             {activeProjects}
           </div>
 
@@ -444,7 +444,7 @@ export default function PortfolioClient({
         </div>
 
         <div className="text-center">
-          <div className="font-heading font-light text-3xl sm:text-5xl text-emerald-500">
+          <div className="font-heading font-medium text-3xl sm:text-5xl text-emerald-500">
             {completedProjects}
           </div>
 

@@ -110,15 +110,15 @@ const HomeAboutSection = () => {
               className="font-heading font-bold text-[clamp(2.5rem,6vw,5.5rem)] leading-[1.1] uppercase tracking-tight text-foreground/90"
             >
               Who is <br />
-              <span className="text-accent  font-light">Design Hub</span> <br />
+              <span className="text-accent  font-medium">Design Hub</span> <br />
               Solutions?
             </h2>
 
             <div className="flex flex-col gap-8 max-w-xl">
-              <p className="about-paragraph text-lg md:text-xl leading-relaxed text-muted-foreground/80 font-light">
+              <p className="about-paragraph text-lg md:text-xl leading-relaxed text-muted-foreground/80 font-medium">
                 We strive to provide 100% custom websites, high-performance mobile apps, and robust enterprise software. We are superbly creative and we honestly care for your product or services — which is rare in these times.
               </p>
-              <p className="about-paragraph text-lg md:text-xl leading-relaxed text-muted-foreground/80 font-light">
+              <p className="about-paragraph text-lg md:text-xl leading-relaxed text-muted-foreground/80 font-medium">
                 Our personality is infectious throughout your brand. Our creativity always stands out from the rest in the right way. People will continually talk about your new catchy look.
               </p>
             </div>
@@ -126,15 +126,15 @@ const HomeAboutSection = () => {
             {/* Huge Stats */}
             <div className="grid grid-cols-3 gap-8 pt-12 border-t border-border mt-4">
               <div className="flex flex-col gap-2">
-                <div className="text-5xl md:text-7xl font-light text-foreground"><span className="stat-counter" data-target="6">0</span>+</div>
+                <div className="text-5xl md:text-7xl font-medium text-foreground"><span className="stat-counter" data-target="6">0</span>+</div>
                 <div className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">Years Experience</div>
               </div>
               <div className="flex flex-col gap-2">
-                <div className="text-5xl md:text-7xl font-light text-foreground"><span className="stat-counter" data-target="550">0</span>+</div>
+                <div className="text-5xl md:text-7xl font-medium text-foreground"><span className="stat-counter" data-target="550">0</span>+</div>
                 <div className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">Projects Delivered</div>
               </div>
               <div className="flex flex-col gap-2">
-                <div className="text-5xl md:text-7xl font-light text-foreground"><span className="stat-counter" data-target="100">0</span>%</div>
+                <div className="text-5xl md:text-7xl font-medium text-foreground"><span className="stat-counter" data-target="100">0</span>%</div>
                 <div className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">Client Satisfaction</div>
               </div>
             </div>
@@ -167,7 +167,7 @@ const HomeAboutSection = () => {
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <span className="text-xl md:text-3xl font-light text-foreground/60 transition-colors group-hover:text-foreground">
+                    <span className="text-xl md:text-3xl font-medium text-foreground/60 transition-colors group-hover:text-foreground">
                       {item.text}
                     </span>
                   </div>

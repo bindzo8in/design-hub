@@ -235,7 +235,7 @@ const HomeHeroSection = () => {
         
         {/* Metric 1 */}
         <div className="flex flex-col gap-2">
-          <div className="text-4xl font-light text-foreground"><span className="stat-number" data-target="550">0</span>+</div>
+          <div className="text-4xl font-medium text-foreground"><span className="stat-number" data-target="550">0</span>+</div>
           <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Projects Delivered</div>
         </div>
 

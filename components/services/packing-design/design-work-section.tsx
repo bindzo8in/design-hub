@@ -20,7 +20,7 @@ const DesignWorkSection = () => {
               tracking-wide
               whitespace-nowrap
               font-orbitron
-              font-light
+              font-medium
             `, i!==0 && "text-glow-white")}
               >
                 DESIGN IS HOW IT WORKS
@@ -51,7 +51,7 @@ const DesignWorkSection = () => {
               tracking-wide
               whitespace-nowrap
               font-orbitron
-              font-light
+              font-medium
             `, i!==3 && "text-glow-white")}
               >
                 AND WE MAKE IT WORK

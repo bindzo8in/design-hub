@@ -68,7 +68,7 @@ const OutDoor = () => {
           <h3 className="text-center text-4xl uppercase font-bold">
             Advertising Services
           </h3>
-          <p className="text-center font-light max-w-2xl mx-auto mt-6 text-foreground/90">
+          <p className="text-center font-medium max-w-2xl mx-auto mt-6 text-foreground/90">
             Our team manages the entire process—from concept and design to
             production and execution—ensuring consistency, quality, and
             effectiveness across all outdoor formats.

@@ -82,7 +82,7 @@ const HomeCTASection = () => {
           </h2>
 
           {/* Description */}
-          <p className="cta-item mt-8 max-w-2xl text-base sm:text-lg leading-relaxed text-muted-foreground/80 font-light tracking-wide">
+          <p className="cta-item mt-8 max-w-2xl text-base sm:text-lg leading-relaxed text-muted-foreground/80 font-medium tracking-wide">
             Partner with us to create digital experiences that transcend the ordinary.
             From visionary design to flawless execution, we bring your ideas to life.
           </p>
@@ -113,17 +113,17 @@ const HomeCTASection = () => {
           <div className="cta-item mt-24 grid grid-cols-1 sm:grid-cols-3 gap-12 sm:gap-24 text-center">
             <div className="flex flex-col items-center gap-2">
               <span className="text-sm uppercase tracking-[0.3em] text-muted-foreground/60">Delivered</span>
-              <span className="font-heading font-light text-4xl sm:text-5xl font-light text-foreground">120+</span>
+              <span className="font-heading font-medium text-4xl sm:text-5xl font-medium text-foreground">120+</span>
             </div>
 
             <div className="flex flex-col items-center gap-2">
               <span className="text-sm uppercase tracking-[0.3em] text-muted-foreground/60">Experience</span>
-              <span className="font-heading font-light text-4xl sm:text-5xl font-light text-foreground">6<span className="text-accent/60">Yrs</span></span>
+              <span className="font-heading font-medium text-4xl sm:text-5xl font-medium text-foreground">6<span className="text-accent/60">Yrs</span></span>
             </div>
 
             <div className="flex flex-col items-center gap-2">
               <span className="text-sm uppercase tracking-[0.3em] text-muted-foreground/60">Support</span>
-              <span className="font-heading font-light text-4xl sm:text-5xl font-light text-foreground">24/7</span>
+              <span className="font-heading font-medium text-4xl sm:text-5xl font-medium text-foreground">24/7</span>
             </div>
           </div>
 

@@ -187,7 +187,7 @@ export default function HomePortfolioShowcase({
                       />
                     ) : (
                       <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-slate-900 via-[#101735] to-slate-950 p-6 text-center">
-                        <span className="font-heading font-light text-3xl uppercase tracking-wider text-slate-600">
+                        <span className="font-heading font-medium text-3xl uppercase tracking-wider text-slate-600">
                           {project.title}
                         </span>
                       </div>

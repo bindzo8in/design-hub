@@ -30,17 +30,17 @@ export default function HeroCinematic() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="font-heading font-light text-5xl md:text-7xl lg:text-8xl font-bold uppercase text-foreground leading-[1.1] tracking-tight mb-8"
+          className="font-heading font-medium text-5xl md:text-7xl lg:text-8xl font-bold uppercase text-foreground leading-[1.1] tracking-tight mb-8"
         >
           Our <br className="md:hidden" />
-          <span className="text-accent  font-light">Services</span>
+          <span className="text-accent  font-medium">Services</span>
         </motion.h1>
 
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="text-lg md:text-xl text-muted-foreground font-light leading-relaxed max-w-2xl mx-auto"
+          className="text-lg md:text-xl text-muted-foreground font-medium leading-relaxed max-w-2xl mx-auto"
         >
           Comprehensive digital solutions engineered for maximum impact. From brand identity to high-performance applications, we deliver excellence across every touchpoint.
         </motion.p>
