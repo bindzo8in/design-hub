@@ -253,7 +253,6 @@ const HomeHeroSection = () => {
           <div className="flex -space-x-3">
             <Image src="/team/balaji.png" alt="Team" width={40} height={40} className="bg-background/90 h-10 w-10 rounded-full border border-background object-cover grayscale transition-all hover:grayscale-0" />
             <Image src="/team/mani.png" alt="Team" width={40} height={40} className="bg-background/90 h-10 w-10 rounded-full border border-background object-cover grayscale transition-all hover:grayscale-0" />
-            <Image src="/team/ranjani.png" alt="Team" width={40} height={40} className="bg-background/90 h-10 w-10 rounded-full border border-background object-cover grayscale transition-all hover:grayscale-0" />
             <div className="flex h-10 w-10 items-center justify-center rounded-full border border-background bg-foreground text-xs font-bold text-background">+</div>
           </div>
         </div>
